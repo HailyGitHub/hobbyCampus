@@ -8,27 +8,27 @@
         <!-- Modal List -->
         <ul class="nav justify-content-center">
             <li class="nav-item">
-              <a class="nav-link text-dark" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><b>회사소개</b></a>
+              <a class="nav-link text-dark" href="#" onclick="showUs()" data-bs-toggle="modal" data-bs-target="#aboutModal"><b>회사소개</b></a>
             </li>
-            <li class="nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <a class="nav-link text-dark" href="#"><b>인사채용</b></a>
+            <li class="nav-item" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                <a class="nav-link text-dark" href="#" onclick="showHR()"><b>인사채용</b></a>
             </li>
-            <li class="nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <a class="nav-link text-dark" href="#"><b>운영정책</b></a>
+            <li class="nav-item" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                <a class="nav-link text-dark" href="#" onclick="showPolicy()"><b>운영정책</b></a>
             </li>
-            <li class="nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <a class="nav-link text-dark" href="#"><b>고객센터</b></a>
+            <li class="nav-item" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                <a class="nav-link text-dark" href="#" onclick="showCenter()"><b>고객센터</b></a>
             </li>
         </ul>
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">footer 내용</h5>
+                <h5 class="modal-title" id="ModalLabel">내용없음</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="modal-body">
                   Ajax 구현 내용
                 </div>
                 <div class="modal-footer">
@@ -45,4 +45,5 @@
 </footer>
 
 <!-- Script to access secret page -->
-<script src="hobbycampus/js/admin.js"></script>
+<script type="text/javascript" src="/hobbycampus/js/httpRequest.js"></script>
+<script type="text/javascript" src="/hobbycampus/js/admin.js"></script>
