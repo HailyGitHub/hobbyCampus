@@ -17,7 +17,8 @@ function clickPwd() {
 
 function showAdmin() {
   if(pwd==user){
-    alert('관리자 페이지로 이동합니다.');
+    alert('앗 비밀번호를 푸셨군요! 관리자 페이지로 이동합니다.');
+    window.location.href = 'adminLoginForm.do';
   }
 }
 

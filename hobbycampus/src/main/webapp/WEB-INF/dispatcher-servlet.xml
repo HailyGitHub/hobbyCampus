@@ -37,7 +37,11 @@
 	
 	
 	<!-- DAO -->
-
+	<bean id="adminDao" class="com.hobbycam.admin.model.AdminDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 
 
 	
