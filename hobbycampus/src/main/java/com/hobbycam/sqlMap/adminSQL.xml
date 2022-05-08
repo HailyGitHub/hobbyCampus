@@ -16,4 +16,15 @@
 		)
 	</insert>
 	
+	<select id="selectAdmin" parameterType="hashmap" resultType="String">
+		SELECT
+			a_email
+		FROM
+			admin
+		WHERE
+			a_email = #{a_email}
+			And
+			a_pwd = #{a_pwd}
+	</select>
+	
 </mapper>

@@ -36,5 +36,17 @@ public class AdminController {
 	}
 	
 	
+	@RequestMapping("/adminCheck.do")
+	public ModelAndView adminCheck(String a_email, String a_pwd) {
+		
+		boolean result = adminDao.adminCheck(a_email, a_pwd); // false is no account
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", result);
+		mav.setViewName("admin/adminResult");
+		return mav;
+	}
+	
+	
 	
 }

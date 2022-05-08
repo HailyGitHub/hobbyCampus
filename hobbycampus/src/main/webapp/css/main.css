@@ -2,9 +2,8 @@
 
 *{
 	margin: 0;
-	pading: 0;
+	padding: 0;
 }
-
 body{
     width: 100%;
 }
@@ -64,55 +63,17 @@ hr{
 	margin-bottom: 40px;
 }
 
-/*
-.wrap{
-	width: 80%;
-	margin: 50px auto;
-	display: flex;
-	flex-wrap: wrap;
+
+/* Dynamic Number CSS*/
+#dynamic-box table {
+	margin: 200px 0px;
 }
-.hex{
-	width: 10vw;
-	height: calc(10 * 1.7320vw);
-	background: #FAF58C	;
-	position: relative;
-	margin: -0.8vw 4vw;
-	transform: rotate(30beg);
+#dynamic-icon th{
+	font-size: 80px;
 }
-.hex:nth-of-type(7n+5){
-	margin-left: 13vw;
-}
-.hex::before{
-	content: '';
-	display: block;
-	width: 100%;
-	height: 100%;
-	background: inherit;
-	position: absolute;
-	top:50%;
-	left: 50%;
-	transform: translate(-50%, -50%) rotate(60deg);
-}
-.hex:after{
-	content: '';
-	display: block;
-	width: 100%;
-	height: 100%;
-	background: inherit;
-	position: absolute;
-	top:50%;
-	left: 50%;
-	transform: translate(-50%, -50%) rotate(-60deg);
-}
-.hex p{
-	position: absolute;
-	top:50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-size: 2rem;
-	z-index: 1;
-}
-*/
+
+
+/* Category CSS */
 .wrap{
     width: 80%;
     margin: 100px auto;
@@ -160,15 +121,15 @@ hr{
     left: 50%;
     transform: translate(-50%, -50%) rotate(-30deg);
     font-size: 2rem;
-    color: #fff;
     z-index: 1;
 }
-
 
 
 #end_line{
 	margin-bottom: 130px;
 }
+
+
 
 /* Footer */
 .footer_p1{
