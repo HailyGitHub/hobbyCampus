@@ -16,17 +16,6 @@
 		)
 	</insert>
 	
-	<select id="selectAdmin" parameterType="hashmap" resultType="String">
-		SELECT
-			a_email
-		FROM
-			admin
-		WHERE
-			a_email = #{a_email}
-		And
-			a_pwd = #{a_pwd}
-	</select>
-	
 	<select id="selectAdminLogin" parameterType="hashmap" resultType="com.hobbycam.admin.model.AdminDTO">
 		SELECT
 			*
@@ -36,6 +25,37 @@
 			a_email = #{a_email}
 		AND
 			a_pwd = #{a_pwd}
+	</select>
+	
+	<select id="selectAdminEmail" parameterType="String" resultType="Integer">
+		SELECT
+			count(*)
+		FROM
+			admin
+		WHERE
+			a_email = #{a_email}
+	</select>
+	
+	<select id="selectAdminName" parameterType="String" resultType="Integer">
+		SELECT
+			count(*)
+		FROM
+			(SELECT
+				a_name AS name
+			FROM
+				admin
+			UNION
+			SELECT
+				t_name AS name
+			FROM
+				teacher
+			UNION
+			SELECT
+				u_name AS name
+			FROM
+				users) d
+		WHERE
+			name = #{a_name}
 	</select>
 	
 </mapper>

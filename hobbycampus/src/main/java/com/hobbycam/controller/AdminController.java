@@ -75,16 +75,23 @@ public class AdminController {
 		return mav;
 	}
 	
-	
-	
-	
-	
-	
-	
-	@RequestMapping("/adminCheck.do")
-	public ModelAndView adminCheck(String a_email, String a_pwd) {
+	@RequestMapping("/adminEmailCheck.do")
+	public ModelAndView adminEmailCheck(String a_email) {
 		
-		boolean result = adminDao.adminCheck(a_email, a_pwd); // false is no account
+		int count = adminDao.adminEmailCheck(a_email);
+		String result = count>0? "사용 불가능한 아이디입니다." : "";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", result);
+		mav.setViewName("admin/adminResult");
+		return mav;
+	}
+	
+	@RequestMapping("/adminNameCheck.do")
+	public ModelAndView adminNameCheck(String a_name) {
+		
+		int count = adminDao.adminNameCheck(a_name);
+		String result = count>0? "사용 불가능한 닉네임입니다." : "";
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result", result);

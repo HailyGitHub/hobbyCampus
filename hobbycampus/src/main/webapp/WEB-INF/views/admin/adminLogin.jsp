@@ -69,7 +69,6 @@
 				<input type="password" class="form-control" id="floatingPassword" name="a_pwd" placeholder="Password">
 				<label for="floatingPassword">비밀번호</label>
 			</div>
-			<div class="loginMsg" id="loginMsg" style="color:red;">테스트</div>
 			<button class="w-100 btn btn-lg btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalSignin" id="signUp_btn">회원가입</button>
 			<button class="w-100 btn btn-lg btn-success" type="submit">로그인</button>
 			<p class="mt-5 mb-3 text-muted">Copyright 2021. Hobby Campus Co., Ltd. all rights reserved.</p>
@@ -108,7 +107,8 @@
 								<img alt="" src="/hobbycampus/img/admin/admin_4.png" width="90" data-img="admin_04.png">
 							</div>
 							
-							<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" style="margin: 25px 0px;">회원가입</button>
+							<div class="signUpMsg" id="signUpMsg" style="color:red;"></div>
+							<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" style="margin: 25px 0px;" onclick="return beforeSignUp()">회원가입</button>
 							<small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
 						</form>
 					</div>
@@ -118,10 +118,11 @@
 	</main>
 </body>
 <script type="text/javascript">
+	
+	/* Select Img */
 	var imgList = document.getElementById('img-list');
 	var img = imgList.children;
 	
-	/* Select Img */
 	imgList.addEventListener('click', function(e){
 		var myImg = e.target;
 		var imgName = myImg.getAttribute('data-img');
@@ -137,25 +138,49 @@
 	});
 	
 	
-	function adminCheck(){
-		var userId = document.adminLogin.a_email.value;
-		var userPwd = document.adminLogin.a_pwd.value;
-		var param = 'a_email=' + userId + '&' + 'a_pwd=' + userPwd;
+	/* Get Message Node */
+	var signMsg = document.all.signUpMsg; // Sign-Up message box
+	var loginMsg = document.all.loginMsg; // Login message box
 	
-		sendRequest('adminCheck.do', param, adminCheckResult, 'GET');
-	}
 	
-	function adminCheckResult(){
-		var msg = document.getElementById('loginMsg').firstChild;
-		
+	/* Sign-Up Email Check */
+	var su_email_box = document.adminSignUp.a_email;
+	
+	su_email_box.addEventListener('keyup', function(){
+		var p_email = 'a_email=' + su_email_box.value; // Get email input data
+		sendRequest('adminEmailCheck.do', p_email, adminEmailCheckResult, 'GET');
+	});
+	
+	function adminEmailCheckResult(){
 		if(XHR.readyState==4){
 			if(XHR.status==200){
-				var data = XHR.responseText;
-				if(data==='false'){
-					msg.nodeValue = '아이디 또는 비밀번호가 틀렸습니다.';
-					return false;
-				}
+				var emailData = XHR.responseText;
+				signMsg.innerHTML = emailData;
 			}
+		}
+	}
+	
+	/* Sign-up Nick-name Check */
+	var su_name_box = document.adminSignUp.a_name;
+	
+	su_name_box.addEventListener('keyup', function(){
+		var p_name = 'a_name=' + su_name_box.value; // Get name input data
+		sendRequest('adminNameCheck.do', p_name, adminNameCheckResult, 'GET');
+	});
+	
+	function adminNameCheckResult(){
+		if(XHR.readyState==4){
+			if(XHR.status==200){
+				var nameData = XHR.responseText;
+				signMsg.innerHTML = nameData;
+			}
+		}
+	}
+	
+	/* Check Email, Nick-name */
+	function beforeSignUp(){
+		if(signMsg.value!=''){
+			return false;
 		}
 	}
 	
