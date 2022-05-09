@@ -23,7 +23,18 @@
 			admin
 		WHERE
 			a_email = #{a_email}
-			And
+		And
+			a_pwd = #{a_pwd}
+	</select>
+	
+	<select id="selectAdminLogin" parameterType="hashmap" resultType="com.hobbycam.admin.model.AdminDTO">
+		SELECT
+			*
+		FROM
+			admin
+		WHERE
+			a_email = #{a_email}
+		AND
 			a_pwd = #{a_pwd}
 	</select>
 	

@@ -2,6 +2,7 @@ package com.hobbycam.admin.model;
 
 import java.util.*;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class AdminDAOImple implements AdminDAO {
@@ -19,6 +20,18 @@ public class AdminDAOImple implements AdminDAO {
 		int count = sqlMap.insert("insertAdmin", dto);
 		return count;
 	}
+	
+	@Override
+	public AdminDTO adminLogin(String a_email, String a_pwd) {
+		Map map = new HashMap();
+		map.put("a_email", a_email);
+		map.put("a_pwd",a_pwd);
+		AdminDTO dto = sqlMap.selectOne("selectAdminLogin", map); // False -> null
+		return dto;
+	}
+	
+	
+	
 	
 	
 	@Override

@@ -57,7 +57,7 @@
 	<main class="form-signin">
 	
 		<!-- Login Form -->
-		<form name="adminLogin" method="post">
+		<form name="adminLogin" method="post" action="adminLogin.do">
 			<img class="mb-4" src="/hobbycampus/img/admin.png" alt="양복업자" width="230">
 			<h1 class="h3 mb-3 fw-normal"><b>관리자 로그인</b></h1>
 		
@@ -71,7 +71,7 @@
 			</div>
 			<div class="loginMsg" id="loginMsg" style="color:red;">테스트</div>
 			<button class="w-100 btn btn-lg btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalSignin" id="signUp_btn">회원가입</button>
-			<button class="w-100 btn btn-lg btn-success" type="submit" onclick="return adminCheck()">로그인</button>
+			<button class="w-100 btn btn-lg btn-success" type="submit">로그인</button>
 			<p class="mt-5 mb-3 text-muted">Copyright 2021. Hobby Campus Co., Ltd. all rights reserved.</p>
 		</form>
 		
@@ -102,10 +102,10 @@
 							
 							<h3>프로필 선택</h3>
 							<div class="img-list" id="img-list" style="margin: 10px 0px;">
-								<img alt="" src="/hobbycampus/img/admin/admin_1.png" width="90" data-img="1.png">
-								<img alt="" src="/hobbycampus/img/admin/admin_2.png" width="90" data-img="2.png">
-								<img alt="" src="/hobbycampus/img/admin/admin_3.png" width="90" data-img="3.png">
-								<img alt="" src="/hobbycampus/img/admin/admin_4.png" width="90" data-img="4.png">
+								<img alt="" src="/hobbycampus/img/admin/admin_1.png" width="90" data-img="admin_01.png">
+								<img alt="" src="/hobbycampus/img/admin/admin_2.png" width="90" data-img="admin_02.png">
+								<img alt="" src="/hobbycampus/img/admin/admin_3.png" width="90" data-img="admin_03.png">
+								<img alt="" src="/hobbycampus/img/admin/admin_4.png" width="90" data-img="admin_04.png">
 							</div>
 							
 							<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" style="margin: 25px 0px;">회원가입</button>
