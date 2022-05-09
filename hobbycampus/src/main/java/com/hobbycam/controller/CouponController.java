@@ -1,11 +1,18 @@
 package com.hobbycam.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hobbycam.coupon.model.CouponDTO;
+import com.hobbycam.coupon.model.CouponService;
+
 @Controller
 public class CouponController {
+	
+	@Autowired
+	private CouponService couponService;
 	
 	@RequestMapping("/coupon.do")
 	public ModelAndView coupon() {
@@ -32,9 +39,17 @@ public class CouponController {
 		return mav;
 	}
 	@RequestMapping("/couponUpdateForm.do")
-	public ModelAndView couponUpdateForm() {
+	public ModelAndView couponUpdateForm(int idx) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("coupon/couponList");
+		CouponDTO dto = couponService.getCouponInfo(idx);
+		if(dto == null){ 
+			mav.addObject("msg","잘못된 접근"); 
+			mav.addObject("goPage","couponList.do"); 
+			mav. setViewName("coupon/couponMsg");
+		}else{
+			mav.addObject("dto",dto); 
+			mav.setViewName("coupon/couponInfo");
+		} 
 		return mav;
 	}
 	@RequestMapping("/couponUpdate.do")
@@ -43,4 +58,5 @@ public class CouponController {
 		mav.setViewName("coupon/couponList");
 		return mav;
 	}
+	
 }

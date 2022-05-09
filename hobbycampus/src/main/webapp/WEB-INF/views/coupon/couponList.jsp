@@ -45,9 +45,9 @@
 		</td>
 	</tr>
 	</c:if>
-	<c:forEach var="dto" items="${val}">
+	<c:forEach var="dto" items="${lists}">
 		<tr>
-			<td>${val_idx}</td>
+			<td>${dto.idx}</td>
 			<!-- create url -->
 			<c:url var="url" value="content.do">
 				<c:param name="idx">${dto.idx}</c:param>
