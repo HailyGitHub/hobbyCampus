@@ -19,7 +19,7 @@
         <a class="navbar-brand" href="#">계정관리</a>
         <a class="navbar-brand" href="#">카테고리</a>
         <a class="navbar-brand" href="#">결제</a>
-        <a class="navbar-brand" href="#">쿠폰</a>
+        <a class="navbar-brand" href="coupon.do">쿠폰</a>
         <a class="navbar-brand" href="#">레벨</a>
         <a class="navbar-brand" href="#">통계</a>
 
