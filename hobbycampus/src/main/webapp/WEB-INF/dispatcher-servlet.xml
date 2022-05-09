@@ -35,6 +35,17 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
 	
+	<!-- controllers -->
+	<bean id="pointController" class="com.hobbycam.controller.PointController"></bean>
+	<bean id="mypageController" class="com.hobbycam.controller.MypageController"></bean>
+
+
+
+	<!-- service -->
+	<bean id="couponService" class="com.hobbycam.service.CouponSerivceImpl">
+	
+	</bean>
+	
 	
 	<!-- DAO -->
 	<bean id="adminDao" class="com.hobbycam.admin.model.AdminDAOImple">
@@ -42,6 +53,7 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	<bean id="couponDAO" class="com.hobbycam.DAO.CouponDAOImpl"></bean>
 
 
 	

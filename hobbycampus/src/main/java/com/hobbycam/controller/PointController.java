@@ -5,13 +5,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class IndexController {
+public class PointController {
 	
-	@RequestMapping("/index.do")
-	public ModelAndView index() {
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("index");
-		return mav;
+	@RequestMapping("/lessonPayment.do")
+	public ModelAndView lessonPayment() {
 		
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("/users/lessonPayment");
+		return mav;
 	}
+	
+
 }

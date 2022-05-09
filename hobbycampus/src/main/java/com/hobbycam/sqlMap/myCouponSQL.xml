@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<mapper namespace="couponMapper">
+	<select id="getCoupons" resultType="com.hobbycam.VO.CouponVO">
+		select 
+			COUPON_IDX as couponIdx,
+			COUPON_TITLE as couponTitle,
+			COUPON_RATE as couponRate,
+			COUPON_IMG as couponImg,
+			COUPON_START as couponStart,
+			COUPON_END as couponEnd,
+			COUPON_STATE as couponState
+		from coupon_list
+	</select>
+	
+	<select id="getCouponsByUser" parameterType="map" resultType="com.hobbycam.VO.CouponVO">
+		select 
+			cl.COUPON_IDX as couponIdx,
+			cl.COUPON_TITLE as couponTitle,
+			cl.COUPON_RATE as couponRate,
+			cl.COUPON_IMG as couponImg,
+			cl.COUPON_START as couponStart,
+			cl.COUPON_END as couponEnd,
+			cl.COUPON_STATE as couponState
+		from coupon_list cl, coupon_record cr
+		where
+			cr.U_IDX = #{uIdx}
+			<if test="stat">
+			       AND cr.COUPON_USE_STATE = 0
+			</if>
+			<if test="!stat">
+			       AND cr.COUPON_USE_STATE != 0
+			</if>
+			
+		and 
+			cr.COUPON_IDX = cl.COUPON_IDX	
+	</select>
+	
+
+
+
+
+</mapper>
