@@ -30,7 +30,8 @@ public class MypageController {
 	public ModelAndView mycoupon(@RequestParam Map<String, Object> param) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypage/mycoupon");
-
+		
+		//TODO 수정해야함( 유저가 3이라고 가정했을 뿐)
 		int uIdx = 3;
 
 		boolean stat = true;

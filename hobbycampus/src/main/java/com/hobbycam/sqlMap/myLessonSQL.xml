@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="lessonMapper">
+	<select id="getLesson" resultType="com.hobbycam.VO.LessonVO">
+		select 
+			l.LESSON_IDX	 as lessonIdx,
+			l.CATE2_IDX	 as cate2Idx,
+			l.T_IDX as tIdx,
+			l.LESSON_SUBJ as lessonSubj,
+			l.LESSON_UP_DATE as lessonUpDate,
+			l.LESSON_TYPE as lessonType,
+			l.LESSON_PRICE as lessonPrice,
+			l.LESSON_THUMBNAIL as lessonThumbnail,
+			l.LESSON_SHORT_CONT as lessonShortCount,
+			l.LESSON_STATE as lessonState,
+			l.LESSON_KIT as lessonKit,
+			t.T_NAME as tName
+		from 
+			lesson_list l,
+			teacher t
+		where 
+			l.LESSON_IDX = #{lessonIdx}
+		and 
+			l.T_IDX = t.T_IDX
+	</select>
+</mapper>

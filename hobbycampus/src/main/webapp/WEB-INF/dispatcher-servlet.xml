@@ -36,15 +36,14 @@
 	</bean>
 	
 	<!-- controllers -->
-	<bean id="pointController" class="com.hobbycam.controller.PointController"></bean>
+
 	<bean id="mypageController" class="com.hobbycam.controller.MypageController"></bean>
 
 
 
 	<!-- service -->
-	<bean id="couponService" class="com.hobbycam.service.CouponSerivceImpl">
-	
-	</bean>
+	<bean id="couponService" class="com.hobbycam.service.CouponSerivceImpl"></bean>
+	<bean id="lessonService" class="com.hobbycam.service.LessonServiceImpl"></bean>
 	
 	
 	<!-- DAO -->
@@ -54,6 +53,7 @@
 		</constructor-arg>
 	</bean>
 	<bean id="couponDAO" class="com.hobbycam.DAO.CouponDAOImpl"></bean>
+	<bean id="lessonDAO" class="com.hobbycam.DAO.LessonDAOImpl"></bean>
 
 
 	

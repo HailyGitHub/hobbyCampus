@@ -6,5 +6,6 @@
 	<mappers>
 		<mapper resource="com/hobbycam/sqlMap/adminSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/myCouponSQL.xml"/>
+		<mapper resource="com/hobbycam/sqlMap/myLessonSQL.xml"/>
 	</mappers>
 </configuration>
