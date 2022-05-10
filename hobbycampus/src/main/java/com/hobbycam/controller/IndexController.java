@@ -23,4 +23,11 @@ public class IndexController {
 		return mav;
 	}
 	
+	@RequestMapping("/mypage.do")
+	public ModelAndView mypage() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("/teacher/mypage");
+		return mav;
+	}
+	
 }
