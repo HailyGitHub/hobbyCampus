@@ -50,12 +50,28 @@ public class LessonController {
 		
 	}
 	
-	@RequestMapping("/lessonUpdate.do")
-	public ModelAndView lessonUpdate() {
+	@RequestMapping(value = "/lessonUpdate.do",method = RequestMethod.GET)
+	public ModelAndView lessonUpdateForm(String lesson_idx) {
+		
 		
 		ModelAndView mav=new ModelAndView();
 		
+		List lists=ldao.lessonUpdateForm(lesson_idx);
+		mav.addObject("lists",lists);
+		mav.setViewName("/lesson/lessonUpdate");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/lessonUpdate.do",method = RequestMethod.POST)
+	public ModelAndView lessonUpdateSubmit(LessonDTO dto) {
 		
+		ModelAndView mav=new ModelAndView();
+		
+		int result=ldao.lessonUpdateSubmit(dto);
+		String msg=result>0?"강의 수정 성공":"강의 수정 실패";
+		mav.addObject("msg",msg);
+		mav.addObject("gopage","index.do");
+		mav.setViewName("/teacher/msg");
 		return mav;
 	}
 }

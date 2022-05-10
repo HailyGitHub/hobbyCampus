@@ -37,6 +37,11 @@
 	
 	
 	<!-- DAO -->
+	<bean id="LessonDAO" class="com.hobbycam.lesson.model.LessonDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 
 
 

@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		INSERT INTO
   			LESSON_LIST
   		VALUES(
-  			SEQ_LESSON_LIST.nextval,
+  			seq_lesson_list.nextval,
   			1,
   			1,
   			#{lesson_subj},
@@ -32,4 +32,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		WHERE
   			T_NAME='두껍'
   	</select>
+  	<select id="selectUpdateLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
+  		SELECT
+  			*
+  		FROM
+  			LESSON_LIST
+  		WHERE
+  			LESSON_IDX=4
+  	</select>
+  	<update id="updateLesson" parameterType="com.hobbycam.lesson.model.LessonDTO">
+  		UPDATE
+  			LESSON_LIST
+  		SET
+  			LESSON_SUBJ=#{lesson_subj},
+  			LESSON_TYPE=#{lesson_type},
+  			LESSON_PRICE=#{lesson_price},
+  			LESSON_THUMBNAIL=#{lesson_thumbnail},
+  			LESSON_SHORT_CONT=#{lesson_short_cont},
+  			LESSON_KIT=#{lesson_kit}
+  		WHERE
+  			LESSON_IDX=4
+  	</update>
   </mapper>

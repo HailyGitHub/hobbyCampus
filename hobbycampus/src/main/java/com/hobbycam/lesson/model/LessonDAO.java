@@ -8,5 +8,9 @@ public interface LessonDAO {
 	
 	public List lessonList(String t_name);
 	
-	public List lessonUpdateForm(int lesson_idx);
+	public List lessonUpdateForm(String lesson_idx);
+	
+	public int lessonUpdateSubmit(LessonDTO dto);
+	
+	public List lessonReqList();
 }

@@ -26,7 +26,19 @@ public class LessonDAOImple implements LessonDAO {
 	}
 	
 	@Override
-	public List lessonUpdateForm(int lesson_idx) {
+	public List lessonUpdateForm(String lesson_idx) {
+		List lists=sqlMap.selectList("selectUpdateLesson",lesson_idx);
+		return lists;
+	}
+	
+	@Override
+	public int lessonUpdateSubmit(LessonDTO dto) {
+		int count=sqlMap.update("updateLesson",dto);
+		return count;
+	}
+	
+	@Override
+	public List lessonReqList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
