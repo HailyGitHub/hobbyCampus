@@ -43,7 +43,7 @@
 
 	<!-- service -->
 	<bean id="couponService" class="com.hobbycam.service.CouponSerivceImpl"></bean>
-	<bean id="lessonService" class="com.hobbycam.service.LessonServiceImpl"></bean>
+	<bean id="lessonScheduleService" class="com.hobbycam.service.LessonScheduleServiceImpl"></bean>
 	
 	
 	<!-- DAO -->
@@ -53,8 +53,10 @@
 		</constructor-arg>
 	</bean>
 	<bean id="couponDAO" class="com.hobbycam.DAO.CouponDAOImpl"></bean>
-	<bean id="lessonDAO" class="com.hobbycam.DAO.LessonDAOImpl"></bean>
-
+	<bean id="lessonScheduleDAO" class="com.hobbycam.DAO.LessonScheduleDAOImpl"></bean>
+	<bean id="postDAO" class="com.hobbycam.DAO.PostDAOImpl"></bean>
+	<bean id="userDAO" class="com.hobbycam.DAO.UserDAOImpl"></bean>
+	<bean id="lessonRecordDAO" class="com.hobbycam.DAO.LessonRecordDAOImpl"></bean>
 
 	
 	

@@ -5,8 +5,8 @@
 	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="lessonMapper">
-	<select id="getLesson" resultType="com.hobbycam.VO.LessonVO">
+<mapper namespace="lessonScheduleMapper">
+	<select id="getLessonSchedule" resultType="com.hobbycam.VO.LessonScheduleVO">
 		select 
 			l.LESSON_IDX	 as lessonIdx,
 			l.CATE2_IDX	 as cate2Idx,
@@ -21,10 +21,13 @@
 			l.LESSON_KIT as lessonKit,
 			t.T_NAME as tName
 		from 
+			lesson_schedule ls,
 			lesson_list l,
 			teacher t
 		where 
-			l.LESSON_IDX = #{lessonIdx}
+			ls.lesson_schedule_idx = #{lessonScheduleIdx}
+		and 
+			ls.lesson_idx = l.lesson_idx
 		and 
 			l.T_IDX = t.T_IDX
 	</select>

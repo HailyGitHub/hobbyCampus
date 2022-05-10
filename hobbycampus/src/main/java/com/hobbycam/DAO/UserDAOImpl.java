@@ -4,17 +4,18 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hobbycam.VO.LessonVO;
+import com.hobbycam.VO.UserVO;
 
 @Repository
-public class LessonDAOImpl implements LessonDAO {
+public class UserDAOImpl implements UserDAO {
 
 	@Autowired
 	protected SqlSessionTemplate sqlSessionTemplate;
-
+	
 	@Override
-	public LessonVO getLesson(int lessonIdx) {
-		return sqlSessionTemplate.selectOne("lessonMapper.getLesson", lessonIdx);
+	public UserVO getUser(int uIdx) {
+		return sqlSessionTemplate.selectOne("userMapper.getUser", uIdx);
 	}
 
+	
 }

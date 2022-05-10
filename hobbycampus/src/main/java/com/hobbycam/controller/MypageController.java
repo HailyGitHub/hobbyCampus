@@ -40,7 +40,6 @@ public class MypageController {
 		}
 
 		List<CouponVO> couponList = couponService.getCouponsByUser(uIdx, stat);
-		System.out.println(couponList);
 		mav.addObject("couponList", couponList);
 		return mav;
 	}

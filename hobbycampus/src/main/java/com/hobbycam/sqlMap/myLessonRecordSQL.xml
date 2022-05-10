@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="lessonRecordMapper">
+	<insert id="insert" parameterType="map">
+		insert into lesson_record
+		(
+			LESSON_RECORD_IDX,
+			U_IDX,
+			LESSON_SCHEDULE_IDX,
+			PRICE_POINT,
+			LESSON_BUY_DATE,
+			LESSON_RECORD_STATE,
+			LESSON_EXCHANGE_STATE
+		)
+		values(
+			seq_lesson_record.nextval,
+			#{uIdx},
+			#{lessonScheduleIdx},
+			#{pricePoint},
+			#{lessonBuyDate},
+			#{lessonRecordState},
+			#{lessonExchangeState}
+		)
+	</insert>
+</mapper>

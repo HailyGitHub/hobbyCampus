@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="postMapper">
+	<select id="getPost" resultType="com.hobbycam.VO.PostVO">
+		select 
+			U_IDX	 as uIdx,
+			POSt_RECEIVER as postReceiver,
+			POST_TEL as postTel,
+			POST_ADDR as postAddr,
+			POST_ETC as postEtc
+		from 
+			post
+		where 
+			U_IDX = #{uIdx}
+	</select>
+	
+	<insert id="insert" parameterType="map">
+		insert into
+		 	post(U_IDX, POSt_RECEIVER, POST_TEL, POST_ADDR, POST_ETC)
+		 values(
+		 #{uIdx},
+		 #{postReceiver},
+		 #{postTel},
+		 #{postAddr},
+		 #{postEtc}
+		 )
+	</insert>
+</mapper>

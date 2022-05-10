@@ -1,6 +1,6 @@
 package com.hobbycam.VO;
 
-public class LessonVO {
+public class LessonScheduleVO {
 	private int lessonIdx;
 	private int cate2Idx;
 	private int tIdx;

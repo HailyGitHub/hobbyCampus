@@ -24,7 +24,7 @@
 		<form>
 			<h2>포인트 충전</h2>
 			<p>
-				내 포인트: --$보유포인트표시$-- <span>하빗</span>
+				내 포인트: ${userVO.uPoint} <span>하빗</span>
 			</p>
 			<p>포인트 충전</p>
 			<hr>
