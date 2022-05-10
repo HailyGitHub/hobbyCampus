@@ -5,7 +5,7 @@
 <header>
     <div class="top_nav">
         <span class="top_nav_area">
-           ${s_a_name } 님 | <a href="adminLogout.do">로그아웃</a>
+        	 ${s_a_name } 님 | <a href="adminLogout.do">로그아웃</a> 
         </span>
     </div>
     <!-- Logo -->
@@ -17,11 +17,12 @@
 
 	        <!-- Category List -->
 	        <a class="navbar-brand" href="resumeList.do">이력서</a>
-	        <a class="navbar-brand" href="#">계정관리</a>
+	        <a class="navbar-brand" href="memberUserList.do">계정관리</a>
 	        <a class="navbar-brand" href="#">카테고리</a>
 	        <a class="navbar-brand" href="#">결제</a>
 	        <a class="navbar-brand" href="#">쿠폰</a>
 	        <a class="navbar-brand" href="#">레벨</a>
+	        <a class="navbar-brand" href="#">공지사항</a>
 	        <a class="navbar-brand" href="#">통계</a>
 
 	        <!-- Search Button-->
@@ -30,21 +31,21 @@
 	        </button>
 	        <!-- Search Bar -->
 	        <div class="collapse navbar-collapse" id="navbarsExample01">
-            <form>
+            <form name="searchForm" action="memberSearch.do">
 	            <div class="row">
 	            <div class="input-group">
 	            	<div class="col-md-1">
-		                <select class="form-select">
-		                    <option selected>선택</option>
-		                    <option value="1">강사</option>
-		                    <option value="2">학생</option>
+		                <select class="form-select" name="selectBox">
+		                    <option value="0" selected>선택</option>
+		                    <option value="user">학생</option>
+		                    <option value="teacher">강사</option>
 		                </select>
 	                </div>
 	                <div class="col-md-10">
-		                <input type="text" class="form-control" placeholder="검색할 내용" aria-label="Example text with two button addons">
+		                <input type="text" class="form-control" placeholder="검색할 닉네임 또는 이메일" name="keyWord" aria-label="search-bar" required>
 	                </div>
 	                <div class="col-md-1">                
-		                <button class="btn btn-outline-secondary" type="button">검색</button>
+		                <button class="btn btn-outline-secondary" type="submit" onclick="return checkSelect()">검색</button>
 	                </div>
 	            </div>
 	            </div>
@@ -53,3 +54,12 @@
         </div>
       </nav>
 </header>
+<script>
+	function checkSelect(){
+		var select_val = document.searchForm.selectBox.value;
+		if(select_val==0){
+			alert('검색할 카테고리를 선택해 주세요.');
+			return false;
+		}
+	}
+</script>
