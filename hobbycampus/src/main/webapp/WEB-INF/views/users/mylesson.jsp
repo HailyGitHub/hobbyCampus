@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,31 +20,33 @@
 	<hr>
 	
 	<!--아래로 로그인된 회원의 레슨상태(수강중/예약/수강완료/취소)에 따라 출력되는 부분  -->
+	<c:if test="${empty lesson_record_state }">				
+		아직 수강한 강의가 없습니다.			
+	</c:if>
+	
 	<div class="lesson_list_section">
-			<div class="goods_group">
-				<ul class="goods_group_list">
-		<li id="_rowLi20220510123126NSP20220510NP3974485505" class="goods_pay_item payorder">
+			<div class="lesson_group">
+				<ul class="lesson_group_list">
 			<div class="lesson_item">
-					<!-- 링크: 강의 상세 정보 페이지로 -->
+					<span class="lesson_record_state ">$레슨 상태$</span>
+					<br>
+					<!-- 링크: 수강한 강의 상세 정보 페이지로 lessonCont.do-->
 					<a href="#">
 					<!--강의 섬네일 표시 영역  -->
 						<img src="C:\\hobbyImg\\lesson\\강사이메일주소\\...png" width="60" height="60">
 				
-				<div class="goods_info">
-
-						<p class="name">
-							강의명
+				<div class="lesson_info">
+						<p class="lesson_subj">
+							$강의명$
 						</p>
-						<ul class="info">
-							<li><span class="blind">상품금액</span>7,900원</li>
-							<li class="date"><span class="blind">강의 구매날짜</span> $구매일$</li>
+						<ul>
+							<li><span>강사명</span></li>
+							<li><span>강의 구매날짜</span> $구매일$</li>
 						</ul>
-					</a>
-					<span class="state _statusName ">결제완료</span>
-					</a>
+					</a>					
 				</div>
+			</div>
+		</div>
 	</div>
-</div>
-
 </body>
 </html>
