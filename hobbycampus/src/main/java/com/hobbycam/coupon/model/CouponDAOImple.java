@@ -43,9 +43,9 @@ public class CouponDAOImple implements CouponDAO {
 	}
 	@Override
 	public int getTotalCnt() {
-		int cnt= sqlMap.selectOne("totalCnt");
+		int cnt= sqlMap.selectOne("totalCouponCnt");
 		cnt=cnt==0?1:cnt;
-		//이제 로직에 대한 고민은 service 파트에서 
+		
 		return cnt;
 	}
 

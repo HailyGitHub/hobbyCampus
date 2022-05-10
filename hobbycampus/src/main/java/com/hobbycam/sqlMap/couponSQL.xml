@@ -41,7 +41,7 @@
 	where coupon_idx= #{coupon_idx}
 	</update>
 
-	<select id="totalCnt" resultType="Integer">
+	<select id="totalCouponCnt" resultType="Integer">
 		select 
 			count(*) 
 		from 

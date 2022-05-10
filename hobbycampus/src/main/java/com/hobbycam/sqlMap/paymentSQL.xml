@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.payment"> 
+ 
+ <select id="selectPaymentList" parameterType="hashmap" resultType="com.hobbycam.payment.model.PaymentDTO">
+ 	select 
+ 		* 
+ 	from 
+ 		pay_list , users 
+ 	where 
+ 		pay_list.u_idx=users.u_idx 
+ 	order by 
+ 		pay_list.pay_list_idx asc 
+
+ </select>
+ <update id="updateRufundState" parameterType="com.hobbycam.payment.model.PaymentDTO">
+	update(
+		select 
+			* 
+		from 
+			users, pay_list 
+		where 
+			users.u_idx=pay_list.u_idx 
+		and 
+			pay_list.pay_list_idx=#{pay_list_idx} 
+	)set 
+		users.u_point=users.u_point+pay_list.pay_point 
+ 
+ </update>
+
+ <update id="updateRufundPoint" parameterType="com.hobbycam.payment.model.PaymentDTO">
+ 	update(
+		select 
+			* 
+		from 
+			users, pay_list 
+		where 
+			users.u_idx=pay_list.u_idx 
+		and 
+			pay_list.pay_list_idx=#{pay_list_idx} 
+	)set 
+		pay_list.pay_value='환불' 
+ </update>
+ 
+ <select id="totalPayCnt" resultType="Integer">
+		select 
+			count(*) 
+		from 
+			pay_list
+	</select>
+ </mapper>

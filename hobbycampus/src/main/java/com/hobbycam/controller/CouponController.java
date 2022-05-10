@@ -15,7 +15,6 @@ import com.hobbycam.coupon.model.CouponDTO;
 @Controller
 public class CouponController {
 	
-
 	
 	@Autowired
 	private CouponDAO couponDao;
@@ -24,14 +23,14 @@ public class CouponController {
 	public ModelAndView coupon() {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("coupon/couponList");
+		mav.setViewName("coupon/coupon");
 		return mav;
 	}
 	
 	@RequestMapping("/couponList.do")
 	public ModelAndView couponList(@RequestParam(value="cp",defaultValue = "1")int cp) {
 		ModelAndView mav = new ModelAndView();
-		int totalCnt=10;//getTotalCnt 메서드 호출. 
+		int totalCnt=couponDao.getTotalCnt();
 		int listSize=5;
 		int pageSize=5;
 		String pageStr=com.hobbycam.page.PageModule.pageMake("couponList.do", totalCnt, listSize, pageSize, cp);

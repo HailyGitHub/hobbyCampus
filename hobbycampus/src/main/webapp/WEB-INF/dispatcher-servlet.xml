@@ -47,6 +47,11 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	<bean id="paymentDao" class="com.hobbycam.payment.model.PaymentDAOImple">	
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 
 	
 	
