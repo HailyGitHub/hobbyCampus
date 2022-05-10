@@ -16,12 +16,10 @@
 	margin: 10px auto;
 }
 
-
-
 </style>
 </head>
 <body>
-	<div id="point_content">
+	<div id="wrap">
 	
 		<form>
 			<h2>포인트 충전</h2>

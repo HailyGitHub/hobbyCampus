@@ -8,45 +8,41 @@
 </head>
 <body>
 <h2>내 수강 내역</h2>
-<div>
+<div id="wrap">
 	<div class="button_set">
-		<input type="button" name="list_bt" value="전체 목록">
-		<input type="button" name="lesson_bt" value="수강중">
-		<input type="button" name="reser_bt" value="예약">
-		<input type="button" name="end_bt" value="수강완료">
-		<input type="button" name="cencel_bt" value="수강취소">
+		<input type="button" name="list_bt" value="전체 목록" onclick="">
+		<input type="button" name="lesson_bt" value="수강중"onclick="">
+		<input type="button" name="reser_bt" value="예약" onclick="">
+		<input type="button" name="end_bt" value="수강완료" onclick="">
+		<input type="button" name="cencel_bt" value="수강취소" onclick="">
 	</div>
+	<hr>
 	
+	<!--아래로 로그인된 회원의 레슨상태(수강중/예약/수강완료/취소)에 따라 출력되는 부분  -->
 	<div class="lesson_list_section">
-	<div class="goods_pay_section ">
 			<div class="goods_group">
 				<ul class="goods_group_list">
-
-
 		<li id="_rowLi20220510123126NSP20220510NP3974485505" class="goods_pay_item payorder">
-			<div class="goods_item">
-				<a href="https://pay.naver.com/payments/detail/20220510NP3974485505" class="goods_thumb">
-					<img src="https://phinf.pstatic.net/checkout/20220407_164/164930992294423TOP_PNG/naver_logo.png" width="60" height="60" alt="케이지이니시스">
-				</a><!--N=a:csh.detail-->
+			<div class="lesson_item">
+					<!-- 링크: 강의 상세 정보 페이지로 -->
+					<a href="#">
+					<!--강의 섬네일 표시 영역  -->
+						<img src="C:\\hobbyImg\\lesson\\강사이메일주소\\...png" width="60" height="60">
+				
 				<div class="goods_info">
-					<!-- NV_MID: -->
-					<a class="goods" href="https://pay.naver.com/payments/detail/20220510NP3974485505">
+
 						<p class="name">
-							롤링파스타 신촌점 - 로제크림 쉬림프 파스타
+							강의명
 						</p>
 						<ul class="info">
 							<li><span class="blind">상품금액</span>7,900원</li>
-							<li class="date"><span class="blind">상품구매날짜</span> 2022.05.10</li>
+							<li class="date"><span class="blind">강의 구매날짜</span> $구매일$</li>
 						</ul>
 					</a>
 					<span class="state _statusName ">결제완료</span>
+					</a>
 				</div>
-		</div>	
-	
-	
 	</div>
-	
-	
 </div>
 
 </body>
