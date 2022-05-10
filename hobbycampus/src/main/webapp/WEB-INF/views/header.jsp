@@ -39,15 +39,23 @@
         <!-- Search Bar -->
         <div class="collapse navbar-collapse" id="navbarsExample01">
             <form>
-            <div class="input-group mb-3">
-                <select class="form-select">
-                    <option selected>전체</option>
-                    <option value="1">라이브</option>
-                    <option value="2">온라인</option>
-                    <option value="3">오프라인</option>
-                </select>
-                <input type="text" class="form-control" placeholder="검색할 내용" aria-label="Example text with two button addons">
-                <button class="btn btn-outline-secondary" type="button">검색</button>
+            <div class="row">
+            <div class="input-group">
+            	<div class="col-md-1">
+	                <select class="form-select">
+	                    <option selected>전체</option>
+	                    <option value="1">라이브</option>
+	                    <option value="2">온라인</option>
+	                    <option value="3">오프라인</option>
+	                </select>
+                </div>
+                <div class="col-md-10">
+	                <input type="text" class="form-control" placeholder="검색할 내용" aria-label="Example text with two button addons">
+                </div>
+                <div class="col-md-1">                
+	                <button class="btn btn-outline-secondary" type="button">검색</button>
+                </div>
+            </div>
             </div>
             </form>
         </div>

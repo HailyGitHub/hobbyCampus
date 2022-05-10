@@ -17,6 +17,68 @@ function clickPwd() {
 
 function showAdmin() {
   if(pwd==user){
-    alert('관리자 페이지로 이동합니다.');
+    alert('앗 비밀번호를 푸셨군요! 관리자 페이지로 이동합니다.');
+    window.location.href = 'adminLoginForm.do';
   }
+}
+
+
+/* About Page Method */
+var m_title = document.getElementById('ModalLabel').firstChild;
+var m_content = document.getElementById('modal-body').firstChild;
+	
+function showUs(){
+	sendRequest('aboutUs.do', null, showUsResult, 'GET');
+}
+function showUsResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+		var data = XHR.responseText;
+		
+		m_title.nodeValue = '회사소개';
+		m_content.nodeValue = data;
+		}
+	}
+}
+
+function showHR(){
+	sendRequest('aboutHR.do', null, showHRResult, 'GET');
+}
+function showHRResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+		var data = XHR.responseText;
+		
+		m_title.nodeValue = '인사채용';
+		m_content.nodeValue = data;
+		}
+	}
+}
+
+function showPolicy(){
+	sendRequest('aboutPolicy.do', null, showPolicyResult, 'GET');
+}
+function showPolicyResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+		var data = XHR.responseText;
+		
+		m_title.nodeValue = '운영정책';
+		m_content.nodeValue = data;
+		}
+	}
+}
+
+function showCenter(){
+	sendRequest('aboutCenter.do', null, showCenterResult, 'GET');
+}
+function showCenterResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+		var data = XHR.responseText;
+		
+		m_title.nodeValue = '고객센터';
+		m_content.nodeValue = data;
+		}
+	}
 }
