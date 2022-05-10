@@ -9,7 +9,7 @@
 <body>
  <div>보유 하빗      ${tPoint}하빗</div>
  <hr>
- <form name="toPoint" action="toPoint.do">
+ <form name="toPoint" action="exToPoint.do">
  <input type="hidden" value="1" name="t_idx">
  	<ul>
  		<li><input type="text" name="exPoint">
@@ -17,10 +17,10 @@
  	</ul>
  </form>
  
- <form name="toCash" action="toCash.do">
+ <form name="toCash" action="exToCash.do">
  <input type="hidden" value="1" name="t_idx">
  	<ul>
- 		<li><input type="text" name="exPoint">	
+ 		<li><input type="text" name="exPoint">	z
  		<input type="submit" value="현금입금 신청" onclick="toChash();"></li>
  	</ul>
  </form>

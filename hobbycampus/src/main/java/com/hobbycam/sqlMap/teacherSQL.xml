@@ -43,22 +43,37 @@
 			FROM teacher 
 			WHERE t_idx=#{t_idx}
  	</select>
- 	<update id="updateUPoint" parameterType="map">
+ 	<update id="plusUPoint" parameterType="map">
  		UPDATE (
 		 SELECT u.u_idx, u.u_name, u.u_point, t.t_idx, t.t_name, t.t_point 
 		 	FROM users u, teacher t
 				WHERE u.u_idx = t.u_idx and t_idx=#{t_idx}) a
 			SET a.u_point=a.u_point<![CDATA[+]]>#{exPoint}
  	</update>
- 	<update id="updateTPoint" parameterType="map">
+ 
+ 	<update id="minusTPoint" parameterType="map">
  	UPDATE (
 	 SELECT u.u_idx, u.u_name, u.u_point, t.t_idx, t.t_name, t.t_point 
 	 	FROM users u, teacher t
 			WHERE u.u_idx = t.u_idx and t_idx=#{t_idx}) a
 		SET a.t_point=a.t_point<![CDATA[-]]>#{exPoint}
  	</update>
- 	<insert id="insertToPoint" parameterType="int">
+ 	<insert id="insertToPoint" parameterType="map">
  		INSERT INTO pay_list 
+ 			VALUES(
+		    	seq_pay_list.nextval, 
+		    		(SELECT u.u_idx
+					FROM users u, teacher t
+					WHERE u.u_idx = t.t_idx
+					AND t.t_idx=#{t_idx}), 
+		    	'환전',
+		    	'포인트',
+		    	sysdate,
+		    	#{exPoint} 
+		)
+ 	</insert>
+ 	<insert id="insertToCash" parameterType="map">
+ 		 		INSERT INTO pay_list 
  			VALUES(
 		    	seq_pay_list.nextval, 
 		    		(SELECT u.u_idx
@@ -68,7 +83,8 @@
 		    	'입금',
 		    	'포인트',
 		    	sysdate,
-		    	100 
+		    	#{exPoint} 
 		)
+ 	
  	</insert>
  </mapper>

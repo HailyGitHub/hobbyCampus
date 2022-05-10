@@ -6,7 +6,7 @@
     <div class="top_nav">
         <span class="top_nav_area">
             <a href="#">회원가입</a> | <a href="#">로그인</a>
-              <a href="teacherMypage.do">마이페이지</a> 
+              <a href="mypage.do">마이페이지</a> 
         </span>
     </div>
     <!-- Logo -->

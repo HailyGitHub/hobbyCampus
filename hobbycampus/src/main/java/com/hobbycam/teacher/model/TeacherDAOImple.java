@@ -49,30 +49,43 @@ public class TeacherDAOImple implements TeacherDAO {
 	
 	/**insert payList */
 	@Override
-	public boolean updatePoint(int t_idx, int exPoint) {
+	public boolean exchageUPoint(int t_idx, int exPoint) {
 		//update u_point
-			//Map map = new HashedMap();
 			Map map = new HashedMap();
 		
 			map.put("t_idx", t_idx);
 			map.put("exPoint", exPoint);
-			int tResult = sqlMap.update("updateUPoint", map);
+			int tResult = sqlMap.update("plusUPoint", map);
 			
 		//update t_point
-			int uResult = sqlMap.update("updateTPoint", map);
+			int uResult = sqlMap.update("minusTPoint", map);
 			
 		//insert pay_list
-			int pResult = sqlMap.insert("insertToPoint", t_idx);
+			int pResult = sqlMap.insert("insertToPoint", map);
 		if(tResult==1&&uResult==1&&pResult==1) {
 			return true;
 		}else {
 			return false;
 		}	
 	}
+		@Override
+		public boolean exchageCash(int t_idx, int exPoint) {
+			Map map = new HashedMap();
+			
+			map.put("t_idx", t_idx);
+			map.put("exPoint", exPoint);
+			
+			//update t_point
+			int uResult = sqlMap.update("minusTPoint", map);
+			
+			//insert pay_list
+			int pResult = sqlMap.update("insertToCash", map);
+			
+			if(uResult==1&&pResult==1) {
+				return true;
+			}else {
+				return false;
+			}	
+		}
 
-	@Override
-	public int payListInsert(int t_idx, int exPoint) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

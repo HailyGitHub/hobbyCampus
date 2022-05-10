@@ -92,39 +92,55 @@ public class TeacherController {
 	}
 	
 	/**update t_point to u_point*/
-	@RequestMapping("/toPoint.do")
+	@RequestMapping("/exToPoint.do")
 	public ModelAndView pointToPoint(String exPoint, int t_idx) {
 		
 		int tPoint = tdao.pointSelect(t_idx);//get t_point by t_idx
 		int exchangePoint = Integer.parseInt(exPoint);
 		int resultPoint =tPoint-exchangePoint;
 		ModelAndView mav = new ModelAndView();
+		
 		//If the user writes a larger(or smaller) amount than the user has
 		if(resultPoint>=0) {
+			
 			//update pay_list and teacherInformation
-			boolean pointUpdate = tdao.updatePoint(t_idx, exchangePoint);
+			boolean pointUpdate = tdao.exchageUPoint(t_idx, exchangePoint);
 			mav.addObject("pointUpdate", pointUpdate);
 			
 			mav.setViewName("teacher/toPoint");
-		}else {
+		}else { 
 			mav.addObject("msg", "보유 포인트 이하로 입력해주세요.");
 			mav.setViewName("teacher/msg");
-		}
+		} 
 		
 		return mav;
 		
 	}
 	
 	/**update t_point to cash*/
-	@RequestMapping("/toCash.do")
-	public ModelAndView pointToCash(String exPoint) {
-		//check if exPoint<t_point
-		
-		
+	@RequestMapping("/exToCash.do")
+	public ModelAndView pointToCash(String exPoint, int t_idx) {
+
+		int tPoint = tdao.pointSelect(t_idx);//get t_point by t_idx
+		int exchangePoint = Integer.parseInt(exPoint);
+		int resultPoint =tPoint-exchangePoint;
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("exPoint", exPoint);
-		mav.setViewName("teacher/toCash");
-		return mav;
+		
+		//If the user writes a larger(or smaller) amount than the user has
+				if(resultPoint>=0) {
+					
+					//update pay_list and teacherInformation
+					boolean pointUpdat = tdao.exchageCash(t_idx, exchangePoint);
+					
+					
+					
+					mav.setViewName("teacher/toPoint");
+				}else { 
+					mav.addObject("msg", "보유 포인트 이하로 입력해주세요.");
+					mav.setViewName("teacher/msg");
+				}
+				
+				return mav;
 	}
 	
 	

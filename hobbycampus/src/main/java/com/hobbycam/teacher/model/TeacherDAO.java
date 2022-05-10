@@ -6,6 +6,7 @@ public interface TeacherDAO {
 	public boolean nameCheck(String t_name);
 	public int teacherInfoUpdate(TeacherDTO dto);
 	public int pointSelect(int t_idx);
-	public boolean updatePoint(int t_idx, int exPoint);
-	public int payListInsert(int t_idx, int exPoint);
+	public boolean exchageUPoint(int t_idx, int exPoint);
+	public boolean exchageCash(int t_idx, int exPoint);
+	
 }

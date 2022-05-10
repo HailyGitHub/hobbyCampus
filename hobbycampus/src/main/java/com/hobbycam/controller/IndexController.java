@@ -15,4 +15,9 @@ public class IndexController {
 		return mav;
 		
 	}
+	
+	@RequestMapping("/mypage.do")
+	public String myPage() {
+		return "myPage";
+	}
 }
