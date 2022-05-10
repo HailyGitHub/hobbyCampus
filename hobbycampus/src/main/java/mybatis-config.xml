@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<mappers>
-		<mapper resource="com/hobbycam/sqlMap/adminSQL.xml"/>
+		<mapper resource="sqlMap/adminSQL.xml"/>
+		<mapper resource="sqlMap/lessonSQL.xml"/>
 	</mappers>
 </configuration>

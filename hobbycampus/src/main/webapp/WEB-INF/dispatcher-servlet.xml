@@ -37,15 +37,19 @@
 	
 	
 	<!-- DAO -->
+
 	<bean id="adminDao" class="com.hobbycam.admin.model.AdminDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	<bean id="LessonDAO" class="com.hobbycam.lesson.model.LessonDAOImple">
 
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 
-	
-	
 	<!-- Views -->
 	<bean id="hobbyDown" class="com.hobbycam.view.DownloadView"></bean> <!-- File Download Class  -->
 	<bean id="hobbyJson" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean> <!-- JSON -->
