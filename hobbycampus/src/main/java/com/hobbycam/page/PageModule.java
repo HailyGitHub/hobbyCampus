@@ -8,20 +8,20 @@ public class PageModule {
 		int totalPage = (totalCnt/listSize) + 1;
 		if(totalCnt%listSize==0) totalPage--;
 
-		// ÇöÀç ÆäÀÌÁö±×·ì (½ÃÀÛÀº 0ºÎÅÍ)
+		// í˜„ì¬ í˜ì´ì§€ê·¸ë£¹ (ì‹œì‘ì€ 0ë¶€í„°)
 		int pageGroup = cp/pageSize;
 		if(cp%pageSize==0) pageGroup--;
 
-		// ÃÑ ÆäÀÌÁö ±×·ì
+		// ì´ í˜ì´ì§€ ê·¸ë£¹
 		int totalPageGroup = totalPage/pageSize;
 		if(totalPage%pageSize==0) totalPageGroup--;
 		
-		// ÇÑ ÆäÀÌÁö±×·ìÀÇ ½ÃÀÛ, ³¡ index
+		// í•œ í˜ì´ì§€ê·¸ë£¹ì˜ ì‹œì‘, ë index
 		int startIdx = pageSize * pageGroup + 1 ;
 		int endIdx = pageSize * pageGroup + pageSize;
 
-		int beforeIdx = (pageGroup-1) * pageSize + pageSize; //ÀÌÀü ÆäÀÌÁö index
-		int nextIdx = (pageGroup+1) * pageSize + 1; //´ÙÀ½ ÆäÀÌÁö index
+		int beforeIdx = (pageGroup-1) * pageSize + pageSize; //ì´ì „ í˜ì´ì§€ index
+		int nextIdx = (pageGroup+1) * pageSize + 1; //ë‹¤ìŒ í˜ì´ì§€ index
 		
 		StringBuffer sb = new StringBuffer();
 		

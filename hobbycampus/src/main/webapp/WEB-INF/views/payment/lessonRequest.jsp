@@ -10,9 +10,44 @@
 <script type="text/javascript">
 	$myLesson.lessonPrice=${lessonVO.lessonPrice}
 </script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+#main{
+	width:940px;
+	margin: 10px auto;
+	padding: 20px;
+
+}
+#left_content{
+	width:350px;
+	padding:20px;
+	margin-bottom:20px;
+	float:left;
+	border: 1px solid #bcbcbc;
+
+}
+#addr_content{
+	width:350px;
+	padding:20px;
+	margin-bottom:20px;
+
+	border: 1px solid #bcbcbc;
+
+}
+#right_content{
+	width:360px;
+	padding:20px;
+	margin-bottom:20px;
+	float:right;
+	border: 1px solid #bcbcbc;
+
+}
+
+</style>
 </head>
 <body>
-	<div class="main">
+	<div id="main">
 		<h2>수강 신청하기</h2>
 		<div id="left_content">
 			<h3>수강 정보</h3>
@@ -26,7 +61,18 @@
 			<dt>키트 유무</dt>
 			<dd>${lessonVO.lessonKit}</dd>
 		</div>
-
+		
+		<div id="addr_content">
+		<h3>배송 정보</h3>
+			<dt>수령인</dt>
+			<dd><input type="text" name="post_receiver" placeholder="수령인을 입력해주세요."></dd>
+			<dt>전화번호</dt>
+			<dd><input type="text" name="post_tel" placeholder="전화번호를 입력해주세요."></dd>
+			<dt>수령지</dt>
+			<dd><input type="text" name="post_addr" placeholder="수령지를 입력해주세요."></dd>
+			<dt>요청사항</dt>
+			<dd><input type="text" name="post_etc" placeholder="내용을 입력해주세요."></dd>	
+		</div>
 		<div id="right_content">
 			<h2>결제 정보</h2>
 			<dt>수강료<dt>
@@ -42,12 +88,13 @@
 			<dt>결제 포인트</dt>
 			<dd>${lessonVO.lessonPrice}</dd>
 			<dd id="price_dd">--쿠폰 할인 표시 부분--</dd>
-			<hr id="total_price_hr">
-			총 결제 포인트-- 총 결제포인트 표시 부분--
+			<dd id="total_price_hr">
+			총 결제 포인트: ${lessonVO.lessonPrice}</dd>
 			<br>
 			<input type="button" value="결제하기">
 		</div>
+		
 	</div>
-
+	
 </body>
 </html>

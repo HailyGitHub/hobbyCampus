@@ -4,17 +4,17 @@ import java.sql.Date;
 
 public class CouponVO {
 
-	private long couponIdx;
+	private int couponIdx;
 	private String couponTitle;
 	private int couponRate;
 	private String couponImg;
 	private Date couponStart;
 	private Date couponEnd;
 	private String couponState;
-	public long getCouponIdx() {
+	public int getCouponIdx() {
 		return couponIdx;
 	}
-	public void setCouponIdx(long couponIdx) {
+	public void setCouponIdx(int couponIdx) {
 		this.couponIdx = couponIdx;
 	}
 	public String getCouponTitle() {

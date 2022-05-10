@@ -7,7 +7,7 @@ public class LessonVO {
 	private String lessonSubj;
 	private String lessonUpDate;
 	private String lessonType;
-	private long lessonPrice;
+	private int lessonPrice;
 	private String lessonThumbnail;
 	private String lessonShortCount;
 	private String lessonState;
@@ -50,10 +50,10 @@ public class LessonVO {
 	public void setLessonType(String lessonType) {
 		this.lessonType = lessonType;
 	}
-	public long getLessonPrice() {
+	public int getLessonPrice() {
 		return lessonPrice;
 	}
-	public void setLessonPrice(long lessonPrice) {
+	public void setLessonPrice(int lessonPrice) {
 		this.lessonPrice = lessonPrice;
 	}
 	public String getLessonThumbnail() {
