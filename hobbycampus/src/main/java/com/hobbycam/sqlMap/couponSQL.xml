@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coupon"> 
+		<insert id="insertCoupon" parameterType="com.hobbycam.coupon.model.CouponDTO">
+	insert into
+		coupon_list
+	values(
+		seq_coupon_list.nextval,
+		#{coupon_title},
+		#{coupon_rate},
+		#{coupon_img},
+		sysdate,
+		sysdate+364,
+		#{coupon_state}
+		)
+	</insert>
+	
+	<select id="selectCouponList" parameterType="hashmap" resultType="com.hobbycam.coupon.model.CouponDTO">
+		select * from 
+		(select rownum as rnum,a.* from 
+		(select * from coupon_list order by coupon_idx desc)a)b 
+		where rnum<![CDATA[>=]]>#{start} 
+		and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="selectCouponInfo" parameterType="Integer" resultType="com.hobbycam.coupon.model.CouponDTO">
+	select 
+		* 
+	from 
+		coupon_list 
+	where 
+		coupon_idx= #{coupon_idx} 
+	</select>
+
+	<update id="updateCoupon" parameterType="com.hobbycam.coupon.model.CouponDTO">
+	update coupon_list 
+	set coupon_title = #{coupon_title},
+	coupon_rate = #{coupon_rate},
+	coupon_state = #{coupon_state}
+	where coupon_idx= #{coupon_idx}
+	</update>
+
+	<select id="totalCnt" resultType="Integer">
+		select 
+			count(*) 
+		from 
+			coupon_list
+	</select>
+</mapper>

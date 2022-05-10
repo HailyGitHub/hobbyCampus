@@ -5,8 +5,9 @@ import java.util.Map;
 
 public interface CouponDAO {
 
-	public CouponDTO getCouponInfo(int idx);
-	public List getCouponList(Map map);
-	public void setCoupon();
-	public void updateCoupon();
+	public List getCouponList(int cp, int listSize);
+	public int setCoupon(CouponDTO dto);
+	public CouponDTO getCouponInfo(int coupon_idx);
+	public int updateCoupon(CouponDTO dto);
+	public int getTotalCnt();
 }

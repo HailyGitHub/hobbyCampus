@@ -42,7 +42,11 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
-
+	<bean id="couponDao" class="com.hobbycam.coupon.model.CouponDAOImple">	
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 
 	
 	

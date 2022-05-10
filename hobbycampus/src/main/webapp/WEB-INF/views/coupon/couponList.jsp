@@ -38,25 +38,25 @@
 		
 	</tfoot>
 	<tbody>
-	<c:if test="${empty val}">
+	<c:if test="${empty lists}">
 	<tr>
 		<td colspan="5" align="center">
-		내용없음
+		발행 쿠폰 데이터 없음
 		</td>
 	</tr>
 	</c:if>
 	<c:forEach var="dto" items="${lists}">
 		<tr>
-			<td>${dto.idx}</td>
+			<td>${dto.coupon_idx}</td>
 			<!-- create url -->
 			<c:url var="url" value="content.do">
-				<c:param name="idx">${dto.idx}</c:param>
+				<c:param name="idx">${dto.coupon_idx}</c:param>
 			</c:url>
 			<!-- insert url -->
-			<td><a href="${url}">${subject}</a></td>
-			<td>${obj}</td>
-			<td>${obj}</td>
-			<td>${obj}</td>
+			<td>${dto.coupon_title}</td>
+			<td>${dto.coupon_rate}</td>
+			<td>${dto.coupon_img}</td>
+			<td>${dto.coupon_end}</td>
 		</tr>
 	</c:forEach>
 	</tbody>
