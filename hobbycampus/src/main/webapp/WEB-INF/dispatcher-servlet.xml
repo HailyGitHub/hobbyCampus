@@ -44,12 +44,27 @@
 		</constructor-arg>
 	</bean>
 	<bean id="LessonDAO" class="com.hobbycam.lesson.model.LessonDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="resumeDao" class="com.hobbycam.resume.model.ResumeDAOImple">
 
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
-
+	<bean id="teacherDao" class="com.hobbycam.teacher.model.TeacherDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="lessonRecordDao" class="com.hobbycam.lessonRecord.model.LessonRecordDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	
 	<!-- Views -->
 	<bean id="hobbyDown" class="com.hobbycam.view.DownloadView"></bean> <!-- File Download Class  -->
 	<bean id="hobbyJson" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean> <!-- JSON -->
