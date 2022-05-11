@@ -4,6 +4,7 @@ import oracle.sql.DATE;
 
 public class PaymentDTO {
 
+	
 	public int pay_list_idx;
 	public int u_idx;
 	public String pay_value;

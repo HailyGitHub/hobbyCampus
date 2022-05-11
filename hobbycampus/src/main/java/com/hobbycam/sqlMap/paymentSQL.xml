@@ -5,14 +5,23 @@
  <mapper namespace="com.payment"> 
  
  <select id="selectPaymentList" parameterType="hashmap" resultType="com.hobbycam.payment.model.PaymentDTO">
- 	select 
- 		* 
- 	from 
- 		pay_list , users 
- 	where 
- 		pay_list.u_idx=users.u_idx 
- 	order by 
- 		pay_list.pay_list_idx asc 
+ 	select * from 
+		(select rownum as rnum,a.* from 
+			(select 
+		 		pay_list.pay_list_idx,
+                users.u_idx,
+	            pay_list.pay_value,
+                pay_list.pay_type,
+                pay_list.pay_date,
+	            pay_list.pay_point 
+		 	from 
+		 		pay_list , users 
+		 	where 
+		 		pay_list.u_idx=users.u_idx 
+		 	order by 
+		 		pay_list.pay_list_idx asc )a)b 
+	where rnum<![CDATA[>=]]>#{start} 
+	and rnum<![CDATA[<=]]>#{end}
 
  </select>
  <update id="updateRufundState" parameterType="com.hobbycam.payment.model.PaymentDTO">

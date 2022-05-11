@@ -23,7 +23,7 @@ public class PaymentDAOImple implements PaymentDAO {
 		Map map= new HashMap();
 		map.put("start",start);
 		map.put("end",end);
-		List lists = sqlMap.selectList("selectPayList",map); 
+		List lists = sqlMap.selectList("selectPaymentList",map); 
 		return lists;
 	}
 

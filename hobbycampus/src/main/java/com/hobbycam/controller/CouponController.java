@@ -74,6 +74,7 @@ public class CouponController {
 	@RequestMapping("/couponUpdate.do")
 	public ModelAndView couponUpdate() {
 		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("coupon/couponList");
 		return mav;
 	}
