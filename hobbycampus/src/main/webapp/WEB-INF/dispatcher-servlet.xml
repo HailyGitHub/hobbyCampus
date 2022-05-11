@@ -47,7 +47,11 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
-
+	<bean id="resumeManageDao" class="com.hobbycam.resume.model.ResumeManageDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 
 	
 	
