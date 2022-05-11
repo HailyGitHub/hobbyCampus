@@ -15,8 +15,8 @@
  				#{resume_intro},
  				#{resume_plan},
  				to_date(#{interview_date_param}, 'yyyy-mm-dd'),
- 				'false',
- 				'false',
+ 				'대기',
+ 				'대기',
  				#{interview_date_param}
  			)
  	</insert>

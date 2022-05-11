@@ -1,15 +1,19 @@
 package com.hobbycam.controller;
 
-import java.sql.Date;
+import java.io.File;
+import java.io.FileOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hobbycam.resume.model.ResumeDAO;
 import com.hobbycam.resume.model.ResumeDTO;
+import com.hobbycam.upload.ImgUplod;
 
 @Controller
 public class ResumeController {
@@ -23,10 +27,18 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/resume.do", method = RequestMethod.POST)
-	public ModelAndView resumeInsert(ResumeDTO dto) {
+	public ModelAndView insertResume(ResumeDTO dto, @RequestParam("resumeImg")MultipartFile resumeImg) {
+		
+		String fileName = resumeImg.getOriginalFilename();
+		String fileExtension = fileName.substring(fileName.length()-4, fileName.length());
+		
+		String savePathFolder ="C:\\hobbyImg\\resumeImg\\"; 
+		
+		ImgUplod iu = new ImgUplod();
+		String savePathImg = iu.copyInto(resumeImg, ""+dto.getU_idx(), savePathFolder, fileExtension) ;
+		dto.setResume_img(savePathImg);
 		ModelAndView mav = new ModelAndView();
 		int result = dao.resumeInsert(dto);
-		System.out.println(result);
 		String msg = result>0?"강사 신청 성공!":"강사 신청 실패!";
 		mav.addObject("msg", result);
 		mav.setViewName("teacher/msg");

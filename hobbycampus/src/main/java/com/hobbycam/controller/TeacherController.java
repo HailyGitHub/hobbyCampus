@@ -24,7 +24,7 @@ public class TeacherController {
 	private LessonRecordDAO ldao;
 	
 	/**Teacher mypage*/
-	@RequestMapping("/teacherMypage.do")
+	@RequestMapping("/mypage.do")
 	public String teacherMypage() {
 		return "teacher/mypage";
 	}

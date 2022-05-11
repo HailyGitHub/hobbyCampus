@@ -1,6 +1,9 @@
 package com.hobbycam.resume.model;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.hobbycam.controller.FileManagerController;
 
 public class ResumeDAOImple implements ResumeDAO {
 	
