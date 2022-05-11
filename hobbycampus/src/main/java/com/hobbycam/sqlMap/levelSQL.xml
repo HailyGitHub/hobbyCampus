@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <mapper namespace="com.level"> 
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.teacherLev"> 
 <select id="selectLevelList" resultType="com.hobbycam.level.model.LevelDTO">
- 	select 
-		*
-	from
-		teacher_lev
+ select * from teacher_lev
  </select>
+ 
  <select id="selectLevelInfo" parameterType="Integer" resultType="com.hobbycam.level.model.LevelDTO">
  	select 
 		*
@@ -13,9 +14,10 @@
 		TEACHER_LEV
 	where lev_idx= #{lev_idx)
  </select>
- <update id="updateLevel" parameterType="com.hobbycam.level.LevelDTO">
+ <update id="updateLevel" parameterType="com.hobbycam.level.model.LevelDTO">
  update TEACHER_LEV 
 	set lev_rate = #{lev_rate}
 	where lev_idx= #{lev_idx}
  </update>
+
  </mapper>

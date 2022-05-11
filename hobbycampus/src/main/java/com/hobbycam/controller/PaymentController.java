@@ -42,9 +42,7 @@ public class PaymentController {
 		if(point==1&&state==1) {
 			mav.addObject("msg","완료");
 		}else {
-			
 			mav.addObject("msg","문제 발생");
-			
 		}
 		mav.addObject("gopage","paymentList.do");
 		mav.setViewName("");

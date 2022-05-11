@@ -43,13 +43,13 @@ public class CouponController {
 		return mav;
 	}
 	@RequestMapping("/couponMakeForm.do")
-	public ModelAndView couponMakeForm() {
+	public ModelAndView couponMakeForm(int idx) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("coupon/couponList");
 		return mav;
 	}
 	@RequestMapping("/couponMake.do")
-	public ModelAndView couponMake() {
+	public ModelAndView couponMake(CouponDTO dto) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("coupon/couponList");
 		return mav;
@@ -72,10 +72,18 @@ public class CouponController {
 	}
 	
 	@RequestMapping("/couponUpdate.do")
-	public ModelAndView couponUpdate() {
+	public ModelAndView couponUpdate(CouponDTO dto) {
 		ModelAndView mav = new ModelAndView();
+		int count = couponDao.updateCoupon(dto);
+		
+		if(count>0){
+			mav.addObject("msg","완료");
+		}else {
+			mav.addObject("msg","문제발생");
+		}
 		
 		mav.setViewName("coupon/couponList");
+		
 		return mav;
 	}
 	
