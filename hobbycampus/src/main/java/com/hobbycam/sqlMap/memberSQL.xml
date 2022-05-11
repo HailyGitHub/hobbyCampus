@@ -97,7 +97,17 @@
 	
 	<select id="selectMemberWithdrawList" parameterType="hashmap" resultType="com.hobbycam.member.model.MemberUserDTO">
 		SELECT 
-			*
+			rownum,
+			u_idx,
+			u_email,
+			u_pwd,
+			u_name,
+			u_img,
+			u_gender,
+			u_point,
+			u_tel,
+			u_state,
+			to_date(extract(year from u_join_date)||'-'||LPAD(extract(month from u_join_date),2,0)||'-'||LPAD(extract(day from u_join_date),2,0)) as u_join_date
 		FROM
 			(SELECT 
 				rownum AS rnum, 
@@ -110,7 +120,7 @@
 				WHERE
 					u_state = '탈퇴'
 				ORDER BY 
-					u_idx DESC)a )b
+					u_join_date DESC)a )b
 		WHERE 
 			rnum<![CDATA[>=]]>#{start} 
 		AND 
