@@ -7,6 +7,7 @@ public class LessonRecordDTO {
 	private int u_idx;
 	private int lesson_schedule_idx;
 	private int price_point;
+	private Date lesson_buy_date;
 	private String lesson_record_state;
 	private String lesson_exchange_state;
 	private String u_name;
@@ -14,17 +15,18 @@ public class LessonRecordDTO {
 	private String lesson_subj;
 	
 	public LessonRecordDTO() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public LessonRecordDTO(int lesson_record_idx, int u_idx, int lesson_schedule_idx, int price_point,
-			String lesson_record_state, String lesson_exchange_state, String u_name, String lesson_time,
-			String lesson_subj) {
+			Date lesson_buy_date, String lesson_record_state, String lesson_exchange_state, String u_name,
+			String lesson_time, String lesson_subj) {
 		super();
 		this.lesson_record_idx = lesson_record_idx;
 		this.u_idx = u_idx;
 		this.lesson_schedule_idx = lesson_schedule_idx;
 		this.price_point = price_point;
+		this.lesson_buy_date = lesson_buy_date;
 		this.lesson_record_state = lesson_record_state;
 		this.lesson_exchange_state = lesson_exchange_state;
 		this.u_name = u_name;
@@ -62,6 +64,14 @@ public class LessonRecordDTO {
 
 	public void setPrice_point(int price_point) {
 		this.price_point = price_point;
+	}
+
+	public Date getLesson_buy_date() {
+		return lesson_buy_date;
+	}
+
+	public void setLesson_buy_date(Date lesson_buy_date) {
+		this.lesson_buy_date = lesson_buy_date;
 	}
 
 	public String getLesson_record_state() {
@@ -105,6 +115,8 @@ public class LessonRecordDTO {
 	}
 	
 	
+	
+
 	
 }
 

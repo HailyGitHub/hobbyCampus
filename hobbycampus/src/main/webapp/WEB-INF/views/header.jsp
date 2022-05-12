@@ -8,7 +8,7 @@
         	<!--  
             <a href="#">회원가입</a> | <a href="#">로그인</a>
             -->
-             <a href="temp.do">강사</a> | <a href="mypage.do">마이페이지</a>
+             <a href="temp.do">강사</a> | <a href="mypage.do">마이페이지</a> | <a href="teacherRecord.do?t_idx=1">강의이력</a>
         </span>
     </div>
     <!-- Logo -->

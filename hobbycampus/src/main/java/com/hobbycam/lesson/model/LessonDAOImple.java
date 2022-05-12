@@ -36,10 +36,40 @@ public class LessonDAOImple implements LessonDAO {
 		int count=sqlMap.update("updateLesson",dto);
 		return count;
 	}
+	//명령 도표 작성 바람
+	@Override
+	public List lessonOnlineCont(int lesson_idx) {
+		List lists=sqlMap.selectList("SelectOnlineLessonCont",lesson_idx);
+		return lists;
+	}
 	
 	@Override
-	public List lessonReqList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List lessonOfflineCont(int lesson_idx) {
+		List lists=sqlMap.selectList("SelectOfflineLessonCont",lesson_idx);
+		return lists;
+	}
+	
+	@Override
+	public List lessonLiveCont(int lesson_idx) {
+		List lists=sqlMap.selectList("SelectLiveLessonCont",lesson_idx);
+		return lists;
+	}
+	
+	@Override
+	public String lessonContIndentify(int lesson_idx) {
+		String type=sqlMap.selectOne("selectLessonType",lesson_idx);
+		return type;
+	}
+	
+	@Override
+	public int lessonLike(int lesson_idx) {
+		int like=sqlMap.selectOne("SelectLessonLikeCount",lesson_idx);
+		return like;
+	}
+	
+	@Override
+	public List lessonReview(int lesson_idx) {
+		List lists=sqlMap.selectList("SelectLessonReview",lesson_idx);
+		return lists;
 	}
 }

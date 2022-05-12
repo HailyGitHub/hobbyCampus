@@ -51,6 +51,90 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			LESSON_SHORT_CONT=#{lesson_short_cont},
   			LESSON_KIT=#{lesson_kit}
   		WHERE
-  			LESSON_IDX=4
+  			LESSON_IDX=2
   	</update>
+  	<select id="SelectLessonReq" resultType="com.hobbycam.lessonRecord.model.LessonRecordDTO">
+  		SELECT B.U_NAME,
+       		   B.LESSON_BUY_DATE,
+               LL.LESSON_SUBJ   
+			  		FROM LESSON_LIST LL,(SELECT A.*,
+                            				  LS.LESSON_IDX 
+					                     FROM  	  
+					                          LESSON_SCHEDULE LS,(SELECT 
+					                                                  LR.*,
+					                                                  U.U_NAME
+					                                              FROM   
+					                                                  LESSON_RECORD LR,
+					                                                  USERS U
+					                                              WHERE 
+					                                                  LR.LESSON_RECORD_STATE='수업' AND
+					                                                  LR.U_IDX=U.U_IDX) A	  
+                     					 WHERE 
+                       						  LS.LESSON_SCHEDULE_IDX=A.LESSON_SCHEDULE_IDX)B
+		WHERE B.LESSON_IDX=LL.LESSON_IDX AND
+			  T_IDX=#{t_idx}
+  	</select>
+  	<select id="selectLessonType" parameterType="int" resultType="String">
+  		SELECT
+  			LESSON_TYPE
+  		FROM
+  			LESSON_LIST
+  		WHERE
+  			LESSON_IDX=#{lesson_idx}
+  	</select>
+  	<select id="SelectOnlineLessonCont" parameterType="int" resultType="com.hobbycam.lesson.model.LessonOnlineDTO" >
+  		SELECT
+  			LL.*,
+  			LON.ONLINE_IDX,
+  			LON.ONLINE_SUBJ,
+  			LON.ONLINE_IMG,
+  			LON.ONLINE_FILE,
+  			LON.ONLINE_CONT
+  		FROM
+  			LESSON_LIST LL,
+  			LESSON_ONLINE LON
+  		WHERE
+  			LL.LESSON_IDX=LON.LESSON_IDX AND
+  			LL.LESSON_IDX=#{lesson_idx}
+  		
+  			
+  	</select>
+  	<select id="SelectOfflineLessonCont"></select>
+  	<select id="SelectLiveLessonCont"></select>
+  	<select id="SelectLessonLikeCount" parameterType="int" resultType="int">
+  		SELECT
+  			COUNT(*)
+  		FROM
+  			LIKE_LIST
+  		WHERE 
+  			LESSON_IDX=#{lesson_idx}
+  	</select>
+  	<select id="SelectLessonReview" parameterType="int" resultType="com.hobbycam.review.model.ReviewDTO">
+		SELECT
+		    C.*
+		FROM
+		    (SELECT
+		        B.*
+		    FROM
+		        (SELECT
+		            A.*,
+		            LS.LESSON_IDX
+		        FROM    
+		            (SELECT 
+		                R.*,
+		                LR.LESSON_SCHEDULE_IDX,
+		                LR.U_IDX
+		            FROM 
+		                REVIEW R,
+		                LESSON_RECORD LR
+		            WHERE
+		                R.LESSON_RECORD_IDX=LR.LESSON_RECORD_IDX)A,
+		                LESSON_SCHEDULE LS
+		        WHERE
+		            A.LESSON_SCHEDULE_IDX=LS.LESSON_SCHEDULE_IDX)B,
+		            LESSON_LIST LL
+		    WHERE
+		        B.LESSON_IDX=LL.LESSON_IDX)C
+		WHERE LESSON_IDX=#{lesson_idx}
+  	</select>
   </mapper>
