@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,37 +16,97 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!--CSS-->
     <link rel="stylesheet" href="/hobbycampus/css/main.css">
+    <style>
+    	.classWithPad { 
+    		margin-left : 50px;
+    		margin-right : 50px;
+    		margin-bottom:80px;
+    		padding:100px; 
+    	}
+    </style>
+    <script>
+    </script>
 </head>
 <body>
 <!-- HEADER -->
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	
 	<!-- MAIN -->
-	<h1>강사 신청</h1>
-	<form name="insertResume" action="resume.do" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="u_idx "value="1">
-		<table border="">
-			<tr>
-				<td rowspan="3"><input type="file" name="resumeImg" value="이력서 사진"></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="resume_name" placeholder="이름"></td>
-			 <td><input type="date" name="interview_date_param" placeholder="면접희망일"></td>
-			</tr>
-			<tr>
-				<td colspan="3"><textarea rows="4" cols="40" name="resume_intro" placeholder="자기소개" style="resize: none;"></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="3"><textarea rows="6" cols="50" name="resume_plan" placeholder="수업계획" style="resize: none;"></textarea> </td>
-			</tr>
-			<tr>
-				<td colspan="3" align="center">
-					<input type="submit" value="등록">
-				</td>
-			</tr>
-		</table>
-	
-	</form>
+<div id="container" class="classWithPad">
+	<div class="py-5 text-center">
+    	<h2>강사 신청서</h2>
+  	</div>
+  	  <hr class="my-2">
+	<form class="row g-3 " name="insertResume" action="resume.do" method="post" enctype="multipart/form-data" >
+    <input type="hidden" name="u_idx "value="1">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <label for="validationDefault01" class="form-label">성함(실명)</label>
+      <input type="text" name="resume_name" class="form-control" id="validationDefault01"  required>
+    </div>
+    <div class="col-md-3">
+      <label for="validationDefault02" class="form-label">면접 희망일</label>
+      <input  type="date" name="interview_date_param" class="form-control" id="validationDefault02" required>
+    </div>
+
+    <div class="col-md-3">
+      <label for="validationDefault01" class="form-label">사진 *jpg만 가능합니다.</label>
+      <input type="file" name="resumeImg" value="이력서 사진" class="form-control" id="validationDefault01" required>
+    </div>
+    <div class="col-md-2"></div>
+    
+    <div class="col-md-1"></div>
+    <div class="col-md-9">
+      <label for="resume_intro" class="form-label">자기소개</label>
+      <textarea class="form-control" rows="4" id="intro" cols="40" name="resume_intro" style="resize: none;"></textarea>
+    </div>
+    <div class="col-md-2"></div>
+
+
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <label for="cate2" class="form-label">수업 카테고리</label>
+      <!-- cate2 -->
+      <select class="form-select" id="cate2" name="cate2_idx"  required>
+         <c:forEach var="cate2" items="${cate2List}">
+         <option value="${cate2.cate2_idx}" >${cate2.cate2_name}</option> 
+         </c:forEach>	
+        
+      </select>
+      
+    </div>
+    <div class="col-md-8"></div>
+    
+    <div class="col-md-1"></div>
+    <div class="col-md-9">
+      <label for="resume_plan" class="form-label">수업계획</label>
+      <textarea class="form-control" rows="4" id="intro" cols="40" name="resume_plan" style="resize: none;"></textarea>
+    </div>
+    <div class="col-md-2"></div>
+
+
+  <div class="col-md-1"></div>
+    <div class="col-11">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck1" required>
+        <label class="form-check-label" for="invalidCheck1">
+            <a href="#">개인정보 활용 동의서</a>에 동의합니다.
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+        <label class="form-check-label" for="invalidCheck2">
+          	면접 혹은 합격여부 관련 안내사항은 메일 주소로 발송됨을 확인하였습니다.
+        </label>
+      </div>
+    </div>
+    <div class="col-md-5"></div>
+    <div class="col-md-2">
+      <button class="btn btn-primary" type="submit">이력서 제출</button>
+    </div>
+    <div class="col-md-5"></div>
+  </form>
+</div>  
 		<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
