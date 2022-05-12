@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hobbycam.lessonRecord.model.LessonRecordDAO;
-import com.hobbycam.page.BootstrapPageModule;
+import com.hobbycam.page.BootstrapPageModule2;
 import com.hobbycam.teacher.model.TeacherDAO;
 import com.hobbycam.teacher.model.TeacherDTO;
 import com.hobbycam.upload.ImgUplod;
@@ -108,14 +108,15 @@ public class TeacherController {
 	
 	/**select lesson_record list*/
 	@RequestMapping("/teacherRecord.do")
-	public ModelAndView teacherRecord(int t_idx, @RequestParam(value="cp", defaultValue = "1")int cp) {
+	public ModelAndView teacherRecord(int t_idx, @RequestParam(value="cp", defaultValue="1")int cp) {
 		ModelAndView mav = new ModelAndView();
 		
 		//page
 		int totalCnt = ldao.teacherRecordCnt(t_idx);
 		int listSize = 10;
 		int pageSize = 5;
-		String pageStr = BootstrapPageModule.pageMake("teacher/teacherRecord", totalCnt, listSize, pageSize, cp);
+		String addParam="&t_idx="+t_idx;
+		String pageStr = BootstrapPageModule2.pageMake("teacherRecord.do", totalCnt, listSize, pageSize, cp, addParam);
 		
 		
 		//list
