@@ -86,5 +86,22 @@ public class ResumeManageDAOImple implements ResumeManageDAO {
 		
 		return count;
 	}
+	
+	@Override
+	public int getUserIdx(int resume_idx) {
+		int u_idx = sqlMap.selectOne("selectUserIdxByIdx", resume_idx);
+		return u_idx;
+	}
+	
+	@Override
+	public void setTeacher(int u_idx) {
+		
+		String  t_name = "강사" + u_idx;
+		
+		Map map = new HashMap();
+		map.put("u_idx", u_idx);
+		map.put("t_name",t_name);
+		sqlMap.insert("insertTeacherByIdx", map);
+	}
 
 }

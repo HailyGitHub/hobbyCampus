@@ -77,7 +77,7 @@
 						
 						<!-- IF lists is not null  -->
 						<c:forEach var="dto" items="${lists}">
-							<tr class="${dto.interview_result=='대기'? '':'table-secondary'}" data-bs-toggle="modal" data-bs-target="#resumeInfoModal" onclick="getResume(${dto.resume_idx})">
+							<tr class="${dto.interview_result=='대기'? '':'table-secondary'}" data-bs-toggle="modal" data-bs-target="#resumeInfoModal" onclick="getResume(${dto.resume_idx}, '${dto.u_email}')">
 								<th scope="row">${dto.resume_idx}</th>
 								<td><img src="/hobbycampus/img/${dto.resume_img}" class="rounded-circle"></td>
 								<td>${dto.u_email}</td>
@@ -118,7 +118,7 @@
 					<div class="modal-content rounded-5 shadow">
 						<!-- Model Header -->
 						<div class="modal-header p-5 pb-4 border-bottom-0">
-							<h3 class="modal-title" id="modal_title" data-idx="">OOO님 이력서</h3>
+							<h3 class="modal-title" id="modal_title" data-idx="" data-email="">OOO님 이력서</h3>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<!-- Model Body -->
@@ -235,7 +235,7 @@
 	
 	/* Input Info to Modal */
 	var resultText = '';
-	function getResume(idx){
+	function getResume(idx, email){
 		
 		$.ajax({
 			type: 'GET',
@@ -243,11 +243,12 @@
 			data: {'resume_idx': idx},
 			dataType: 'json',
 			success: function(result){
-				resultText = result; // To Trim?
+				resultText = result; // To Trim???
 				var dto = resultText.result;
 				var ImgSrc = '/hobbycampus/img/';
 				
 				$('#modal_title').attr('data-idx', dto.resume_idx);
+				$('#modal_title').attr('data-email', email);
 				$('#modal_title').text(dto.resume_name + '님 이력서');
 				$('#modal_img').attr('src', ImgSrc + dto.resume_img);
 				$('#modal_intro').text(dto.resume_intro);
@@ -274,17 +275,18 @@
 	
 	/* Change Resume State */
 	function updateState(){
-		
+
 		if(!confirm('정보를 수정하시겠습니까?')) return false; //Check Again
 		
 		var r_idx = $('#modal_title').attr('data-idx');
+		var u_email = $('#modal_title').attr('data-email');
 		var i_state = $('input:radio[name="interview_state"]:checked').val();
 		var i_result = $('input:radio[name="interview_result"]:checked').val();
 		
 		$.ajax({
 			type: 'GET',
 			url: 'resumeChangeState.do',
-			data: {'resume_idx':r_idx,'interview_state':i_state, 'interview_result':i_result},
+			data: {'resume_idx':r_idx,'u_email':u_email, 'interview_state':i_state, 'interview_result':i_result},
 			dataType: 'text',
 			success: function(msg){
 				alert(decodeURI(msg) + '하였습니다.');

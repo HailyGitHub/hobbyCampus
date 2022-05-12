@@ -152,4 +152,31 @@
 			resume_idx = #{resume_idx}
 	</update>
 	
+	<select id="selectUserIdxByIdx" parameterType="Integer" resultType="Integer">
+		SELECT
+			u_idx
+		FROM 
+			teacher_resume
+		WHERE
+			resume_idx = #{resume_idx}
+	</select>
+	
+	<insert id="insertTeacherByIdx" parameterType="hashmap">
+		INSERT INTO
+			teacher
+		VALUES(
+			seq_teacher.nextval,
+			#{u_idx},
+			1,
+			#{t_name},
+			'0.png',
+			'안녕하세요. 새로 등록한 강사입니다. 잘 부탁드립니다.',
+			sysdate,
+			'없음',
+			'없음',
+			'없음',
+			0
+		)
+	</insert>
+	
 </mapper>

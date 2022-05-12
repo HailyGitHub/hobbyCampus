@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hobbycam.email.HobbyEmail;
+import com.hobbycam.email.HobbyEmailGoogle;
 import com.hobbycam.resume.model.*;
 
 @Controller
@@ -98,21 +100,55 @@ public class ResumeManageController {
 	@ResponseBody
 	public String resumeChangeState(
 			@RequestParam(value =  "resume_idx") int resume_idx, 
+			@RequestParam(value =  "u_email") String u_email, 
 			@RequestParam(value =  "interview_state") String interview_state, 
 			@RequestParam(value =  "interview_result") String interview_result) {
 		
 		try {
-			interview_state = URLDecoder.decode(interview_state, "UTF-8");
-			interview_result = URLDecoder.decode(interview_result, "UTF-8");
+			interview_state = URLDecoder.decode(interview_state, "UTF-8"); //Get Parameter 
+			interview_result = URLDecoder.decode(interview_result, "UTF-8"); //Get Parameter 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		
 		int count = resumeManageDao.resumeChangeState(resume_idx, interview_state, interview_result); //Update Resume State
 		String msg = count>0? "수정" : "실패";
+		
+		//Send Email to User 
+		if(!interview_result.equals("대기") && msg.equals("수정")) {
+			HobbyEmail hobbymail = new HobbyEmailGoogle();
+			String subject = "하비캠퍼스 면접 결과 안내";
+			String content = "";
+			switch(interview_result) {
+			case "불합격":
+				try {
+					content = "안녕하세요! <br>"
+							+ "저희 하비캠퍼스의 면접을 봐주셔서 감사합니다. <br>"
+							+ "아쉽게 면접결과는 <strong>불합격</strong> 처리 되었음을 알려드립니다. <br>"
+							+ "잘 부탁드립니다.";
+					hobbymail.emailSend(u_email, subject, content);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+			case "합격":
+				try {
+					content = "안녕하세요! <br>"
+							+ "저희 하비캠퍼스의 면접을 봐주셔서 감사합니다. <br>"
+							+ "면접 결과는 합격되었음을 알려드립니다 <br>"
+							+ "로그인 하셔서 학생 페이지를 확인해 주세요. <br>"
+							+ "잘 부탁드립니다.";
+					hobbymail.emailSend(u_email, subject, content);
+					int u_idx = resumeManageDao.getUserIdx(resume_idx); //GET u_idx
+					resumeManageDao.setTeacher(u_idx);  //INSERT INTO teacher information
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 		msg = URLEncoder.encode(msg);
 		return msg;
 	}
-	
 	
 }

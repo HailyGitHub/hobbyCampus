@@ -12,5 +12,7 @@ public interface ResumeManageDAO {
 	public List getResumeResultList(int cp, int listSize);
 	public ResumeManageDTO getResumeInfo(int resume_idx);
 	public int resumeChangeState(int resume_idx, String interview_state, String interview_result);
+	public int getUserIdx(int resume_idx);
+	public void setTeacher(int u_idx);
 	
 }
