@@ -43,15 +43,15 @@ public class CouponController {
 		return mav;
 	}
 	@RequestMapping("/couponMakeForm.do")
-	public ModelAndView couponMakeForm(int idx) {
+	public ModelAndView couponMakeForm(
+			@RequestParam(value="coupon_idx") int coupon_idx) {
+		
 		ModelAndView mav = new ModelAndView();
-		CouponDTO dto = couponDao.getCouponInfo(idx);
-		if(dto!=null) {			
-			mav.addObject("dto",dto);
-		}else {
-			mav.addObject("errorMsg","데이터가 존재하지 않습니다.");
-		}
-		mav.setViewName("coupon/couponList");
+		CouponDTO dto = couponDao.getCouponInfo(coupon_idx);
+		System.out.println(dto.getCoupon_idx());
+		mav.addObject("dto",dto);
+		mav.setViewName("hobbyJson");
+		
 		return mav;
 	}
 	@RequestMapping("/couponMake.do")

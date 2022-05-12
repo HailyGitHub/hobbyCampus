@@ -16,7 +16,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="/hobbycampus/css/main.css">
 </head>
-<body>
+<body id="mainBody">
 	<!-- HEADER -->
 	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
 	
@@ -61,7 +61,7 @@
 			</c:url>
 			<!-- insert url -->
 			<td>
-				<a href="${url}" style="text-decoration: none; color: black;">
+				<a href="#" style="text-decoration: none; color: black;" onclick="getResume(${dto.coupon_idx})" data-bs-toggle="modal" data-bs-target="#exampleModal">
 				${dto.coupon_title} 
 				</a>
 			</td>
@@ -84,8 +84,10 @@
        <div class="modal-body p-5 pt-0">
         <form class="">
           <div class="form-floating mb-3">
-            <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
+            <input type="email" class="form-control rounded-4" id="modal_idx"  placeholder="name@example.com">
+           
             <label for="floatingInput">Email address</label>
+            <a id="modal_idx"></a>
           </div>
           <div class="form-floating mb-3">
             <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
@@ -97,19 +99,49 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="return gettrue()">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 
-	
+
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 
 </body>
+
 <script>
+function gettrue(){
+	if(!confirm('test')) return false;
+	alert('true 확인');
+	$('#exampleModal').modal('hide');
+}
 
-
+/* Input Info to Modal */
+function getResume(idx){
+   console.log(idx);
+   $.ajax({
+      type: 'GET',
+      url: 'couponMakeForm.do',
+      data: {'coupon_idx': idx},
+      dataType: 'json',
+      success: function(result){// json에서 불러온 결과값을 호출하는 함수. 즉 couponMakeForm 메소드 그 자체라 생각하면 된다.
+         var dto = result.dto; // couponMakeFor에 저장된 데이터인 dto를 호출 couponMakeForm ().dto;
+        // var ImgSrc = '/hobbycampus/img/';
+        console.log(result);
+        console.log(dto.coupon_idx); //couponMakeForm().dto.coupon_idx;
+		
+        $('#exampleModalLabel').text('쿠폰정보'); //coupon_idx 라는 키값으로 해시데이터를 삽입, 화면에는 안보임.
+        $('#modal_idx').attr('data-coupon_idx', dto.coupon_idx); //coupon_idx 라는 키값으로 해시데이터를 삽입, 화면에는 안보임.
+        $('#modal_idx').attr('value', dto.coupon_idx); //해당 태그의 value에 데이터 삽입
+        $('#modal_idx').text(dto.coupon_idx);
+        // $('#modal_img').attr('src', ImgSrc + dto.resume_img);
+        // $('#modal_intro').text(dto.resume_intro);
+         //$('#modal_cate1_name').text(dto.cate1_name);
+        // $('#modal_cate2_name').text(dto.cate2_name);
+       }//success : function
+   });//ajax
+}//getResume()
 </script>
 </html>
