@@ -20,23 +20,27 @@
  	</select>
  	<update id="updateTeacher" parameterType="com.hobbycam.teacher.model.TeacherDTO">
  		UPDATE teacher
- 			SET t_name=#{t_name},
+ 			SET t_img=#{t_img},
+ 				t_name=#{t_name},
  				t_account_owner=#{t_account_owner},
  				t_account_number=#{t_account_number},
  				t_account_bank=#{t_account_bank},
  				t_profile=#{t_profile}
  			WHERE t_idx=#{t_idx}	
  	</update>
- 	<select id="selectLessonRecord" parameterType="int" resultType="com.hobbycam.lessonRecord.model.LessonRecordDTO">
- 		  SELECT b.*, u.u_name
-			FROM users u, 
-			    (SELECT r.*, a.lesson_time, a.lesson_subj
-			    FROM lesson_record r, 
-			    (SELECT l.lesson_subj, s.lesson_time, s.lesson_schedule_idx
-			    FROM lesson_list l, lesson_schedule s
-			    WHERE l.t_idx=#{t_idx} and l.lesson_idx=s.lesson_idx) a 
-			    WHERE a.lesson_schedule_idx=r.lesson_schedule_idx) b
-			WHERE u.u_idx=b.u_idx 
+ 	<select id="selectLessonRecord" parameterType="Map" resultType="com.hobbycam.lessonRecord.model.LessonRecordDTO">
+ 		 SELECT * FROM(
+			select ROWNUM AS RNUM, C.* from ( 
+			 SELECT b.*, u.u_name
+						FROM users u, 
+						    (SELECT r.*, a.lesson_time, a.lesson_subj
+						    FROM lesson_record r, 
+						    (SELECT l.lesson_subj, s.lesson_time, s.lesson_schedule_idx
+						    FROM lesson_list l, lesson_schedule s
+						    WHERE l.t_idx=#{t_idx} and l.lesson_idx=s.lesson_idx) a 
+						    WHERE a.lesson_schedule_idx=r.lesson_schedule_idx) b
+						WHERE u.u_idx=b.u_idx )c)d
+			WHERE RNUM<![CDATA[>=]]>#{start} AND RNUM<![CDATA[<=]]>#{end}
  	</select>
  	<select id="selectPoint" parameterType="int" resultType="int">
  		SELECT t_point 

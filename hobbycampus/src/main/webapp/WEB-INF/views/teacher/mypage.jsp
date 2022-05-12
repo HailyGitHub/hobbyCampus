@@ -15,108 +15,37 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!--CSS-->
     <link rel="stylesheet" href="/hobbycampus/css/main.css">
+    <style type="text/css">
+    	.mainArea {
+    		min-height: 1000px;
+    	}
+    </style>
 </head>
 <body>
 <!-- HEADER -->
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	
-	<!-- MAIN -->
-	<div class="accordion" id="accordionPanelsStayOpenExample">
-    <!--student mypage-->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-          <div>
-            <span class="fs-4">학생</span>
-            <span>닉네임|u_point</span>
-          </div>
-        </button>
-      </h2>
-      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-        <div class="accordion-body">
-          <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-              <a href="#" class="nav-link bg-warning">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-                학생 기능1
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                학생 기능2
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-                학생 기능3
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-                학생 기능4
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-                강사 신청
-              </a>
-            </li>
-          </ul>  
-        </div>
-      </div>
-    </div>
-    <!--teacher mypage-->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-          <div>
-            <span class="fs-4">강사</span>
-            <span>닉네임|t_point</span>
-          </div>
-        </button>
-      </h2>
-      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-        <div class="accordion-body">
-          <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-              <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-                강사기능1
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                강사기능2
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-                강사기능3
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-                강사기능4
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-                강사기능5
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+	<!-- SIDEBar -->
+	<main class="mainArea">
+	<div class="row">
+		<div class="col-md-2">
+			<jsp:include page="/WEB-INF/views/myPageSide.jsp"></jsp:include>		
+		</div>
+		<!-- main -->
+		<div class="col-md-10">
+			<ul>
+				<li><a href="resume.do">강사 신청</a></li>
+				<li><a href="testForm.do">dateTest</a></li>
+				<li><a href="teacherInfo.do?t_idx=1">프로필관리</a></li>
+				<li><a href="teacherRecord.do?t_idx=1">강의 이력</a></li>
+				<li><a href="chat.do">채팅하기</a></li>
+				<li><a href="teacherPoint.do?t_idx=1">포인트 관리</a></li>
+			</ul>	
+		</div>
+	</div>
+	</main>
+		
+	<!-- FOOTER -->
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 <!-- JavaScript -->
 <script type="text/javascript" src="/hobbycampus/js/dynamicNumber.js"></script>
