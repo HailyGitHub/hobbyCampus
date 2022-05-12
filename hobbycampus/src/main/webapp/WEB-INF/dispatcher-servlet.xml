@@ -57,7 +57,7 @@
 	<bean id="postDAO" class="com.hobbycam.DAO.PostDAOImpl"></bean>
 	<bean id="userDAO" class="com.hobbycam.DAO.UserDAOImpl"></bean>
 	<bean id="lessonRecordDAO" class="com.hobbycam.DAO.LessonRecordDAOImpl"></bean>
-
+	<bean id="payDAO" class="com.hobbycam.DAO.PayDAOImpl"></bean>
 	
 	
 	<!-- Views -->

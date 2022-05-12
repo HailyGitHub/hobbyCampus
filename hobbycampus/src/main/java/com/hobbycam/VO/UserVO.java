@@ -58,5 +58,11 @@ public class UserVO {
 	public void setuState(String uState) {
 		this.uState = uState;
 	}
+	@Override
+	public String toString() {
+		return "UserVO [uIdx=" + uIdx + ", uEmail=" + uEmail + ", uName=" + uName + ", uImg=" + uImg + ", uGender="
+				+ uGender + ", uPoint=" + uPoint + ", uTel=" + uTel + ", uState=" + uState + "]";
+	}
+	
 	
 }

@@ -10,5 +10,6 @@
 		<mapper resource="com/hobbycam/sqlMap/myPostSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/myUserSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/myLessonRecordSQL.xml"/>
+		<mapper resource="com/hobbycam/sqlMap/myPaySQL.xml"/>
 	</mappers>
 </configuration>

@@ -21,4 +21,14 @@
 		where 
 			U_IDX = #{uIdx}
 	</select>
+
+	<update id="updateUPoint" parameterType="map">
+		update 
+			users
+		set 
+			U_POINT = #{newUPoint}
+		where 
+			U_IDX = #{uIdx}
+	</update>
+
 </mapper>

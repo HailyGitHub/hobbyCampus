@@ -27,4 +27,30 @@
 			#{lessonExchangeState}
 		)
 	</insert>
+	
+	<select id="getLessonRecords" parameterType="map" resultType="com.hobbycam.VO.LessonRecordVO">
+		select 
+			 l.lesson_subj as lessonSubj,
+			 t.t_name as tName,
+			 to_char(lr.lesson_buy_date, 'yyyy-mm-dd hh24:mi:ss') as lessonBuyDate,
+			 lr.lesson_record_state as lessonRecordState
+		from 
+			lesson_record lr, 
+			lesson_schedule ls, 
+			lesson_list l, 
+			teacher t
+		where 
+			lr.u_idx = #{uIdx}
+		<if test="lessonRecordState != null">
+		AND 
+			lr.lesson_record_state = #{lessonRecordState}
+		</if>
+		and 
+			lr.lesson_schedule_idx = ls.lesson_schedule_idx
+		and 
+			ls.lesson_idx = l.lesson_idx 
+		and 
+			l.t_idx = t.t_idx
+		order by lr.lesson_buy_date desc
+	</select>
 </mapper>

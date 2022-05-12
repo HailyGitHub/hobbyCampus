@@ -3,6 +3,7 @@ package com.hobbycam.controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hobbycam.DAO.LessonRecordDAO;
 import com.hobbycam.DAO.PostDAO;
+import com.hobbycam.VO.LessonRecordVO;
 
 @Controller
 public class mylessonContoller {
@@ -67,6 +69,18 @@ public class mylessonContoller {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/users/mylesson");
+		
+		
+		String lessonRecordState = param.get("lessonRecordState");
+		List<LessonRecordVO> lessonRecordList = lessonRecordDAO.getLessonRecords(uIdx, lessonRecordState);
+		mav.addObject("lessonRecordList", lessonRecordList);
+		
+		
+		
+		
+		
+		
+		
 		return mav;
 	}
 

@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+#wrap {
+	padding: 30px;
+	margin: 10px auto;
+}
+
+#point_content{
+	text-align:center;
+	margin: 10px auto;
+}
+
+#bu_div{
+	text-align:center;
+}
+
+.form-check{	
+	margin: 10px auto;
+}
+
+.title{
+	text-align:center;
+	font-weight: bold;
+	color:DarkSlateGray;
+}
+
+.hb_yellow{
+	
+	font-weight:bold;
+	color:orange;
+}
+
+.hb_price{
+	font-weight: bold;
+	color:DarkSlateGray;	
+}
+
+#middle_hr{
+	border-top: 1px dashed #bbb;	
+}
+
+#com_hr{
+	
+	border: 0px solid;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(172, 131, 83, 0.75), rgba(0, 0, 0, 0));
+    margin: 32px 0px;
+    display: block;
+}
+
+.blueone {
+  border-collapse: collapse;
+}  
+.blueone th {
+  padding: 10px;
+  color: #168;
+  border-bottom: 3px solid orange;
+  text-align: left;
+}
+.blueone td {
+  color: #669;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.blueone tr:hover td {
+  color: #004;
+}
+
+h1{
+	color:orange;
+}
+
+.imgsize{	
+	width:31px;	
+}
+
+.bt_enter{
+	width: 150px;
+	position: relative;
+	background-color: #f7d034;
+	border-radius: 4px;
+	line-height: 40px;
+	-webkit-transition: none;
+	transition: none;
+	box-shadow: 0 3px 0 #f7ba59;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+}
+
+.bt_enter:hover{
+	top: -4px;
+	box-shadow: 0 1px 0 #f7ba59;
+}
+.bt_enter:active {
+	top: 3px;
+	box-shadow: none;	
+}
+
+#contents_buttons{
+	padding-top: 10px;
+	margin:0 auto;
+	
+}
+
+

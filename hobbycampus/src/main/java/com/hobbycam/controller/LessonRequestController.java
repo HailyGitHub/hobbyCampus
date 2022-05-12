@@ -68,4 +68,12 @@ public class LessonRequestController {
 		
 		return mav;
 	}
+	
+	//수강신청 완료 페이지 이동
+	@RequestMapping("/lessonComplete.do")
+	public ModelAndView lessonComplete() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("payment/lessonComplete");
+		return mav;
+	}
 }

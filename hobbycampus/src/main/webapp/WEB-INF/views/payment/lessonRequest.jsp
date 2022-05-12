@@ -4,54 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="/hobbycampus/js/myLesson.js"></script>
+<link rel="stylesheet" href="/hobbycampus/css/lessonreq.css">
+<script src="/hobbycampus/js/myLessonRequest.js"></script>
 <script type="text/javascript">
-	$myLesson.lessonPrice=${lessonVO.lessonPrice}
-	$myLesson.totalPrice=${lessonVO.lessonPrice}
-	$myLesson.paymentPrice=${lessonVO.lessonPrice}
-	$myLesson.uPoint=${userVO.uPoint}
-	$myLesson.postSaved="${postSaved}"
-	$myLesson.lessonScheduleIdx=${lessonScheduleIdx}
+	$myLessonRequest.lessonPrice=${lessonVO.lessonPrice}
+	$myLessonRequest.totalPrice=${lessonVO.lessonPrice}
+	$myLessonRequest.paymentPrice=${lessonVO.lessonPrice}
+	$myLessonRequest.uPoint=${userVO.uPoint}
+	$myLessonRequest.postSaved="${postSaved}"
+	$myLessonRequest.lessonScheduleIdx=${lessonScheduleIdx}
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-
-#main{
-	width: 90%;
-	margin: 10px auto;
-	padding: 20px;
-
-}
-#left_content{
-	width:400px;
-	padding:20px;
-	margin-bottom:20px;
-	float:left;
-	border: 1px solid #bcbcbc;
-
-}
-#right_content{
-	width:400px;
-	padding:20px;
-	margin-bottom:20px;
-	float:right;
-	border: 1px solid #bcbcbc;
-
-}
-#addr_content{
-	width:400px;
-	padding:20px;
-	margin-bottom:20px;
-	float:left;
-
-	border: 1px solid #bcbcbc;
-
-}
-
-
-</style>
 </head>
 <body>
 	<div id="wrap">
@@ -76,19 +42,18 @@
 			<dd>${lessonVO.lessonPrice}</dd>
 			<dt>보유 포인트</dt>
 			<dd>${userVO.uPoint}</dd>
-			<select onchange="$myLesson.applyCoupon(this)">
+			<select onchange="$myLessonRequest.applyCoupon(this)">
 				<option value="" price=0>보유한 쿠폰</option>
 				<c:forEach items="${couponList}" var="coupon">
 				    <option value="${coupon.couponIdx}" price="${coupon.couponRate}">${coupon.couponTitle}</option>
 				</c:forEach>
 			</select>
 			<dt>결제 포인트</dt>
-			<dd>${lessonVO.lessonPrice}</dd>
 			<dd id="price_dd">0</dd>
 			<dd id="total_price_hr">
 			총 결제 포인트: ${lessonVO.lessonPrice}</dd>
 			<br>
-			<input type="button" value="결제하기" onclick=$myLesson.payment()>
+			<input type="button" value="결제하기" onclick=$myLessonRequest.payment()>
 		</div>
 		<c:if test="${lessonVO.lessonKit == '있음'}">
 		<div id="addr_content">
@@ -124,8 +89,5 @@
 		</div>
 		</c:if>
 	</div>
-	<script>
-	
-	</script>
 </body>
 </html>

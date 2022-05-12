@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="payMapper">
+	<select id="getPays" parameterType="map" resultType="com.hobbycam.VO.PayVO">
+		select 
+			payListIdx,
+		    pay_date AS payDate,
+		    point,
+		    title,
+		    type
+		from
+		(
+		    select 
+		        rownum as rnum,
+		        T2.*
+		    from
+		    (
+		        select
+		        	*
+		        from 
+		        (
+		            select 
+		            	0 as payListIdx,
+		                to_char(lr.LESSON_BUY_DATE, 'yyyy-mm-dd hh24:mi:ss') as pay_date,
+		                lr.PRICE_POINT as point,
+		                l.LESSON_SUBJ as title,
+		                '구매' as type 
+		            from 
+		            	lesson_record lr, 
+		            	lesson_schedule ls, 
+		            	lesson_list l
+		            where 
+		            	lr.u_idx = #{uIdx}
+		            and 
+		            	lr.lesson_schedule_idx = ls.lesson_schedule_idx
+		            and 
+		            	ls.lesson_idx = l.lesson_idx
+		            union 
+		            select
+		            	PAY_LIST_IDX as payListIdx,
+		            	to_char(PAY_DATE, 'yyyy-mm-dd hh24:mi:ss') as pay_date,
+		            	PAY_POINT as point,
+		            	'포인트 충전' as title, 
+		            	PAY_VALUE as type 
+		            from 
+		            	pay_list
+		            where 
+		            	U_IDX = #{uIdx}
+		        ) T
+		        order by T.pay_date desc
+		    ) T2
+		)
+		where
+			<![CDATA[
+		    #{start} <= rnum
+		    ]]>
+		and 
+			<![CDATA[
+		    rnum < #{end}
+		    ]]>
+	</select>
+	<select id="getPayTotalCnt" resultType="int">
+		select
+			count(1)
+	    from 
+	    (
+	        select 
+	            to_char(lr.LESSON_BUY_DATE, 'yyyy-mm-dd hh24:mi:ss') as pay_date,
+	            lr.PRICE_POINT as point,
+	            l.LESSON_SUBJ as title,
+	            '구매' as type 
+	        from lesson_record lr, lesson_schedule ls, lesson_list l
+	        where lr.u_idx = #{uIdx}
+	        and lr.lesson_schedule_idx = ls.lesson_schedule_idx
+	        and ls.lesson_idx = l.lesson_idx
+	        union 
+	        select
+	         to_char(PAY_DATE, 'yyyy-mm-dd hh24:mi:ss') as pay_date,
+	         PAY_POINT as point,
+	         '포인트 충전' as title, 
+	         PAY_VALUE as type 
+	        from pay_list
+	        where U_IDX = #{uIdx}
+	    )
+	</select>
+	
+	<select id="getPay" parameterType="map" resultType="com.hobbycam.VO.PayVO">
+		select
+			PAY_POINT as point
+		from
+			pay_list
+		where
+			PAY_LIST_IDX = #{payListIdx}
+		and
+			U_IDX = #{uIdx}
+	</select>
+	
+	<update id="updatePayValue" parameterType="java.util.Map">
+		update 
+			pay_list
+		set
+			PAY_VALUE = #{payValue}
+		where 
+			PAY_LIST_IDX = #{payListIdx}
+	</update>
+		
+</mapper>
