@@ -33,7 +33,7 @@ public class CouponController {
 		int totalCnt=couponDao.getTotalCnt();
 		int listSize=5;
 		int pageSize=5;
-		String pageStr=com.hobbycam.page.PageModule.pageMake("couponList.do", totalCnt, listSize, pageSize, cp);
+		String pageStr=com.hobbycam.page.BootstrapPageModule.pageMake("couponList.do", totalCnt, listSize, pageSize, cp);
 		
 		List lists= couponDao.getCouponList(cp,listSize);
 		
@@ -45,12 +45,24 @@ public class CouponController {
 	@RequestMapping("/couponMakeForm.do")
 	public ModelAndView couponMakeForm(int idx) {
 		ModelAndView mav = new ModelAndView();
+		CouponDTO dto = couponDao.getCouponInfo(idx);
+		if(dto!=null) {			
+			mav.addObject("dto",dto);
+		}else {
+			mav.addObject("errorMsg","데이터가 존재하지 않습니다.");
+		}
 		mav.setViewName("coupon/couponList");
 		return mav;
 	}
 	@RequestMapping("/couponMake.do")
 	public ModelAndView couponMake(CouponDTO dto) {
 		ModelAndView mav = new ModelAndView();
+		int count = couponDao.setCoupon(dto);
+		if(count>0) {
+			mav.addObject("msg","완료");
+		}else {
+			mav.addObject("msg","실패");
+		}
 		mav.setViewName("coupon/couponList");
 		return mav;
 	}

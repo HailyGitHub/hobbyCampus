@@ -23,7 +23,7 @@ public class PaymentController {
 		int totalCnt=paymentDao.getTotalCnt();
 		int listSize=5;
 		int pageSize=5;
-		String pageStr=com.hobbycam.page.PageModule.pageMake("paymentList.do", totalCnt, listSize, pageSize, cp);
+		String pageStr=com.hobbycam.page.BootstrapPageModule.pageMake("paymentList.do", totalCnt, listSize, pageSize, cp);
 		
 		List lists= paymentDao.getPaymentList(cp,listSize);
 		

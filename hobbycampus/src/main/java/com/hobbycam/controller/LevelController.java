@@ -39,7 +39,7 @@ public class LevelController {
 			mav.addObject("msg","문제 발생");
 			
 		}
-		mav.setViewName("evel/levelList");
+		mav.setViewName("level/levelList");
 		
 		return mav;
 		
