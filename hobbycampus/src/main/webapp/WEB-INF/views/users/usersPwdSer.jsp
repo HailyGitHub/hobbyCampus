@@ -29,7 +29,7 @@ function emailSendResult(){
 
 <form name="userPwdSer" action="userPwdSer.do">
 <input type="email" name="u_email">
-<input type="button" value="메일 인증하기" onclick="">
+<input type="button" value="메일 인증하기" onclick="userPwdSer()">
 
 
 </form>

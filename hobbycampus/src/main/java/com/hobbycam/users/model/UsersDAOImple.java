@@ -1,30 +1,20 @@
 package com.hobbycam.users.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
-
-import javax.mail.Message.RecipientType;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 
 public class UsersDAOImple implements UsersDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlMap;
-	
-	@Autowired
-	private JavaMailSender mailSender;
-	
+
 	public static final int NOT_ID=1;
 	public static final int NOT_PWD=2;
 	public static final int LOGIN_OK=3;
 	public static final int ERROR=-1;
+	public static final int DEL=-2;
 
 	public UsersDAOImple(SqlSessionTemplate sqlMap) {
 		super();
@@ -70,8 +60,17 @@ public class UsersDAOImple implements UsersDAO {
 	@Override
 	public int usersLogin(String email, String pwd) {
 
-		String u_pwd=sqlMap.selectOne("usersLogin",email);
+		UsersDTO dto=sqlMap.selectOne("usersLogin",email);
 		
+		String u_pwd=dto.getU_pwd();
+		String u_state=dto.getU_state();
+		System.out.println("u_pwd="+u_pwd);
+		System.out.println("u_state="+u_state);
+		
+		if(u_state.equals("탈퇴")) {
+			return DEL;
+		}
+	
 		if(u_pwd==null||u_pwd.equals("")){
 			return NOT_ID;
 		} else if(!u_pwd.equals(pwd)) {
@@ -84,17 +83,18 @@ public class UsersDAOImple implements UsersDAO {
 	}
 	
 	
-	public String usersname(String email) {
-		String u_name=sqlMap.selectOne("usersname",email);
-		return u_name;
+	public UsersDTO usersname(String email) {
+		UsersDTO dto =sqlMap.selectOne("usersname",email);
+		
+		return dto;
 	}
 	
 	//getusername
 	@Override
-	public List usersInfo(String email) {
-		List u_info=sqlMap.selectList("usersInfo",email);
+	public Integer usersTidx(int idx){
+		Integer u_tidx=sqlMap.selectOne("userTidx",idx); 
 		
-		return u_info;
+		return u_tidx;
 	}
 	
 	@Override
@@ -111,7 +111,7 @@ public class UsersDAOImple implements UsersDAO {
 	
 	@Override
 	public int userDel(int idx) {
-		int count=sqlMap.update("",idx);
+		int count=sqlMap.update("usersDel",idx);
 		return count;
 	}
 	}

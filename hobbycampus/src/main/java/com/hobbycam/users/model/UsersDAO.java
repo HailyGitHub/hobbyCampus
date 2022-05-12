@@ -11,6 +11,7 @@ public interface UsersDAO {
 	public static final int NOT_PWD=2;
 	public static final int LOGIN_OK=3;
 	public static final int ERROR=-1;
+	public static final int DEL=-2;
 	
 	
 	public int usersEmailJoin(UsersDTO dto);
@@ -21,9 +22,9 @@ public interface UsersDAO {
 	
 	public int usersLogin(String email, String pwd);
 	
-	public List usersInfo(String email);
+	public Integer usersTidx(int idx);
 	
-	public String usersname(String email);
+	public UsersDTO usersname(String email);
 
 	public UsersDTO userUpForm(int idx);
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+  <c:if test="${empty sessionScope.u_name}">
+            <a href="userJoin.do">회원가입</a> 
+            | <a href="userLogin.do">로그인</a>
+      </c:if>
+      <c:if test="${!empty sessionScope.u_name}">
+      	${sessionScope.u_name} 님  | <a href="userLogout.do">로그아웃</a>
+      </c:if> 
+      
+<div>
+<a href="userUpForm.do">회원정보 수정</a>
+</div>
+
+
+
 
 <ul>
 <li onclick="kakaoLogin();">
@@ -20,6 +36,15 @@
   </a>
 </li>
 </ul>
+
+
+
+
+
+
+
+
+
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
@@ -64,30 +89,5 @@ if (Kakao.Auth.getAccessToken()) {
 }  
 </script>
 
-
-<script type="text/javascript">
-  Kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
-    success: function(authObj) {
-      Kakao.API.request({
-        url: '/v2/user/me',
-        success: function(res) {
-          alert(JSON.stringify(res))
-        },
-        fail: function(error) {
-          alert(
-            'login success, but failed to request user information: ' +
-              JSON.stringify(error)
-          )
-        },
-      })
-    },
-    fail: function(err) {
-      alert('failed to login: ' + JSON.stringify(err))
-    },
-  })
-</script>
-	
-	
 </body>
 </html>

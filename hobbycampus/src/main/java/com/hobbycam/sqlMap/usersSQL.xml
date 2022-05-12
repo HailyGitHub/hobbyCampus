@@ -71,15 +71,15 @@
 
 
   <!-- Login -->
-  <select id="usersLogin" parameterType="String" resultType="String">
-  	select u_pwd
+  <select id="usersLogin" parameterType="String" resultType="com.hobbycam.users.model.UsersDTO">
+  	select u_pwd, u_state
   	from users 
   	where u_email=#{e_mail}
   
   </select>
   
-    <select id="usersname" parameterType="String" resultType="String">
-	select u_name
+    <select id="usersname" parameterType="String" resultType="com.hobbycam.users.model.UsersDTO">
+	select u_name, u_idx
   	from users
   	where users.u_email=#{e_mail}
   </select>
@@ -87,18 +87,17 @@
   
   
   <!-- getUserName -->
-  <select id="usersInfo" parameterType="String" resultType="int">
-	select 	users.u_idx,teacher.t_idx 
-  	from teacher,users
-  	     
-  	where users.u_idx = teacher.u_idx (+)
-  	      and users.u_email=#{e_mail}
+  <select id="userTidx" parameterType="int" resultType="integer">
+	select t_idx 
+  	from teacher
+  	where teacher.u_idx =#{u_idx}
+  	      
   </select>
   
 	<select id="userUpForm" parameterType="int" resultType="com.hobbycam.users.model.UsersDTO">
 	select  u_img,u_name,u_tel  
 	from users
-	where u_idx=1
+	where u_idx=#{u_idx}
 
 	</select>
   
@@ -108,9 +107,9 @@
   <update id="userUp" parameterType="com.hobbycam.users.model.UsersDTO">
   	update users 
   	
-  		set u_pwd=#{u_pwd} 
-  			u_name=#{u_name}
-  			u_img=#{u_img}
+  		set u_pwd=#{u_pwd} ,
+  			u_name=#{u_name},
+  			u_img=#{u_img},
   			u_tel=#{u_tel}
   			
   	where u_idx=#{u_idx}

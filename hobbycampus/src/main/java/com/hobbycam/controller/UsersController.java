@@ -15,10 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hobbycam.users.model.UsersDAO;
 import com.hobbycam.users.model.UsersDTO;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import java.util.Random;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -26,7 +24,6 @@ import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
 
-import javax.activation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,6 +45,17 @@ public class UsersController {
 	 private static final String SMTP_AUTH_PWD  = "hobbyCampus";
 
 	 
+	 @RequestMapping("/userTest.do")
+	 public ModelAndView userTest() {
+			 ModelAndView mav=new ModelAndView();
+			 mav.setViewName("users/userTest");
+			 return mav;
+	 }
+	 
+	 
+	 
+	 
+	 
 	//change page emailCheck
 	@RequestMapping("/userJoin.do")
 	public ModelAndView usersJoin() {
@@ -65,7 +73,7 @@ public class UsersController {
 			
 			String msg="";
 			if(count>0) {
-				msg="이미 가입한 email입니다.";
+				msg="이미 가입하거나 탈퇴한 email입니다.";
 				
 			} else if(count==0) {
 				try {
@@ -84,37 +92,37 @@ public class UsersController {
 		}
 	
 	
-		  //email Send
-		   public void emailSend(String email) throws Exception{
-		    	//int code=(int)(Math.random()*10000);
-		        Properties props = new Properties();
-		        props.put("mail.transport.protocol", "smtp");
-		        props.put("mail.smtp.host", SMTP_HOST_NAME);
-		        props.put("mail.smtp.auth", "true");
-		        props.put("mail.smtp.port", "587");
-		        props.put("mail.smtp.starttls.enable", "true");
-		        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-		        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+		   //email Send
+        public void emailSend(String email) throws Exception{
+            //int code=(int)(Math.random()*10000);
+             Properties props = new Properties();
+             props.put("mail.transport.protocol", "smtp");
+             props.put("mail.smtp.host", SMTP_HOST_NAME);
+             props.put("mail.smtp.auth", "true");
+             props.put("mail.smtp.port", "587");
+             props.put("mail.smtp.starttls.enable", "true");
+             props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+             props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
-		        Authenticator auth = new SMTPAuthenticator();
-		        Session mailSession = Session.getDefaultInstance(props, auth);
-		        Transport transport = mailSession.getTransport();
+             Authenticator auth = new SMTPAuthenticator();
+             Session mailSession = Session.getDefaultInstance(props, auth);
+             Transport transport = mailSession.getTransport();
 
-		        MimeMessage message = new MimeMessage(mailSession);
-		        message.setSubject("hobbyCampus 입니다~ ^^");
-		        String content = "인증을 진행해 주세요~  "
-		        		+"<a href='http://localhost:9090/hobbycampus/userEmail.do?email="+email+"'>"
-		        		+ "클릭클릭</a> ^^";
-		        message.setContent(content,"text/html;charset=utf-8");
-		        message.setFrom(new InternetAddress(SMTP_AUTH_USER));
-		        message.addRecipient(Message.RecipientType.TO,
-		             new InternetAddress(email));
+             MimeMessage message = new MimeMessage(mailSession);
+             message.setSubject("hobbyCampus 입니다~ ^^");
+             String content = "인증을 진행해 주세요~  "
+                   +"<a href='http://localhost:9090/hobbycampus/userEmail.do?email="+email+"'>"
+                   + "클릭클릭</a> ^^";
+             message.setContent(content,"text/html;charset=utf-8");
+             message.setFrom(new InternetAddress(SMTP_AUTH_USER));
+             message.addRecipient(Message.RecipientType.TO,
+                  new InternetAddress(email));
 
-		        transport.connect();
-		        transport.sendMessage(message,
-		            message.getRecipients(Message.RecipientType.TO));
-		        transport.close();
-		    }
+             transport.connect();
+             transport.sendMessage(message,
+                 message.getRecipients(Message.RecipientType.TO));
+             transport.close();
+         }
 
 		   
 		   //mail Authenticator
@@ -166,7 +174,7 @@ public class UsersController {
 			String imgname=copyInto(dto.getU_email(), upload);
 			dto.setU_img(imgname);
 		}
-			
+			  
 		//emailJoin
 		dto.setU_img("img/user.png");
 		int count=usersDao.usersEmailJoin(dto);
@@ -228,16 +236,28 @@ public class UsersController {
 
 	    	int count=usersDao.usersLogin(u_email, u_pwd);
 	
-	    	if(count==usersDao.LOGIN_OK) {
-	    		String u_name=usersDao.usersname(u_email);
-	    		List u_info=usersDao.usersInfo(u_email);
+	    	if(count==usersDao.DEL) {
+	    		mav.addObject("msg","탈퇴한 이메일입니다.");
+	    		mav.setViewName("users/usersMsg");
+	    		
+	    	} else
 	    	
-	    		session.setAttribute("u_email", u_email);
+	    	if(count==usersDao.LOGIN_OK) {
+	    		UsersDTO dto=usersDao.usersname(u_email);
+	    		int u_idx=dto.getU_idx();
+	    		Integer t_idx=usersDao.usersTidx(u_idx);
+	    	
+	    		String u_name=dto.getU_name();
+	    		
 	    		session.setAttribute("u_name", u_name);
-	    		session.setAttribute("u_idx", u_info.get(0));
-	    		if(u_info.size()==2) {
-	    			session.setAttribute("t_idx", u_info.get(1));
+	    		session.setAttribute("u_idx", dto.getU_idx());
+	    		
+	    		if(t_idx!=null) {
+	    			session.setAttribute("t_idx", t_idx);
+	    			System.out.println("tidx 세션 저장됨 ");
 	    		}
+	    		
+	    		System.out.println(t_idx);
 	    		
 	    		if(savemail==null) {
 	    			Cookie ck=new Cookie("savemail", u_email);
@@ -251,7 +271,7 @@ public class UsersController {
 	    		}
 	    		
 	    		mav.addObject("msg",u_name+"님 환영합니다.");
-	    		mav.addObject("u_name",u_info.get(0));
+	    		mav.addObject("u_name",u_name);
 	    		mav.setViewName("users/usersMsg");
 	    	} else if(count==usersDao.NOT_ID||count==usersDao.NOT_PWD) {
 	    		mav.addObject("msg","이메일 혹은 비밀번호를 확인해 주세요");
@@ -293,12 +313,25 @@ public class UsersController {
 	}
 	
 
-	@RequestMapping("/userUp.do")
-	public ModelAndView userUp(UsersDTO dto) {
+	@RequestMapping(value="/userUp.do" ,method = RequestMethod.POST)
+	public ModelAndView userUp(UsersDTO dto, @RequestParam("upload") MultipartFile upload, HttpServletRequest req) {
 		ModelAndView mav=new ModelAndView();
+		
+		HttpSession session=req.getSession();
+		int idx=(int)session.getAttribute("u_idx");
+		dto.setU_idx(idx);
+		
+		
+	if (!upload.isEmpty()) {
+		String imgname=copyInto(dto.getU_email(), upload);
+		dto.setU_img(imgname);
+	}
 		
 		int count=usersDao.userUp(dto);
 		String msg=count>0?"회원정보가 수정되었습니다.":"수정 불가합니다.";
+		if(count>0) {
+			session.setAttribute("u_name", dto.getU_name());
+		}		
 		
 		mav.addObject("msg",msg);
 		mav.setViewName("users/usersMsg");
@@ -312,10 +345,13 @@ public class UsersController {
 		ModelAndView mav=new ModelAndView();
 		HttpSession session=req.getSession();
 		int idx=(int)session.getAttribute("u_idx");
+		System.out.println("u_idx="+idx);
 		
 		int count=usersDao.userDel(idx);
 		
 		String msg=count>0?"탈퇴 완료되었습니다.":"탈퇴할 수 없습니다.";
+		
+		session.invalidate();
 		
 		mav.addObject("msg",msg);
 		mav.setViewName("users/usersMsg");
