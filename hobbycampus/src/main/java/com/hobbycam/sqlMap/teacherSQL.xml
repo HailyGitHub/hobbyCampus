@@ -8,6 +8,26 @@
  			FROM teacher
  				WHERE t_idx=#{t_idx}
  	</select>
+ 	<select id="tPointExCnt" parameterType="Integer" resultType="Integer">
+ 	select count(*) from (
+		select a.*
+		from (select * from pay_list)a,
+				teacher t
+		where a.u_idx = t.u_idx
+		and t.t_idx=#{t_idx}) b
+ 	</select>
+ 	<select id="tPointPayList" parameterType="Map" resultType="com.hobbycam.payList.model.PayListDTO">
+		 select c.* from(
+			select ROWNUM AS RNUM, b.* from (
+				select a.*
+					from (
+						select * from pay_list order by pay_list_idx desc)a,
+						teacher t
+						where a.u_idx = t.u_idx
+					and t.t_idx=#{t_idx})b)c
+				WHERE RNUM<![CDATA[>=]]>#{start} AND RNUM<![CDATA[<=]]>#{end}
+					 
+ 	</select>
  	<select id="nameCheck" parameterType="String" resultType="int">
 		SELECT
 			COUNT(*)
@@ -42,7 +62,7 @@
 						WHERE u.u_idx=b.u_idx )c)d
 			WHERE RNUM<![CDATA[>=]]>#{start} AND RNUM<![CDATA[<=]]>#{end}
  	</select>
- 	<select id="selectPoint" parameterType="int" resultType="int">
+ 	<select id="selectPoint" parameterType="Integer" resultType="Integer">
  		SELECT t_point 
 			FROM teacher 
 			WHERE t_idx=#{t_idx}

@@ -1,5 +1,10 @@
 package com.hobbycam.payList.model;
 
-public interface payListDAO {
-	public int insertToPoint();
+import java.util.List;
+
+public interface PayListDAO {
+
+	public List teacherPayList(int t_idx, int cp, int listSize);
+	public int teacherPointExCnt(int t_idx);
+	
 }

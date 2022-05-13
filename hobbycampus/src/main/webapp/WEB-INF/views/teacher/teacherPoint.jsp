@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,11 @@
     <style type="text/css">
     	.mainArea {
     		min-height: 1000px;
+    	} 
+    	
+    	#pRecordList{
+    		margin-top: 20px;
+    		
     	}
     </style>
 </head>
@@ -32,30 +38,93 @@
 		</div>
 		<!-- main -->
 		<div class="col-md-10">
-			<div>보유 하빗      ${tPoint}하빗</div>
-			 <hr>
-			 <form name="toPoint" action="exToPoint.do">
-			 <input type="hidden" value="1" name="t_idx">
-			 	<ul>
-			 		<li><input type="text" name="exPoint">
-			 		<input type="submit" value="포인트로 전환" onclick="toPoint();"></li>
-			 	</ul>
-			 </form>
-			 
-			 <form name="toCash" action="exToCash.do">
-			 <input type="hidden" value="1" name="t_idx">
-			 	<ul>
-			 		<li><input type="text" name="exPoint">	
-			 		<input type="submit" value="현금입금 신청" onclick="toChash();"></li>
-			 	</ul>
-			 </form>
-			 <hr>
-			</body>
-		
-		</div>
+	      <div class="container px-4 py-5" id="featured-3">
+	        <h2 class="pb-2 border-bottom">보유 포인트</h2>
+	        <h4 class="pb-2">${tPoint}하빗</h4>
+	
+	       <div style="padding: 40px;"></div>
+	
+			<!-- exchange teacher point to user point -->
+	       <div class="pb-2 border-bottom col-md-4">학생 포인트로 전환하기</div>
+		      <div>
+		        <form name="toPoint" action="exToPoint.do">
+		        <input type="hidden" value="1" name="t_idx">
+		          <div class="col-md-6">
+		            <input type="text" name="exPoint">
+		            <button class="btn btn-primary" type="submit" onclick="toPoint();">전환</button>
+		          </div>
+		        </form>
+		      </div>
+	       <div style="padding: 20px;"></div>
+	      
+	      <!-- exchange teacher point to cash -->
+	       <div class="pb-2 border-bottom col-md-4">현금으로 환전하기</div>
+				 <form name="toCash" action="exToCash.do">
+				 <input type="hidden" value="1" name="t_idx">
+			       <div class="col-md-6">
+			           <input type="text" name="exPoint">	
+			           <button class="btn btn-primary" type="submit" onclick="toChash();">환전</button>
+			         </div>
+				 </form>
+	
+	       <div style="padding: 40px;"></div>
+				 
+				 
+				 <!-- exchange record list -->
+				 <div class="pb-2 border-bottom col-md-8">
+				 환전/전환 이력
+				 
+					 <table class="table  table-hover" id="pRecordList">
+					 	<thead>
+							<tr>
+						      <th scope="col">이력 번호</th>
+						      <th scope="col">타입</th>
+						      <th scope="col">환전/전환 일자</th>
+						      <th scope="col">사용 포인트</th>
+						    </tr>
+						</thead>
+						<tfoot>
+							<td colspan="6">
+								${pageStr }
+							</td>
+						</tfoot>
+						<tbody>
+						 	<c:if test="${empty lists }">
+						 		<tr>
+						 			<td>환전/전환 이력이 없습니다.</td>
+						 		</tr>
+						 	
+						 	</c:if>
+						 	<c:forEach var="dto" items="${lists }">
+										<tr>
+											<td>${dto.pay_list_idx }</td>
+											<td>${dto.pay_value}</td>
+											<td>${dto.pay_date }</td>
+											<td>${dto.pay_point }</td>
+										</tr>
+							</c:forEach>
+						</tbody>	
+					 </table>
+				 </div>
+			</div><!-- main -->
 	</div>
-	</main>
-		
+	</main>	
+	<script>
+		function toCash() {
+			$(".toCash").css("display","none");
+			$(".toPoint").css("display","");
+		}
+		function toPoint() {
+			$(".toCash").css("display","");
+			$(".toPoint").css("display","none");
+		}
+		function all() {
+			$(".toCash").css("display","");
+			$(".toPoint").css("display","");
+		}
+
+	</script>	 
+</body>
 
  
 
