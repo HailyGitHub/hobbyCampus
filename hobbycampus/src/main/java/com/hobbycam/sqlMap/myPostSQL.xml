@@ -19,7 +19,7 @@
 			U_IDX = #{uIdx}
 	</select>
 	
-	<insert id="insert" parameterType="map">
+	<insert id="insertPost" parameterType="map">
 		insert into
 		 	post(U_IDX, POSt_RECEIVER, POST_TEL, POST_ADDR, POST_ETC)
 		 values(
