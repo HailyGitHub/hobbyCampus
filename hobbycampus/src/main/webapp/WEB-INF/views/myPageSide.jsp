@@ -32,33 +32,31 @@
 <body>
 
 
+
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="d-md-block bg-light sidebar collapse" style="min-height: 1000px">
-      <div class="position-sticky pt-6 sideDiv">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-6 sideDiv" style="height: 1000px;">
         <ul class="nav flex-column" >
           <li class="nav-item">
               <span data-feather="home"></span>
               <svg class="bi me-2" width="40" height="32"></svg>
               <div>
                 <span class="fs-3">
-                  <button class="btn btn-primary" id="student" onclick="studentClick();">&nbsp;&nbsp;학생&nbsp;&nbsp;</button>
+                  <button class="btn" id="student" onclick="studentClick();">&nbsp;&nbsp;학생&nbsp;&nbsp;</button>
                   
                 </span>
                 |
                 <span class="fs-3">
-                  <button class="btn btn-primary" id="teacher" onclick="teacherClick();">&nbsp;&nbsp;강사&nbsp;&nbsp;</button>
+                  <button class="btn" id="teacher" onclick="teacherClick();">&nbsp;&nbsp;강사&nbsp;&nbsp;</button>
                 </span>
                 <hr>
               </div>
-             </li>
               <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                  <a href="#" class="nav-link" id="st1">
+                  <a href="#" class="nav-link">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
                     <span class="studentList" >학생 기능1</span>
-	               </a>      
-	               <a href="#" class="nav-link">
                     <span class="teacherList" style="display: none;" >강사 기능1</span>
                   </a>
                 </li>
@@ -90,12 +88,12 @@
                     <span class="teacherList" style="display: none;">강사 기능5</span>
                   </a>
                 </li>
-                
-                
               </ul>
             </div>
+          </li>
          
-      
+        </ul>
+      </div>
     </nav>
   </div>
 </div>
@@ -105,10 +103,24 @@
 function studentClick(){
   $(".teacherList").css("display","none");
   $(".studentList").css("display","");
+  
+  $("#student").removeClass('btn-light');
+  $("#teacher").removeClass('btn-warning');
+
+  $("#student").addClass('btn-warning');
+  $("#teacher").addClass('btn-light');
 }
 function teacherClick(){
+
   $(".studentList").css("display","none");
   $(".teacherList").css("display","");
+  
+  $("#student").removeClass('btn-warning');
+  $("#teacher").removeClass('btn-light');
+
+  $("#student").addClass('btn-light');
+  $("#teacher").addClass('btn-warning');
+  
 }
 </script>
 </html>

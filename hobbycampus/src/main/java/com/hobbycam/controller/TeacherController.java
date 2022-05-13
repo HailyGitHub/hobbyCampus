@@ -2,6 +2,8 @@ package com.hobbycam.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hobbycam.lessonRecord.model.LessonRecordDAO;
 import com.hobbycam.page.BootstrapPageModule2;
+import com.hobbycam.payList.model.PayListDAO;
+import com.hobbycam.payList.model.PayListDTO;
 import com.hobbycam.teacher.model.TeacherDAO;
 import com.hobbycam.teacher.model.TeacherDTO;
 import com.hobbycam.upload.ImgUplod;
@@ -24,6 +28,11 @@ public class TeacherController {
 	
 	@Autowired
 	private LessonRecordDAO ldao;
+	
+	@Autowired
+	private PayListDAO pdao;
+	
+	@Autowired ServletContext servletContext;
 	
 	/**Teacher mypage*/
 	@RequestMapping("/mypage.do")
@@ -131,10 +140,27 @@ public class TeacherController {
 	
 	/**Select teacher point*/
 	@RequestMapping("/teacherPoint.do")
-	public ModelAndView pointSelect(int t_idx) {
-		int tPoint = tdao.pointSelect(t_idx);
+	public ModelAndView pointSelect(int t_idx, @RequestParam(value="cp", defaultValue="1")int cp) {
+		
+		//page
+				int totalCnt = pdao.teacherPointExCnt(t_idx);
+				int listSize = 10;
+				int pageSize = 5;
+				String addParam="&t_idx="+t_idx;
+				String pageStr = BootstrapPageModule2.pageMake("teacherPoint.do", totalCnt, listSize, pageSize, cp, addParam);
+				
+		
 		ModelAndView mav = new ModelAndView();
+		
+		//get teacher point by t_idx
+		int tPoint = tdao.pointSelect(t_idx);
+		
+		//get exchange record list
+		List lists = pdao.teacherPayList(t_idx, cp, listSize);
+		
+		mav.addObject("lists",lists);
 		mav.addObject("tPoint", tPoint);
+		mav.addObject("pageStr", pageStr);
 		mav.setViewName("teacher/teacherPoint");
 		return mav;
 	}
@@ -146,21 +172,25 @@ public class TeacherController {
 		int tPoint = tdao.pointSelect(t_idx);//get t_point by t_idx
 		int exchangePoint = Integer.parseInt(exPoint);
 		int resultPoint =tPoint-exchangePoint;
+		boolean pointUpdate = false;
+		String gopage="";
 		ModelAndView mav = new ModelAndView();
 		
 		//If the user writes a larger(or smaller) amount than the user has
 		if(resultPoint>=0) {
 			
 			//update pay_list and teacherInformation
-			boolean pointUpdate = tdao.exchageUPoint(t_idx, exchangePoint);
-			mav.addObject("pointUpdate", pointUpdate);
+			pointUpdate = tdao.exchageUPoint(t_idx, exchangePoint);
+			gopage="teacher/teacherPointOk";
 			
-			mav.setViewName("teacher/toPoint");
-		}else { 
+		}else{
 			mav.addObject("msg", "보유 포인트 이하로 입력해주세요.");
-			mav.setViewName("teacher/msg");
-		} 
+			mav.addObject("location","teacherPoint.do?t_idx="+t_idx);
+			gopage="teacher/msg";
+		}
 		
+		mav.addObject("pointUpdate", pointUpdate);
+		mav.setViewName(gopage);
 		return mav;
 		
 	}
@@ -172,22 +202,26 @@ public class TeacherController {
 		int tPoint = tdao.pointSelect(t_idx);//get t_point by t_idx
 		int exchangePoint = Integer.parseInt(exPoint);
 		int resultPoint =tPoint-exchangePoint;
+		boolean pointUpdate = false;
+		String gopage="";
+		
 		ModelAndView mav = new ModelAndView();
 		
 		//If the user writes a larger(or smaller) amount than the user has
 				if(resultPoint>=0) {
 					
 					//update pay_list and teacherInformation
-					boolean pointUpdat = tdao.exchageCash(t_idx, exchangePoint);
+					pointUpdate = tdao.exchageCash(t_idx, exchangePoint);
+					gopage="teacher/teacherPointOk";
 					
 					
-					
-					mav.setViewName("teacher/toPoint");
 				}else { 
 					mav.addObject("msg", "보유 포인트 이하로 입력해주세요.");
-					mav.setViewName("teacher/msg");
+					mav.addObject("location","teacherPoint.do?t_idx="+t_idx);
+					gopage = "teacher/msg";
 				}
-				
+				mav.addObject("pointUpdate", pointUpdate);
+				mav.setViewName(gopage);
 				return mav;
 	}
 	

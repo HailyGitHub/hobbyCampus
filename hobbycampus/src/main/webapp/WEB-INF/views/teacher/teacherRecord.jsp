@@ -45,7 +45,7 @@
 					      <th scope="col">학생명</th>
 					      <th scope="col">수업일자</th>
 					      <th scope="col">진행상태</th>
-					      <th scope="col"  >정산상태</th>
+					      <th scope="col">정산상태</th>
 					    </tr>
 					</thead>
 					<tfoot>
