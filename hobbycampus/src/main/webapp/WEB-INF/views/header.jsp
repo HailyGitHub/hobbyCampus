@@ -5,7 +5,10 @@
 <header>
     <div class="top_nav">
         <span class="top_nav_area">
+        	<!--  
             <a href="#">회원가입</a> | <a href="#">로그인</a>
+            -->
+             <a href="temp.do">강사</a> | <a href="mpage.do">마이페이지</a>
         </span>
     </div>
     <!-- Logo -->

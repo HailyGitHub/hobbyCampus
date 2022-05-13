@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="hobbycam.teacher">
+ 	<select id="teacherSelect" parameterType="int" resultType="com.hobbycam.teacher.model.TeacherDTO">
+ 		SELECT *
+ 			FROM teacher
+ 				WHERE t_idx=#{t_idx}
+ 	</select>
+ 	<select id="tPointExCnt" parameterType="Integer" resultType="Integer">
+ 	select count(*) from (
+		select a.*
+		from (select * from pay_list)a,
+				teacher t
+		where a.u_idx = t.u_idx
+		and t.t_idx=#{t_idx}) b
+ 	</select>
+ 	<select id="tPointPayList" parameterType="Map" resultType="com.hobbycam.payList.model.PayListDTO">
+		 select c.* from(
+			select ROWNUM AS RNUM, b.* from (
+				select a.*
+					from (
+						select * from pay_list order by pay_list_idx desc)a,
+						teacher t
+						where a.u_idx = t.u_idx
+					and t.t_idx=#{t_idx})b)c
+				WHERE RNUM<![CDATA[>=]]>#{start} AND RNUM<![CDATA[<=]]>#{end}
+					 
+ 	</select>
+ 	<select id="nameCheck" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			admin a, users u, teacher t
+		WHERE 
+			a.a_name=#{t_name}
+		    or  u.u_name=#{t_name}
+		    or t.t_name=#{t_name}
+ 	</select>
+ 	<update id="updateTeacher" parameterType="com.hobbycam.teacher.model.TeacherDTO">
+ 		UPDATE teacher
+ 			SET t_img=#{t_img},
+ 				t_name=#{t_name},
+ 				t_account_owner=#{t_account_owner},
+ 				t_account_number=#{t_account_number},
+ 				t_account_bank=#{t_account_bank},
+ 				t_profile=#{t_profile}
+ 			WHERE t_idx=#{t_idx}	
+ 	</update>
+ 	<select id="selectLessonRecord" parameterType="Map" resultType="com.hobbycam.lessonRecord.model.LessonRecordDTO">
+ 		 SELECT * FROM(
+			select ROWNUM AS RNUM, C.* from ( 
+			 SELECT b.*, u.u_name
+						FROM users u, 
+						    (SELECT r.*, a.lesson_time, a.lesson_subj
+						    FROM lesson_record r, 
+						    (SELECT l.lesson_subj, s.lesson_time, s.lesson_schedule_idx
+						    FROM lesson_list l, lesson_schedule s
+						    WHERE l.t_idx=#{t_idx} and l.lesson_idx=s.lesson_idx) a 
+						    WHERE a.lesson_schedule_idx=r.lesson_schedule_idx) b
+						WHERE u.u_idx=b.u_idx )c)d
+			WHERE RNUM<![CDATA[>=]]>#{start} AND RNUM<![CDATA[<=]]>#{end}
+ 	</select>
+ 	<select id="selectPoint" parameterType="Integer" resultType="Integer">
+ 		SELECT t_point 
+			FROM teacher 
+			WHERE t_idx=#{t_idx}
+ 	</select>
+ 	<update id="plusUPoint" parameterType="map">
+ 		UPDATE (
+		 SELECT u.u_idx, u.u_name, u.u_point, t.t_idx, t.t_name, t.t_point 
+		 	FROM users u, teacher t
+				WHERE u.u_idx = t.u_idx and t_idx=#{t_idx}) a
+			SET a.u_point=a.u_point<![CDATA[+]]>#{exPoint}
+ 	</update>
+ 
+ 	<update id="minusTPoint" parameterType="map">
+ 	UPDATE (
+	 SELECT u.u_idx, u.u_name, u.u_point, t.t_idx, t.t_name, t.t_point 
+	 	FROM users u, teacher t
+			WHERE u.u_idx = t.u_idx and t_idx=#{t_idx}) a
+		SET a.t_point=a.t_point<![CDATA[-]]>#{exPoint}
+ 	</update>
+ 	<insert id="insertToPoint" parameterType="map">
+ 		INSERT INTO pay_list 
+ 			VALUES(
+		    	seq_pay_list.nextval, 
+		    		(SELECT u.u_idx
+					FROM users u, teacher t
+					WHERE u.u_idx = t.t_idx
+					AND t.t_idx=#{t_idx}), 
+		    	'환전',
+		    	'포인트',
+		    	sysdate,
+		    	#{exPoint} 
+		)
+ 	</insert>
+ 	<insert id="insertToCash" parameterType="map">
+ 		 		INSERT INTO pay_list 
+ 			VALUES(
+		    	seq_pay_list.nextval, 
+		    		(SELECT u.u_idx
+					FROM users u, teacher t
+					WHERE u.u_idx = t.t_idx
+					AND t.t_idx=#{t_idx}), 
+		    	'입금',
+		    	'포인트',
+		    	sysdate,
+		    	#{exPoint} 
+		)
+ 	
+ 	</insert>
+ </mapper>

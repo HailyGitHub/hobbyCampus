@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>myPage</title>
-	<!-- Title Icon -->
+<title>Insert title here</title>
+<!-- Title Icon -->
     <link href="img/main.ico" rel="shortcut icon" type="image/x-icon">
 	<!--BootStarp-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -15,9 +16,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!--CSS-->
     <link rel="stylesheet" href="/hobbycampus/css/main.css">
-    <style type="text/css">
-    	.mainArea {
-    		min-height: 1000px;
+	   <style>
+    	.classWithPad { 
+    		margin-left : 50px;
+    		margin-right : 50px;
+    		margin-bottom:80px;
+    		padding:100px; 
     	}
     </style>
 </head>
@@ -32,21 +36,46 @@
 		</div>
 		<!-- main -->
 		<div class="col-md-10">
-			<ul>
-				<li><a href="resume.do">강사 신청</a></li>
-				<li><a href="testForm.do">dateTest</a></li>
-				<li><a href="teacherInfo.do?t_idx=1">프로필관리</a></li>
-				<li><a href="teacherRecord.do?t_idx=1">강의 이력</a></li>
-				<li><a href="chat.do">채팅하기</a></li>
-				<li><a href="teacherPoint.do?t_idx=1">포인트 관리</a></li>
-			</ul>	
+		<div class="col-md-10">
+			<table id="recordTable" class="table table-hover">
+					<thead>
+						<tr>
+					      <th scope="col">이력번호</th>
+					      <th scope="col">강의명</th>
+					      <th scope="col">학생명</th>
+					      <th scope="col">수업일자</th>
+					      <th scope="col">진행상태</th>
+					      <th scope="col">정산상태</th>
+					    </tr>
+					</thead>
+					<tfoot>
+						<td colspan="6">
+							${pageStr }
+						</td>
+					</tfoot>
+					<tbody>
+						<c:if test="${empty lists }">
+							<tr>
+								<td>등록된 게시글이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:forEach var="dto" items="${lists }">
+							<tr class="${dto.lesson_exchange_state=='미정산'?'table-warning':''}">
+								<td>${dto.lesson_record_idx }</td>
+								<td>${dto.lesson_subj }</td>
+								<td>${dto.u_name }</td>
+								<td>${dto.lesson_time }</td>
+								<td>${dto.lesson_record_state }</td>
+								<td>${dto.lesson_exchange_state }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+			</table>
 		</div>
+		</div>
+		<div class="col-md-1">
 	</div>
-	</main>
-		
-	<!-- FOOTER -->
-	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	</main>	
+	
 </body>
-<!-- JavaScript -->
-<script type="text/javascript" src="/hobbycampus/js/dynamicNumber.js"></script>
 </html>
