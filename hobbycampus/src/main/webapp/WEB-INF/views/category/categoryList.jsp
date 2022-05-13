@@ -26,6 +26,9 @@
     		border: 1px solid black;
     		width: 100px;
     	}
+    	#cate2-img{
+    		width: 30px;
+    	}
     </style>
 </head>
 <body>
@@ -34,141 +37,15 @@
 	
 	<!-- MAIN -->
 	<main class="main-area">
-		<!-- Select Button List -->
+		<!-- Button for Create Category1 -->
 		<article class="select-list m-5">
 			<div class="d-grid gap-2 d-md-block col-md-12 text-center">
 				<button class="btn btn-lg btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#inputCate"><i class="bi bi-bookmark-plus-fill"></i> 카테고리 생성</button>
 			</div>
 		</article>
 		
-		<!-- Category_1 List -->
-		<div class="row m-2">
-			<div class="col-sm-3">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title text-center">큰 카테고리</h5>
-						<div class="text-center">					
-							<img class="rounded-circle text-center m-1" src="/hobbycampus/img/none.png">
-						</div>
-						<div class="text-center mt-2">						
-							<button type="button" class="btn btn btn-outline-secondary">
-								<i class="bi bi-search"></i>상세보기
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title text-center">큰 카테고리</h5>
-						<div class="text-center">					
-							<img class="rounded-circle text-center m-1" src="/hobbycampus/img/none.png">
-						</div>
-						<div class="text-center mt-2">						
-							<button type="button" class="btn btn btn-outline-secondary">
-								<i class="bi bi-search"></i>상세보기
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title text-center">큰 카테고리</h5>
-						<div class="text-center">					
-							<img class="rounded-circle text-center m-1" src="/hobbycampus/img/none.png">
-						</div>
-						<div class="text-center mt-2">						
-							<button type="button" class="btn btn btn-outline-secondary">
-								<i class="bi bi-search"></i>상세보기
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title text-center">큰 카테고리</h5>
-						<div class="text-center">					
-							<img class="rounded-circle text-center m-1" src="/hobbycampus/img/none.png">
-						</div>
-						<div class="text-center mt-2">						
-							<button type="button" class="btn btn btn-outline-secondary">
-								<i class="bi bi-search"></i>상세보기
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row m-2">
-			<div class="col-sm-3">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title text-center">큰 카테고리</h5>
-						<div class="text-center">					
-							<img class="rounded-circle text-center m-1" src="/hobbycampus/img/none.png">
-						</div>
-						<div class="text-center mt-2">						
-							<button type="button" class="btn btn btn-outline-secondary">
-								<i class="bi bi-search"></i>상세보기
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title text-center">큰 카테고리</h5>
-						<div class="text-center">					
-							<img class="rounded-circle text-center m-1" src="/hobbycampus/img/none.png">
-						</div>
-						<div class="text-center mt-2">						
-							<button type="button" class="btn btn btn-outline-secondary">
-								<i class="bi bi-search"></i>상세보기
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title text-center">큰 카테고리</h5>
-						<div class="text-center">					
-							<img class="rounded-circle text-center m-1" src="/hobbycampus/img/none.png">
-						</div>
-						<div class="text-center mt-2">						
-							<button type="button" class="btn btn btn-outline-secondary">
-								<i class="bi bi-search"></i>상세보기
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title text-center">큰 카테고리</h5>
-						<div class="text-center">					
-							<img class="rounded-circle text-center m-1" src="/hobbycampus/img/none.png">
-						</div>
-						<div class="text-center mt-2">						
-							<button type="button" class="btn btn btn-outline-secondary">
-								<i class="bi bi-search"></i>상세보기
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
 		<!-- Input Category Modal -->
-		<article class="resume-info-modal">
+		<article class="create-cate1-modal">
 			<div class="modal fade" id="inputCate" tabindex="-1" aria-labelledby="inputCate" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-scrollable" role="document">
 					<div class="modal-content rounded-5 shadow">
@@ -179,34 +56,67 @@
 						</div>
 						<!-- Model Body -->
 						<div class="modal-body p-5 pt-0">
-							<form name="Cate_Form_1" action="" method="post" enctype="multipart/form-data">
+							<form name="Cate1Form" action="uploadCate1.do" method="post" enctype="multipart/form-data">
 								<!-- Input Category Name -->
 								<div class="form-floating mb-3">
 									<input type="text" class="form-control rounded-4" name="cate1_name" id="cate1_name" maxlength="7" placeholder="큰 카테고리 이름 입력" required>
 									<label for="floatingInput">큰 카테고리 이름</label>
 								</div>
 								<!-- Upload Category Image -->
-								<div class="form-floating mb-3">
-									<input type="file" name="cate1_img">
+								<div class="mb-3">
+									<label for="formFile" class="form-label">파일 업로드</label>
+									<input class="form-control" type="file" name="cate1Upload" id="cate1_img">
 								</div>
 								<hr class="my-4">
 								<!-- Submit Button -->						
-								<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" onclick="return checkFile()">수정하기</button>
+								<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" onclick="return checkFile()">생성하기</button>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</article>
-
-		<!-- Input Category Modal -->
-		<article class="resume-info-modal">
-			<div class="modal fade" id="" tabindex="-1" aria-labelledby="inputCate" aria-hidden="true">
+		
+		<!-- Category_1 List -->
+		<div class="row m-2">
+			<!-- GET Cate1 Lists -->
+			<c:set var="dto" value="${lists}"></c:set>
+			<c:forEach var="i" begin="1" end="${size}" step="1">
+				<div class="col-sm-3">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title text-center">${dto[i-1].cate1_name}</h5>
+							<div class="text-center">					
+								<img class="rounded-circle text-center m-1" src="/hobbycampus/hobbyImg/category1/${dto[i-1].cate1_img}">
+							</div>
+							<div class="text-center mt-2">						
+								<button type="button" class="btn btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#cateInfo" onclick="showCate(${dto[i-1].cate1_idx})">
+									<i class="bi bi-search"></i>상세보기
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- To new line -->
+				<c:if test="${i%4==0}"> 
+					</div><div class="row m-2">
+				</c:if>
+			</c:forEach>
+		</div>
+		
+		<!-- Category1,2 Information Modal -->
+		<article class="cate-info-modal">
+			<div class="modal fade" id="cateInfo" tabindex="-1" aria-labelledby="inputCate" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-scrollable" role="document">
 					<div class="modal-content rounded-5 shadow">
 						<!-- Model Header -->
 						<div class="modal-header p-5 pb-4 border-bottom-0">
-							<h3 class="modal-title" id="modal_title" data-idx="" data-email="">OOO님 이력서</h3>
+							<div class="row">
+								<h3 class="modal-title col-md-10" id="modal_title"><b>카테고리 1</b></h3>
+								<div class="col-md-1 text-end">
+									<button type="button" class="btn btn-link"><i class="bi bi-pencil-fill"></i></button>
+								</div>	
+							</div>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<!-- Model Body -->
@@ -214,91 +124,108 @@
 							<form name="interviewForm">
 								<!-- Resume Image -->
 								<div class="form-floating mb-3 text-center">
-									<img src="" class="rounded-circle" id="modal_img">
+									<img src="/hobbycampus/hobbyImg/category1/teacher.png" class="rounded-circle" id="cate1-img">
 								</div>
 								<hr class="my-4">
 								<!-- Resume Introduce -->
 								<div class="form-floating mb-3">
-									<h5><b>자기소개</b></h5>
-									<div id="modal_intro">
-										자기소개 내용
+									<div class="row">
+										<h5 class="col-md-6"><b>하위 카테고리</b></h5>
+										<div class="col-md-6 text-end">
+											<button type="button" class="btn btn-outline-secondary"><i class="bi bi-plus"></i></button>
+										</div>									
 									</div>
-								</div>
-								<hr class="my-4">
-								<!-- Resume Lesson Plan -->
-								<div class="form-floating mb-3">
-									<h5><b>카테고리</b></h5>
-									<div>
-										<span id="modal_cate1_name"><img src="" class="rounded-circle" id="modal_cate1_img" style="width:30px; border: 1px solid black;">카테고리 1</span>
-										<span class="fs-5"><i class="bi bi-caret-right-fill"></i></span>
-										<span id="modal_cate2_name"><img src="" class="rounded-circle" id="modal_cate2_img" style="width:30px; border: 1px solid black;">카테고리 2</span>
-									</div>
-								</div>
-								<hr class="my-4">
-								<!-- Resume Lesson Plan -->
-								<div class="form-floating mb-3">
-									<h5><b>수업계획</b></h5>
-									<div id="modal_plan">
-										수업 계획
-									</div>
-								</div>
-								<hr class="my-4">
-								<!-- Interview Date -->
-								<div class="form-floating mb-3">
-									<h5><b>면접희망날짜</b></h5>
-									<div id="model_interview_date">
-										면접희망날짜
-									</div>
-								</div>
-								<hr class="my-4">
-								<!-- Interview Sate Buttons -->
-								<div class="form-floating mb-3">
-									<h5><b>면접여부</b></h5>
-									<div class="btn-group btn-group-lg" role="group" id="modal_interview_state">
-										<input type="radio" class="btn-check col-md-4" name="interview_state" id="interview_state_1" autocomplete="off" value="대기">
-										<label class="btn btn-outline-secondary" for="interview_state_1">대기</label>
-										<input type="radio" class="btn-check col-md-4" name="interview_state" id="interview_state_2" autocomplete="off" value="예약">
-										<label class="btn btn-outline-warning" for="interview_state_2">예약</label>
-										<input type="radio" class="btn-check col-md-4" name="interview_state" id="interview_state_3" autocomplete="off" value="완료">
-										<label class="btn btn-outline-success" for="interview_state_3">완료</label>
-									</div>
-								</div>
-								<hr class="my-4">
-								<!-- Interview Result Buttons -->
-								<div class="form-floating mb-3">
-									<h5><b>면접결과</b></h5>
-									<div class="btn-group btn-group-lg" role="group" id="modal_interview_result">
-										<input type="radio" class="btn-check col-md-4" name="interview_result" id="interview_result_1" autocomplete="off" value="대기">
-										<label class="btn btn-outline-secondary" for="interview_result_1">대기</label>
-										<input type="radio" class="btn-check col-md-4" name="interview_result" id="interview_result_2" autocomplete="off" value="불합격">
-										<label class="btn btn-outline-danger" for="interview_result_2">불합격</label>
-										<input type="radio" class="btn-check col-md-4" name="interview_result" id="interview_result_3" autocomplete="off" value="합격">
-										<label class="btn btn-outline-success" for="interview_result_3">합격</label>
-									</div>
+									<table class="table table-striped m-2">
+										<thead>
+											<tr>
+												<th scope="col" class="col-md-2">#</th>
+												<th scope="col" class="col-md-4">이미지</th>
+												<th scope="col" class="col-md-4">이름</th>
+												<th scope="col" class="col-md-2">버튼</th>
+											</tr>
+										</thead>
+										<tbody class="cateTwo-tbody">
+											<tr>
+												<th scope="row">1</th>
+												<td>
+													<img src="/hobbycampus/hobbyImg/category2/user.png" class="rounded-circle" id="cate2-img">
+												</td>
+												<td>하위1</td>
+												<td><button type="button" class="btn btn-success btn-sm">수정</button></td>
+											</tr>
+											<tr>
+												<th scope="row">1</th>
+												<td>
+													<img src="/hobbycampus/hobbyImg/category2/user.png" class="rounded-circle" id="cate2-img">
+												</td>
+												<td>하위1</td>
+												<td><button type="button" class="btn btn-success btn-sm">수정</button></td>
+											</tr>
+											<tr>
+												<th scope="row">1</th>
+												<td>
+													<img src="/hobbycampus/hobbyImg/category2/user.png" class="rounded-circle" id="cate2-img">
+												</td>
+												<td>하위1</td>
+												<td><button type="button" class="btn btn-success btn-sm">수정</button></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 								<hr class="my-4">
 								<!-- Submit Button -->						
-								<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" id="modal_submit" type="button" onclick="return updateState()">수정하기</button>
+								<div class="text-center">
+									<button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close">확인</button>								
+								</div>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</article>
-
 	</main>
 	
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
+
+	/* Check Image File extension */
 	function checkFile(){
-		var filename = $('#cate1_name').val();
-		filename = filename.substring(filename.length-3, filename.length);
-		if(filename!='jpg' || filename!='png'){
+		var filename = $('#cate1_img').val();
+		filename = filename.substring(filename.length-3, filename.length); //Get file extension
+		if(filename!='jpg' && filename!='png'){ //Only jpg,png
 			alert('jpg,png 이미지 파일만 업로드 가능합니다.');
 			return false;
 		}
 	}
+	
+	/* GET cate2 Information List */
+	function showCate(idx){
+		
+		// GET cate2 Info & SET List
+		$.ajax({
+			type: 'GET',
+			url: 'categoryTwoList.do',
+			data: {'cate1_idx': idx},
+			dataType: 'json',
+			success: function(e){
+				var $dto = e.dtos;
+				var $tbody = $('.cateTwo-tbody');
+				
+				$tbody.empty(); //Reset tbody content
+				if($dto.length==0){ //If no categotyTwo list
+					$tbody.append('<tr><td colspan="4" class="text-center">하위 카테고리가 존재하지 않습니다.</td></tr>')
+				}
+				for(var i=0; i<$dto.length; i++){ //SET table for categoryTwo List
+					$tbody.append('<tr><th scope="row" data-idx="' + $dto[i].cate2_idx +'">' + (i+1) + '</th>'
+									+ '<td><img src="/hobbycampus/hobbyImg/category2/' + $dto[i].cate2_img + '" class="rounded-circle" id="cate2-img">' 
+									+ '<td>'+ $dto[i].cate2_name + '</td>'
+									+ '<td><button type="button" class="btn btn-success btn-sm">수정</button></td></tr>');
+				}
+			}
+		});
+	}
+	
 </script>
 </html>

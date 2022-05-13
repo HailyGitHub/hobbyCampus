@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hobby.category">
+	
+	<select id="selectCate1MaxIdx" resultType="Integer">
+		SELECT
+			MAX(cate1_idx) AS cate1_idx
+		FROM
+			cate1	
+	</select>
+	
+	<insert id="insertCate1Info" parameterType="hashmap">
+		INSERT INTO
+			cate1
+		VALUES
+			(seq_cate1.nextval,
+			#{cate1_name},
+			#{cate1_img}
+			)
+	</insert>
+	
+	<select id="selectCateOneList" resultType="com.hobbycam.category.model.Cate1DTO">
+		SELECT
+			*
+		FROM
+			cate1
+		ORDER BY
+			cate1_idx ASC
+	</select>
+	
+	<select id="selectCateTwo" parameterType="Integer" resultType="com.hobbycam.category.model.Cate2DTO">
+		SELECT
+			*
+		FROM
+			cate2
+		WHERE
+			cate1_idx = #{cate1_idx}
+		ORDER BY
+			cate2_idx ASC
+	</select>
+	
+</mapper>
