@@ -5,12 +5,12 @@
 <header>
     <div class="top_nav">
         <span class="top_nav_area">
-<<<<<<< HEAD
+
         	<!--  
             <a href="#">회원가입</a> | <a href="#">로그인</a>
             -->
              <a href="temp.do">강사</a> | <a href="mpage.do">마이페이지</a>
-=======
+
         <c:if test="${empty sessionScope.u_name}">
             <a href="userJoin.do">회원가입</a> 
             | <a href="userLogin.do">로그인</a>
@@ -21,7 +21,7 @@
        
        
        
->>>>>>> users/mypage_jh
+
         </span>
     </div>
     <!-- Logo -->

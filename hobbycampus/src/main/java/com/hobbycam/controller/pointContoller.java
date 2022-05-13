@@ -109,7 +109,7 @@ public class pointContoller {
 		return mav;
 	}
 
-	@RequestMapping("/refund.do")
+	@RequestMapping("/myPointRefund.do")
 	@ResponseBody
 	public String refund(@RequestParam Map<String, String> param) {
 		int payListIdx = 0;

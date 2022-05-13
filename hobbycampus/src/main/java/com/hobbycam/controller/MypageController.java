@@ -18,7 +18,7 @@ public class MypageController {
 	@Autowired
 	private CouponService couponService;
 
-	@RequestMapping("/mypage.do")
+	@RequestMapping("/myUserPage.do")
 	public ModelAndView mypage() {
 
 		ModelAndView mav = new ModelAndView();

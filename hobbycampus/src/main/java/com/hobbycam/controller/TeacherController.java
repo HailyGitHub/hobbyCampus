@@ -35,7 +35,7 @@ public class TeacherController {
 	@Autowired ServletContext servletContext;
 	
 	/**Teacher mypage*/
-	@RequestMapping("/mypage.do")
+	@RequestMapping("/myTeacherPage.do")
 	public String teacherMypage() {
 		return "teacher/mypage";
 	}
