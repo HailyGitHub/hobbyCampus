@@ -19,6 +19,8 @@
 		<mapper resource="com/hobbycam/sqlMap/myPaySQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/usersSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/reviewSQL.xml"/>
-
+		<mapper resource="com/hobbycam/sqlMap/couponSQL.xml"/>
+		<mapper resource="com/hobbycam/sqlMap/paymentSQL.xml"/>
+		<mapper resource="com/hobbycam/sqlMap/levelSQL.xml"/>
 	</mappers>
 </configuration>

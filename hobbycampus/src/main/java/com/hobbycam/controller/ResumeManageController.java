@@ -22,9 +22,11 @@ public class ResumeManageController {
 	@Autowired
 	private ResumeManageDAO resumeManageDao;
 	
+	
 	@RequestMapping("/resumeList.do")
 	public ModelAndView resumeList(
 			@RequestParam(value = "cp", defaultValue = "1") int cp) {
+		
 		int applyCnt = resumeManageDao.getApplyTotalCnt(); //Get Apply total count
 		int totalCnt = resumeManageDao.getResumeTotalCnt(); //Get Resume list total count
 		int listSize = 10;

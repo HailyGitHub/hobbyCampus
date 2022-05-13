@@ -46,7 +46,10 @@
 				<button class="btn btn-lg" type="button" id="btn_1"><i class="bi bi-journal-text"></i> 전체목록</button>
 				<button class="btn btn-lg position-relative" type="button" id="btn_2">
 					<!-- Badge Button -->
-					<i class="bi bi-journal-plus"></i> 신청목록<span class="badge bg-danger rounded-pill">${applyCnt}</span>
+					<i class="bi bi-journal-plus"></i> 신청목록
+					<c:if test="${applyCnt != 0}">
+						<span class="badge bg-danger rounded-pill">${applyCnt}</span>					
+					</c:if>
 				</button>
 				<button class="btn btn-lg" type="button" id="btn_3"><i class="bi bi-journal-check"></i> 마감목록</button>
 			</div>

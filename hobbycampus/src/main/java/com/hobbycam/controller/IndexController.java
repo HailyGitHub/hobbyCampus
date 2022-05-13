@@ -28,4 +28,5 @@ public class IndexController {
 		mav.setViewName("/teacher/mypage");
 		return mav;
 	}
+
 }

@@ -36,42 +36,36 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
 	
+
 	<!-- controllers -->
-
 	<bean id="mypageController" class="com.hobbycam.controller.MypageController"></bean>
-
-
 
 	<!-- service -->
 	<bean id="couponService" class="com.hobbycam.service.CouponSerivceImpl"></bean>
 	<bean id="lessonScheduleService" class="com.hobbycam.service.LessonScheduleServiceImpl"></bean>
-	
-	
-	<!-- DAO -->
 
+	<!-- DAO -->
 	<bean id="adminDao" class="com.hobbycam.admin.model.AdminDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
-	<bean id="couponDAO" class="com.hobbycam.DAO.CouponDAOImpl"></bean>
-	<bean id="lessonScheduleDAO" class="com.hobbycam.DAO.LessonScheduleDAOImpl"></bean>
-	<bean id="postDAO" class="com.hobbycam.DAO.PostDAOImpl"></bean>
-	<bean id="userDAO" class="com.hobbycam.DAO.UserDAOImpl"></bean>
-	<bean id="lessonRecordDAO" class="com.hobbycam.DAO.LessonRecordDAOImpl"></bean>
-	<bean id="payDAO" class="com.hobbycam.DAO.PayDAOImpl"></bean>	
 	<bean id="usersDao" class="com.hobbycam.users.model.UsersDAOImple">
-			<constructor-arg>
-				<ref bean="sqlSessionTemplate"/>
-			</constructor-arg>
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
 	</bean> 
 	<bean id="reviewDao" class="com.hobbycam.review.model.ReviewDAOImple">
-			<constructor-arg>
-				<ref bean="sqlSessionTemplate"/>
-			</constructor-arg>
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
 	</bean> 
-
 	<bean id="memberDao" class="com.hobbycam.member.model.MemberDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="couponDao" class="com.hobbycam.coupon.model.CouponDAOImple">	
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
@@ -86,8 +80,17 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	<bean id="paymentDao" class="com.hobbycam.payment.model.PaymentDAOImple">	
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 	<bean id="resumeDao" class="com.hobbycam.resume.model.ResumeDAOImple">
-
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id ="levelDao" class="com.hobbycam.level.model.LevelDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
@@ -107,6 +110,7 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+
 
 
 	<!-- Views -->
