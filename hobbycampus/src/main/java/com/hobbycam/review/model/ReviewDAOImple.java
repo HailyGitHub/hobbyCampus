@@ -9,12 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class reviewDAOImple implements reviewDAO {
+public class ReviewDAOImple implements ReviewDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlMap;
 
-	public reviewDAOImple(SqlSessionTemplate sqlMap) {
+	public ReviewDAOImple(SqlSessionTemplate sqlMap) {
 		super();
 		this.sqlMap = sqlMap;
 	}

@@ -9,13 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hobbycam.review.model.reviewDAO;
+import com.hobbycam.review.model.ReviewDAO;
 
 @Controller
 public class ReviewController {
 
 	@Autowired
-	reviewDAO reviewDao;
+	ReviewDAO reviewDao;
 	
 	@RequestMapping("/review.do")
 	public ModelAndView review(HttpServletRequest req) {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-public interface reviewDAO {
+public interface ReviewDAO {
 
 	public List review(HttpServletRequest req); 
 	

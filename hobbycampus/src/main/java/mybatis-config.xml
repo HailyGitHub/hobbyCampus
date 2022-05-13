@@ -4,16 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<mappers>
-<<<<<<< HEAD
+
 		<mapper resource="com/hobbycam/sqlMap/lessonSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/teacherSQL.xml"/>
-		<mapper resource="com/hobbycam/sqlMap/adminSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/memberSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/resumeManageSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/resumeSQL.xml"/>
-
-=======
-
 		<mapper resource="com/hobbycam/sqlMap/adminSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/myCouponSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/myLessonScheduleSQL.xml"/>
@@ -23,6 +19,6 @@
 		<mapper resource="com/hobbycam/sqlMap/myPaySQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/usersSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/reviewSQL.xml"/>
->>>>>>> users/mypage_jh
+
 	</mappers>
 </configuration>

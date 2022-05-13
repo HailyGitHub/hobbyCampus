@@ -65,7 +65,7 @@
 				<ref bean="sqlSessionTemplate"/>
 			</constructor-arg>
 	</bean> 
-	<bean id="reviewDao" class="com.hobbycam.review.model.reviewDAOImple">
+	<bean id="reviewDao" class="com.hobbycam.review.model.ReviewDAOImple">
 			<constructor-arg>
 				<ref bean="sqlSessionTemplate"/>
 			</constructor-arg>
