@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="hobbycam.users">
+  
+  <!-- emailJoin -->
+  <select id="usersEmailCheck" parameterType="String" resultType="int">
+    select count(*) from 
+      (select u.u_email,
+      		a.a_email
+      
+      	 from users u,
+      	 	admin a 
+      	 	
+      where u.u_email=#{email}
+        or a.a_email=#{email})
+  </select>
+  
+
+  <select id="usersNameCheck" parameterType="String" resultType="int">
+    select count(*) from 
+      (select u.u_name,
+      		t.t_name,
+      		a.a_name
+      
+      	 from users u,
+      	 	teacher t,
+      	 	admin a 
+      	 	
+      where u.u_name=#{name}
+        or t.t_name=#{name}
+        or a.a_name=#{name})
+  
+  </select>
+  
+
+  <insert id="usersEmailJoin" parameterType="com.hobbycam.users.model.UsersDTO">
+  	insert into users 
+  	values(
+  		seq_users.nextval,
+  		#{u_email},
+  		#{u_pwd},
+  		#{u_name},
+  		#{u_img},
+  		#{u_gender},
+  		0,
+  		#{u_tel},
+  		'활성',
+  		sysdate)
+  	
+  </insert>
+  
+  
+  <!-- user kakaoJoin -->
+  <insert id="usersKakaoJoin" parameterType="com.hobbycam.users.model.UsersDTO">
+  insert into users 
+  	values(
+  		seq_users.nextval,
+  		#{u_email},
+  		'kakao',
+  		#{u_name},
+  		#{u_img},
+  		#{u_gender},
+  		0,
+  		#{u_tel},
+  		'활성',
+  		sysdate)
+  </insert>
+  
+
+
+  <!-- Login -->
+  <select id="usersLogin" parameterType="String" resultType="com.hobbycam.users.model.UsersDTO">
+  	select u_pwd, u_state
+  	from users 
+  	where u_email=#{e_mail}
+  
+  </select>
+  
+    <select id="usersname" parameterType="String" resultType="com.hobbycam.users.model.UsersDTO">
+	select u_name, u_idx
+  	from users
+  	where users.u_email=#{e_mail}
+  </select>
+  
+  
+  
+  <!-- getUserName -->
+  <select id="userTidx" parameterType="int" resultType="integer">
+	select t_idx 
+  	from teacher
+  	where teacher.u_idx =#{u_idx}
+  	      
+  </select>
+  
+	<select id="userUpForm" parameterType="int" resultType="com.hobbycam.users.model.UsersDTO">
+	select  u_img,u_name,u_tel  
+	from users
+	where u_idx=#{u_idx}
+
+	</select>
+  
+  
+  
+  <!--  user UPdate -->
+  <update id="userUp" parameterType="com.hobbycam.users.model.UsersDTO">
+  	update users 
+  	
+  		set u_pwd=#{u_pwd} ,
+  			u_name=#{u_name},
+  			u_img=#{u_img},
+  			u_tel=#{u_tel}
+  			
+  	where u_idx=#{u_idx}
+  </update>
+  
+  
+  
+  <!-- pwd Change -->
+  <update id="usersPwdUp" parameterType="com.hobbycam.users.model.UsersDTO">
+  	update users
+  		set u_pwd=#{u_pwd}
+  		
+  	where u_idx=#{u_idx}
+  
+  </update>
+  
+  
+  
+  <!--  userDelete -->
+  <update id="usersDel" parameterType="int">
+  	update users 
+  	set u_state='탈퇴' 
+  	where u_idx=#{u_idx}
+  </update>
+  
+  
+  </mapper>

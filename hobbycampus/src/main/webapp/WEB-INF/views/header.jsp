@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- Header -->
 <header>
     <div class="top_nav">
         <span class="top_nav_area">
-            <a href="#">회원가입</a> | <a href="#">로그인</a>
+        <c:if test="${empty sessionScope.u_name}">
+            <a href="userJoin.do">회원가입</a> 
+            | <a href="userLogin.do">로그인</a>
+      </c:if>
+      <c:if test="${!empty sessionScope.u_name}">
+      	${sessionScope.u_name} 님  | <a href="userLogout.do">로그아웃</a>
+      </c:if> 
+       
+       
+       
         </span>
     </div>
     <!-- Logo -->
