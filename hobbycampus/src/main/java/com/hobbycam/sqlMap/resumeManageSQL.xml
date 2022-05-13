@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hobby.resumeManage">
+	
+	<select id="selectResumeTotalCnt" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			teacher_resume
+	</select>
+	
+	<select id="selectApplyTotalCnt" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			teacher_resume
+		WHERE
+			interview_result = '대기'
+	</select>
+	
+	<select id="selectResultTotalCnt" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			teacher_resume
+		WHERE
+			interview_result != '대기'
+	</select>
+	
+	<select id="selectResumeList" parameterType="hashmap" resultType="com.hobbycam.resume.model.ResumeManageDTO">
+		SELECT
+		    *
+		FROM
+		    (SELECT
+		        rownum as rnum, 
+		        c.*
+		    FROM
+		        (SELECT 
+		            a.resume_idx, 
+		            a.resume_img, 
+		            a.resume_name, 
+		            a.interview_state, 
+		            a.interview_result, 
+		            b.u_email, 
+		            b.u_gender
+		        FROM
+		            teacher_resume a, 
+		            users b
+		        WHERE
+		            a.u_idx = b.u_idx
+		        ORDER BY    
+		            a.resume_idx DESC) c) d
+		WHERE
+		    rnum<![CDATA[>=]]>#{start}
+		AND 
+		    rnum<![CDATA[<=]]>#{end}
+	</select>
+	
+	<select id="selectResumeApplyList" parameterType="hashmap" resultType="com.hobbycam.resume.model.ResumeManageDTO">
+		SELECT
+		    *
+		FROM
+		    (SELECT
+		        rownum as rnum, 
+		        c.*
+		    FROM
+		        (SELECT 
+		            a.resume_idx, 
+		            a.resume_img, 
+		            a.resume_name, 
+		            a.interview_state, 
+		            a.interview_result, 
+		            b.u_email, 
+		            b.u_gender
+		        FROM
+		            teacher_resume a, 
+		            users b
+		        WHERE
+		            a.u_idx = b.u_idx
+		        AND
+		        	a.interview_result = '대기'
+		        ORDER BY    
+		            a.resume_idx DESC) c) d
+		WHERE
+		    rnum<![CDATA[>=]]>#{start}
+		AND 
+		    rnum<![CDATA[<=]]>#{end}
+	</select>
+	
+	<select id="selectResumeResultList" parameterType="hashmap" resultType="com.hobbycam.resume.model.ResumeManageDTO">
+		SELECT
+		    *
+		FROM
+		    (SELECT
+		        rownum as rnum, 
+		        c.*
+		    FROM
+		        (SELECT 
+		            a.resume_idx, 
+		            a.resume_img, 
+		            a.resume_name, 
+		            a.interview_state, 
+		            a.interview_result, 
+		            b.u_email, 
+		            b.u_gender
+		        FROM
+		            teacher_resume a, 
+		            users b
+		        WHERE
+		            a.u_idx = b.u_idx
+		        AND
+		        	a.interview_result != '대기'
+		        ORDER BY    
+		            a.resume_idx DESC) c) d
+		WHERE
+		    rnum<![CDATA[>=]]>#{start}
+		AND 
+		    rnum<![CDATA[<=]]>#{end}
+	</select>
+	
+	<select id="selectResumeInfo" parameterType="Integer" resultType="com.hobbycam.resume.model.ResumeManageDTO">
+		SELECT
+		    *
+		FROM
+		    teacher_resume tr,
+		    (SELECT
+		        b.cate2_idx, 
+		        b.cate2_name, 
+		        b.cate2_img, 
+		        a.cate1_name, 
+		        a.cate1_img
+		    FROM 
+		        cate1 a, 
+		        cate2 b
+		    WHERE
+		        a.cate1_idx = b.cate1_idx) ctg
+		WHERE
+		    ctg.cate2_idx = tr.cate2_idx
+		AND 
+		    tr.resume_idx = #{resume_idx}
+	</select>
+	
+	<update id="updateResumeState" parameterType="hashmap">
+		UPDATE
+			teacher_resume
+		SET
+			interview_state = #{interview_state},
+			interview_result = #{interview_result}
+		WHERE
+			resume_idx = #{resume_idx}
+	</update>
+	
+	<select id="selectUserIdxByIdx" parameterType="Integer" resultType="Integer">
+		SELECT
+			u_idx
+		FROM 
+			teacher_resume
+		WHERE
+			resume_idx = #{resume_idx}
+	</select>
+	
+	<insert id="insertTeacherByIdx" parameterType="hashmap">
+		INSERT INTO
+			teacher
+		VALUES(
+			seq_teacher.nextval,
+			#{u_idx},
+			1,
+			#{t_name},
+			'0.png',
+			'안녕하세요. 새로 등록한 강사입니다. 잘 부탁드립니다.',
+			sysdate,
+			'없음',
+			'없음',
+			'없음',
+			0
+		)
+	</insert>
+	
+</mapper>

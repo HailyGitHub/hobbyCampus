@@ -14,4 +14,18 @@ public class IndexController {
 		return mav;
 		
 	}
+
+	@RequestMapping("/temp.do")
+	public ModelAndView temp() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("/teacher/temp");
+		return mav;
+	}
+	
+	@RequestMapping("/mpage.do")
+	public ModelAndView mypage() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("/teacher/mypage");
+		return mav;
+	}
 }

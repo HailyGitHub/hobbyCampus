@@ -154,8 +154,7 @@
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>
 	    <version>2.13.2.2</version>
-	</dependency>  
-
+	</dependency>
 
 <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 <dependency>
@@ -163,6 +162,7 @@
     <artifactId>mail</artifactId>
     <version>1.4.7</version>
 </dependency>
+
 
   </dependencies>
   

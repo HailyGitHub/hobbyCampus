@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context 
 	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	
@@ -70,6 +71,44 @@
 			</constructor-arg>
 	</bean> 
 
+	<bean id="memberDao" class="com.hobbycam.member.model.MemberDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="resumeManageDao" class="com.hobbycam.resume.model.ResumeManageDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="LessonDAO" class="com.hobbycam.lesson.model.LessonDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="resumeDao" class="com.hobbycam.resume.model.ResumeDAOImple">
+
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="teacherDao" class="com.hobbycam.teacher.model.TeacherDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="lessonRecordDao" class="com.hobbycam.lessonRecord.model.LessonRecordDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="payListDao" class="com.hobbycam.payList.model.PayListDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+
+
 	<!-- Views -->
 	<bean id="hobbyDown" class="com.hobbycam.view.DownloadView"></bean> <!-- File Download Class  -->
 	<bean id="hobbyJson" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean> <!-- JSON -->
@@ -82,24 +121,21 @@
 		<property name="order" value="0"></property>
 	</bean>
 	
-	
-	
 
-	<!-- mailSender -->
+	<!-- Email API -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com"/>
-		<property name="port" value="587"/>
-		<property name="username" value="lemoni3710@gmail.com"/>
-		<property name="password" value="hobbyCampus"/>
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.transport.protocol">smtp</prop>
-				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.starttls.enable">true</prop>
-				<prop key="mail.debug">true</prop>
-				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
-				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
-			</props>
-		</property>
+	    <property name="host" value="smtp.gmail.com" />
+	    <property name="port" value="587" />
+	    <property name="username" value="lemoni3710@gmail.com" />
+	    <property name="password" value="hobbyCampus" />
+	    <property name="javaMailProperties">
+	        <props>
+	            <prop key="mail.transport.protocol">smtp</prop>
+	            <prop key="mail.smtp.auth">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.debug">true</prop>
+	        </props>
+	    </property>
 	</bean>
+
 </beans>

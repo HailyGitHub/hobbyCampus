@@ -123,27 +123,29 @@
 		</article>
 		
 		<!-- Dynamic Number -->
-		<article class="col-md-12" id="dynamic-box" align="center">
-			<table class="bg-light">
-				<tr id="dynamic-icon">
-					<th class="col-md-3 display-4 text-danger"><i class="bi bi-person-video3"></i></th>
-					<th class="col-md-3 display-4 text-success"><i class="bi bi-people-fill"></i></th>
-					<th class="col-md-3 display-4 text-primary"><i class="bi bi-pencil"></i></th>
-					<th class="col-md-3 display-4 text-warning"><i class="bi bi-palette2"></i></th>
-				</tr>
-				<tr id="dynamic-number">
-					<td class="display-1 text-danger" id="dynamic1" data-rate="100"><b></b></td>
-					<td class="display-1 text-success" id="dynamic2" data-rate="300"><b></b></td>
-					<td class="display-1 text-primary" id="dynamic3" data-rate="150"><b></b></td>
-					<td class="display-1 text-warning" id="dynamic4" data-rate="25"><b></b></td>
-				</tr>
-				<tr id="dynamic-title">
-					<td class="text-danger"><h3>강사</h3></td>
-					<td class="text-success"><h3>학생</h3></td>
-					<td class="text-primary"><h3>클래스</h3></td>
-					<td class="text-warning"><h3>카테고리</h3></td>
-				</tr>
-			</table>
+		<article class="col-md-12 justify-content-center" id="dynamic-box" align="center">
+			<div class="row">
+				<table class="bg-light justify-content-center m-1">
+					<tr id="dynamic-icon">
+						<th class="col-md-3 display-4 text-danger"><i class="bi bi-person-video3"></i></th>
+						<th class="col-md-3 display-4 text-success"><i class="bi bi-people-fill"></i></th>
+						<th class="col-md-3 display-4 text-primary"><i class="bi bi-pencil"></i></th>
+						<th class="col-md-3 display-4 text-warning"><i class="bi bi-palette2"></i></th>
+					</tr>
+					<tr id="dynamic-number">
+						<td class="display-1 text-danger" id="dynamic1" data-rate="100"><b></b></td>
+						<td class="display-1 text-success" id="dynamic2" data-rate="300"><b></b></td>
+						<td class="display-1 text-primary" id="dynamic3" data-rate="150"><b></b></td>
+						<td class="display-1 text-warning" id="dynamic4" data-rate="25"><b></b></td>
+					</tr>
+					<tr id="dynamic-title">
+						<td class="text-danger"><h3>강사</h3></td>
+						<td class="text-success"><h3>학생</h3></td>
+						<td class="text-primary"><h3>클래스</h3></td>
+						<td class="text-warning"><h3>카테고리</h3></td>
+					</tr>
+				</table>
+			</div>
 		</article>
 		
 		<hr>		
