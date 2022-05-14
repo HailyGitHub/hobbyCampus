@@ -40,11 +40,11 @@
 		<!-- Button for Create Category1 -->
 		<article class="select-list m-5">
 			<div class="d-grid gap-2 d-md-block col-md-12 text-center">
-				<button class="btn btn-lg btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#inputCate"><i class="bi bi-bookmark-plus-fill"></i> 카테고리 생성</button>
+				<button class="btn btn-lg btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#inputCate"><i class="bi bi-bookmark-plus-fill"></i> 큰 카테고리 생성</button>
 			</div>
 		</article>
 		
-		<!-- Input Category Modal -->
+		<!-- Input Category One Modal -->
 		<article class="create-cate1-modal">
 			<div class="modal fade" id="inputCate" tabindex="-1" aria-labelledby="inputCate" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -56,7 +56,7 @@
 						</div>
 						<!-- Model Body -->
 						<div class="modal-body p-5 pt-0">
-							<form name="Cate1Form" action="uploadCate1.do" method="post" enctype="multipart/form-data">
+							<form name="Cate1Form" action="uploadCateOne.do" method="post" enctype="multipart/form-data">
 								<!-- Input Category Name -->
 								<div class="form-floating mb-3">
 									<input type="text" class="form-control rounded-4" name="cate1_name" id="cate1_name" maxlength="7" placeholder="큰 카테고리 이름 입력" required>
@@ -65,11 +65,11 @@
 								<!-- Upload Category Image -->
 								<div class="mb-3">
 									<label for="formFile" class="form-label">파일 업로드</label>
-									<input class="form-control" type="file" name="cate1Upload" id="cate1_img">
+									<input class="form-control" type="file" name="cate1Upload" id="cate1_img" required>
 								</div>
 								<hr class="my-4">
 								<!-- Submit Button -->						
-								<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" onclick="return checkFile()">생성하기</button>
+								<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" onclick="return checkFile('cate1_img')">생성하기</button>
 							</form>
 						</div>
 					</div>
@@ -90,7 +90,7 @@
 								<img class="rounded-circle text-center m-1" src="/hobbycampus/hobbyImg/category1/${dto[i-1].cate1_img}">
 							</div>
 							<div class="text-center mt-2">						
-								<button type="button" class="btn btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#cateInfo" onclick="showCate(${dto[i-1].cate1_idx})">
+								<button type="button" class="btn btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#cateInfo" onclick="showCate(${dto[i-1].cate1_idx},'${dto[i-1].cate1_name}','${dto[i-1].cate1_img}')">
 									<i class="bi bi-search"></i>상세보기
 								</button>
 							</div>
@@ -111,73 +111,46 @@
 					<div class="modal-content rounded-5 shadow">
 						<!-- Model Header -->
 						<div class="modal-header p-5 pb-4 border-bottom-0">
-							<div class="row">
-								<h3 class="modal-title col-md-10" id="modal_title"><b>카테고리 1</b></h3>
-								<div class="col-md-1 text-end">
-									<button type="button" class="btn btn-link"><i class="bi bi-pencil-fill"></i></button>
-								</div>	
+							<div class="row" id="title-row" data-cateOne-idx="">
+								<!-- From JQuery -->
 							</div>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<!-- Model Body -->
 						<div class="modal-body p-5 pt-0">
-							<form name="interviewForm">
-								<!-- Resume Image -->
-								<div class="form-floating mb-3 text-center">
-									<img src="/hobbycampus/hobbyImg/category1/teacher.png" class="rounded-circle" id="cate1-img">
+							<!-- Resume Image -->
+							<div class="form-floating mb-3 text-center" id="img-row">
+								<!-- From JQuery -->
+							</div>
+							<hr class="my-4">
+							<!-- Resume Introduce -->
+							<div class="form-floating mb-3">
+								<div class="row">
+									<h5 class="col-md-6"><b>하위 카테고리</b></h5>
+									<div class="col-md-6 text-end" id="btn-plus">
+										<!-- From JQuery -->
+									</div>									
 								</div>
-								<hr class="my-4">
-								<!-- Resume Introduce -->
-								<div class="form-floating mb-3">
-									<div class="row">
-										<h5 class="col-md-6"><b>하위 카테고리</b></h5>
-										<div class="col-md-6 text-end">
-											<button type="button" class="btn btn-outline-secondary"><i class="bi bi-plus"></i></button>
-										</div>									
-									</div>
-									<table class="table table-striped m-2">
-										<thead>
-											<tr>
-												<th scope="col" class="col-md-2">#</th>
-												<th scope="col" class="col-md-4">이미지</th>
-												<th scope="col" class="col-md-4">이름</th>
-												<th scope="col" class="col-md-2">버튼</th>
-											</tr>
-										</thead>
-										<tbody class="cateTwo-tbody">
-											<tr>
-												<th scope="row">1</th>
-												<td>
-													<img src="/hobbycampus/hobbyImg/category2/user.png" class="rounded-circle" id="cate2-img">
-												</td>
-												<td>하위1</td>
-												<td><button type="button" class="btn btn-success btn-sm">수정</button></td>
-											</tr>
-											<tr>
-												<th scope="row">1</th>
-												<td>
-													<img src="/hobbycampus/hobbyImg/category2/user.png" class="rounded-circle" id="cate2-img">
-												</td>
-												<td>하위1</td>
-												<td><button type="button" class="btn btn-success btn-sm">수정</button></td>
-											</tr>
-											<tr>
-												<th scope="row">1</th>
-												<td>
-													<img src="/hobbycampus/hobbyImg/category2/user.png" class="rounded-circle" id="cate2-img">
-												</td>
-												<td>하위1</td>
-												<td><button type="button" class="btn btn-success btn-sm">수정</button></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<hr class="my-4">
-								<!-- Submit Button -->						
-								<div class="text-center">
-									<button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close">확인</button>								
-								</div>
-							</form>
+								<table class="table table-striped m-2">
+									<thead>
+										<tr>
+											<th scope="col" class="col-md-2">#</th>
+											<th scope="col" class="col-md-4">이미지</th>
+											<th scope="col" class="col-md-4">이름</th>
+											<th scope="col" class="col-md-2">버튼</th>
+										</tr>
+									</thead>
+									<tbody class="cateTwo-tbody">
+										<!-- From JQuery -->
+									</tbody>
+								</table>
+							</div>
+							<div id="cateTwo-form-area"></div>
+							<hr class="my-4">
+							<!-- Submit Button -->						
+							<div class="text-center">
+								<button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close">확인</button>								
+							</div>
 						</div>
 					</div>
 				</div>
@@ -188,44 +161,5 @@
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
-<script type="text/javascript">
-
-	/* Check Image File extension */
-	function checkFile(){
-		var filename = $('#cate1_img').val();
-		filename = filename.substring(filename.length-3, filename.length); //Get file extension
-		if(filename!='jpg' && filename!='png'){ //Only jpg,png
-			alert('jpg,png 이미지 파일만 업로드 가능합니다.');
-			return false;
-		}
-	}
-	
-	/* GET cate2 Information List */
-	function showCate(idx){
-		
-		// GET cate2 Info & SET List
-		$.ajax({
-			type: 'GET',
-			url: 'categoryTwoList.do',
-			data: {'cate1_idx': idx},
-			dataType: 'json',
-			success: function(e){
-				var $dto = e.dtos;
-				var $tbody = $('.cateTwo-tbody');
-				
-				$tbody.empty(); //Reset tbody content
-				if($dto.length==0){ //If no categotyTwo list
-					$tbody.append('<tr><td colspan="4" class="text-center">하위 카테고리가 존재하지 않습니다.</td></tr>')
-				}
-				for(var i=0; i<$dto.length; i++){ //SET table for categoryTwo List
-					$tbody.append('<tr><th scope="row" data-idx="' + $dto[i].cate2_idx +'">' + (i+1) + '</th>'
-									+ '<td><img src="/hobbycampus/hobbyImg/category2/' + $dto[i].cate2_img + '" class="rounded-circle" id="cate2-img">' 
-									+ '<td>'+ $dto[i].cate2_name + '</td>'
-									+ '<td><button type="button" class="btn btn-success btn-sm">수정</button></td></tr>');
-				}
-			}
-		});
-	}
-	
-</script>
+<script type="text/javascript" src="/hobbycampus/js/category.js"></script>
 </html>
