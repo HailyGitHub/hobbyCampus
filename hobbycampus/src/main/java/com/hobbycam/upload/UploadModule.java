@@ -5,5 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface UploadModule {
 	
 	public boolean copyInto(MultipartFile upload, String fileName, String savePath, String extension);
+	public boolean deleteImg(String savepath, String oldFileName);
 	
 }

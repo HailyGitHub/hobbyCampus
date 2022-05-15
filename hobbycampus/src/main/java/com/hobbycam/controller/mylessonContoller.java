@@ -28,17 +28,17 @@ public class mylessonContoller {
 	@RequestMapping("/mylessonList.do")
 	public ModelAndView myreviewList(@RequestParam Map<String, String> param) {
 
-		// TODO 수정해야함( 유저가 3이라고 가정했을 뿐)
+		// TODO 
 		int uIdx = 3;
 
-		// 주소지 저장
+		// 
 		String postReceiver = param.get("postReceiver");
 		String postTel = param.get("postTel");
 		String postAddr = param.get("postAddr");
 		String postEtc = param.get("postEtc");
-		// postReceiver 관련된 정보가 있을 때
+		// postReceiver 
 		if (postReceiver != null) {
-			// 저장 로직
+			// 
 			Map<String, Object> map = new HashMap<>();
 			map.put("uIdx", uIdx);
 			map.put("postReceiver", postReceiver);
@@ -48,9 +48,9 @@ public class mylessonContoller {
 			postDAO.insert(map);
 		}
 
-		// 수강이력에 추가
+		//
 		try {
-			// 만약 하위 정보 없이 그냥 내 이력 보려고 들어온거라면 error try catch 후 건너뛰기
+			// 
 			int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
 			int pricePoint = Integer.valueOf(param.get("pricePoint"));
 			String lessonRecordState = "예약";

@@ -7,16 +7,16 @@
 	<select id="selectCateOneMaxIdx" resultType="Integer">
 		SELECT
 			seq_cate1.NEXTVAL
-		from 
-			dual
+		FROM 
+			DUAL
 	</select>
 	
 	
 	<select id="selectCateTwoMaxIdx" resultType="Integer">
 		SELECT
 			seq_cate2.NEXTVAL
-		from 
-			dual
+		FROM 
+			DUAL
 	</select>
 	
 	
@@ -24,7 +24,7 @@
 		INSERT INTO
 			cate1
 		VALUES
-			(seq_cate1.nextval,
+			(#{nextIdx},
 			#{cate1_name},
 			#{cate1_img}
 			)
@@ -35,7 +35,7 @@
 		INSERT INTO
 			cate2
 		VALUES
-			(seq_cate2.nextval,
+			(#{nextIdx},
 			#{cate1_idx},
 			#{cate2_name},
 			#{cate2_img}
@@ -65,13 +65,25 @@
 	</select>
 	
 	
-	<update id="updateCateOneName" parameterType="hashmap">
+	<update id="upadateCateOne" parameterType="hashmap">
 		UPDATE
 			cate1
 		SET
-			cate1_name = #{cate1_name}
+			cate1_name = #{cate1_name},
+			cate1_img = #{cate1_img}
 		WHERE
 			cate1_idx = #{cate1_idx}
+	</update>
+	
+	
+	<update id="upadateCateTwo" parameterType="hashmap">
+		UPDATE
+			cate2
+		SET
+			cate2_name = #{cate2_name},
+			cate2_img = #{cate2_img}
+		WHERE
+			cate2_idx = #{cate2_idx}
 	</update>
 	
 </mapper>

@@ -51,7 +51,7 @@
 					<div class="modal-content rounded-5 shadow">
 						<!-- Model Header -->
 						<div class="modal-header p-5 pb-4 border-bottom-0">
-							<h3 class="modal-title" id="modal_title">큰 카테고리 생성</h3>
+							<h3 class="modal-title" id="modal_title"><i class="bi bi-bookmark-plus-fill"></i> 큰 카테고리 생성</h3>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<!-- Model Body -->
@@ -118,12 +118,13 @@
 						</div>
 						<!-- Model Body -->
 						<div class="modal-body p-5 pt-0">
-							<!-- Resume Image -->
+							<!-- Category One Image -->
 							<div class="form-floating mb-3 text-center" id="img-row">
 								<!-- From JQuery -->
 							</div>
+							<div id="cateOne-form-area"></div>
 							<hr class="my-4">
-							<!-- Resume Introduce -->
+							<!-- Category Two List -->
 							<div class="form-floating mb-3">
 								<div class="row">
 									<h5 class="col-md-6"><b>하위 카테고리</b></h5>

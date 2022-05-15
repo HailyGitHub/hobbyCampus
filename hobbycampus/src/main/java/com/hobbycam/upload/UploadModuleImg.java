@@ -24,5 +24,12 @@ public class UploadModuleImg implements UploadModule {
 			return false;
 		}
 	}
+	
+	@Override
+	public boolean deleteImg(String savepath, String oldFileName) {
+		File f = new File(savepath + oldFileName);
+		f.delete();
+		return true;
+	}
 
 }

@@ -62,15 +62,15 @@ public class CategoryController {
 		String extension =  fileName.substring(fileName.length()-4, fileName.length()); // GET File Extension
 		String savepath = servletContext.getRealPath(CATEGORY_ONE_PATH); //GET category1 File Path
 
-		String nextIdx = "" + categoryDao.getCateOneMaxIdx(); //GET Next cate1_idx
+		int nextIdx = categoryDao.getCateOneMaxIdx(); //GET Next cate1_idx
 		
 		//Save File to savePath
 		UploadModule loadModule = new UploadModuleImg();
-		boolean result = loadModule.copyInto(upload, nextIdx, savepath, extension);
+		boolean result = loadModule.copyInto(upload, ""+nextIdx, savepath, extension);
 		
 		String msg = "이미지 업로드에 실패하였습니다."; //File Upload fail
 		if(result==true) { //File Upload success -> Save DB
-			int count = categoryDao.addCateOne(cate1_name, nextIdx+extension);
+			int count = categoryDao.addCateOne(nextIdx, cate1_name, nextIdx+extension);
 			msg = count>0?  "등록 성공하였습니다." : "등록 실패하였습니다.";
 		}
 		
@@ -88,15 +88,15 @@ public class CategoryController {
 		String extension =  fileName.substring(fileName.length()-4, fileName.length()); // GET File Extension
 		String savepath = servletContext.getRealPath(CATEGORY_TWO_PATH); //GET category2 File Path
 		
-		String nextIdx = "" + categoryDao.getCateTwoMaxIdx(); //GET Next cate2_idx
+		int nextIdx = categoryDao.getCateTwoMaxIdx(); //GET Next cate2_idx
 		
 		//Save File to savePath
 		UploadModule loadModule = new UploadModuleImg();
-		boolean result = loadModule.copyInto(upload, nextIdx, savepath, extension);
+		boolean result = loadModule.copyInto(upload, ""+nextIdx, savepath, extension);
 		
 		String msg = "이미지 업로드에 실패하였습니다."; //File Upload fail
 		if(result==true) { //File Upload success -> Save DB
-			int count = categoryDao.addCateTwo(cate1_idx, cate2_name, nextIdx+extension);
+			int count = categoryDao.addCateTwo(nextIdx, cate1_idx, cate2_name, nextIdx+extension);
 			msg = count>0?  "등록 성공하였습니다." : "등록 실패하였습니다.";
 		}
 		
@@ -105,18 +105,56 @@ public class CategoryController {
 		mav.setViewName("category/categoryResult");
 		return mav;
 	}
-
 	
-	@RequestMapping("categoryOneEditName.do")
-	public ModelAndView categoryOneEditName(int cate1_idx, String cate1_name) {
+	@RequestMapping("/editCateOne.do")
+	public ModelAndView editCateOne(int cate1_idx, String cate1_name, String cate1_img,
+			@RequestParam(value = "cateOneUpload") MultipartFile upload) {
 		
-		int count = categoryDao.editCateOneName(cate1_idx, cate1_name);
-		String msg = count>0? "수정 성공하였습니다." : "수정 실패하였습니다.";
+		String fileName = upload.getOriginalFilename();
+		String extension =  fileName.substring(fileName.length()-4, fileName.length()); // GET File Extension
+		String savepath = servletContext.getRealPath(CATEGORY_ONE_PATH); //GET category1 File Path
+		
+		UploadModule loadModule = new UploadModuleImg();
+		boolean deleteResult = loadModule.deleteImg(savepath, cate1_img); // Delete old file
+		boolean uploadResult = loadModule.copyInto(upload, ""+cate1_idx, savepath, extension); // Upload new file
+		
+		String msg = "카테고리 수정에 실패하였습니다.";
+		if(deleteResult==true&&uploadResult==true) { //Update Category One DB
+			int count = categoryDao.editCateOne(cate1_idx, cate1_name, ""+cate1_idx+extension);
+			msg = count>0?  "수정 성공하였습니다." : "수정 실패하였습니다.";
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
-		mav.setViewName("hobbyJson");
+		mav.setViewName("category/categoryResult");
 		return mav;
 	}
+
+	@RequestMapping("/editCateTwo.do")
+	public ModelAndView editCateTwo(int cate2_idx, String cate2_name, String cate2_img,
+			@RequestParam(value = "cateTwoUpload") MultipartFile upload) {
+		
+		String fileName = upload.getOriginalFilename();
+		String extension =  fileName.substring(fileName.length()-4, fileName.length()); // GET File Extension
+		String savepath = servletContext.getRealPath(CATEGORY_TWO_PATH); //GET category2 File Path
+		
+		UploadModule loadModule = new UploadModuleImg();
+		//System.out.println(savepath+cate2_img);
+		boolean deleteResult = loadModule.deleteImg(savepath, cate2_img); // Delete old file
+		boolean uploadResult = loadModule.copyInto(upload, ""+cate2_idx, savepath, extension); // Upload new file
+		
+		String msg = "카테고리 수정에 실패하였습니다.";
+		if(deleteResult==true&&uploadResult==true) { //Update Category Two DB
+			int count = categoryDao.editCateTwo(cate2_idx, cate2_name, ""+cate2_idx+extension);
+			msg = count>0?  "수정 성공하였습니다." : "수정 실패하였습니다.";
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.setViewName("category/categoryResult");
+		return mav;
+		
+	}
+	
 	
 }
