@@ -55,7 +55,7 @@ public class CategoryDAOImple implements CategoryDAO {
 	
 	@Override
 	public List getCateTwoList(int cate1_idx) {
-		List lists = sqlMap.selectList("selectCateTwo", cate1_idx);
+		List lists = sqlMap.selectList("selectCateTwoList", cate1_idx);
 		return lists;
 	}
 	

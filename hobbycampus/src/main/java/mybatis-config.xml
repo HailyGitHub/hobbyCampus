@@ -22,5 +22,6 @@
 		<mapper resource="com/hobbycam/sqlMap/paymentSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/levelSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/categorySQL.xml"/>
+		<mapper resource="com/hobbycam/sqlMap/indexSQL.xml"/>
 	</mappers>
 </configuration>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hobby.index">
+	
+	<select id="selectIndexCateOneList" resultType="com.hobbycam.category.model.Cate1DTO">
+		SELECT
+			*
+		FROM
+			cate1
+		ORDER BY
+			cate1_idx ASC
+	</select>
+	
+	
+	<select id="selectIndexCateTwoList" resultType="com.hobbycam.category.model.Cate2DTO">
+		SELECT
+			*
+		FROM
+			cate2
+		ORDER BY
+			cate2_idx ASC
+	</select>
+
+</mapper>

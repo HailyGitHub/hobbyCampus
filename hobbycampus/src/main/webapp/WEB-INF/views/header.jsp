@@ -31,13 +31,14 @@
             <img src="/hobbycampus/img/main.png" alt="main_img">Hobby Campus
         </a>
 
-        <!-- Category List -->
+        <!-- Category One List -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle navbar-brand" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">카테고리</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown03">
-            <li><a class="dropdown-item" href="#">언어</a></li>
-            <li><a class="dropdown-item" href="#">수학</a></li>
-            <li><a class="dropdown-item" href="#">체육</a></li>
+	            <!-- GET Category One -->
+	            <c:forEach var="cateOneDTO" items="${cateOneList}">
+	            	<li><a class="dropdown-item" href="#" data-idx="${cateOneDTO.cate1_idx}" data-img="${cateOneDTO.cate1_img}">${cateOneDTO.cate1_name}</a></li>
+	            </c:forEach>
             </ul>
         </li>
         <a class="navbar-brand" href="#">라이브</a>

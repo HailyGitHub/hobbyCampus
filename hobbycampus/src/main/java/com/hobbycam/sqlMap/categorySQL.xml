@@ -53,7 +53,7 @@
 	</select>
 	
 	
-	<select id="selectCateTwo" parameterType="Integer" resultType="com.hobbycam.category.model.Cate2DTO">
+	<select id="selectCateTwoList" parameterType="Integer" resultType="com.hobbycam.category.model.Cate2DTO">
 		SELECT
 			*
 		FROM

@@ -120,7 +120,7 @@ hr{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(-30deg);
-    font-size: 2rem;
+    font-size: 5px;
     z-index: 1;
 }
 
