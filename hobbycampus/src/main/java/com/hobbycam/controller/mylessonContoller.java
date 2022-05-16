@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hobbycam.DAO.LessonRecordDAO;
 import com.hobbycam.DAO.PostDAO;
 import com.hobbycam.VO.LessonRecordVO;
+import com.hobbycam.lessonRecord.model.LessonRecordDAO;
 
 @Controller
 public class mylessonContoller {
@@ -23,7 +23,7 @@ public class mylessonContoller {
 	private PostDAO postDAO;
 
 	@Autowired
-	private LessonRecordDAO lessonRecordDAO;
+	private LessonRecordDAO lessonRecordDao;
 
 	@RequestMapping("/mylessonList.do")
 	public ModelAndView myreviewList(@RequestParam Map<String, String> param) {
@@ -63,7 +63,7 @@ public class mylessonContoller {
 			map.put("lessonRecordState", lessonRecordState);
 			map.put("lessonExchangeState", lessonExchangeState);
 
-			lessonRecordDAO.insert(map);
+			lessonRecordDao.insert(map);
 		} catch (Exception e) {
 		}
 
@@ -72,13 +72,8 @@ public class mylessonContoller {
 		
 		
 		String lessonRecordState = param.get("lessonRecordState");
-		List<LessonRecordVO> lessonRecordList = lessonRecordDAO.getLessonRecords(uIdx, lessonRecordState);
+		List<LessonRecordVO> lessonRecordList = lessonRecordDao.getLessonRecords(uIdx, lessonRecordState);
 		mav.addObject("lessonRecordList", lessonRecordList);
-		
-		
-		
-		
-		
 		
 		
 		return mav;

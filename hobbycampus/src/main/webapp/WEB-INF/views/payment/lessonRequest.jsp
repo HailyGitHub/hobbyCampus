@@ -7,7 +7,6 @@
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/hobbycampus/css/lessonreq.css">
 <script src="/hobbycampus/js/myLessonRequest.js"></script>
 <script type="text/javascript">
 	$myLessonRequest.lessonPrice=${lessonVO.lessonPrice}
@@ -18,14 +17,23 @@
 	$myLessonRequest.lessonScheduleIdx=${lessonScheduleIdx}
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/hobbycampus/css/lessonreq.css">
+<link rel="stylesheet" href="/hobbycampus/css/pointShop.css">
+<style>
+dt{
+ font-weight:bold;
+ color: darkgray;
+}
+</style>
 </head>
 <body>
+<div class="container"> 
 	<div id="wrap">
-		<h2>수강 신청하기</h2>
+		<h2><span class="hb_yellow">수강 신청</span></h2>
 		<span id="left_content">
 			<h3>수강 정보</h3>
 			<hr>
-			<dt>강의명</dt>
+			<dt id="se">강의명</dt>
 			<dd>${lessonVO.lessonSubj}</dd>
 			<dt>강사명</dt>
 			<dd>${lessonVO.tName}</dd>
@@ -35,9 +43,8 @@
 			<dd>${lessonVO.lessonKit}</dd>
 		</span>
 		
-		
 		<div id="right_content">
-			<h2>결제 정보</h2>
+			<h2><span class="hb_yellow">결제 정보</span></h2>
 			<dt>수강료<dt>
 			<dd>${lessonVO.lessonPrice}</dd>
 			<dt>보유 포인트</dt>
@@ -53,7 +60,7 @@
 			<dd id="total_price_hr">
 			총 결제 포인트: ${lessonVO.lessonPrice}</dd>
 			<br>
-			<input type="button" value="결제하기" onclick=$myLessonRequest.payment()>
+			<button type="button" class="bt_enter" onclick=$myLessonRequest.payment()>결제하기</button>
 		</div>
 		<c:if test="${lessonVO.lessonKit == '있음'}">
 		<div id="addr_content">
@@ -88,6 +95,7 @@
 			</dd>	
 		</div>
 		</c:if>
+	</div>
 	</div>
 </body>
 </html>

@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hobbycam.VO.CouponVO;
-import com.hobbycam.service.CouponService;
+import com.hobbycam.coupon.model.CouponDAO;
 
 @Controller
 public class MypageController {
 
 	@Autowired
-	private CouponService couponService;
+	private CouponDAO couponDAO;
 
 	@RequestMapping("/myUserPage.do")
 	public ModelAndView mypage() {
@@ -39,7 +39,7 @@ public class MypageController {
 			stat = false;
 		}
 
-		List<CouponVO> couponList = couponService.getCouponsByUser(uIdx, stat);
+		List<CouponVO> couponList = couponDAO.getCouponsByUser(uIdx, stat);
 		mav.addObject("couponList", couponList);
 		return mav;
 	}

@@ -1,9 +1,13 @@
 package com.hobbycam.users.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.hobbycam.VO.UserVO;
 
 public class UsersDAOImple implements UsersDAO {
 
@@ -113,5 +117,27 @@ public class UsersDAOImple implements UsersDAO {
 	public int userDel(int idx) {
 		int count=sqlMap.update("usersDel",idx);
 		return count;
+	}
+	
+	@Override
+	public UserVO getUser(int uIdx) {
+		return sqlMap.selectOne("getUser", uIdx);
+	}
+
+	@Override
+	public int updateUPoint(int uIdx, int newUPoint) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("uIdx", uIdx);
+		map.put("newUPoint", newUPoint);
+		return sqlMap.update("updateUPoint", map);
+	}
+
+
+	@Override
+	public int addUPoint(int uIdx, int point) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("uIdx", uIdx);
+		map.put("point", point);
+		return sqlMap.update("addUPoint", map);
 	}
 	}

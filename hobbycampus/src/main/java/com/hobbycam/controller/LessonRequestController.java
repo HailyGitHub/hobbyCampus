@@ -9,42 +9,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hobbycam.DAO.LessonScheduleDAO;
 import com.hobbycam.DAO.PostDAO;
-import com.hobbycam.DAO.UserDAO;
 import com.hobbycam.VO.CouponVO;
 import com.hobbycam.VO.LessonScheduleVO;
 import com.hobbycam.VO.PostVO;
 import com.hobbycam.VO.UserVO;
-import com.hobbycam.service.CouponService;
-import com.hobbycam.service.LessonScheduleService;
+import com.hobbycam.coupon.model.CouponDAO;
+import com.hobbycam.users.model.UsersDAO;
 
 @Controller
 public class LessonRequestController {
 
 	@Autowired
-	private LessonScheduleService lessonScheduleService;
+	private LessonScheduleDAO lessonScheduleDAO;
 
 	@Autowired
-	private CouponService couponService;
+	private CouponDAO couponDAO;
 	
 	@Autowired
 	private PostDAO postDAO;
 	
 	@Autowired
-	private UserDAO userDAO;
+	private UsersDAO userDAO;
 
 	@RequestMapping("/lessonRequest.do")
 	public ModelAndView mypage(@RequestParam Map<String, String> param) {
 
 		// lessonIdx를 int로 변환하는 와중 오류 체크 해야함(param.get("lessonIdx")가 없거나 숫자가 아닌 경우)
 		int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
-		LessonScheduleVO lessonScheduleVO = lessonScheduleService.getLessonSchedule(lessonScheduleIdx);
+		LessonScheduleVO lessonScheduleVO = lessonScheduleDAO.getLessonSchedule(lessonScheduleIdx);
 		
 		// TODO 수정해야함( 유저가 3이라고 가정했을 뿐)
 		int uIdx = 3;
 		UserVO userVO = userDAO.getUser(uIdx);
 		
-		List<CouponVO> couponList = couponService.getCouponsByUser(uIdx, true);
+		List<CouponVO> couponList = couponDAO.getCouponsByUser(uIdx, true);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("payment/lessonRequest");

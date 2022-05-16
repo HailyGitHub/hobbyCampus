@@ -53,5 +53,13 @@ public class PayDAOImpl implements PayDAO {
 		return sqlSessionTemplate.update("payMapper.updatePayValue", map);
 	}
 
+
+
+	@Override
+	public int insertPay(Map<String, Object> map) {
+		return sqlSessionTemplate.insert("payMapper.insertPay", map);
+
+	}
+
 	
 }

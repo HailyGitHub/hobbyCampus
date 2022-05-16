@@ -108,5 +108,29 @@
 		where 
 			PAY_LIST_IDX = #{payListIdx}
 	</update>
+	
+	
+	<insert id="insertPay" parameterType="java.util.Map">
+		insert into 
+			pay_list(
+				pay_list_idx,
+				u_idx,
+				pay_value,
+				pay_type,
+				pay_date,
+				pay_point
+			)
+		values(
+			seq_pay_list.nextval,
+			#{uIdx},
+			#{payValue},
+			#{payType},
+			sysdate,
+			#{point}
+		)
+	</insert>
+	
+	
+	
 		
 </mapper>

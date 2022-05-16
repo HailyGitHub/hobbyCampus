@@ -38,7 +38,7 @@
 							<td><c:out value="${pay.title}" /></td>
 							<td>
 							<c:choose>
-								<c:when test="${pay.type == '입금'}">
+								<c:when test="${pay.type == '입금' || pay.type == '충전'}">
 									<button payListIdx="${pay.payListIdx}" onclick="$myPoint.refund(this)">환불요청</button>
 								</c:when>
 								<c:otherwise>

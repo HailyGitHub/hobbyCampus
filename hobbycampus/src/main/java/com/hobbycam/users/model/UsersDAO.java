@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.hobbycam.VO.UserVO;
+
 public interface UsersDAO {
 
 	public static final int NOT_ID=1;
@@ -40,4 +42,8 @@ public interface UsersDAO {
 	
 	public String mailSend(String e_mail, HttpServletRequest request);
 	*/
+	UserVO getUser(int uIdx);
+	int updateUPoint(int uIdx, int newUPoint);
+	int addUPoint(int uIdx, int point);
+	
 }
