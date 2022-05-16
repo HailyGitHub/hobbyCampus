@@ -22,9 +22,18 @@ public class IndexController {
 		List cateOneList = indexDao.getCateOneList(); //GET CategoryOne List
 		List cateTwoList = indexDao.getCateTwoList(); //GET CategoryTwo List
 		
+		int teacherCnt = indexDao.getTeacherCnt(); //GET Teacher Count
+		int userCnt = indexDao.getUserCnt(); //GET User Count
+		int classCnt = indexDao.getLessonCnt(); //GET Lesson Count
+		int categoryCnt = indexDao.getCategoryCnt(); //GET Category Count
+		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("cateOneList", cateOneList);
 		mav.addObject("cateTwoList", cateTwoList);
+		mav.addObject("teacherCnt", teacherCnt);
+		mav.addObject("userCnt", userCnt);
+		mav.addObject("classCnt", classCnt);
+		mav.addObject("categoryCnt", categoryCnt);
 		mav.setViewName("index");
 		return mav;
 	}

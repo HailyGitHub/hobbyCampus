@@ -23,7 +23,7 @@
 	        <a class="navbar-brand" href="coupon.do">쿠폰</a>
 	        <a class="navbar-brand" href="#">레벨</a>
 	        <a class="navbar-brand" href="#">공지사항</a>
-	        <a class="navbar-brand" href="#">통계</a>
+	        <a class="navbar-brand" href="totalList.do">통계</a>
 
 	        <!-- Search Button-->
 	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">

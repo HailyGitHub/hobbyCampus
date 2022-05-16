@@ -134,10 +134,10 @@
 						<th class="col-md-3 display-4 text-warning"><i class="bi bi-palette2"></i></th>
 					</tr>
 					<tr id="dynamic-number">
-						<td class="display-1 text-danger" id="dynamic1" data-rate="100"><b></b></td>
-						<td class="display-1 text-success" id="dynamic2" data-rate="300"><b></b></td>
-						<td class="display-1 text-primary" id="dynamic3" data-rate="150"><b></b></td>
-						<td class="display-1 text-warning" id="dynamic4" data-rate="25"><b></b></td>
+						<td class="display-1 text-danger" id="dynamic1" data-rate="${teacherCnt}"><b></b></td>
+						<td class="display-1 text-success" id="dynamic2" data-rate="${userCnt}"><b></b></td>
+						<td class="display-1 text-primary" id="dynamic3" data-rate="${classCnt}"><b></b></td>
+						<td class="display-1 text-warning" id="dynamic4" data-rate="${categoryCnt}"><b></b></td>
 					</tr>
 					<tr id="dynamic-title">
 						<td class="text-danger"><h3>강사</h3></td>
@@ -252,9 +252,9 @@
 				<!-- GET Category Two -->
 				<c:forEach var="cateTwoDTO" items="${cateTwoList}">
 				 	<div class="hex">
-						<p style="font-size:25px;">
+						<p style="font-size:20px;">
 						${cateTwoDTO.cate2_name}
-						<img src="/hobbycampus/hobbyImg/category2/${cateTwoDTO.cate2_img}" style="width:35px;" class="rounded-circle">
+						<img src="/hobbycampus/hobbyImg/category2/${cateTwoDTO.cate2_img}" style="width:60px;" class="rounded-circle">
 						</p>
 				    </div>
 				</c:forEach>

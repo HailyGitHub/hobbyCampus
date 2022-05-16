@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hobby.total">
+	
+	<select id="selectUserGenderTotal" resultType="com.hobbycam.total.model.TotalGenderDTO">
+		SELECT
+		    *
+		FROM
+		    (SELECT 
+		        COUNT(*) AS male
+		    FROM 
+		        users
+		    WHERE 
+		        u_gender = '남자') a,
+		    (SELECT 
+		        COUNT(*) AS female
+		    FROM 
+		        users
+		    WHERE 
+		        u_gender = '여자') b
+	</select>
+	
+	
+	<select id="selectTeacherGenderTotal" resultType="com.hobbycam.total.model.TotalGenderDTO">
+		SELECT
+		    *
+		FROM
+		    (SELECT
+		        COUNT(*) AS male 
+		    FROM 
+		        teacher, users
+		    WHERE
+		        teacher.u_idx = users.u_idx
+		    AND
+		        users.u_gender = '남자') a,
+		    (SELECT
+		        COUNT(*) AS female
+		    FROM 
+		        teacher, users
+		    WHERE
+		        teacher.u_idx = users.u_idx
+		    AND
+		        users.u_gender = '여자') b
+	</select>
+	
+	
+	<select id="selectUserSignUpMonthCnt" parameterType="hashmap" resultType="com.hobbycam.total.model.TotalMonthDTO">
+		SELECT
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'01',1,0)) AS  m01,
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'02',1,0)) AS  m02, 
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'03',1,0)) AS  m03,
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'04',1,0)) AS  m04,
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'05',1,0)) AS  m05,
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'06',1,0)) AS  m06,
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'07',1,0)) AS  m07,
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'08',1,0)) AS  m08,
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'09',1,0)) AS  m09,
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'10',1,0)) AS  m10,
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'11',1,0)) AS  m11,
+		    sum(DECODE(SUBSTR(a.u_join_date,4,2),'12',1,0)) AS  m12
+		FROM 
+		    users a
+		WHERE 
+    		a.u_join_date<![CDATA[>=]]>#{first}
+		AND 
+    		a.u_join_date<![CDATA[<=]]>#{last}
+	</select>
+	
+	
+	<select id="selectTeacherSignUpMonthCnt" parameterType="hashmap" resultType="com.hobbycam.total.model.TotalMonthDTO">
+		SELECT
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'01',1,0)) AS  m01,
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'02',1,0)) AS  m02, 
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'03',1,0)) AS  m03,
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'04',1,0)) AS  m04,
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'05',1,0)) AS  m05,
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'06',1,0)) AS  m06,
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'07',1,0)) AS  m07,
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'08',1,0)) AS  m08,
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'09',1,0)) AS  m09,
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'10',1,0)) AS  m10,
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'11',1,0)) AS  m11,
+		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'12',1,0)) AS  m12
+		FROM 
+		    teacher a
+		WHERE 
+    		a.t_join_date<![CDATA[>=]]>#{first}
+		AND 
+    		a.t_join_date<![CDATA[<=]]>#{last}
+	</select>
+	
+	
+	<select id="selectTestMonth" resultType="String">
+		SELECT
+		    SUBSTR(a.u_join_date,4,2)
+		FROM 
+		    users a
+		WHERE 
+		    u_join_date<![CDATA[>=]]>'20220101'
+		AND 
+		    u_join_date<![CDATA[<=]]>'20221231'
+	</select>
+	
+</mapper>

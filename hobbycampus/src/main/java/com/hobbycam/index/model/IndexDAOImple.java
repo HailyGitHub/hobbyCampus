@@ -26,6 +26,29 @@ public class IndexDAOImple implements IndexDAO {
 		return lists;
 	}
 	
+	@Override
+	public int getTeacherCnt() {
+		int count = sqlMap.selectOne("selectTeacherCnt");
+		return count;
+	}
+	
+	@Override
+	public int getUserCnt() {
+		int count = sqlMap.selectOne("selectUserCnt");
+		return count;
+	}
+	
+	@Override
+	public int getLessonCnt() {
+		int count = sqlMap.selectOne("selectLessonCnt");
+		return count;
+	}
+	
+	@Override
+	public int getCategoryCnt() {
+		int count = sqlMap.selectOne("selectCategoryCnt");
+		return count;
+	}
 	
 	
 }

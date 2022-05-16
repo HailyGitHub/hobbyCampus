@@ -22,5 +22,45 @@
 		ORDER BY
 			cate2_idx ASC
 	</select>
+	
+	
+	<select id="selectTeacherCnt" resultType="Integer">
+		SELECT
+		    COUNT(*)
+		FROM
+		    teacher a, users b
+		WHERE
+		    a.u_idx = b.u_idx
+		AND
+		    b.u_state != '탈퇴'
+	</select>
+	
+	
+	<select id="selectUserCnt" resultType="Integer">
+		SELECT
+		    COUNT(*)
+		FROM
+		    users
+		WHERE
+		    u_state != '탈퇴' 
+	</select>
+	
+	
+	<select id="selectLessonCnt" resultType="Integer">
+		SELECT
+		    COUNT(*)
+		FROM
+		     lesson_list
+		WHERE
+		    lesson_state = '진행'
+	</select>
+	
+	
+	<select id="selectCategoryCnt" resultType="Integer">
+		SELECT
+		    COUNT(*)
+		FROM
+		    cate2
+	</select>
 
 </mapper>

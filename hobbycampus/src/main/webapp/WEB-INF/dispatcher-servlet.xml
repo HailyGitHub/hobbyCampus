@@ -113,6 +113,11 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	<bean id="totalDao" class="com.hobbycam.total.model.TotalDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 
 
 
