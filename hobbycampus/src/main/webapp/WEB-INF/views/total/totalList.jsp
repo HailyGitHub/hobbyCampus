@@ -223,7 +223,7 @@
 				label: '강사 가입 추이',
 				backgroundColor: 'transparent',
 				borderColor: '#36E0C6',
-				data: [${tm.m01}, ${tm.m02}, ${tm.m03}, ${tm.m04}, ${tm.m05},${tm.m06}, ${tm.m07}, ${tm.m08}, ${tm.m09}, ${tm.m10}, ${tm.m11}, ${tm.m12}]
+				data: [${tm.m01}, ${tm.m02}, ${tm.m03}, ${tm.m04}, ${tm.m05},${tm.m06}, ${tm.m07}, ${tm.m08}, ${tm.m09}, ${tm.m10}, ${tm.m11}, ${tm.m12}] //tm -> Teacher sign-up count group by Month
 			}]
 		},
 		options: {}
@@ -231,12 +231,11 @@
 	
 	
 	/* Category One data */
-	var test = "Eating, Drinking, Sleeping, Designing, Coding, Cycling, Running";
 	var $cateOneData = {
-		labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+		labels: ['${oneList[0].cate1_name}', '${oneList[1].cate1_name}', '${oneList[2].cate1_name}', '${oneList[3].cate1_name}', '${oneList[4].cate1_name}', '${oneList[5].cate1_name}', '${oneList[6].cate1_name}'],
 		datasets: [{
-			label: '큰 카테고리 비중',
-		    data: [65, 59, 90, 81, 56, 55, 40],
+			label: '큰 카테고리 수업 비중',
+		    data: [${oneRate[0]}, ${oneRate[1]}, ${oneRate[2]}, ${oneRate[3]}, ${oneRate[4]}, ${oneRate[5]}, ${oneRate[6]}],
 		    fill: true,
 		    backgroundColor: 'rgba(210, 153, 83, 0.2)',
 		    borderColor: 'rgb(210, 153, 83)',
@@ -260,17 +259,18 @@
 	var myChart = new Chart($cateTwo, {
 		type: 'bar',
 		data: {
-			labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+			labels: ['${twoList[0].cate2_name}', '${twoList[1].cate2_name}', '${twoList[2].cate2_name}', '${twoList[3].cate2_name}', '${twoList[4].cate2_name}', '${twoList[5].cate2_name}', '${twoList[6].cate2_name}'],
 			datasets: [{
 				label: '작은 카테고리 수요',
-				data: [12, 19, 3, 5, 2, 3],
+				data: [${twoRate[0]}, ${twoRate[1]}, ${twoRate[2]}, ${twoRate[3]}, ${twoRate[4]}, ${twoRate[5]}, ${twoRate[6]}],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)', 
 					'rgba(54, 162, 235, 0.2)', 
 					'rgba(255, 206, 86, 0.2)', 
 					'rgba(75, 192, 192, 0.2)', 
 					'rgba(153, 102, 255, 0.2)', 
-					'rgba(255, 159, 64, 0.2)'
+					'rgba(255, 159, 64, 0.2)',
+					'rgba(255, 99, 132, 0.2)'
 				],
 				borderColor: [
 					'rgba(255, 99, 132, 1)', 
@@ -278,7 +278,8 @@
 					'rgba(255, 206, 86, 1)', 
 					'rgba(75, 192, 192, 1)', 
 					'rgba(153, 102, 255, 1)', 
-					'rgba(255, 159, 64, 1)'
+					'rgba(255, 159, 64, 1)',
+					'rgba(255, 99, 132, 1)',
 				],
 				borderWidth: 1
 			}]
@@ -297,9 +298,9 @@
 	
 	/* Sales data */
 	var $sales = $('#sales');
-	var $total = [10, 20, 30, 40, 20, 30, 50, 60, 40, 50, 60, 80];
-	var $refund = [5, 10, 20, 7, 10, 4, 5, 13, 10, 8, 4, 3];
-	var $exchange = [4, 2, 1, 4, 5, 6, 7, 3, 2, 23, 24, 10];
+	var $total = [${total.m01}, ${total.m02}, ${total.m03}, ${total.m04}, ${total.m05}, ${total.m06}, ${total.m07}, ${total.m08}, ${total.m09}, ${total.m10}, ${total.m11}, ${total.m12}];
+	var $refund = [${refund.m01}, ${refund.m02}, ${refund.m03}, ${refund.m04}, ${refund.m05}, ${refund.m06}, ${refund.m07}, ${refund.m09}, ${refund.m09}, ${refund.m10}, ${refund.m11}, ${refund.m12}];
+	var $exchange = [${exchange.m01}, ${exchange.m02}, ${exchange.m03}, ${exchange.m04}, ${exchange.m05}, ${exchange.m06}, ${exchange.m07}, ${exchange.m08}, ${exchange.m09}, ${exchange.m10}, ${exchange.m11}, ${exchange.m12}];
 
 	var $salesData = {
 		type: 'bar',
@@ -318,7 +319,7 @@
 				type: 'line'
 			},
 			{
-				label: '환전',
+				label: '환전입금',
 				data: $exchange,
 				backgroundColor: 'transparent',
 				borderColor: 'rgba(100, 140, 255)',

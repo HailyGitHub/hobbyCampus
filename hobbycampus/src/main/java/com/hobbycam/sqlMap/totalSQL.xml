@@ -69,6 +69,67 @@
 	</select>
 	
 	
+	<select id="selectCateOneTotal" resultType="com.hobbycam.category.model.Cate1DTO">
+		SELECT
+			*
+		FROM
+			cate1
+		ORDER BY
+			cate1_idx ASC
+	</select>
+	
+	
+	<select id="selectCateOneRate" parameterType="Integer" resultType="Integer">
+		SELECT
+		    COUNT(*)
+		FROM
+		    (SELECT
+		        a.cate1_idx
+		    FROM
+		        cate1 a, cate2 b, lesson_list c
+		    WHERE
+		        a.cate1_idx = b.cate1_idx
+		    AND
+		        b.cate2_idx = c.cate2_idx) d
+		WHERE
+		    cate1_idx = #{cate1_idx}
+	</select>
+	
+	
+	<select id="selectCateTwoTotal" resultType="com.hobbycam.category.model.Cate2DTO">
+		SELECT
+		    *
+		FROM
+		    cate2
+		ORDER BY
+		    cate1_idx ASC,
+		    cate2_idx ASC
+	</select>
+	
+	
+	<select id="selectCateTwoRate" parameterType="hashmap" resultType="Integer">
+		SELECT
+		    COUNT(*)
+		FROM
+		    (SELECT
+		        a.cate2_idx, d.lesson_buy_date
+		    FROM
+		        cate2 a, lesson_list b, lesson_schedule c, lesson_record d
+		    WHERE
+		        a.cate2_idx = b.cate2_idx
+		    AND
+		        b.lesson_idx = c.lesson_idx
+		    AND
+		        c.lesson_schedule_idx = d.lesson_schedule_idx) e
+		WHERE
+		    lesson_buy_date <![CDATA[>=]]> #{first}
+		AND
+		    lesson_buy_date <![CDATA[<=]]> #{last}
+		AND
+		    cate2_idx = #{cate2_idx}
+	</select>
+	
+	
 	<select id="selectTeacherSignUpMonthCnt" parameterType="hashmap" resultType="com.hobbycam.total.model.TotalMonthDTO">
 		SELECT
 		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'01',1,0)) AS  m01,
@@ -92,15 +153,91 @@
 	</select>
 	
 	
+	<select id="selectSalesTotal" parameterType="hashmap" resultType="com.hobbycam.total.model.TotalMonthDTO">
+		SELECT
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'01',pay_point,0)) AS  m01,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'02',pay_point,0)) AS  m02, 
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'03',pay_point,0)) AS  m03,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'04',pay_point,0)) AS  m04,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'05',pay_point,0)) AS  m05,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'06',pay_point,0)) AS  m06,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'07',pay_point,0)) AS  m07,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'08',pay_point,0)) AS  m08,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'09',pay_point,0)) AS  m09,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'10',pay_point,0)) AS  m10,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'11',pay_point,0)) AS  m11,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'12',pay_point,0)) AS  m12
+		FROM 
+		    pay_list
+		WHERE 
+    		pay_date<![CDATA[>=]]>#{first}
+		AND 
+    		pay_date<![CDATA[<=]]>#{last}
+    	AND
+    		pay_value = '충전'
+	</select>
+	
+	
+	<select id="selectSalesRefund" parameterType="hashmap" resultType="com.hobbycam.total.model.TotalMonthDTO">
+		SELECT
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'01',pay_point,0)) AS  m01,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'02',pay_point,0)) AS  m02, 
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'03',pay_point,0)) AS  m03,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'04',pay_point,0)) AS  m04,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'05',pay_point,0)) AS  m05,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'06',pay_point,0)) AS  m06,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'07',pay_point,0)) AS  m07,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'08',pay_point,0)) AS  m08,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'09',pay_point,0)) AS  m09,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'10',pay_point,0)) AS  m10,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'11',pay_point,0)) AS  m11,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'12',pay_point,0)) AS  m12
+		FROM 
+		    pay_list
+		WHERE 
+    		pay_date<![CDATA[>=]]>#{first}
+		AND 
+    		pay_date<![CDATA[<=]]>#{last}
+    	AND
+    		pay_value = '환불'
+	</select>
+	
+	
+	<select id="selectSalesExchange" parameterType="hashmap" resultType="com.hobbycam.total.model.TotalMonthDTO">
+		SELECT
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'01',pay_point,0)) AS  m01,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'02',pay_point,0)) AS  m02, 
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'03',pay_point,0)) AS  m03,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'04',pay_point,0)) AS  m04,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'05',pay_point,0)) AS  m05,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'06',pay_point,0)) AS  m06,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'07',pay_point,0)) AS  m07,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'08',pay_point,0)) AS  m08,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'09',pay_point,0)) AS  m09,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'10',pay_point,0)) AS  m10,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'11',pay_point,0)) AS  m11,
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'12',pay_point,0)) AS  m12
+		FROM 
+		    pay_list
+		WHERE 
+    		pay_date<![CDATA[>=]]>#{first}
+		AND 
+    		pay_date<![CDATA[<=]]>#{last}
+    	AND
+    		pay_value = '입금'
+	</select>
+	
 	<select id="selectTestMonth" resultType="String">
 		SELECT
-		    SUBSTR(a.u_join_date,4,2)
+		    SUM(DECODE(SUBSTR(pay_date,4,2),'01',pay_point,0))
 		FROM 
-		    users a
+		    pay_list
 		WHERE 
-		    u_join_date<![CDATA[>=]]>'20220101'
+    		pay_date<![CDATA[>=]]>#{first}
 		AND 
-		    u_join_date<![CDATA[<=]]>'20221231'
+    		pay_date<![CDATA[<=]]>#{last}
+		AND
+    		pay_value = '충전'
 	</select>
 	
 </mapper>

@@ -45,10 +45,68 @@ public class TotalDAOImple implements TotalDAO {
 		TotalMonthDTO dto = sqlMap.selectOne("selectTeacherSignUpMonthCnt",map);
 		return dto;
 	}
+	
+	@Override
+	public List getCateOne() {
+		List lists = sqlMap.selectList("selectCateOneTotal");
+		return lists;
+	}
+	
+	@Override
+	public int getCateOneRate(int cate1_idx) {
+		int count = sqlMap.selectOne("selectCateOneRate", cate1_idx);
+		return count;
+	}
+	
+	@Override
+	public List getCateTwo() {
+		List lists = sqlMap.selectList("selectCateTwoTotal");
+		return lists;
+	}
+	
+	@Override
+	public int getCateTwoRate(int cate2_idx, String first, String last) {
+		Map map = new HashedMap();
+		map.put("cate2_idx", cate2_idx);
+		map.put("first", first);
+		map.put("last", last);
+		int count = sqlMap.selectOne("selectCateTwoRate", map);
+		return count;
+	}
+	
+	@Override
+	public TotalMonthDTO getSalesTotal(String first, String last) {
+		Map map = new HashedMap();
+		map.put("first", first);
+		map.put("last", last);
+		TotalMonthDTO dto = sqlMap.selectOne("selectSalesTotal",map);
+		return dto;
+	}
+	
+	@Override
+	public TotalMonthDTO getSalesRefund(String first, String last) {
+		Map map = new HashedMap();
+		map.put("first", first);
+		map.put("last", last);
+		TotalMonthDTO dto = sqlMap.selectOne("selectSalesRefund",map);
+		return dto;
+	}
+	
+	@Override
+	public TotalMonthDTO getSalesExchange(String first, String last) {
+		Map map = new HashedMap();
+		map.put("first", first);
+		map.put("last", last);
+		TotalMonthDTO dto = sqlMap.selectOne("selectSalesExchange",map);
+		return dto;
+	}
 
 	@Override
-	public List getTest() {
-		List list = sqlMap.selectList("selectTestMonth");
+	public List getTest(String first, String last) {
+		Map map = new HashedMap();
+		map.put("first", first);
+		map.put("last", last);
+		List list = sqlMap.selectList("selectTestMonth", map);
 		return list;
 	}
 }
