@@ -25,6 +25,13 @@
     		margin-top: 20px;
     		
     	}
+    	
+    	#teacherPoint{
+    		background-color: beige;
+    		color : black;
+    		font-weight: bold;
+    		text-decoration: underline;
+    	}
     </style>
 </head>
 <body>
@@ -46,7 +53,7 @@
 	
 			<!-- exchange teacher point to user point -->
 	       <div class="pb-2 border-bottom col-md-4">학생 포인트로 전환하기</div>
-		      <div>
+		      <div "col-md-3">
 		        <form name="toPoint" action="exToPoint.do">
 		        <input type="hidden" value="1" name="t_idx">
 		          <div class="col-md-6">
@@ -55,10 +62,10 @@
 		          </div>
 		        </form>
 		      </div>
-	       <div style="padding: 20px;"></div>
 	      
 	      <!-- exchange teacher point to cash -->
 	       <div class="pb-2 border-bottom col-md-4">현금으로 환전하기</div>
+	       <div "col-md-3">
 				 <form name="toCash" action="exToCash.do">
 				 <input type="hidden" value="1" name="t_idx">
 			       <div class="col-md-6">

@@ -99,7 +99,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		
   			
   	</select>
-  	<select id="SelectOfflineLessonCont"></select>
+  	<select id="SelectOfflineLessonCont" parameterType="int" resultType="com.hobbycam.lesson.model.LessonOfflineDTO" >
+  	select ll.*, lo.offline_idx, lo.offline_runtime, lo.offline_map, lo.offline_folder, lo.offline_cont, lo.offline_addr
+	from lesson_offline lo, lesson_list ll
+	where ll.lesson_idx=#{lesson_idx}
+  	</select>
   	<select id="SelectLiveLessonCont"></select>
   	<select id="SelectLessonLikeCount" parameterType="int" resultType="int">
   		SELECT

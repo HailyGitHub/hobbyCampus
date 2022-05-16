@@ -113,10 +113,11 @@ public class LessonController {
 			lists=ldao.lessonLiveCont(lesson_idx);
 			break;
 		}
+		mav.addObject("lessonType", type);
 		mav.addObject("like",like);
 		mav.addObject("review",review);
 		mav.addObject("lists",lists);
-		mav.setViewName("/lesson/lessonCont");
+		mav.setViewName("lesson/lessonCont");
 		return mav;
 		
 	}

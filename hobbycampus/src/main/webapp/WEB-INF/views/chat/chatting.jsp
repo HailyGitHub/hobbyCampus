@@ -205,7 +205,7 @@
 		    }
 		  }
 		});
-
+ 
 		function displayMyMSG(){
 		  obj.Cdisplay.insertAdjacentHTML("beforeend", 
 		  '<div class="my-msg"><div><div class="title">'+obj.mID.value+'</div><div class="content-msg">'+obj.msg.value+'</div></div></div>');

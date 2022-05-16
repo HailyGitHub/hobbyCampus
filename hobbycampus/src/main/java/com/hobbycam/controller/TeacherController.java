@@ -57,19 +57,20 @@ public class TeacherController {
 		
 		String fileName = t_img.getOriginalFilename();
 		String savePathImg = "";
+		String fileExtension="";
 		if(fileName==null||fileName.equals("")) {
 			 TeacherDTO tDto = tdao.teacherInfoForm(dto.getT_idx());
 			savePathImg = tDto.getT_img();
 		}else {
-			String fileExtension = fileName.substring(fileName.length()-4, fileName.length());
+			fileExtension = fileName.substring(fileName.length()-4, fileName.length());
 			
-			String savePathFolder ="C:\\hobbyImg\\teacherImg\\"; 
+			String savePathFolder =servletContext.getRealPath("/hobbyImg/teacherImg/"); 
 			
 			ImgUplod iu = new ImgUplod();
 			savePathImg = iu.copyInto(t_img, ""+dto.getT_idx(), savePathFolder, fileExtension);
 			
 		}
-		dto.setT_img(savePathImg);
+		dto.setT_img(""+dto.getT_idx()+fileExtension);
 		
 		
 		String msg = "";
@@ -152,6 +153,9 @@ public class TeacherController {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		//update lesson exchange state If more than 7 days have passed since class time
+		tdao.lessonExStateUpdate(t_idx);
+		
 		//get teacher point by t_idx
 		int tPoint = tdao.pointSelect(t_idx);
 		
@@ -224,7 +228,6 @@ public class TeacherController {
 				mav.setViewName(gopage);
 				return mav;
 	}
-	
 	
 	
 	

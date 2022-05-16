@@ -22,6 +22,18 @@
     		margin-bottom:80px;
     		padding:100px; 
     	}
+    	#teacherImg{
+    	 width : 200px;
+    	 
+    	
+    	#teacherInfo{
+    		background-color: beige;
+    		color : black;
+    		font-weight: bold;
+    		text-decoration: underline;
+    	} 
+    	 
+    	}
     </style>
     <script>
 	function nameCheck() {
@@ -49,8 +61,7 @@
 		    
 		    <div class="col-md-1"></div>
 		    <div class="col-md-3">
-		    	<img src="${dto.t_img}" >
-		    	${dto.t_img}
+		    <img id="teacherImg" src="/hobbycampus/hobbyImg/teacherImg/${dto.t_img} ">
 		    </div>
 		    <div class="col-md-3">
 		      프로필사진
@@ -107,6 +118,7 @@
 		    <div class="col-md-4"></div>
 		
 		  </form>
+		</div>
 		</div>	
 		</div>
 	<!-- FOOTER -->

@@ -66,15 +66,30 @@
     <div class="col-md-1"></div>
     <div class="col-md-3">
       <label for="cate2" class="form-label">수업 카테고리</label>
-      <!-- cate2 -->
-      <select class="form-select" id="cate2" name="cate2_idx"  required>
-         <c:forEach var="cate2" items="${cate2List}">
-         <option value="${cate2.cate2_idx}" >${cate2.cate2_name}</option> 
-         </c:forEach>	
-        
-      </select>
       
-    </div>
+      <!-- cate1 List-->
+      <select class="form-select" id="cate1" name="cate1_idx"  required>
+      	<option>::전체::</option>
+      	<c:forEach var="cate1" items="${cate1List}">
+      	<option value="${cate1.cate1_idx}" >${cate1.cate1_name}</option>
+      	</c:forEach>
+      </select>
+    </div> 
+      <!-- cate2 -->
+    <div class="col-md-3" id="cate2">  
+      	<!-- From JQuery -->
+    </div>  
+      
+      <!-- <select class="form-select" id="cate2" name="cate2_idx"  required> -->
+      <!-- <c:forEach var="cate2" items="${cate2List}"> -->
+      <!-- <option value="${cate2.cate2_idx}" >${cate2.cate2_name}</option> -->   
+      <!-- </c:forEach> -->   
+      <!-- </select> -->    
+         	
+        
+      
+      
+  
     <div class="col-md-8"></div>
     
     <div class="col-md-1"></div>
@@ -83,7 +98,7 @@
       <textarea class="form-control" rows="4" id="intro" cols="40" name="resume_plan" style="resize: none;"></textarea>
     </div>
     <div class="col-md-2"></div>
-
+		
 
   <div class="col-md-1"></div>
     <div class="col-11">
@@ -110,4 +125,27 @@
 		<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
+<script>
+
+	 $('#cate1').change(function () {
+		 
+		$.ajax({
+			url :"cate2.do",
+			type : "get",
+			data : {'cate1_idx': $('#cate1').val()},
+			dataType : "json",
+			success : function(data) {
+				var $dto = data.cate2List;
+				console.log($dto);
+				console.log($dto[2].cate2_name);
+				$('#cate2').empty();
+				//$('#cate2').append('<span>'+$idx+'</span>');
+				
+			}
+		});	
+	});
+
+	
+	
+</script>
 </html>
