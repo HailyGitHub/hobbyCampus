@@ -46,7 +46,9 @@
       padding-right: 4px
     }
   </style>
-
+	<script>
+	var mapAddr = '제주특별자치도 제주시 첨단로 242';
+	</script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -95,66 +97,116 @@
       </div>
     </div>
   </div>
-  <!--content-->
-    
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-1"></div>
-    <main class="col-md-8">
-    <c:forEach var="dto" items="${lists}">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-       
-        <h2>강의 설명</h2>
-     </div>
-      	<div >
-        	상세 영역
-     	</div>
-     	
-		<c:if test="${empty lists }">
-		<table>
-			<tr>
-				<td colspan="2" align="center">
-				죄송합니다. 삭제된 강의입니다.
-				</td>
-			</tr>
-		</table>
-		</c:if>
-    </main>
+ 
 
-    <nav id="sidebarMenu" class="col-md-4 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="remote">
-        <div>${dto.lesson_subj }</div>
-        <div>${dto.lesson_short_cont }</div>
-        <div>${dto.lesson_kit }</div>
-        <div>${dto.lesson_price }</div>
-        <button type="button" class="btn btn-warning">수강 신청</button>
-        <div>
-          <button type="button" class="btn btn-outline-danger">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
-            <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
-            </svg>
-            찜              
-          </button>
-          <button type="button" class="btn btn-outline-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
-              <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
-            </svg>
-            강사메일         
-          </button>
-        </div>
-      </div>
-    </nav>
-</div>
-</div>
-	
-	</c:forEach>
  
 	
-	
-	<!-- online -->
 	<!-- offline -->
-	<!-- live -->
+	<c:if test="${lessonType=='오프라인' }">
+		<!--content-->
+			<div class="container-fluid">
+			  <div class="row">
+			   <c:forEach var="dto" items="${lists}">
+			    <div class="col-md-1"></div>
+			    <main class="col-md-8">
+			   
+			      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			       
+			        <h2>강의 설명</h2>
+			     </div>
+			     	<!-- content description -->
+				      	<div id="offlineCont">
+				        	${dto.offline_cont }
+				     	</div>
+				     	<c:if test="${empty lists }">
+						<table>
+							<tr>
+								<td colspan="2" align="center">
+								죄송합니다. 삭제된 강의입니다.
+								</td>
+							</tr>
+						</table>
+						</c:if>
+					<!-- map -->
+			     		<div id="map" style="width:50%;height:200px;"></div>
+					<!-- review -->
+						<c:if test="${empty review }">
+							<table>
+								<tr>
+									<td colspan="2" align="center">
+									아직 등록된 리뷰가 없습니다.
+									</td>
+								</tr>
+							</table>
+						</c:if>
+						<c:forEach var="rv" items="${review }">
+							<table>
+								<tr>
+									<th>별점</th>
+									<td>${rv.star_point }</td> 
+								</tr>
+								<tr>
+									<th>리뷰 내용</th>
+									<td>${rv.review_cont }</td> 
+								</tr>
+								<tr>
+									<th>리뷰 날짜</th>
+									<td>${rv.review_date }</td>
+								</tr>
+							</table>
+						</c:forEach>
+			    </main>
+		<!--side bar-->	
+		    <nav id="sidebarMenu" class="col-md-4 col-lg-2 d-md-block bg-light sidebar collapse">
+		      <div class="remote">
+		      	<div id="type" class="text-muted text-end " style="letter-spacing: -2px;"> ${lessonType}</div>
+		        <div id="subj" class="text-end  fs-4" >${dto.lesson_subj }</div>
+		        <div id="cont" class="text-end  fs-5">${dto.lesson_short_cont }</div>
+		        <div id="scheduleDate">
+		        	<select class="form-select" id="scheduleDateList" name="scheduleDate"  required>
+				      	<option>::날짜선택::</option>
+				      	<c:forEach var="sd" items="${scheduleDate }">
+				      		<option value="${sd.lesson_start}" >${sd.lesson_start}</option>
+				      	</c:forEach>
+				      </select>
+		        
+		        </div>
+		        <div id="lessonTime">
+		        	
+		        
+		        </div>
+		        <div id="price" class="text-end  fs-5">${dto.lesson_price } 하빗</div>
+		        <div id="kit" class="text-end text-muted">*${dto.lesson_kit=='true'?'키트 포함':'' }</div>
+		        <div class="text-center">
+		          <button type="button" class="btn btn-warning" style="width:90%">수강 신청</button>
+			     
+			          <button type="button" class="btn btn-outline-danger"  id="like" style="width:45%" >
+			            <i id="heartFill" class="bi bi-heart"></i>
+			            <!-- <i class="bi bi-suit-heart-fill"></i> -->
+			             찜(${like })    
+			          </button>
+			        
+			          <button  data-bs-toggle="modal" data-bs-target="#sendMail" type="button" class="btn btn-outline-primary" id="mail" style="width:45%">
+			           <i class="bi bi-envelope-plus"></i>
+			            메일         
+			          </button>
+			        
+		        </div>
+		      </div>
+		    </nav>
+		   </c:forEach>
+		</div>
+		</div>
+	</c:if>
+	<!-- online -->
+	<c:if test="${lessonType=='온라인' }">
 	
+	</c:if>
+	
+	<!-- live -->
+	<c:if test="${lessonType=='라이브' }">
+	
+	</c:if>
 	
 	
 	
@@ -166,7 +218,66 @@
 	<!-- </tr><tr><th>리뷰 날짜</th><td>${rv.review_date }</td></tr></c:forEach></table> -->	
 			
 		
-		
+	<!-- Modal -->
+		<div class="modal fade" id="sendMail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">강사님에게 메일 보내기</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div> 
+		      <form name="emailForm" action="sendEmail.do">
+			      <div class="modal-body">
+			      	<input type="hidden" name="lesson_idx" value="${lesson_idx}">
+			      	  <input type="hidden" name="teacherEmail" value="${tEmail}">
+		              <input type="text" class="form-control" name="userMail" placeholder="답변 받으실 주소" required>
+		              <input type="text" class="form-control" name="mailSubject" placeholder="메일 제목" required>
+		              <textarea class="form-control" rows="4" cols="40" name="mailContent" style="resize: none;" placeholder="문의 내용"></textarea>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+			        <button type="submit" class="btn btn-primary">보내기</button>
+			      </div>
+		      </form>
+		    </div>
+		  </div>
+		</div>	
 
 </body>
+<script>
+	$(document).ready(function(){
+		if(${likeCheck } ){
+			
+		}else{
+			
+		}
+	});
+
+	
+	 $('#scheduleDate').change(function () {
+		 
+		$.ajax({
+			url :"lessonTime.do",
+			type : "get",
+			data : {'lessonDate': $('#scheduleDateList').val()},
+			dataType : "json",
+			success : function(data) {
+				$('#lessonTime').empty();
+				var addOption = '';
+				var $scTime = data.scheduleTime;
+				
+				for(var i=0; i<$scTime.length; i++){
+					addOption+='<option value="'+$scTime[i].lesson_schedule_idx+'">'+$scTime[i].lesson_time+'</option>';
+				}
+				$('#lessonTime').append('<select class="form-select" id="lessonTimeList"  required>'+addOption+'</select>');
+				
+			}
+		});	
+	});
+
+	
+	
+</script>
+
+<jsp:include page="/WEB-INF/views/map.jsp"></jsp:include>
 </html>

@@ -25,7 +25,7 @@
     	#teacherImg{
     	 width : 200px;
     	 
-    	
+    	}
     	#teacherInfo{
     		background-color: beige;
     		color : black;
@@ -33,7 +33,7 @@
     		text-decoration: underline;
     	} 
     	 
-    	}
+    	
     </style>
     <script>
 	function nameCheck() {

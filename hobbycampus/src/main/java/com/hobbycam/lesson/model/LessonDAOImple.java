@@ -1,7 +1,9 @@
 package com.hobbycam.lesson.model;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class LessonDAOImple implements LessonDAO {
@@ -36,7 +38,7 @@ public class LessonDAOImple implements LessonDAO {
 		int count=sqlMap.update("updateLesson",dto);
 		return count;
 	}
-	//명령 도표 작성 바람
+	
 	@Override
 	public List lessonOnlineCont(int lesson_idx) {
 		List lists=sqlMap.selectList("SelectOnlineLessonCont",lesson_idx);
@@ -72,4 +74,38 @@ public class LessonDAOImple implements LessonDAO {
 		List lists=sqlMap.selectList("SelectLessonReview",lesson_idx);
 		return lists;
 	}
+	
+	@Override
+	public List scheduleDate(int lesson_idx) {
+		List lists = sqlMap.selectList("selectScheduleDate",lesson_idx);
+		return lists;
+	}
+	
+	@Override
+	public List scheduleTime(String lessonDate) {
+		List lists = sqlMap.selectList("selectScheduleTime",lessonDate);
+		return lists;
+	}
+	
+	@Override
+	public String teacherEmail(int lesson_idx) {
+		String teacherEmail = sqlMap.selectOne("selectTeacherEmail", lesson_idx);
+		return teacherEmail;
+	}
+	
+	@Override
+	public boolean checkLike(int lesson_idx,int u_idx) {;
+		Map map = new HashedMap();
+		map.put("u_idx", u_idx);
+		map.put("lesson_idx", lesson_idx);
+		int result = sqlMap.selectOne("checkLike", map);
+		if(result>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 }
+
+

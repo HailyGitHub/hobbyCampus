@@ -65,19 +65,22 @@
 
     <div class="col-md-1"></div>
     <div class="col-md-3">
-      <label for="cate2" class="form-label">수업 카테고리</label>
+      <label for="cate2" class="form-label">수업 카테고리(대분류)</label>
       
       <!-- cate1 List-->
       <select class="form-select" id="cate1" name="cate1_idx"  required>
-      	<option>::전체::</option>
+      	<option>::대분류::</option>
       	<c:forEach var="cate1" items="${cate1List}">
-      	<option value="${cate1.cate1_idx}" >${cate1.cate1_name}</option>
+      		<option value="${cate1.cate1_idx}" >${cate1.cate1_name}</option>
       	</c:forEach>
       </select>
     </div> 
       <!-- cate2 -->
-    <div class="col-md-3" id="cate2">  
+    <div class="col-md-3">  
+    <label for="cate2" class="form-label">(소분류)</label>
+    	<div  id="cate2">
       	<!-- From JQuery -->
+      	</div>
     </div>  
       
       <!-- <select class="form-select" id="cate2" name="cate2_idx"  required> -->
@@ -135,12 +138,23 @@
 			data : {'cate1_idx': $('#cate1').val()},
 			dataType : "json",
 			success : function(data) {
-				var $dto = data.cate2List;
-				console.log($dto);
-				console.log($dto[2].cate2_name);
 				$('#cate2').empty();
-				//$('#cate2').append('<span>'+$idx+'</span>');
+				var $dto = data.cate2List;
+				var addOption = '';
+				for(var i=0; i<$dto.length; i++){
+					addOption+='<option value="'+$dto[i].cate2_idx+'">'+$dto[i].cate2_name+'</option>';
+				}
 				
+				$('#cate2').append('<select class="form-select" id="cate2List" name="cate2_idx"  required>'+addOption+'</select>');
+					
+				//console.log($dto[2].cate2_name);
+				
+				
+				//$('#cate2').append('<span>'+$idx+'</span>');
+				//<select class="form-select" id="cate2" name="cate2_idx"  required>
+				//<c:forEach var="cate2" items="${cate2List}"> 
+				//<option value="${cate2.cate2_idx}" >${cate2.cate2_name}</option>
+				 //</c:forEach>
 			}
 		});	
 	});

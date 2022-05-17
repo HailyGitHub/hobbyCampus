@@ -100,9 +100,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			
   	</select>
   	<select id="SelectOfflineLessonCont" parameterType="int" resultType="com.hobbycam.lesson.model.LessonOfflineDTO" >
-  	select ll.*, lo.offline_idx, lo.offline_runtime, lo.offline_map, lo.offline_folder, lo.offline_cont, lo.offline_addr
-	from lesson_offline lo, lesson_list ll
-	where ll.lesson_idx=#{lesson_idx}
+  		SELECT ll.*, lo.offline_idx, lo.offline_runtime, lo.offline_map, lo.offline_folder, lo.offline_cont, lo.offline_addr
+		FROM lesson_offline lo, lesson_list ll
+		WHERE ll.lesson_idx=#{lesson_idx}
   	</select>
   	<select id="SelectLiveLessonCont"></select>
   	<select id="SelectLessonLikeCount" parameterType="int" resultType="int">
@@ -140,5 +140,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    WHERE
 		        B.LESSON_IDX=LL.LESSON_IDX)C
 		WHERE LESSON_IDX=#{lesson_idx}
+  	</select>
+  	<select id="selectScheduleDate" parameterType="int" resultType="com.hobbycam.lesson.model.LessonScheduleDTO">
+  		SELECT distinct ls.lesson_start
+  			FROM lesson_schedule ls
+  				WHERE ls.lesson_idx=#{lesson_idx}
+  	</select>
+  	
+  	<select id="selectScheduleTime" parameterType="String" resultType="com.hobbycam.lesson.model.LessonScheduleDTO">
+  		SELECT *
+  			FROM lesson_schedule ls
+  				WHERE ls.lesson_start=to_date(#{lesson_time},'YYYY-MM-DD')
+  	</select>
+  	<select id="checkLike"  parameterType="map" resultType="int">
+	  	SELECT count(*)
+			FROM like_list
+				WHERE u_idx=#{u_idx} And lesson_idx=#{lesson_idx}
+  	</select>
+  	<select id="selectTeacherEmail" parameterType="int" resultType="String">
+  		SELECT u.u_email 
+		    FROM (SELECT t.u_idx
+			    FROM lesson_list ls, teacher t
+			    WHERE ls.lesson_idx=1
+			    	AND ls.t_idx=t.t_idx) a, users u
+		WHERE a.u_idx = u.u_idx
   	</select>
   </mapper>

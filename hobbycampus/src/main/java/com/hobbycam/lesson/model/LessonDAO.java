@@ -24,4 +24,12 @@ public interface LessonDAO {
 	
 	public List lessonReview(int lesson_idx);
 	
+	public List scheduleDate(int lesson_idx);
+	
+	public List scheduleTime(String lessonDate);
+	
+	public String teacherEmail(int lesson_idx);
+	
+	public boolean checkLike(int lesson_idx,int u_idx);
+	
 }

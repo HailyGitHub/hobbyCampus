@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hobbycam.email.HobbyEmailGoogle;
 import com.hobbycam.lesson.model.LessonDAO;
 import com.hobbycam.lesson.model.LessonDTO;
 import com.hobbycam.lessonRecord.model.LessonRecordDAO;
@@ -91,17 +93,32 @@ public class LessonController {
 		
 	}
 	
+	
+	/**get lesson Content by lesson_idx*/
 	@RequestMapping("/lessonCont.do")
 	public ModelAndView lessonCont(int lesson_idx) {
 		ModelAndView mav=new ModelAndView();
 		
 		String type=ldao.lessonContIndentify(lesson_idx);
 		
+		//get review list
 		List lists=null;
-		
 		List review=ldao.lessonReview(lesson_idx);
+		
+		//get like cnt
 		int like=ldao.lessonLike(lesson_idx);
 		
+		//get lesson date
+		List scheduleDate = ldao.scheduleDate(lesson_idx);
+		
+		//get t_email
+		String tEmail = ldao.teacherEmail(lesson_idx);
+		
+		//whether the like button
+		int u_idx=2;
+		boolean likeCheck = ldao.checkLike(lesson_idx, u_idx);
+		
+		//get content 
 		switch (type) {
 		case "온라인":
 			lists=ldao.lessonOnlineCont(lesson_idx);
@@ -117,9 +134,44 @@ public class LessonController {
 		mav.addObject("like",like);
 		mav.addObject("review",review);
 		mav.addObject("lists",lists);
+		mav.addObject("tEmail",tEmail);		
+		mav.addObject("scheduleDate",scheduleDate);
+		mav.addObject("likeCheck",likeCheck);
 		mav.setViewName("lesson/lessonCont");
 		return mav;
 		
+	}
+	
+	/**send email to teacher*/
+	@RequestMapping("/sendEmail.do")
+	public ModelAndView sendEmail(@RequestParam("teacherEmail")String tEmail, @RequestParam("userMail")String uEmail,@RequestParam("mailSubject")String subject, @RequestParam("mailContent")String content ) {
+		ModelAndView mav=new ModelAndView();
+		HobbyEmailGoogle heg = new HobbyEmailGoogle();
+		boolean result = false;
+		subject = "[hobbycampus/수업 문의]"+subject;
+		content = "[답변 받을 학생 이메일]  "+uEmail+"\r\n[문의 내용]"+content;
+		try {
+			heg.emailSend(tEmail, subject, content);
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		mav.addObject("result", result);
+		mav.setViewName("lesson/lessonContEmailOk");
+		return mav;
+		
+	}
+	
+	
+	/**get lesson time by specific lesson date*/
+	@RequestMapping("/lessonTime.do")
+	public ModelAndView getLessonTime(String lessonDate) {
+		List scheduleTime = ldao.scheduleTime(lessonDate);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("scheduleTime",scheduleTime);
+		mav.setViewName("hobbyJson");
+		return mav;
 	}
 	
 
