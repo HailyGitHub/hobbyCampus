@@ -106,6 +106,28 @@ public class LessonDAOImple implements LessonDAO {
 		}
 	}
 	
+	@Override
+	public void deleteLike(int u_idx, int lesson_idx) {
+		Map map = new HashedMap();
+		map.put("u_idx", u_idx);
+		map.put("lesson_idx", lesson_idx);
+		sqlMap.delete("deleteLike", map);
+	}
+	
+	public void insertLike(int u_idx, int lesson_idx) {
+		Map map = new HashedMap();
+		map.put("u_idx", u_idx);
+		map.put("lesson_idx", lesson_idx);
+		sqlMap.insert("insertLike", map);
+	}
+	
+	@Override
+	public int lessonScheduleIdx(int lesson_idx) {
+		int lessonScIdx = sqlMap.selectOne("selectScIdx", lesson_idx);
+		System.out.println("127번줄 : "+lesson_idx);
+		System.out.println("128번줄 : "+lessonScIdx);
+		return lessonScIdx;
+	}
 }
 
 

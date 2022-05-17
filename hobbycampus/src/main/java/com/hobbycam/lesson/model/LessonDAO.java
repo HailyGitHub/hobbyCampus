@@ -32,4 +32,10 @@ public interface LessonDAO {
 	
 	public boolean checkLike(int lesson_idx,int u_idx);
 	
+	public void deleteLike(int u_idx, int lesson_idx);
+	
+	public void insertLike(int u_idx, int lesson_idx);
+	
+	public int lessonScheduleIdx(int lesson_idx);
+	
 }

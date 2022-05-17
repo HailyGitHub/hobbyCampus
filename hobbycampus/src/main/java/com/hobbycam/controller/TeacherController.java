@@ -33,7 +33,7 @@ public class TeacherController {
 	private PayListDAO pdao;
 	
 	@Autowired ServletContext servletContext;
-	
+
 	/**Teacher mypage*/
 	@RequestMapping("/myTeacherPage.do")
 	public String teacherMypage() {

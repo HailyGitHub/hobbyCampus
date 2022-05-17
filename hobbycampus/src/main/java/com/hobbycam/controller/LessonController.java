@@ -115,19 +115,24 @@ public class LessonController {
 		String tEmail = ldao.teacherEmail(lesson_idx);
 		
 		//whether the like button
-		int u_idx=2;
+		int u_idx=1;
 		boolean likeCheck = ldao.checkLike(lesson_idx, u_idx);
 		
+		int lessonScIdx = 0;
 		//get content 
 		switch (type) {
 		case "온라인":
 			lists=ldao.lessonOnlineCont(lesson_idx);
+			lessonScIdx = ldao.lessonScheduleIdx(lesson_idx);
+			mav.addObject("lessonScIdx", lessonScIdx);
 			break;
 		case "오프라인":
 			lists=ldao.lessonOfflineCont(lesson_idx);
 			break;
 		case "라이브":
 			lists=ldao.lessonLiveCont(lesson_idx);
+			lessonScIdx = ldao.lessonScheduleIdx(lesson_idx);
+			mav.addObject("lessonScIdx", lessonScIdx);
 			break;
 		}
 		mav.addObject("lessonType", type);
@@ -137,6 +142,8 @@ public class LessonController {
 		mav.addObject("tEmail",tEmail);		
 		mav.addObject("scheduleDate",scheduleDate);
 		mav.addObject("likeCheck",likeCheck);
+		mav.addObject("u_idx",u_idx);
+		mav.addObject("lesson_idx",lesson_idx);
 		mav.setViewName("lesson/lessonCont");
 		return mav;
 		
@@ -163,6 +170,32 @@ public class LessonController {
 		
 	}
 	
+	/**get like count by lesson_idx*/
+	@RequestMapping("/likeBtnCk.do")
+	public ModelAndView getLikeCnt(int lesson_idx, int u_idx, String btState) {
+		System.out.println(btState);
+		if(  btState=="false"||btState.equals("false")) {
+			ldao.deleteLike(lesson_idx, u_idx);
+		}else {
+			ldao.insertLike(u_idx, lesson_idx);
+		}
+		int likeCnt=ldao.lessonLike(lesson_idx);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("likeCnt",likeCnt);
+		mav.setViewName("hobbyJson");
+		return mav;
+	}
+	
+	/**get lessonScheduleIdx by lesson_idx*/
+	@RequestMapping("/scIdx.do")
+	public ModelAndView getLessonScheduleIdx(int lesson_idx) {
+		int lessonScheduleIdx = ldao.lessonScheduleIdx(lesson_idx);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("lscIdx", lessonScheduleIdx);
+		mav.setViewName("hobbyJson");
+		return mav;
+	}
 	
 	/**get lesson time by specific lesson date*/
 	@RequestMapping("/lessonTime.do")
@@ -174,5 +207,5 @@ public class LessonController {
 		return mav;
 	}
 	
-
+	
 }
