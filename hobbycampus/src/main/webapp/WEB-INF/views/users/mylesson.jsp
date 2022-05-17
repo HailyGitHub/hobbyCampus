@@ -17,67 +17,76 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <!--CSS-->
 <link rel="stylesheet" href="/hobbycampus/css/main.css">
 <link rel="stylesheet" href="/hobbycampus/css/pointShop.css">
 <script src="/hobbycampus/js/lib/ajax.js"></script>
+<style>
+
+a{
+ 	text-decoration-line:none; 
+}
+
+</style>
 </head>
 <body>
 	<div class="container">
 		<div id="wrap">
 			<h3>
-				<span class="hb_yellow">내 수강 내역</span>
+				<span class="hb_yellow">내 수강 내역 <i class="bi bi-bank2"></i></span>
 			</h3>
 			<br>
 			<div>
 				<input type="button" name="list_bt" value="전체 목록"
 					class="btn btn-outline-warning"
 					onclick="$myLesson.goWithFilter(this)"> <input
-					type="button" name="lesson_bt" value="수강중"
+					type="button" name="lesson_bt" value="수업"
 					class="btn btn-outline-warning"
 					onclick="$myLesson.goWithFilter(this)"> <input
 					type="button" name="reser_bt" value="예약"
 					class="btn btn-outline-warning"
 					onclick="$myLesson.goWithFilter(this)"> <input
-					type="button" name="end_bt" value="수강완료"
+					type="button" name="end_bt" value="완료"
 					class="btn btn-outline-warning"
 					onclick="$myLesson.goWithFilter(this)"> <input
-					type="button" name="cencel_bt" value="수강취소"
+					type="button" name="cencel_bt" value="취소"
 					class="btn btn-outline-warning"
 					onclick="$myLesson.goWithFilter(this)">
 			</div>
 			<br>
-			<!--아래로 로그인된 회원의 레슨상태(수강중/예약/수강완료/취소)에 따라 출력되는 부분  -->
+			<!--lesson_record_state of user  -->
+			
 			<c:choose>
 				<c:when test="${empty lessonRecordList}">
 			해당 수강 내역이 없습니다.
 		</c:when>
 				<c:otherwise>
-					<div class="lesson_list_section">
+				<div class="divLine">
 						<c:forEach items="${lessonRecordList}" var="lessonRecord">
 							<div class="lesson_item">
-								<span class="lesson_record_state ">${lessonRecord.lessonRecordState}</span>
+								<span class="lesson_record_state "><i class="bi bi-list-stars"></i> ${lessonRecord.lessonRecordState}</span>
 								<br>
-								<!-- 링크: 수강한 강의 상세 정보 페이지로 lessonCont.do-->
-								<a href="#"> <!--강의 섬네일 표시 영역  --> <img
+								<!-- Link: lessonCont.do-->
+								<a href="#"> <!--lesson thumbnail  --> <img
 									src="C:\\hobbyImg\\lesson\\강사이메일주소\\...png" width="60"
 									height="60">
 									<div class="lesson_info">
 										<p class="lesson_subj">${lessonRecord.lessonSubj}</p>
-										<ul>
-											<li><span>강사명</span></li>
-											<li>${lessonRecord.tName}</li>
-											<li><span>강의 구매날짜</span>${lessonRecord.lessonBuyDate}</li>
-										</ul>
-									</div>
+											<span class="lessonT"><i class="bi bi-person-square"></i> 강사명</span>
+											<p class="lessonRecoT">${lessonRecord.tName}</p>
+											<span class="lesson_paydate">강의 구매날짜: ${lessonRecord.lessonBuyDate}</span>
+										<span class="spanHR">─────────────────────────────────</span>
+									</div>		
 								</a>
 							</div>
 						</c:forEach>
-					</div>
+						</div>
 				</c:otherwise>
 			</c:choose>
+			
 		</div>
 	</div>
 </body>
