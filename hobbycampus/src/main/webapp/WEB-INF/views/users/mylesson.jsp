@@ -71,7 +71,7 @@ a{
 								<br>
 								<!-- Link: lessonCont.do-->
 								<a href="#"> <!--lesson thumbnail  --> <img
-									src="C:\\hobbyImg\\lesson\\강사이메일주소\\...png" width="60"
+									src="/hobbycampus/hobbyImg/lesson/강사인덱스/레슨인덱스/" width="60"
 									height="60">
 									<div class="lesson_info">
 										<p class="lesson_subj">${lessonRecord.lessonSubj}</p>
