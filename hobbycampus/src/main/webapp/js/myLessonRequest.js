@@ -31,7 +31,7 @@ $myLessonRequest = {
 			return;
 		} else {
 			//포인트 충분-> 결제
-			var url = "/hobbycampus/mylessonList.do";
+			var url = "/hobbycampus/lessonComplete.do";
 			url += "?lessonScheduleIdx=" + $myLessonRequest.lessonScheduleIdx;
 			url += "&pricePoint=" + $myLessonRequest.paymentPrice;
 

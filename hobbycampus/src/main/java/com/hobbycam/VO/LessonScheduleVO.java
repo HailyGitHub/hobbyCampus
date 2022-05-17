@@ -1,5 +1,5 @@
 package com.hobbycam.VO;
-
+import java.sql.*;
 public class LessonScheduleVO {
 	private int lessonIdx;
 	private int cate2Idx;
@@ -13,7 +13,7 @@ public class LessonScheduleVO {
 	private String lessonState;
 	private String lessonKit;
 	private String tName;
-	
+
 	public int getLessonIdx() {
 		return lessonIdx;
 	}

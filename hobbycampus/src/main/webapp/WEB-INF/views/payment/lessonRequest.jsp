@@ -50,6 +50,8 @@ dd{
 			<dd>${lessonVO.tName}</dd>
 			<dt><i class="bi bi-bookmark-star"></i> 종류</dt>
 			<dd>${lessonVO.lessonType}</dd>
+			<dt><i class="bi bi-bookmark-star"></i>날짜</dt>
+			<dd>$강의 날짜</dd>
 			<dt><i class="bi bi-bookmark-star"></i> 키트 유무</dt>
 			<dd>${lessonVO.lessonKit}</dd>
 		</span>

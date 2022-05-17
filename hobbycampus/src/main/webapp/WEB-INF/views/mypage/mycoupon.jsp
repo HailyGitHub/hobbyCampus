@@ -19,6 +19,12 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
 <!--CSS-->
 <link rel="stylesheet" href="/hobbycampus/css/main.css">
 <link rel="stylesheet" href="/hobbycampus/css/pointShop.css">
@@ -27,38 +33,77 @@
 <body>
 	<!-- HEADER -->
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-
-	<div class="container">
-		<div id="wrap">
-			<h3><span class="hb_yellow">쿠폰 내역 <i class="bi bi-ticket-perforated"></i></h3>
-			
-			<div id="contents_buttons">
-				<input type="button" class="btn btn-outline-warning" value="사용 가능"
-					onclick="location.href='/hobbycampus/mycoupon.do'"> 
-				<input type="button" class="btn btn-outline-warning" value="사용 완료"
-					onclick="location.href='/hobbycampus/mycoupon.do?stat=N'">
+	<!-- SIDEBar -->
+	<main class="mainArea">
+		<div class="row">
+			<div class="col-md-2">
+				<jsp:include page="/WEB-INF/views/myPageSide.jsp"></jsp:include>
 			</div>
-			<table class="table table-hover">
-				<thead class="table-light">
-					<tr>
-						<th>등록일</th>
-						<th>쿠폰명</th>
-						<th>만료일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${couponList}" var="coupon">
-						<tr>
-							<td><c:out value="${coupon.couponStart}" /></td>
-							<td><c:out value="${coupon.couponTitle}" /></td>
-							<td><c:out value="${coupon.couponEnd}" /></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+			<!-- main -->
+			<div class="col-md-10">
+				<!-- body -->
+				<div class="container">
+					<div id="wrap">
+						<h3>
+							<span class="hb_yellow">쿠폰 내역 <i
+								class="bi bi-ticket-perforated"></i>
+						</h3>
+
+						<div id="contents_buttons">
+							<input type="button" class="btn btn-outline-warning"
+								value="사용 가능" onclick="location.href='/hobbycampus/mycoupon.do'">
+							<input type="button" class="btn btn-outline-warning"
+								value="사용 완료"
+								onclick="location.href='/hobbycampus/mycoupon.do?stat=N'">
+						</div>
+						<table class="table table-hover">
+							<thead class="table-light">
+								<tr>
+									<th>등록일</th>
+									<th>쿠폰명</th>
+									<th>만료일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${couponList}" var="coupon">
+									<tr>
+										<td><c:out value="${coupon.couponStart}" /></td>
+										<td><c:out value="${coupon.couponTitle}" /></td>
+										<td><c:out value="${coupon.couponEnd}" /></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
 		</div>
 </body>
+<script>
+	function studentClick() {
+		$(".teacherList").css("display", "none");
+		$(".studentList").css("display", "");
+
+		$("#student").removeClass('btn-light');
+		$("#teacher").removeClass('btn-warning');
+
+		$("#student").addClass('btn-warning');
+		$("#teacher").addClass('btn-light');
+	}
+	function teacherClick() {
+
+		$(".studentList").css("display", "none");
+		$(".teacherList").css("display", "");
+
+		$("#student").removeClass('btn-warning');
+		$("#teacher").removeClass('btn-light');
+
+		$("#student").addClass('btn-light');
+		$("#teacher").addClass('btn-warning');
+
+	}
+</script>
 <!-- FOOTER -->
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 
