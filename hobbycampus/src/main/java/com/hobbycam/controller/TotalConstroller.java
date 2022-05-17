@@ -19,7 +19,7 @@ public class TotalConstroller {
 	@Autowired
 	private TotalDAO totalDao;
 	
-	@RequestMapping("totalList.do")
+	@RequestMapping("/totalList.do")
 	public ModelAndView totalList() {
 		
 		Calendar now = Calendar.getInstance();
@@ -32,6 +32,10 @@ public class TotalConstroller {
 		
 		TotalMonthDTO um = totalDao.getUserSignUPCnt(first, last); //GET user sign-up count group by month
 		TotalMonthDTO tm = totalDao.getTeacherSignUPCnt(first, last); //GET teacher sign-up count group by month
+		
+		int live = totalDao.getLiveCnt(); //GET Live Type Count
+		int on = totalDao.getOnCnt(); //GET Online Type Count
+		int off = totalDao.getOffCnt(); //GET Offline Type Count
 		
 		List oneList = totalDao.getCateOne(); //GET Category One List
 		List oneRate = new ArrayList(); //GET Category One Rate
@@ -53,14 +57,6 @@ public class TotalConstroller {
 		TotalMonthDTO refund = totalDao.getSalesRefund(first, last); //GET sales total
 		TotalMonthDTO exchange = totalDao.getSalesExchange(first, last); //GET sales total
 		
-		/*
-		List test = totalDao.getTest(first, last);
-		for(int i=0; i<test.size(); i++) {
-			System.out.println(test.get(i));
-		}
-		*/
-		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("ug", ug); 
 		mav.addObject("tg", tg); 
@@ -70,6 +66,9 @@ public class TotalConstroller {
 		mav.addObject("oneRate", oneRate);
 		mav.addObject("twoList", twoList);
 		mav.addObject("twoRate", twoRate);
+		mav.addObject("live", live);
+		mav.addObject("on", on);
+		mav.addObject("off", off);
 		mav.addObject("total", total); 
 		mav.addObject("refund", refund); 
 		mav.addObject("exchange", exchange); 

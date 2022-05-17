@@ -14,11 +14,12 @@ public interface TotalDAO {
 	public List getCateTwo();
 	public int getCateTwoRate(int cate2_idx, String first, String last);
 	
+	public int getLiveCnt();
+	public int getOnCnt();
+	public int getOffCnt();
+	
 	public TotalMonthDTO getSalesTotal(String first, String last);
 	public TotalMonthDTO getSalesRefund(String first, String last);
 	public TotalMonthDTO getSalesExchange(String first, String last);
-	
-	
-	public List getTest(String first, String last);
 
 }

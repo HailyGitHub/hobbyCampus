@@ -97,13 +97,37 @@
 			</div>
 		</article>
 		
+		<!-- Lesson Type Total -->
+		<article class="category-one-total bg-light rounded-3">
+			<div class="container">
+				<!-- Lesson Type Total Title -->
+				<div class="row my-3">
+					<div class="col-12 text-center fs-2 fw-bold">
+						<i class="bi bi-pie-chart"></i> 클래스 종류 비중
+					</div>
+				</div>
+				<!-- Lesson Type Total -->
+				<div class="row my-2">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<canvas id="lessonType"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="margin-space">빈공간</div>
+			</div>
+		</article>
+		
+		
 		<!-- Category One Total -->
 		<article class="category-one-total bg-light rounded-3">
 			<div class="container">
 				<!-- Category One Total Title -->
 				<div class="row my-3">
 					<div class="col-12 text-center fs-2 fw-bold">
-						<i class="bi bi-intersect"></i> 큰 카테고리 통계
+						<i class="bi bi-intersect"></i> 큰 카테고리 수업 비중
 					</div>
 				</div>
 				<!-- Category One Total -->
@@ -126,7 +150,7 @@
 				<!-- Category Two Total Title -->
 				<div class="row my-3">
 					<div class="col-12 text-center fs-2 fw-bold">
-						<i class="bi bi-bar-chart-line"></i> 작은 카테고리 통계
+						<i class="bi bi-bar-chart-line"></i> 작은 카테고리 수요
 					</div>
 				</div>
 				<!-- Category Two Total -->
@@ -226,6 +250,20 @@
 				data: [${tm.m01}, ${tm.m02}, ${tm.m03}, ${tm.m04}, ${tm.m05},${tm.m06}, ${tm.m07}, ${tm.m08}, ${tm.m09}, ${tm.m10}, ${tm.m11}, ${tm.m12}] //tm -> Teacher sign-up count group by Month
 			}]
 		},
+		options: {}
+	});
+	
+	
+	/* Lesson Type data */
+	var $lessonTypeData = {
+		datasets: [{backgroundColor: ['#2CE0BC','#FFC300', '#8282FF'],data: [${live}, ${on}, ${off}]}], //
+		labels: ['라이브','온라인','오프라인']
+	};
+	
+	var $lessonType = $('#lessonType');
+	var $lessonTypeChart = new Chart($lessonType, {
+		type: 'doughnut',
+		data: $lessonTypeData,
 		options: {}
 	});
 	

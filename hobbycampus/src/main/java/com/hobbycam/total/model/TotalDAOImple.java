@@ -75,6 +75,24 @@ public class TotalDAOImple implements TotalDAO {
 	}
 	
 	@Override
+	public int getLiveCnt() {
+		int count = sqlMap.selectOne("selectLiveTypeCnt");
+		return count;
+	}
+	
+	@Override
+	public int getOnCnt() {
+		int count = sqlMap.selectOne("selectOnTypeCnt");
+		return count;
+	}
+	
+	@Override
+	public int getOffCnt() {
+		int count = sqlMap.selectOne("selectOffTypeCnt");
+		return count;
+	}
+	
+	@Override
 	public TotalMonthDTO getSalesTotal(String first, String last) {
 		Map map = new HashedMap();
 		map.put("first", first);
@@ -101,12 +119,4 @@ public class TotalDAOImple implements TotalDAO {
 		return dto;
 	}
 
-	@Override
-	public List getTest(String first, String last) {
-		Map map = new HashedMap();
-		map.put("first", first);
-		map.put("last", last);
-		List list = sqlMap.selectList("selectTestMonth", map);
-		return list;
-	}
 }

@@ -130,6 +130,36 @@
 	</select>
 	
 	
+	<select id="selectLiveTypeCnt" resultType="Integer">
+		SELECT 
+		    COUNT(*)
+		FROM
+		    lesson_list
+		WHERE
+		    lesson_type = '라이브'
+	</select>
+	
+	
+	<select id="selectOnTypeCnt" resultType="Integer">
+		SELECT 
+		    COUNT(*)
+		FROM
+		    lesson_list
+		WHERE
+		    lesson_type = '온라인'
+	</select>
+	
+	
+	<select id="selectOffTypeCnt" resultType="Integer">
+		SELECT 
+		    COUNT(*)
+		FROM
+		    lesson_list
+		WHERE
+		    lesson_type = '오프라인'
+	</select>
+	
+	
 	<select id="selectTeacherSignUpMonthCnt" parameterType="hashmap" resultType="com.hobbycam.total.model.TotalMonthDTO">
 		SELECT
 		    sum(DECODE(SUBSTR(a.t_join_date,4,2),'01',1,0)) AS  m01,
@@ -225,19 +255,6 @@
     		pay_date<![CDATA[<=]]>#{last}
     	AND
     		pay_value = '입금'
-	</select>
-	
-	<select id="selectTestMonth" resultType="String">
-		SELECT
-		    SUM(DECODE(SUBSTR(pay_date,4,2),'01',pay_point,0))
-		FROM 
-		    pay_list
-		WHERE 
-    		pay_date<![CDATA[>=]]>#{first}
-		AND 
-    		pay_date<![CDATA[<=]]>#{last}
-		AND
-    		pay_value = '충전'
 	</select>
 	
 </mapper>
