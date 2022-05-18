@@ -54,6 +54,13 @@
 		<tr>
 			<th colspan="2">구분선--------------------------------------------------------------------------------</th>
 		</tr>
+	<c:if test="${empty review }">
+		<tr>
+			<td colspan="2" align="center">
+			등록된 리뷰가 없습니다.
+			</td>
+		</tr>
+	</c:if>
 	<c:forEach var="rv" items="${review }">
 		<tr>
 			<th>별점</th>

@@ -16,11 +16,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			#{lesson_price},
   			#{lesson_thumbnail},
   			#{lesson_short_cont},
-  			'haha',
+  			'진행',
   			#{lesson_kit}
   		)
   	</insert>
-  	<select id="selectLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
+  	<insert id="insertOnlineLesson" parameterType="com.hobbycam.lesson.model.LessonOnlineDTO">
+  		INSERT INTO
+  			LESSON_ONLINE
+  		VALUES(
+  			seq_lesson_online.nextval,
+  			seq_lesson_list.nextval-1,
+  			#{online_subj},
+  			#{online_img},
+  			#{online_file},
+  			#{online_cont}
+  		)
+  		
+  	</insert>
+  	<insert id="insertOfflineLesson" parameterType="com.hobbycam.lesson.model.LessonOfflineDTO">
+  		INSERT INTO
+  			LESSON_OFFLINE
+  		VALUES(
+  			seq_lesson_offline.nextval,
+  			seq_lesson_list.nextval-1,
+  			#{offline_runtime},
+  			#{offline_folder},
+  			#{offline_cont},
+  			#{offline_addr}
+  		)
+  	</insert>
+  	<insert id="insertLiveLesson" parameterType="com.hobbycam.lesson.model.LessonLiveDTO">
+  		INSERT INTO
+  			LESSON_LIVE
+  		VALUES(
+  			seq_lesson_live.nextval,
+  			seq_lesson_list.nextval-1,
+  			#{live_runtime},
+  			#{live_tool},
+  			#{live_folder},
+  			#{live_cont}
+  		)
+  	</insert>
+  	<select id="selectTeacherLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
   		SELECT 
   			LESSON_LIST.LESSON_SUBJ,
   			LESSON_LIST.LESSON_THUMBNAIL,
@@ -109,6 +146,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		WHERE 
   			LESSON_IDX=#{lesson_idx}
   	</select>
+  	<select id="countLessonList" resultType="int">
+  		SELECT
+  			COUNT(*)
+  		FROM
+  			LESSON_LIST
+  	</select>
   	<select id="SelectLessonReview" parameterType="int" resultType="com.hobbycam.review.model.ReviewDTO">
 		SELECT
 		    C.*
@@ -136,5 +179,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    WHERE
 		        B.LESSON_IDX=LL.LESSON_IDX)C
 		WHERE LESSON_IDX=#{lesson_idx}
+  	</select>
+  	<select id="selectLessonList" resultType="com.hobbycam.lesson.model.LessonDTO">
+  		SELECT
+  			*
+  		FROM
+  			LESSON_LIST
+  	</select>
+  	<select id="selectCate1List" resultType="com.hobbycam.cate1.model.Cate1DTO">
+  		SELECT
+  			*
+  		FROM
+  			CATE1
+  	</select>
+  	<select id="selectCate2List" parameterType="int" resultType="com.hobbycam.cate2.model.Cate2DTO">
+  		SELECT
+  			*
+  		FROM
+  			CATE2
+  		WHERE
+  			CATE1_idx=#{cate1_idx}
+  	</select>
+  	<select id="selectLessonListByTidx" parameterType="int" resultType="com.hobbycam.lesson.model.LessonDTO">
+  		SELECT
+  			*
+  		FROM
+  			LESSON_LIST
+  		WHERE
+  			T_IDX={t_idx}
+  	</select>
+  	<select id="SelectLessonIdxByLessonThumbnail" parameterType="String" resultType="int">
+  		SELECT
+  			LESSON_IDX
+  		FROM
+  			LESSON_LIST
+  		WHERE
+  			LESSON_THUMBNAIL=#{th_count}
   	</select>
   </mapper>

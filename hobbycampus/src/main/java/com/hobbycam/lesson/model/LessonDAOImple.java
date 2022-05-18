@@ -20,8 +20,26 @@ public class LessonDAOImple implements LessonDAO {
 	}
 	
 	@Override
-	public List lessonList(String t_name) {
-		List lists=sqlMap.selectList("selectLesson",t_name);
+	public int onlineLessonInsert(LessonOnlineDTO onlinedto) {
+		int count=sqlMap.insert("insertOnlineLesson",onlinedto);
+		return count;
+	}
+	
+	@Override
+	public int offlineLessonInsert(LessonOfflineDTO offlinedto) {
+		int count=sqlMap.insert("insertOfflineLesson",offlinedto);
+		return count;
+	}
+	
+	@Override
+	public int liveLessonInsert(LessonLiveDTO livedto) {
+		int count=sqlMap.insert("insertLiveLesson",livedto);
+		return count;
+	}
+	
+	@Override
+	public List teacherLessonList(String t_name) {
+		List lists=sqlMap.selectList("selectTeacherLesson",t_name);
 		return lists;
 	}
 	
@@ -71,5 +89,38 @@ public class LessonDAOImple implements LessonDAO {
 	public List lessonReview(int lesson_idx) {
 		List lists=sqlMap.selectList("SelectLessonReview",lesson_idx);
 		return lists;
+	}
+	
+	@Override
+	public List lessonList() {
+		List lists=sqlMap.selectList("selectLessonList");
+		return lists;
+	}
+	
+	public List cate1List() {
+		List lists=sqlMap.selectList("selectCate1List");
+		return lists;
+	}
+	
+	public List cate2List(int cate1_idx) {
+		List lists=sqlMap.selectList("selectCate2List",cate1_idx);
+		return lists;
+	}
+	
+	@Override
+	public LessonDTO LessonListByTidx(int t_idx) {
+		LessonDTO dto=sqlMap.selectOne("selectLessonListByTidx",t_idx);
+		return dto;
+	}
+	
+	@Override
+	public int countLessonList() {
+		int count=sqlMap.selectOne("countLessonList");
+		return count;
+	}
+	
+	public int SelectLessonIdxByLessonThumbnail(String th_count) {
+		int l_idx=sqlMap.selectOne("SelectLessonIdxByLessonThumbnail",th_count);
+		return l_idx;
 	}
 }

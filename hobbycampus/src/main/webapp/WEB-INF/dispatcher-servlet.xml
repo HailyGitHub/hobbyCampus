@@ -40,10 +40,7 @@
 	<!-- controllers -->
 	<bean id="mypageController" class="com.hobbycam.controller.MypageController"></bean>
 
-	<!-- service -->
-	<bean id="couponService" class="com.hobbycam.service.CouponSerivceImpl"></bean>
-	<bean id="lessonScheduleService" class="com.hobbycam.service.LessonScheduleServiceImpl"></bean>
-
+	
 	<!-- DAO -->
 	<bean id="adminDao" class="com.hobbycam.admin.model.AdminDAOImple">
 		<constructor-arg>
@@ -106,6 +103,11 @@
 		</constructor-arg>
 	</bean>
 	<bean id="payListDao" class="com.hobbycam.payList.model.PayListDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="scheduleDao" class="com.hobbycam.schedule.model.ScheduleDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
