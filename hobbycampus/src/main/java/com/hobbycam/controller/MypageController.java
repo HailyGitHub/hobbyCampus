@@ -22,7 +22,7 @@ public class MypageController {
 	public ModelAndView mypage() {
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("users/mypage");
+		mav.setViewName("users/mylesson");
 		return mav;
 	}
 

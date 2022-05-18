@@ -78,6 +78,10 @@ a:hover { text-decoration:none !important }
 						<c:forEach items="${lessonRecordList}" var="lessonRecord">
 							<div class="lesson_item">
 								<span class="lesson_record_state "><i class="bi bi-list-stars"></i> ${lessonRecord.lessonRecordState}</span>
+								<div>${lessonRecord.lesson_type}</div>
+								<c:if test="${lessonRecord.lesson_type=='온라인'}">
+									<input type="button" value="강의보기">
+								</c:if>
 								<br>
 								<!-- Link: lessonCont.do-->
 								<a href="#"> <!--lesson thumbnail  --> <img
@@ -89,6 +93,7 @@ a:hover { text-decoration:none !important }
 											<p class="lessonRecoT">${lessonRecord.tName}</p>
 											<span class="lessonT"><i class="bi bi-calendar-check"></i> 시작일</span>
 											<p class="lessonStart">$시작일</p>
+											
 											<span class="lesson_paydate">강의 구매날짜: ${lessonRecord.lessonBuyDate}</span>
 										<span class="spanHR">─────────────────────────────────</span>
 									</div>		

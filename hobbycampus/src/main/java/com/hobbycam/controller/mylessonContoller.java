@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,11 +29,17 @@ public class mylessonContoller {
 	private LessonRecordDAO lessonRecordDao;
 
 	@RequestMapping("/mylessonList.do")
-	public ModelAndView mylessonList(@RequestParam Map<String, String> param) {
+	public ModelAndView mylessonList(@RequestParam Map<String, String> param , HttpServletRequest req) {
 
-		// TODO 수정해야함( 유저가 3이라고 가정했을 뿐)
-		int uIdx = 3;
-
+		ModelAndView mav = new ModelAndView();
+		
+		 HttpSession session=req.getSession();
+		 if(session.getAttribute("u_idx")==null) {
+			 mav.setViewName("index.do");
+			 return mav;
+		 }
+	     int uIdx=(int)session.getAttribute("u_idx");
+		
 		// 주소지 저장
 		String postReceiver = param.get("postReceiver");
 		String postTel = param.get("postTel");
@@ -67,15 +76,14 @@ public class mylessonContoller {
 		} catch (Exception e) {
 		}
 
-		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("/users/mylesson");
 		
 		
 		String lessonRecordState = param.get("lessonRecordState");
 		List<LessonRecordVO> lessonRecordList = lessonRecordDao.getLessonRecords(uIdx, lessonRecordState);
 		mav.addObject("lessonRecordList", lessonRecordList);
-		
-		
+
 		return mav;
 	}
 

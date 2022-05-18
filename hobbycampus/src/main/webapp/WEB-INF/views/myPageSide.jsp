@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,10 +60,13 @@
                    <button class="btn btn-outline-primary" id="student" onclick="studentClick();">&nbsp;&nbsp;학생&nbsp;&nbsp;</button>
                    
                  </span>
-                 |
+
+			<c:if test="${!empty sessionScope.t_idx}">
                  <span class="fs-3">
+                 
                    <button class="btn btn-outline-primary" id="teacher" onclick="teacherClick();">&nbsp;&nbsp;강사&nbsp;&nbsp;</button>
                  </span>
+                </c:if>
                  <hr>
                </div>
                <ul class="nav nav-pills flex-column mb-auto">
