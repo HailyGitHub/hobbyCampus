@@ -24,5 +24,6 @@
 		<mapper resource="com/hobbycam/sqlMap/categorySQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/indexSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/totalSQL.xml"/>
+		<mapper resource="com/hobbycam/sqlMap/scheduleSQL.xml"/>
 	</mappers>
 </configuration>

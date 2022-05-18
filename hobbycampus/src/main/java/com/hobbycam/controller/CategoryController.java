@@ -3,6 +3,7 @@ package com.hobbycam.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -154,6 +155,28 @@ public class CategoryController {
 		mav.setViewName("category/categoryResult");
 		return mav;
 		
+	}
+	
+	@RequestMapping("/sideBarCateOne.do")
+	public ModelAndView sideBarCateOne() {
+		
+		List cateOne = categoryDao.getCateOneList();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("cateOne", cateOne);
+		mav.setViewName("hobbyJson");
+		return mav;
+	}
+	
+	@RequestMapping("/sideBarCateTwo.do")
+	public ModelAndView sideBarCateTwo(int cate1_idx) {
+		
+		List cateTwo = categoryDao.getCateTwoList(cate1_idx);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("cateTwo", cateTwo);
+		mav.setViewName("hobbyJson");
+		return mav;
 	}
 	
 	
