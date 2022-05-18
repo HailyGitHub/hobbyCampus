@@ -26,7 +26,7 @@ public class mylessonContoller {
 	private LessonRecordDAO lessonRecordDao;
 
 	@RequestMapping("/mylessonList.do")
-	public ModelAndView myreviewList(@RequestParam Map<String, String> param) {
+	public ModelAndView mylessonList(@RequestParam Map<String, String> param) {
 
 		// TODO 수정해야함( 유저가 3이라고 가정했을 뿐)
 		int uIdx = 3;

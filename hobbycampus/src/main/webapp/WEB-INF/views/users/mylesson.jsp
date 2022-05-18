@@ -26,18 +26,28 @@
 <script src="/hobbycampus/js/lib/ajax.js"></script>
 <style>
 
-a{
- 	text-decoration-line:none; 
-}
+a { text-decoration:none !important }
+a:hover { text-decoration:none !important }
 
 </style>
 </head>
 <body>
+<!-- HEADER -->
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	<!-- SIDEBar -->
+	<main class="mainArea">
+		<div class="row">
+			<div class="col-md-2">
+				<jsp:include page="/WEB-INF/views/myPageSide.jsp"></jsp:include>
+			</div>
+			<!-- main -->
+			<div class="col-md-10">
+				<!-- body -->
 	<div class="container">
 		<div id="wrap">
-			<h3>
+			<h2>
 				<span class="hb_yellow">내 수강 내역 <i class="bi bi-bank2"></i></span>
-			</h3>
+			</h2>
 			<br>
 			<div>
 				<input type="button" name="list_bt" value="전체 목록"
@@ -75,8 +85,10 @@ a{
 									height="60">
 									<div class="lesson_info">
 										<p class="lesson_subj">${lessonRecord.lessonSubj}</p>
-											<span class="lessonT"><i class="bi bi-person-square"></i> 강사명</span>
+											<span class="lessonT"><i class="bi bi-mortarboard-fill"></i> 강사명</span>
 											<p class="lessonRecoT">${lessonRecord.tName}</p>
+											<span class="lessonT"><i class="bi bi-calendar-check"></i> 시작일</span>
+											<p class="lessonStart">$시작일</p>
 											<span class="lesson_paydate">강의 구매날짜: ${lessonRecord.lessonBuyDate}</span>
 										<span class="spanHR">─────────────────────────────────</span>
 									</div>		
@@ -86,8 +98,11 @@ a{
 						</div>
 				</c:otherwise>
 			</c:choose>
-			
 		</div>
 	</div>
+	</div>
+</div>
 </body>
+<!-- FOOTER -->
+<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </html>

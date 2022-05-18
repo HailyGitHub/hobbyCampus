@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="img/main.ico" rel="shortcut icon" type="image/x-icon">
-<!--BootStarp-->
+<!-- Bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -17,8 +17,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <!-- JQuery -->
@@ -44,10 +42,10 @@
 				<!-- body -->
 				<div class="container">
 					<div id="wrap">
-						<h3>
+						<h2>
 							<span class="hb_yellow">쿠폰 내역 <i
 								class="bi bi-ticket-perforated"></i>
-						</h3>
+						</h2>
 
 						<div id="contents_buttons">
 							<input type="button" class="btn btn-outline-warning"
@@ -80,30 +78,6 @@
 			</div>
 		</div>
 </body>
-<script>
-	function studentClick() {
-		$(".teacherList").css("display", "none");
-		$(".studentList").css("display", "");
-
-		$("#student").removeClass('btn-light');
-		$("#teacher").removeClass('btn-warning');
-
-		$("#student").addClass('btn-warning');
-		$("#teacher").addClass('btn-light');
-	}
-	function teacherClick() {
-
-		$(".studentList").css("display", "none");
-		$(".teacherList").css("display", "");
-
-		$("#student").removeClass('btn-warning');
-		$("#teacher").removeClass('btn-light');
-
-		$("#student").addClass('btn-light');
-		$("#teacher").addClass('btn-warning');
-
-	}
-</script>
 <!-- FOOTER -->
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 

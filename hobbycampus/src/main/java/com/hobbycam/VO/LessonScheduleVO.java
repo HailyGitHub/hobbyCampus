@@ -14,6 +14,7 @@ public class LessonScheduleVO {
 	private String lessonKit;
 	private String tName;
 
+
 	public int getLessonIdx() {
 		return lessonIdx;
 	}
@@ -92,7 +93,7 @@ public class LessonScheduleVO {
 		return "LessonVO [lessonIdx=" + lessonIdx + ", cate2Idx=" + cate2Idx + ", tIdx=" + tIdx + ", lessonSubj="
 				+ lessonSubj + ", lessonUpDate=" + lessonUpDate + ", lessonType=" + lessonType + ", lessonPrice="
 				+ lessonPrice + ", lessonThumbnail=" + lessonThumbnail + ", lessonShortCount=" + lessonShortCount
-				+ ", lessonState=" + lessonState + ", lessonKit=" + lessonKit + ", tName=" + tName + "]";
+				+ ", lessonState=" + lessonState + ", lessonKit=" + lessonKit + "]";
 	}
 	
 	

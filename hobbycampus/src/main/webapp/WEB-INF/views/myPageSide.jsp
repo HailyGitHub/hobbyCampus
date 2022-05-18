@@ -68,7 +68,7 @@
                <ul class="nav nav-pills flex-column mb-auto">
                  <li class="nav-item">
                    <a href="#" class="nav-link">
-                     <span class="studentList" >내 정보</span>
+                     <span class="studentList" >내 수강내역</span>
                    </a>
                    <a href="#" class="nav-link">
                     <span class="teacherList" style="display: none;" >내 강의 신청</span>
@@ -93,7 +93,7 @@
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <span class="studentList" >내 수강 내역</span>
+                    <span class="studentList" >내 리뷰</span>
                   </a>
                   <a href="teacherPoint.do?t_idx=1" class="nav-link">
                    <span class="teacherList" style="display: none;" id="teacherPoint">포인트 관리</span>
@@ -102,7 +102,7 @@
                 
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <span class="studentList" >내 리뷰</span>
+                    <span class="studentList" >찜 목록</span>
                   </a>
                   <a href="teacherInfo.do?t_idx=1" class="nav-link">
                    <span class="teacherList" style="display: none;" id="teacherInfo">프로필 관리</span>
@@ -110,12 +110,12 @@
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <span class="studentList" >찜 목록</span>
+                    <span class="studentList" >내 쿠폰</span>
                   </a>                   
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <span class="studentList" >내 쿠폰</span>
+                    <span class="studentList" >내 정보</span>
                   </a>
                                     
                 </li>
