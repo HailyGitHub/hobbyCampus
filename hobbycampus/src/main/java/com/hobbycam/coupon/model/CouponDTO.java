@@ -1,13 +1,15 @@
 package com.hobbycam.coupon.model;
+
 import java.sql.*;
+
 public class CouponDTO {
 	private int coupon_idx;
-	private String   coupon_title;
-	private int  coupon_rate;
-	private String  coupon_img;
-	private Date  coupon_start;
+	private String   coupon_title; //coupon name
+	private int  coupon_rate; // discount rate
+	private String  coupon_img; // image
+	private Date  coupon_start; 
 	private Date  coupon_end;
-	private String  coupon_state;
+	private String  coupon_state; // usable state
 
 	public CouponDTO() {
 		// TODO Auto-generated constructor stub

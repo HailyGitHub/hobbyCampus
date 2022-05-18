@@ -5,7 +5,7 @@ public class LevelDTO {
 	public int lev_idx;
 	public String lev_name;
 	public String lev_img;
-	public int lev_rate;
+	public int lev_rate; //discount rate
 	public int lev_sales;
 	
 	public LevelDTO() {

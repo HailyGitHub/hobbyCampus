@@ -12,7 +12,7 @@
 		*
 	from
 		TEACHER_LEV
-	where lev_idx= #{lev_idx)
+	where lev_idx= #{lev_idx}
  </select>
  <update id="updateLevel" parameterType="com.hobbycam.level.model.LevelDTO">
  update TEACHER_LEV 

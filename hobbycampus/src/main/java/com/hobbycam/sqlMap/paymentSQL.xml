@@ -24,33 +24,34 @@
 	and rnum<![CDATA[<=]]>#{end}
 
  </select>
- <update id="updateRufundState" parameterType="com.hobbycam.payment.model.PaymentDTO">
+ <update id="updateRefundState" parameterType="com.hobbycam.payment.model.PaymentDTO">
 	update(
 		select 
-			* 
+			users.* , pay_list.pay_point 
 		from 
 			users, pay_list 
 		where 
 			users.u_idx=pay_list.u_idx 
 		and 
-			pay_list.pay_list_idx=#{pay_list_idx} 
-	)set 
-		users.u_point=users.u_point+pay_list.pay_point 
- 
+			pay_list_idx= #{pay_list_idx} 
+		and pay_value != '환불' 
+	) set 
+		u_point=u_point+pay_point 
+		
  </update>
 
- <update id="updateRufundPoint" parameterType="com.hobbycam.payment.model.PaymentDTO">
+ <update id="updateRefundPoint" parameterType="com.hobbycam.payment.model.PaymentDTO">
  	update(
 		select 
-			* 
+			pay_list.* 
 		from 
 			users, pay_list 
 		where 
 			users.u_idx=pay_list.u_idx 
 		and 
-			pay_list.pay_list_idx=#{pay_list_idx} 
-	)set 
-		pay_list.pay_value='환불' 
+			pay_list_idx= #{pay_list_idx} 
+	) set 
+		pay_value='환불' 
  </update>
  
  <select id="totalPayCnt" resultType="Integer">

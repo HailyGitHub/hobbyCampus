@@ -19,14 +19,6 @@ public class CouponController {
 	@Autowired
 	private CouponDAO couponDao;
 	
-	@RequestMapping("/coupon.do")
-	public ModelAndView coupon() {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("coupon/coupon");
-		return mav;
-	}
-	
 	@RequestMapping("/couponList.do")
 	public ModelAndView couponList(@RequestParam(value="cp",defaultValue = "1")int cp) {
 		ModelAndView mav = new ModelAndView();
@@ -63,7 +55,7 @@ public class CouponController {
 		}else {
 			mav.addObject("msg","실패");
 		}
-		mav.setViewName("coupon/couponList");
+		mav.setViewName("hobbyJson");
 		return mav;
 	}
 	
@@ -73,12 +65,11 @@ public class CouponController {
 		CouponDTO dto = couponDao.getCouponInfo(coupon_idx);
 		if(dto == null){ 
 			mav.addObject("msg","잘못된 접근"); 
-			mav.addObject("goPage","couponList.do"); 
-			mav. setViewName("coupon/couponMsg");
+			mav. setViewName("hobbyJson");
 			
 		}else{
 			mav.addObject("dto",dto); 
-			mav.setViewName("coupon/couponInfo");
+			mav.setViewName("hobbyJson");
 		} 
 		return mav;
 	}
@@ -94,7 +85,7 @@ public class CouponController {
 			mav.addObject("msg","문제발생");
 		}
 		
-		mav.setViewName("coupon/couponList");
+		mav.setViewName("hobbyJson");
 		
 		return mav;
 	}

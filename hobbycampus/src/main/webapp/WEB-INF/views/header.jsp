@@ -43,7 +43,7 @@
         <a class="navbar-brand" href="#">라이브</a>
         <a class="navbar-brand" href="#">온라인</a>
         <a class="navbar-brand" href="#">오프라인</a>
-        <a class="navbar-brand" href="#">공지사항</a>
+        <a class="navbar-brand" href="noticeList.do">공지사항</a>
 
         <!-- Search Button-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
