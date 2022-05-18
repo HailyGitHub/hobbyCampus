@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.hobbycam.lesson">
+  	<insert id="insertLesson" parameterType="com.hobbycam.lesson.model.LessonDTO">
+  		INSERT INTO
+  			LESSON_LIST
+  		VALUES(
+  			SEQ_LESSON_LIST.nextval,
+  			1,
+  			1,
+  			#{lesson_subj},
+  			sysdate,
+  			#{lesson_type},
+  			#{lesson_price},
+  			#{lesson_thumbnail},
+  			#{lesson_short_cont},
+  			'haha',
+  			#{lesson_kit}
+  		)
+  	</insert>
+  	<select id="selectLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
+  		SELECT 
+  			LESSON_LIST.LESSON_SUBJ,
+  			LESSON_LIST.LESSON_THUMBNAIL,
+  			LESSON_LIST.LESSON_SHORT_CONT,
+  			TEACHER.T_NAME
+  		FROM 
+  			LESSON_LIST,
+  			TEACHER
+  		WHERE
+  			T_NAME='두껍'
+  	</select>
+  </mapper>
