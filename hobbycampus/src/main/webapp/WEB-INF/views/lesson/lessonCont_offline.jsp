@@ -17,7 +17,7 @@
     
   </style>
 	<script>
-		                                                                                                            
+   	 var mapAddr = '${map}';                                                                                              
 	</script>
 <head>
 <meta charset="UTF-8">
@@ -155,7 +155,7 @@
 		        <div id="cont" class="text-end  fs-5">${dto.lesson_short_cont }</div>
 		        
 		       
-			        <div id="scheduleDate">
+			        <div id="scheduleDate" class="text-end">
 			        <span class="fs-6 text-muted  text-end fw-light">강의 날짜</span>
 			        	<select class="form-select" id="scheduleDateList" name="scheduleDate"  required>
 					      	<option>::날짜선택::</option>
@@ -164,7 +164,9 @@
 					      	</c:forEach>
 					      </select>
 			        </div>
-		       		<span class="fs-6 text-muted text-end fw-light">강의 시간</span>
+		       		<div class="text-end">
+		       		<span class="fs-6 text-muted text-end fw-light ">강의 시간</span>
+		       		</div>
 			        <div id="lessonTime">
 			        	<!-- from Jquery -->
 			        </div>
@@ -190,15 +192,6 @@
 		</div>
 		</div>
 	
-	
-	
-	<!-- <c:forEach var="rv" items="${review }"> --> 
-	<!-- <tr> -->
-	<!-- 	<th>별점</th> <td>${rv.star_point }</td> -->
-	<!--</tr><tr><th>리뷰 내용</th><td>${rv.review_cont }</td>  -->		
-	<!-- </tr><tr><th>리뷰 날짜</th><td>${rv.review_date }</td></tr></c:forEach></table> -->	
-			
-		
 	<!-- Modal -->
 		<div class="modal fade" id="sendMail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
@@ -224,6 +217,8 @@
 		  </div>
 		</div>	
 
+	<!-- FOOTER -->
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 <script>
 	$(document).ready(function(){
@@ -242,7 +237,7 @@
 
 	/**like button clicked*/
 	$('#likeBnt').click(function () {
-		var btState = $("#heartFill").hasClass("bi-heart");
+		var btState = $("#heartFill").hasClass("bi-heart"); //true -> need to click
 		$.ajax({
 			url :"likeBtnCk.do",
 			type : "get",
@@ -251,13 +246,13 @@
 			success : function(data) {
 				var addOption = '';
 				var $likeCnt = data.likeCnt;
-				if($("#heartFill").hasClass("bi-heart")){//already not like
+				if(btState){//already not like, Add 1
 					$('#likeBnt').empty();
 					var $likeCnt = data.likeCnt;
 					var icon = '<i id="heartFill" class="bi bi-suit-heart-fill"></i>';
 					var likeCnt ='찜('+$likeCnt+')';
 					$('#likeBnt').append(icon+likeCnt);
-				}else{//already like
+				}else{//already like // minus 1
 					$('#likeBnt').empty();
 					var $likeCnt = data.likeCnt;
 					var icon = '<i id="heartFill" class="bi bi-heart"></i>';

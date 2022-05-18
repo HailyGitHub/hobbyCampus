@@ -38,4 +38,6 @@ public interface LessonDAO {
 	
 	public int lessonScheduleIdx(int lesson_idx);
 	
+	public String getAddr(int lesson_idx);
+	
 }

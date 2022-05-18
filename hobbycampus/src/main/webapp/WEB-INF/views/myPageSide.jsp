@@ -58,9 +58,8 @@
                <div>
                  <span class="fs-3">
                    <button class="btn btn-outline-primary" id="student" onclick="studentClick();">&nbsp;&nbsp;학생&nbsp;&nbsp;</button>
-                   
-                 </span>
-                 |
+                   </span>
+                
                  <span class="fs-3">
                    <button class="btn btn-outline-primary" id="teacher" onclick="teacherClick();">&nbsp;&nbsp;강사&nbsp;&nbsp;</button>
                  </span>
@@ -83,12 +82,11 @@
                    <span class="teacherList" style="display: none;" >내 강의 보기</span>
                   </a>                     
                 </li>
-                
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <span class="studentList" >학생 기능1</span>
                   </a>
-                  <a href="teacherRecord.do?t_idx=1" class="nav-link">
+                  <a href="teacherRecord.do" class="nav-link">
                    <span class="teacherList" style="display: none;" id="teacherRecord" >내 강의 이력</span>
                   </a>                     
                 </li>
@@ -96,16 +94,15 @@
                   <a href="#" class="nav-link">
                     <span class="studentList" >학생 기능1</span>
                   </a>
-                  <a href="teacherPoint.do?t_idx=1" class="nav-link">
+                  <a href="teacherPoint.do" class="nav-link">
                    <span class="teacherList" style="display: none;" id="teacherPoint">포인트 관리</span>
                   </a>                     
                 </li>
-                
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <span class="studentList" >학생 기능1</span>
                   </a>
-                  <a href="teacherInfo.do?t_idx=1" class="nav-link">
+                  <a href="teacherInfo.do" class="nav-link">
                    <span class="teacherList" style="display: none;" id="teacherInfo">프로필 관리</span>
                   </a>                     
                 </li>
@@ -117,6 +114,15 @@
  
  </body>
  <script>
+ $(document).ready(function(){
+	 if(${t_idx==null}){
+		 $(".teacher").css("display","none");
+		 $(".student").css("display","none");
+		 $(".teacherList").css("display","none");
+	 }
+	 
+ }
+ 
  function studentClick(){
    $(".teacherList").css("display","none");
    $(".studentList").css("display","");

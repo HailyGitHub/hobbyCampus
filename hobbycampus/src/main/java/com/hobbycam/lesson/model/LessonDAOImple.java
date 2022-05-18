@@ -93,6 +93,11 @@ public class LessonDAOImple implements LessonDAO {
 		return teacherEmail;
 	}
 	
+	public String getAddr(int lesson_idx) {
+		String mapAddr = sqlMap.selectOne("selectMap",lesson_idx);
+		return mapAddr;
+	}
+	
 	@Override
 	public boolean checkLike(int lesson_idx,int u_idx) {;
 		Map map = new HashedMap();
@@ -107,7 +112,7 @@ public class LessonDAOImple implements LessonDAO {
 	}
 	
 	@Override
-	public void deleteLike(int u_idx, int lesson_idx) {
+	public void deleteLike(int lesson_idx,int u_idx) {
 		Map map = new HashedMap();
 		map.put("u_idx", u_idx);
 		map.put("lesson_idx", lesson_idx);
@@ -124,8 +129,6 @@ public class LessonDAOImple implements LessonDAO {
 	@Override
 	public int lessonScheduleIdx(int lesson_idx) {
 		int lessonScIdx = sqlMap.selectOne("selectScIdx", lesson_idx);
-		System.out.println("127번줄 : "+lesson_idx);
-		System.out.println("128번줄 : "+lessonScIdx);
 		return lessonScIdx;
 	}
 }

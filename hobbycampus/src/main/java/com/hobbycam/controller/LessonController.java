@@ -2,6 +2,9 @@ package com.hobbycam.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,6 +88,8 @@ public class LessonController {
 	
 	@RequestMapping("/lessonReqList.do")
 	public ModelAndView lessonReqList(int t_idx) {
+		
+		
 		ModelAndView mav=new ModelAndView();
 		List lists=lrdao.lessonReqList(t_idx);
 		mav.addObject("lists",lists);
@@ -96,10 +101,12 @@ public class LessonController {
 	
 	/**get lesson Content by lesson_idx*/
 	@RequestMapping("/lessonCont.do")
-	public ModelAndView lessonCont(int lesson_idx) {
-		ModelAndView mav=new ModelAndView();
-		
+	public ModelAndView lessonCont(int lesson_idx, HttpServletRequest req) {
+
+		HttpSession session=req.getSession();
+	    int u_idx=(int)session.getAttribute("u_idx");
 		String type=ldao.lessonContIndentify(lesson_idx);
+		ModelAndView mav=new ModelAndView();
 		
 		//get review list
 		List lists=null;
@@ -108,31 +115,40 @@ public class LessonController {
 		//get like cnt
 		int like=ldao.lessonLike(lesson_idx);
 		
-		//get lesson date
-		List scheduleDate = ldao.scheduleDate(lesson_idx);
-		
 		//get t_email
 		String tEmail = ldao.teacherEmail(lesson_idx);
 		
 		//whether the like button
-		int u_idx=1;
 		boolean likeCheck = ldao.checkLike(lesson_idx, u_idx);
+		String setViewName = "";
 		
 		int lessonScIdx = 0;
+		List scheduleDate = null;
 		//get content 
 		switch (type) {
 		case "온라인":
 			lists=ldao.lessonOnlineCont(lesson_idx);
-			lessonScIdx = ldao.lessonScheduleIdx(lesson_idx);
-			mav.addObject("lessonScIdx", lessonScIdx);
+			//get lesson date
+			setViewName="lesson/lessonCont_online";
 			break;
 		case "오프라인":
 			lists=ldao.lessonOfflineCont(lesson_idx);
+			
+			//get map address
+			String mapAddr = ldao.getAddr(lesson_idx);
+			mav.addObject("map", mapAddr);
+			
+			//get lesson date
+			scheduleDate = ldao.scheduleDate(lesson_idx);
+			mav.addObject("scheduleDate",scheduleDate);
+			setViewName="lesson/lessonCont_offline";
 			break;
 		case "라이브":
 			lists=ldao.lessonLiveCont(lesson_idx);
-			lessonScIdx = ldao.lessonScheduleIdx(lesson_idx);
-			mav.addObject("lessonScIdx", lessonScIdx);
+			//get lesson date
+			scheduleDate = ldao.scheduleDate(lesson_idx);
+			mav.addObject("scheduleDate",scheduleDate);
+			setViewName="lesson/lessonCont_live";
 			break;
 		}
 		mav.addObject("lessonType", type);
@@ -140,11 +156,10 @@ public class LessonController {
 		mav.addObject("review",review);
 		mav.addObject("lists",lists);
 		mav.addObject("tEmail",tEmail);		
-		mav.addObject("scheduleDate",scheduleDate);
 		mav.addObject("likeCheck",likeCheck);
 		mav.addObject("u_idx",u_idx);
 		mav.addObject("lesson_idx",lesson_idx);
-		mav.setViewName("lesson/lessonCont");
+		mav.setViewName(setViewName);
 		return mav;
 		
 	}
@@ -172,8 +187,11 @@ public class LessonController {
 	
 	/**get like count by lesson_idx*/
 	@RequestMapping("/likeBtnCk.do")
-	public ModelAndView getLikeCnt(int lesson_idx, int u_idx, String btState) {
-		System.out.println(btState);
+	public ModelAndView getLikeCnt(int lesson_idx,  String btState, HttpServletRequest req) {
+		
+		HttpSession session=req.getSession();
+	    int u_idx=(int)session.getAttribute("u_idx");
+	      
 		if(  btState=="false"||btState.equals("false")) {
 			ldao.deleteLike(lesson_idx, u_idx);
 		}else {

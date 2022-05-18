@@ -55,7 +55,6 @@
 	       <div class="pb-2 border-bottom col-md-4">학생 포인트로 전환하기</div>
 		      <div "col-md-3">
 		        <form name="toPoint" action="exToPoint.do">
-		        <input type="hidden" value="1" name="t_idx">
 		          <div class="col-md-6">
 		            <input type="text" name="exPoint">
 		            <button class="btn btn-primary" type="submit" onclick="toPoint();">전환</button>
@@ -67,7 +66,6 @@
 	       <div class="pb-2 border-bottom col-md-4">현금으로 환전하기</div>
 	       <div "col-md-3">
 				 <form name="toCash" action="exToCash.do">
-				 <input type="hidden" value="1" name="t_idx">
 			       <div class="col-md-6">
 			           <input type="text" name="exPoint">	
 			           <button class="btn btn-primary" type="submit" onclick="toChash();">환전</button>
@@ -115,22 +113,7 @@
 				 </div>
 			</div><!-- main -->
 	</div>
-	</main>	
-	<script>
-		function toCash() {
-			$(".toCash").css("display","none");
-			$(".toPoint").css("display","");
-		}
-		function toPoint() {
-			$(".toCash").css("display","");
-			$(".toPoint").css("display","none");
-		}
-		function all() {
-			$(".toCash").css("display","");
-			$(".toPoint").css("display","");
-		}
-
-	</script>	 
+	</main>		 
 </body>
 
  

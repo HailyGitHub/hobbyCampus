@@ -3,6 +3,8 @@ package com.hobbycam.controller;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +37,11 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/resume.do", method = RequestMethod.POST)
-	public ModelAndView insertResume(ResumeDTO dto, @RequestParam("resumeImg")MultipartFile resumeImg) {
+	public ModelAndView insertResume(ResumeDTO dto, @RequestParam("resumeImg")MultipartFile resumeImg, HttpServletRequest req) {
+		
+		 HttpSession session=req.getSession();
+	      int u_idx=(int)session.getAttribute("u_idx");
+		dto.setU_idx(u_idx);
 		
 		String savePathFolder = servletContext.getRealPath("/hobbyImg/resumeImg/");
 		
@@ -62,7 +68,6 @@ public class ResumeController {
 		
 		ModelAndView mav = new ModelAndView();
 		List cate2List =  dao.cate2List(cate1_idx);
-		System.out.println(cate2List.size());
 		mav.addObject("cate2List", cate2List);
 		mav.setViewName("hobbyJson");
 		return mav;

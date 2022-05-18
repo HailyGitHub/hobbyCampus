@@ -38,7 +38,7 @@
   	</div>
   	  <hr class="my-2">
 	<form class="row g-3 " name="insertResume" action="resume.do" method="post" enctype="multipart/form-data" >
-    <input type="hidden" name="u_idx "value="1">
+   
     <div class="col-md-1"></div>
     <div class="col-md-3">
       <label for="validationDefault01" class="form-label">성함(실명)</label>
@@ -82,14 +82,6 @@
       	<!-- From JQuery -->
       	</div>
     </div>  
-      
-      <!-- <select class="form-select" id="cate2" name="cate2_idx"  required> -->
-      <!-- <c:forEach var="cate2" items="${cate2List}"> -->
-      <!-- <option value="${cate2.cate2_idx}" >${cate2.cate2_name}</option> -->   
-      <!-- </c:forEach> -->   
-      <!-- </select> -->    
-         	
-        
       
       
   
@@ -147,14 +139,7 @@
 				
 				$('#cate2').append('<select class="form-select" id="cate2List" name="cate2_idx"  required>'+addOption+'</select>');
 					
-				//console.log($dto[2].cate2_name);
 				
-				
-				//$('#cate2').append('<span>'+$idx+'</span>');
-				//<select class="form-select" id="cate2" name="cate2_idx"  required>
-				//<c:forEach var="cate2" items="${cate2List}"> 
-				//<option value="${cate2.cate2_idx}" >${cate2.cate2_name}</option>
-				 //</c:forEach>
 			}
 		});	
 	});
