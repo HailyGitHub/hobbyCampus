@@ -6,9 +6,14 @@ public interface LessonDAO {
 
 	public int lessonInsert(LessonDTO dto);
 	
-	public List lessonList(String t_name);
+	public int onlineLessonInsert(LessonOnlineDTO onlinedto);
 	
-
+	public int offlineLessonInsert(LessonOfflineDTO offlinedto);
+	
+	public int liveLessonInsert(LessonLiveDTO livedto);
+	
+	public List teacherLessonList(String t_name);
+	
 	public List lessonUpdateForm(String lesson_idx);
 	
 	public int lessonUpdateSubmit(LessonDTO dto);
@@ -25,21 +30,17 @@ public interface LessonDAO {
 	
 	public List lessonReview(int lesson_idx);
 	
-	public List scheduleDate(int lesson_idx);
+	public List lessonList();
 	
-	public List scheduleTime(String lessonDate);
+	public List cate1List();
 	
-	public String teacherEmail(int lesson_idx);
+	public List cate2List(int cate1_idx);
 	
-	public boolean checkLike(int lesson_idx,int u_idx);
+	public LessonDTO LessonListByTidx(int t_idx);
 	
-	public void deleteLike(int u_idx, int lesson_idx);
+	public int countLessonList();
 	
-	public void insertLike(int u_idx, int lesson_idx);
+	public int SelectLessonIdxByLessonThumbnail(String th_count);
 	
-	public int lessonScheduleIdx(int lesson_idx);
 	
-	public String getAddr(int lesson_idx);
-	
-
 }
