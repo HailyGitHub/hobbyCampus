@@ -96,11 +96,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		WHERE
   			LL.LESSON_IDX=LON.LESSON_IDX AND
   			LL.LESSON_IDX=#{lesson_idx}
-  		
-  			
   	</select>
-  	<select id="SelectOfflineLessonCont"></select>
-  	<select id="SelectLiveLessonCont"></select>
+  	<select id="SelectOfflineLessonCont" parameterType="int" resultType="com.hobbycam.lesson.model.LessonOfflineDTO" >
+  		SELECT ll.*, lo.offline_idx, lo.offline_runtime, lo.offline_map, lo.offline_folder, lo.offline_cont, lo.offline_addr
+		FROM lesson_offline lo, lesson_list ll
+		WHERE ll.lesson_idx=#{lesson_idx}
+  	</select>
+  	<select id="SelectLiveLessonCont" parameterType="int" resultType="com.hobbycam.lesson.model.LessonLiveDTO">
+		SELECT ls.*, lv.live_idx, lv.live_runtime, lv.live_tool, lv.live_folder, lv.live_cont
+				FROM lesson_live lv, lesson_list ls
+				WHERE ls.lesson_idx=#{lesson_idx}
+  	</select>
   	<select id="SelectLessonLikeCount" parameterType="int" resultType="int">
   		SELECT
   			COUNT(*)
@@ -136,5 +142,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    WHERE
 		        B.LESSON_IDX=LL.LESSON_IDX)C
 		WHERE LESSON_IDX=#{lesson_idx}
+  	</select>
+  	<select id="selectScheduleDate" parameterType="int" resultType="com.hobbycam.lesson.model.LessonScheduleDTO">
+  		SELECT distinct ls.lesson_start
+  			FROM lesson_schedule ls
+  				WHERE ls.lesson_idx=#{lesson_idx}
+  	</select>
+  	
+  	<select id="selectScheduleTime" parameterType="String" resultType="com.hobbycam.lesson.model.LessonScheduleDTO">
+  		SELECT *
+  			FROM lesson_schedule ls
+  				WHERE ls.lesson_start=to_date(#{lesson_time},'YYYY-MM-DD')
+  	</select>
+  	<select id="checkLike"  parameterType="map" resultType="int">
+	  	SELECT count(*)
+			FROM like_list
+				WHERE u_idx=#{u_idx} And lesson_idx=#{lesson_idx}
+  	</select>
+  	<select id="selectTeacherEmail" parameterType="int" resultType="String">
+  		SELECT u.u_email 
+		    FROM (SELECT t.u_idx
+			    FROM lesson_list ls, teacher t
+			    WHERE ls.lesson_idx=#{lesson_idx}
+			    	AND ls.t_idx=t.t_idx) a, users u
+		WHERE a.u_idx = u.u_idx
+  	</select>
+  	<delete id="deleteLike" parameterType="map">
+  		DELETE FROM like_list
+  		WHERE u_idx=#{u_idx} and lesson_idx=#{lesson_idx}
+  	</delete>
+  	<insert id="insertLike" parameterType="map">
+  		INSERT INTO like_list
+  		VALUES(#{u_idx},#{lesson_idx} )
+  	</insert>
+  	<select id="selectScIdx" parameterType="int" resultType="int">
+  		SELECT lesson_schedule_idx
+			FROM  lesson_schedule
+			WHERE lesson_idx=#{lesson_idx}
+  	</select>
+  	<select id="selectMap" parameterType="int" resultType="String">
+  		SELECT offline_addr
+  		FROM lesson_offline
+  		WHERE lesson_idx=#{lesson_idx}
   	</select>
   </mapper>

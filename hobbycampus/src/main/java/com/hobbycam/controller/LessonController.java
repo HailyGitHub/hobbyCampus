@@ -2,12 +2,18 @@ package com.hobbycam.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hobbycam.DAO.LessonRecordDAO;
+import com.hobbycam.email.HobbyEmailGoogle;
 import com.hobbycam.lesson.model.LessonDAO;
 import com.hobbycam.lesson.model.LessonDTO;
 
@@ -16,6 +22,9 @@ public class LessonController {
 	
 	@Autowired
 	private LessonDAO ldao;
+	
+	@Autowired
+	private LessonRecordDAO lrdao;
 
 	@RequestMapping(value = "/lesson.do",method = RequestMethod.GET)
 	public ModelAndView lessonForm() {
@@ -58,4 +67,149 @@ public class LessonController {
 		
 		return mav;
 	}
+
+	@RequestMapping(value = "/lessonUpdate.do",method = RequestMethod.POST)
+	public ModelAndView lessonUpdateSubmit(LessonDTO dto) {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		int result=ldao.lessonUpdateSubmit(dto);
+		String msg=result>0?"강의 수정 성공":"강의 수정 실패";
+		mav.addObject("msg",msg);
+		mav.addObject("gopage","index.do");
+		mav.setViewName("/teacher/msg");
+		return mav;
+	}
+	
+	
+	
+	
+	/**get lesson Content by lesson_idx*/
+	@RequestMapping("/lessonCont.do")
+	public ModelAndView lessonCont(int lesson_idx, HttpServletRequest req) {
+
+		HttpSession session=req.getSession();
+	    int u_idx=(int)session.getAttribute("u_idx");
+		String type=ldao.lessonContIndentify(lesson_idx);
+		ModelAndView mav=new ModelAndView();
+		
+		//get review list
+		List lists=null;
+		List review=ldao.lessonReview(lesson_idx);
+		
+		//get like cnt
+		int like=ldao.lessonLike(lesson_idx);
+		
+		//get t_email
+		String tEmail = ldao.teacherEmail(lesson_idx);
+		
+		//whether the like button
+		boolean likeCheck = ldao.checkLike(lesson_idx, u_idx);
+		String setViewName = "";
+		
+		int lessonScIdx = 0;
+		List scheduleDate = null;
+		//get content 
+		switch (type) {
+		case "온라인":
+			lists=ldao.lessonOnlineCont(lesson_idx);
+			//get lesson date
+			setViewName="lesson/lessonCont_online";
+			break;
+		case "오프라인":
+			lists=ldao.lessonOfflineCont(lesson_idx);
+			
+			//get map address
+			String mapAddr = ldao.getAddr(lesson_idx);
+			mav.addObject("map", mapAddr);
+			
+			//get lesson date
+			scheduleDate = ldao.scheduleDate(lesson_idx);
+			mav.addObject("scheduleDate",scheduleDate);
+			setViewName="lesson/lessonCont_offline";
+			break;
+		case "라이브":
+			lists=ldao.lessonLiveCont(lesson_idx);
+			//get lesson date
+			scheduleDate = ldao.scheduleDate(lesson_idx);
+			mav.addObject("scheduleDate",scheduleDate);
+			setViewName="lesson/lessonCont_live";
+			break;
+		}
+		mav.addObject("lessonType", type);
+		mav.addObject("like",like);
+		mav.addObject("review",review);
+		mav.addObject("lists",lists);
+		mav.addObject("tEmail",tEmail);		
+		mav.addObject("likeCheck",likeCheck);
+		mav.addObject("u_idx",u_idx);
+		mav.addObject("lesson_idx",lesson_idx);
+		mav.setViewName(setViewName);
+		return mav;
+		
+	}
+	
+	/**send email to teacher*/
+	@RequestMapping("/sendEmail.do")
+	public ModelAndView sendEmail(@RequestParam("teacherEmail")String tEmail, @RequestParam("userMail")String uEmail,@RequestParam("mailSubject")String subject, @RequestParam("mailContent")String content ) {
+		ModelAndView mav=new ModelAndView();
+		HobbyEmailGoogle heg = new HobbyEmailGoogle();
+		boolean result = false;
+		subject = "[hobbycampus/수업 문의]"+subject;
+		content = "[답변 받을 학생 이메일]  "+uEmail+"\r\n[문의 내용]"+content;
+		try {
+			heg.emailSend(tEmail, subject, content);
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		mav.addObject("result", result);
+		mav.setViewName("lesson/lessonContEmailOk");
+		return mav;
+		
+	}
+	
+	/**get like count by lesson_idx*/
+	@RequestMapping("/likeBtnCk.do")
+	public ModelAndView getLikeCnt(int lesson_idx,  String btState, HttpServletRequest req) {
+		
+		HttpSession session=req.getSession();
+	    int u_idx=(int)session.getAttribute("u_idx");
+	      
+		if(  btState=="false"||btState.equals("false")) {
+			ldao.deleteLike(lesson_idx, u_idx);
+		}else {
+			ldao.insertLike(u_idx, lesson_idx);
+		}
+		int likeCnt=ldao.lessonLike(lesson_idx);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("likeCnt",likeCnt);
+		mav.setViewName("hobbyJson");
+		return mav;
+	}
+	
+	/**get lessonScheduleIdx by lesson_idx*/
+	@RequestMapping("/scIdx.do")
+	public ModelAndView getLessonScheduleIdx(int lesson_idx) {
+		int lessonScheduleIdx = ldao.lessonScheduleIdx(lesson_idx);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("lscIdx", lessonScheduleIdx);
+		mav.setViewName("hobbyJson");
+		return mav;
+	}
+	
+	/**get lesson time by specific lesson date*/
+	@RequestMapping("/lessonTime.do")
+	public ModelAndView getLessonTime(String lessonDate) {
+		List scheduleTime = ldao.scheduleTime(lessonDate);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("scheduleTime",scheduleTime);
+		mav.setViewName("hobbyJson");
+		return mav;
+	}
+	
+	
+
 }

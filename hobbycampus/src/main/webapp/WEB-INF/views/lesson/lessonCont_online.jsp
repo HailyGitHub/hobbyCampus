@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
  <link href="img/main.ico" rel="shortcut icon" type="image/x-icon">
@@ -23,8 +24,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
-=======
 <!-- HEADER -->
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>	
 
@@ -77,22 +76,10 @@
 			        <h4>강의 상세 설명</h4>
 			     </div>
 			     	<!-- content description -->
-		                 <c:if test="${lessonType=='오프라인' }">
-		                  <div id="lessonContentLists">
-		                       ${dto.offline_cont }
-		                    </div>
-		               </c:if>
-		                <c:if test="${lessonType=='온라인' }">
-		                     <div id="onlineLessonContentLists">
-		                       ${dto.online_cont }
-		                    </div>
-		               </c:if>     
-		                <c:if test="${lessonType=='라이브' }">
-		                     <div id="liveLessonContentLists">
-		                       ${dto.live_cont }
-		                    </div>
-		               </c:if>     
-
+			     	
+						<div id="lessonContentLists">
+				        	 ${dto.online_cont }
+				     	</div>
 					
 					
 				     	<c:if test="${empty lists }">
@@ -166,22 +153,7 @@
 		        <div id="subj" class="text-end fw-bold fs-4" >${dto.lesson_subj }</div>
 		       
 		        <div id="cont" class="text-end  fs-5">${dto.lesson_short_cont }</div>
-		        
 		       
-			        <div id="scheduleDate">
-			        <span class="fs-6 text-muted  text-end fw-light">강의 날짜</span>
-			        	<select class="form-select" id="scheduleDateList" name="scheduleDate"  required>
-					      	<option>::날짜선택::</option>
-					      	<c:forEach var="sd" items="${scheduleDate }">
-					      		<option value="${sd.lesson_start}" >${sd.lesson_start}</option>
-					      	</c:forEach>
-					      </select>
-			        </div>
-		       		<span class="fs-6 text-muted text-end fw-light">강의 시간</span>
-			        <div id="lessonTime">
-			        	<!-- from Jquery -->
-			        </div>
-			   
 			    
 		        <div id="price" class="text-end fw-bold fs-5"><span class="text-muted fs-6 fw-light">수강료</span> ${dto.lesson_price } 하빗</div>
 		        <div id="kit" class="text-end text-muted fw-light fs-6">*${dto.lesson_kit=='true'?'키트 포함':'' }</div>
@@ -202,16 +174,6 @@
 		   </c:forEach>
 		</div>
 		</div>
-	
-	
-	
-	<!-- <c:forEach var="rv" items="${review }"> --> 
-	<!-- <tr> -->
-	<!-- 	<th>별점</th> <td>${rv.star_point }</td> -->
-	<!--</tr><tr><th>리뷰 내용</th><td>${rv.review_cont }</td>  -->		
-	<!-- </tr><tr><th>리뷰 날짜</th><td>${rv.review_date }</td></tr></c:forEach></table> -->	
-			
-		
 	<!-- Modal -->
 		<div class="modal fade" id="sendMail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
@@ -236,8 +198,9 @@
 		    </div>
 		  </div>
 		</div>	
->>>>>>> teacher_shj
 
+	<!-- FOOTER -->
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 <script>
 	$(document).ready(function(){
@@ -256,6 +219,11 @@
 
 	/**like button clicked*/
 	$('#likeBnt').click(function () {
+		console.log('220줄 : u_idx = ${u_idx}');
+		console.log('lesson_idx = ${lesson_idx}');
+		
+		
+		
 		var btState = $("#heartFill").hasClass("bi-heart");
 		$.ajax({
 			url :"likeBtnCk.do",
@@ -292,27 +260,7 @@
 		
 	});
 	
-	/**select lesson date*/
-	 $('#scheduleDate').change(function () {
-		$.ajax({
-			url :"lessonTime.do",
-			type : "get",
-			data : {'lessonDate': $('#scheduleDateList').val()},
-			dataType : "json",
-			success : function(data) {
-				$('#lessonTime').empty();
-				var addOption = '';
-				var $scTime = data.scheduleTime;
-				for(var i=0; i<$scTime.length; i++){
-					addOption+='<option value="'+$scTime[i].lesson_schedule_idx+'">'+$scTime[i].lesson_time+'</option>';
-				}
-				$('#lessonTime').append('<select class="form-select" id="lessonTimeList"  required>'+addOption+'</select>');
-				
-			}
-		});	
-	});
 
 </script>
 
-<jsp:include page="/WEB-INF/views/map.jsp"></jsp:include>
 </html>
