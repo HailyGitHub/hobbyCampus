@@ -45,7 +45,7 @@
 		            	PAY_LIST_IDX as payListIdx,
 		            	to_char(PAY_DATE, 'yyyy-mm-dd hh24:mi:ss') as pay_date,
 		            	PAY_POINT as point,
-		            	'포인트 충전' as title, 
+		            	'충전' as title, 
 		            	PAY_VALUE as type 
 		            from 
 		            	pay_list
@@ -82,7 +82,7 @@
 	        select
 	         to_char(PAY_DATE, 'yyyy-mm-dd hh24:mi:ss') as pay_date,
 	         PAY_POINT as point,
-	         '포인트 충전' as title, 
+	         '충전' as title, 
 	         PAY_VALUE as type 
 	        from pay_list
 	        where U_IDX = #{uIdx}
