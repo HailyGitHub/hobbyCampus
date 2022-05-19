@@ -36,13 +36,15 @@
 </head>
 <body>
 <!-- HEADER -->
-<c:set var="adminSession" value="${a_idx}"></c:set>
+<c:set var="adminSession" value="${s_a_idx}"></c:set>
+<c:set var="tSession" value="${t_idx}"></c:set>
 <c:if test="${empty adminSession}">
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 </c:if>
 <c:if test="${!empty adminSession}">
 	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
-	<input type="hidden" id="admin" value="${adminSession}">
+	<input type="hidden" id="adminSession" value="${adminSession}" style="display: none;">
+	<input type="hidden" id="tSession" value="${tSession}" style="display: none;">
 </c:if>	
 
 
@@ -123,6 +125,7 @@
        <div class="modal-body p-5 pt-0">
         <form class="">
         <input type="hidden" id="notice_idx">
+        <input type="hidden" id="admin_idx">
           <div class="form-floating mb-3" name="i_subject">
            <input type="Text" class="form-control rounded-4" id="notice_subj" placeholder="modal_title">
            <label for="notice_subj">Subject</label>
@@ -165,7 +168,15 @@
 </body>
 
 <script>
-
+window.onload = function(){
+	if( $('#adminSession').val()==null){
+		$('#btn_3').css('display', 'none');
+	}
+	if( $('#tSession').val()==null&&$('#adminSession').val()==null){
+		$('#btn_2').css('display', 'none');
+	}
+	
+}
 
 	/* List Button CSS */
 	var $uri = $(location).attr('pathname'); //Get pathname
@@ -215,7 +226,7 @@
 		$('#t_notice_cont').css('display', 'block');
 		
 		btnOff();
-		if ($('#admin').val() != null){
+		if ($('#adminSession').val() != null){
 			$('#modal_udt_btn').css('display', 'block');
 		}
 		$('#notice_subj').empty();
@@ -231,6 +242,7 @@ $.ajax({
 		$('#t_notice_subj').text(result.dto.notice_subj);
 		$('#t_notice_cont').text(result.dto.notice_cont);
 		$('#notice_idx').val(result.dto.notice_idx);
+		$('#admin_idx').val(result.dto.a_idx);
 		$('#notice_subj').val(result.dto.notice_subj);
 		$('#notice_cont').val(result.dto.notice_cont);
 		$("#noticeOpt").val(result.dto.notice_viewer).prop("selected", true);
@@ -259,19 +271,16 @@ $.ajax({
 		$('#noticeOpt').val('');
 		$('#notice_cont').val('');
 
-		
 
-		
 	}
 	
 	function createOk(){
 		if(!confirm('게시하시겠습니까?')) return false;
-		
 		console.log($('#admin').val());
 		console.log($('#notice_subj').val());
 		console.log($('#noticeOpt').val());
 		console.log($('#notice_cont').val());
-		var a_idx = $('#admin_idx').val();
+		var a_idx = ($('#adminSession').val());
 		var subj = $('#notice_subj').val();
 		var viewer = $('#noticeOpt').val();
 		var cont = $('#notice_cont').val();
@@ -302,7 +311,7 @@ $.ajax({
 	function updateOk(){
 		if(!confirm('수정하시겠습니까?')) return false;
 		
-		console.log($('#admin').val());
+		console.log($('#adminSession').val());
 		console.log($('#notice_subj').val());
 		console.log($('#noticeOpt').val());
 		console.log($('#notice_cont').val());

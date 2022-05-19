@@ -345,9 +345,7 @@ var getCookie = function(name) {
 	var noticeBlind = getCookie("noticeBlind");
 	
 	//alert("쿠키 noticeBlind변수에 저장된 값: "+noticeBlind);
-	if(noticeBlind!='true'){
-		$('#exampleModal').modal('show');
-	}
+	
 	
 	$('#modal_title').text('공지사항');
 	$('#notice_subj').css('display', 'none');
@@ -369,6 +367,8 @@ var getCookie = function(name) {
 		url: 'getNoticeExpose.do',
 		dataType: 'json',
 		success: function(result){
+			if(result.dto.notice_idx!=){
+				
 			console.log(result.dto.notice_idx); //couponMakeForm().dto.coupon_idx;	 
 			$('#t_notice_subj').text(result.dto.notice_subj);
 			$('#t_notice_cont').text(result.dto.notice_cont);
@@ -376,7 +376,11 @@ var getCookie = function(name) {
 			$('#notice_subj').val(result.dto.notice_subj);
 			$('#notice_cont').val(result.dto.notice_cont);
 			$("#noticeOpt").val(result.dto.notice_viewer).prop("selected", true);
-		}
+			};
+			if(noticeBlind!='true'){
+				$('#exampleModal').modal('show');
+			}
+		},error:function(){}, complete : function(){}
 	});//ajax	
  } 
 
