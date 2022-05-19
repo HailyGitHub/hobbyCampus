@@ -1,0 +1,60 @@
+@charset "UTF-8";
+.bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+    
+
+    #lessonContent{
+      height: 100%;
+    }
+    
+    
+    #stars{
+          font-size: 2em;
+          color: transparent;
+         text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    }
+    #lessonContents{
+    	padding : 10px;
+    	margin-top: 10px;
+    }
+    #contDescription,#contentMap{
+    	margin-top: 40px;
+    	margin-bottom: 90px;    
+    }
+    #contentMap{
+    	margin-bottom: 120px;    
+    }
+    table{
+    	margin : 0px;
+    }
+    #reviewList{
+    	margin-top: 30px;
+    	margin-bottom: 30px;    
+    }
+    #type, #subj, #cont{
+    	margin-top: 30px;
+    }
+    #scheduleDate{
+    	margin-top: 30px;
+    	margin-bottom: 10px;   
+    }
+   #price{
+   	margin-top: 30px;
+   	border-top: 1px solid lightslategray;
+   }
+   #kit{
+   	margin-bottom: 50px;  
+   }
+   #lessonEnrollBtn{
+   	margin-bottom: 10px; 
+   }
+   
+   .emailModalText{
+   		padding : 10px;
+   		margin : 10px;
+   }

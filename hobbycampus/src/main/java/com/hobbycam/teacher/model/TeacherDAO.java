@@ -8,5 +8,5 @@ public interface TeacherDAO {
 	public int pointSelect(int t_idx);
 	public boolean exchageUPoint(int t_idx, int exPoint);
 	public boolean exchageCash(int t_idx, int exPoint);
-	
+	public void lessonExStateUpdate(int t_idx);
 }

@@ -1,4 +1,4 @@
-package com.hobbycam.cate1.model;
+package com.hobbycam.category.model;
 
 public class Cate1DTO {
 
