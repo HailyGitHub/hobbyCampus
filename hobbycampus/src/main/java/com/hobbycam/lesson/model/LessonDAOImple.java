@@ -131,6 +131,12 @@ public class LessonDAOImple implements LessonDAO {
 		int lessonScIdx = sqlMap.selectOne("selectScIdx", lesson_idx);
 		return lessonScIdx;
 	}
+	
+	@Override
+	public String getThumbnail(int lesson_idx) {
+		String thumbnail = sqlMap.selectOne("selectThumb", lesson_idx);
+		return thumbnail;
+	}
 }
 
 

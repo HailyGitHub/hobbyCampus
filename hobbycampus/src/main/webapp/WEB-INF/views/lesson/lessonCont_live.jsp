@@ -38,17 +38,13 @@
 		      </div>
 		      <div class="carousel-inner">
 		        <div class="carousel-item active" >
-		          <img src="img/banner_01.png" class="d-block w-100" alt="간판1" height="500em">
+		          <img src="/hobbycampus/hobbyImg/lesson/${thumbnail }/thumbnail.jpg" class="d-block w-100" alt="간판1" height="500em">
 		        </div>
-		        <div class="carousel-item">
-		          <img src="img/banner_02.png" class="d-block w-100" alt="간판2" height="500em">
-		        </div>
-		        <div class="carousel-item">
-		          <img src="img/banner_03.png" class="d-block w-100" alt="간판3" height="500em">
-		        </div>
-		        <div class="carousel-item">
-		          <img src="img/banner_04.png" class="d-block w-100" alt="간판3" height="500em">
-		        </div>
+		        <c:forEach var="lessonImg" items="${imgLists }"> 
+			      <div class="carousel-item">
+			          <img src="/hobbycampus/hobbyImg/lesson/${thumbnail }/img/${lessonImg}" class="d-block w-100" height="500em">
+			      </div>
+			  </c:forEach>
 		      </div>
 		      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 		        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -217,7 +213,6 @@
 </body>
 <script>
 $(document).ready(function(){
-	console.log(${likeCheck} );
 	if(${likeCheck} ){
 		var icon = '<i id="heartFill" class="bi bi-suit-heart-fill"></i>';	 
 		var likeCnt ='찜('+${like }+')';

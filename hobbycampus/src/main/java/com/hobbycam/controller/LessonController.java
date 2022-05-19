@@ -2,6 +2,7 @@ package com.hobbycam.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,7 @@ import com.hobbycam.email.HobbyEmailGoogle;
 import com.hobbycam.lesson.model.LessonDAO;
 import com.hobbycam.lesson.model.LessonDTO;
 import com.hobbycam.lessonRecord.model.LessonRecordDAO;
+import com.hobbycam.upload.getLessonImg;
 
 @Controller
 public class LessonController {
@@ -25,6 +27,8 @@ public class LessonController {
 	
 	@Autowired
 	private LessonRecordDAO lrdao;
+	
+	@Autowired ServletContext servletContext;
 
 	@RequestMapping(value = "/lesson.do",method = RequestMethod.GET)
 	public ModelAndView lessonForm() {
@@ -124,12 +128,23 @@ public class LessonController {
 		
 		int lessonScIdx = 0;
 		List scheduleDate = null;
+		
+		//get thumbnail column by lesson_idx
+		String lesson_thumbnail = ldao.getThumbnail(lesson_idx);
+		
+		//get lesson imges
+		getLessonImg gi = new getLessonImg();
+		List imgLists = gi.getImages(lesson_thumbnail, servletContext); 	
+		
 		//get content 
 		switch (type) {
 		case "온라인":
 			lists=ldao.lessonOnlineCont(lesson_idx);
+			
 			//get lesson date
 			setViewName="lesson/lessonCont_online";
+			
+			
 			break;
 		case "오프라인":
 			lists=ldao.lessonOfflineCont(lesson_idx);
@@ -142,6 +157,9 @@ public class LessonController {
 			scheduleDate = ldao.scheduleDate(lesson_idx);
 			mav.addObject("scheduleDate",scheduleDate);
 			setViewName="lesson/lessonCont_offline";
+			
+			
+			
 			break;
 		case "라이브":
 			lists=ldao.lessonLiveCont(lesson_idx);
@@ -152,6 +170,8 @@ public class LessonController {
 			break;
 		}
 		mav.addObject("lessonType", type);
+		mav.addObject("thumbnail", lesson_thumbnail);
+		mav.addObject("imgLists", imgLists);
 		mav.addObject("like",like);
 		mav.addObject("review",review);
 		mav.addObject("lists",lists);

@@ -185,4 +185,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		FROM lesson_offline
   		WHERE lesson_idx=#{lesson_idx}
   	</select>
+  	<select id="selectThumb" parameterType="int" resultType="String">
+  		SELECT lesson_thumbnail
+  		FROM lesson_list
+  		WHERE lesson_idx=#{lesson_idx}
+  	</select>
   </mapper>

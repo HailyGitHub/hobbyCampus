@@ -20,6 +20,7 @@ import com.hobbycam.payList.model.PayListDAO;
 import com.hobbycam.teacher.model.TeacherDAO;
 import com.hobbycam.teacher.model.TeacherDTO;
 import com.hobbycam.upload.ImgUplod;
+import com.hobbycam.upload.getLessonImg;
 
 @Controller
 public class TeacherController {
@@ -38,6 +39,7 @@ public class TeacherController {
 	/**Teacher mypage*/
 	@RequestMapping("/myTeacherPage.do")
 	public String teacherMypage() {
+		
 		return "teacher/mypage";
 	}
 	

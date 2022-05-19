@@ -40,4 +40,6 @@ public interface LessonDAO {
 	
 	public String getAddr(int lesson_idx);
 	
+	public String getThumbnail(int lesson_idx);
+	
 }
