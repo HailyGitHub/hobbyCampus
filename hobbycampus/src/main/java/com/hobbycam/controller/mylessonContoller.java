@@ -6,82 +6,85 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hobbycam.DAO.LessonRecordDAO;
 import com.hobbycam.DAO.PostDAO;
 import com.hobbycam.VO.LessonRecordVO;
+import com.hobbycam.lessonRecord.model.LessonRecordDAO;
 
 @Controller
 public class mylessonContoller {
 
-	@Autowired
-	private PostDAO postDAO;
+   @Autowired
+   private PostDAO postDAO;
 
-	@Autowired
-	private LessonRecordDAO lessonRecordDAO;
+   @Autowired
+   private LessonRecordDAO lessonRecordDao;
 
-	@RequestMapping("/mylessonList.do")
-	public ModelAndView myreviewList(@RequestParam Map<String, String> param) {
+   @RequestMapping("/mylessonList.do")
+   public ModelAndView mylessonList(@RequestParam Map<String, String> param , HttpServletRequest req) {
 
-		// TODO 
-		int uIdx = 3;
+      ModelAndView mav = new ModelAndView();
+      
+       HttpSession session=req.getSession();
+       if(session.getAttribute("u_idx")==null) {
+          mav.setViewName("index.do");
+          return mav;
+       }
+        int uIdx=(int)session.getAttribute("u_idx");
+      
+      // post save
+      String postReceiver = param.get("postReceiver");
+      String postTel = param.get("postTel");
+      String postAddr = param.get("postAddr");
+      String postEtc = param.get("postEtc");
+      // postReceiver info O
+      if (postReceiver != null) {
+         // Logic
+         Map<String, Object> map = new HashMap<>();
+         map.put("uIdx", uIdx);
+         map.put("postReceiver", postReceiver);
+         map.put("postTel", postTel);
+         map.put("postAddr", postAddr);
+         map.put("postEtc", postEtc);
+         postDAO.insert(map);
+      }
 
-		// 
-		String postReceiver = param.get("postReceiver");
-		String postTel = param.get("postTel");
-		String postAddr = param.get("postAddr");
-		String postEtc = param.get("postEtc");
-		// postReceiver 
-		if (postReceiver != null) {
-			// 
-			Map<String, Object> map = new HashMap<>();
-			map.put("uIdx", uIdx);
-			map.put("postReceiver", postReceiver);
-			map.put("postTel", postTel);
-			map.put("postAddr", postAddr);
-			map.put("postEtc", postEtc);
-			postDAO.insert(map);
-		}
+      // add lessonlist
+      try {
+         
+         int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
+         int pricePoint = Integer.valueOf(param.get("pricePoint"));
+         String lessonRecordState = "예약";
+         String lessonExchangeState = "미정산";
+         Map<String, Object> map = new HashMap<>();
+         map.put("uIdx", uIdx);
+         map.put("lessonScheduleIdx", lessonScheduleIdx);
+         map.put("pricePoint", pricePoint);
+         map.put("lessonBuyDate", LocalDateTime.now());
+         map.put("lessonRecordState", lessonRecordState);
+         map.put("lessonExchangeState", lessonExchangeState);
 
-		//
-		try {
-			// 
-			int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
-			int pricePoint = Integer.valueOf(param.get("pricePoint"));
-			String lessonRecordState = "예약";
-			String lessonExchangeState = "미정산";
-			Map<String, Object> map = new HashMap<>();
-			map.put("uIdx", uIdx);
-			map.put("lessonScheduleIdx", lessonScheduleIdx);
-			map.put("pricePoint", pricePoint);
-			map.put("lessonBuyDate", LocalDateTime.now());
-			map.put("lessonRecordState", lessonRecordState);
-			map.put("lessonExchangeState", lessonExchangeState);
+         lessonRecordDao.insert(map);
+      } catch (Exception e) {
+      }
 
-			lessonRecordDAO.insert(map);
-		} catch (Exception e) {
-		}
+      
+      mav.setViewName("/users/mylesson");
+      
+      
+      String lessonRecordState = param.get("lessonRecordState");
+      List<LessonRecordVO> lessonRecordList = lessonRecordDao.getLessonRecords(uIdx, lessonRecordState);
+      mav.addObject("lessonRecordList", lessonRecordList);
 
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/users/mylesson");
-		
-		
-		String lessonRecordState = param.get("lessonRecordState");
-		List<LessonRecordVO> lessonRecordList = lessonRecordDAO.getLessonRecords(uIdx, lessonRecordState);
-		mav.addObject("lessonRecordList", lessonRecordList);
-		
-		
-		
-		
-		
-		
-		
-		return mav;
-	}
+      return mav;
+   }
 
 }

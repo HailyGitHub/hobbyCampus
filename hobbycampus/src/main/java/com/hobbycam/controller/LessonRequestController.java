@@ -27,137 +27,113 @@ import com.hobbycam.users.model.UsersDAO;
 @Controller
 public class LessonRequestController {
 
-	@Autowired
-	private LessonScheduleDAO lessonScheduleDAO;
+   @Autowired
+   private LessonScheduleDAO lessonScheduleDAO;
 
-	@Autowired
-	private CouponDAO couponDAO;
+   @Autowired
+   private CouponDAO couponDAO;
 
-	@Autowired
-	private PostDAO postDAO;
+   @Autowired
+   private PostDAO postDAO;
 
-	@Autowired
-	private UsersDAO userDAO;
+   @Autowired
+   private UsersDAO userDAO;
 
-	@Autowired
-	private LessonRecordDAO lessonRecordDao;
+   @Autowired
+   private LessonRecordDAO lessonRecordDao;
 
-	@RequestMapping("/lessonRequest.do")
-<<<<<<< HEAD
-	public ModelAndView mypage(@RequestParam Map<String, String> param, HttpServletRequest req) {
-		HttpSession session = req.getSession();
-=======
-	public ModelAndView mypage(@RequestParam Map<String, String> param) {
+   @RequestMapping("/lessonRequest.do")
+   public ModelAndView mypage(@RequestParam Map<String, String> param, HttpServletRequest req) {
+      HttpSession session = req.getSession();
+      ModelAndView mav = new ModelAndView();
+      if (session.getAttribute("u_idx") == null) {
+         mav.setViewName("redirect:/index.do");
+         return mav;
+      }
 
-		
-		int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
-		LessonScheduleVO lessonScheduleVO = lessonScheduleService.getLessonSchedule(lessonScheduleIdx);
-		
-		
-		int uIdx = 3;
-		UserVO userVO = userDAO.getUser(uIdx);
-		
-		List<CouponVO> couponList = couponService.getCouponsByUser(uIdx, true);
+   
+      int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
+      LessonScheduleVO lessonScheduleVO = lessonScheduleDAO.getLessonSchedule(lessonScheduleIdx);
 
->>>>>>> teacher_kdw
-		ModelAndView mav = new ModelAndView();
-		if (session.getAttribute("u_idx") == null) {
-			mav.setViewName("redirect:/index.do");
-			return mav;
-		}
+      int uIdx = (int) session.getAttribute("u_idx");
+      UserVO userVO = userDAO.getUser(uIdx);
 
-	
-		int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
-		LessonScheduleVO lessonScheduleVO = lessonScheduleDAO.getLessonSchedule(lessonScheduleIdx);
+      List<CouponVO> couponList = couponDAO.getCouponsByUser(uIdx, true);
 
-		int uIdx = (int) session.getAttribute("u_idx");
-		UserVO userVO = userDAO.getUser(uIdx);
+      mav.setViewName("payment/lessonRequest");
 
-		List<CouponVO> couponList = couponDAO.getCouponsByUser(uIdx, true);
+      // kit
+      if ("있음".equals(lessonScheduleVO.getLessonKit())) {
+         PostVO postVO = postDAO.getPost(uIdx);
+         // not post .
+         if (postVO == null) {
+            mav.addObject("postSaved", "N");
+         }
 
-		mav.setViewName("payment/lessonRequest");
+         mav.addObject("postVO", postVO);
+      }
 
-<<<<<<< HEAD
-		// kit
-		if ("있음".equals(lessonScheduleVO.getLessonKit())) {
-=======
-		
-		if("있음".equals(lessonScheduleVO.getLessonKit())) {
->>>>>>> teacher_kdw
-			PostVO postVO = postDAO.getPost(uIdx);
-			// not post .
-			if (postVO == null) {
-				mav.addObject("postSaved", "N");
-			}
+      // set todo info 
+      mav.addObject("lessonScheduleIdx", lessonScheduleIdx);
+      mav.addObject("userVO", userVO);
+      mav.addObject("lessonVO", lessonScheduleVO);
+      mav.addObject("couponList", couponList);
 
-			mav.addObject("postVO", postVO);
-		}
+      return mav;
+   }
 
-<<<<<<< HEAD
-		// set todo info 
-=======
-		
->>>>>>> teacher_kdw
-		mav.addObject("lessonScheduleIdx", lessonScheduleIdx);
-		mav.addObject("userVO", userVO);
-		mav.addObject("lessonVO", lessonScheduleVO);
-		mav.addObject("couponList", couponList);
+   // move page
+   @RequestMapping("/lessonComplete.do")
+   public ModelAndView lessonComplete(@RequestParam Map<String, String> param, HttpServletRequest req) {
+      HttpSession session = req.getSession();
 
-		return mav;
-	}
+      int uIdx = (int) session.getAttribute("u_idx");
 
-	// move page
-	@RequestMapping("/lessonComplete.do")
-	public ModelAndView lessonComplete(@RequestParam Map<String, String> param, HttpServletRequest req) {
-		HttpSession session = req.getSession();
+      // save post 
+      
+      String postReceiver = param.get("postReceiver");
+      String postTel = param.get("postTel");
+      String postAddr = param.get("postAddr");
+      String postEtc = param.get("postEtc");
+      
+      // postReceiver  
+      if (postReceiver != null) {
+   
+         Map<String, Object> map = new HashMap<>();
+         map.put("uIdx", uIdx);
+         map.put("postReceiver", postReceiver);
+         map.put("postTel", postTel);
+         map.put("postAddr", postAddr);
+         map.put("postEtc", postEtc);
+         postDAO.insert(map);
+      }
 
-		int uIdx = (int) session.getAttribute("u_idx");
+      // add mylesson
+      try {
+         
+         int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
+         int pricePoint = Integer.valueOf(param.get("pricePoint"));
+         String lessonRecordState = "예약대기";
+         String lessonExchangeState = "미정산";
+         Map<String, Object> map = new HashMap<>();
+         map.put("uIdx", uIdx);
+         map.put("lessonScheduleIdx", lessonScheduleIdx);
+         map.put("pricePoint", pricePoint);
+         map.put("lessonBuyDate", LocalDateTime.now());
+         map.put("lessonRecordState", lessonRecordState);
+         map.put("lessonExchangeState", lessonExchangeState);
 
-		// save post 
-		
-		String postReceiver = param.get("postReceiver");
-		String postTel = param.get("postTel");
-		String postAddr = param.get("postAddr");
-		String postEtc = param.get("postEtc");
-		
-		// postReceiver  
-		if (postReceiver != null) {
-	
-			Map<String, Object> map = new HashMap<>();
-			map.put("uIdx", uIdx);
-			map.put("postReceiver", postReceiver);
-			map.put("postTel", postTel);
-			map.put("postAddr", postAddr);
-			map.put("postEtc", postEtc);
-			postDAO.insert(map);
-		}
+         lessonRecordDao.insert(map);
+         
+         userDAO.subUPoint(uIdx, pricePoint);
+      } catch (Exception e) {
+      }
+      
+      
+      
 
-		// add mylesson
-		try {
-			
-			int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
-			int pricePoint = Integer.valueOf(param.get("pricePoint"));
-			String lessonRecordState = "예약";
-			String lessonExchangeState = "미정산";
-			Map<String, Object> map = new HashMap<>();
-			map.put("uIdx", uIdx);
-			map.put("lessonScheduleIdx", lessonScheduleIdx);
-			map.put("pricePoint", pricePoint);
-			map.put("lessonBuyDate", LocalDateTime.now());
-			map.put("lessonRecordState", lessonRecordState);
-			map.put("lessonExchangeState", lessonExchangeState);
-
-			lessonRecordDao.insert(map);
-			
-			userDAO.subUPoint(uIdx, pricePoint);
-		} catch (Exception e) {
-		}
-		
-		
-		
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("payment/lessonComplete");
-		return mav;
-	}
+      ModelAndView mav = new ModelAndView();
+      mav.setViewName("payment/lessonComplete");
+      return mav;
+   }
 }

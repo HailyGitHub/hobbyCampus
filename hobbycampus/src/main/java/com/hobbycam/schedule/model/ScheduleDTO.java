@@ -64,8 +64,6 @@ public class ScheduleDTO {
 		this.lesson_people = lesson_people;
 	}
 
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> teacher_kdw
+
