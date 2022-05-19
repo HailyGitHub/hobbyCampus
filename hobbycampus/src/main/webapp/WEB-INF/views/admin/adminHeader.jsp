@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<!-- ADMIN Login Check -->
+<jsp:include page="/WEB-INF/views/admin/loginCheck.jsp"></jsp:include>
+
 <!-- Header -->
 <header>
     <div class="top_nav">
@@ -19,11 +22,11 @@
 	        <a class="navbar-brand" href="resumeList.do">이력서</a>
 	        <a class="navbar-brand" href="memberUserList.do">계정관리</a>
 	        <a class="navbar-brand" href="categoryList.do">카테고리</a>
-	        <a class="navbar-brand" href="#">결제</a>
-	        <a class="navbar-brand" href="coupon.do">쿠폰</a>
-	        <a class="navbar-brand" href="#">레벨</a>
-	        <a class="navbar-brand" href="#">공지사항</a>
-	        <a class="navbar-brand" href="#">통계</a>
+	        <a class="navbar-brand" href="paymentList.do">결제</a>
+	        <a class="navbar-brand" href="couponList.do">쿠폰</a>
+	        <a class="navbar-brand" href="levelList.do">레벨</a>
+	        <a class="navbar-brand" href="noticeList.do">공지사항</a>
+	        <a class="navbar-brand" href="totalList.do">통계</a>
 
 	        <!-- Search Button-->
 	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">

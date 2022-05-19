@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hobbycam.level.model.LevelDAO;
@@ -29,9 +30,10 @@ public class LevelController {
 	}
 	
 	@RequestMapping("/levelUpdateForm.do")
-	public ModelAndView levelUpdateForm(int idx) {
+	public ModelAndView levelUpdateForm(@RequestParam(value="lev_idx") int idx) {
 		ModelAndView mav = new ModelAndView();
 		LevelDTO dto = levelDao.getUpdateLevelInfo(idx);
+		System.out.println("controller : "+idx);
 		if(dto!=null) {
 			mav.addObject("dto",dto);
 		}else {
@@ -39,7 +41,7 @@ public class LevelController {
 			mav.addObject("msg","문제 발생");
 			
 		}
-		mav.setViewName("level/levelList");
+		mav.setViewName("hobbyJson");
 		
 		return mav;
 		
@@ -56,7 +58,7 @@ public class LevelController {
 			mav.addObject("msg","문제 발생");
 			
 		}
-		mav.setViewName("level/levelList");
+		mav.setViewName("hobbyJson");
 		
 		return mav;
 		

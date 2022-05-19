@@ -30,19 +30,20 @@
             <img src="/hobbycampus/img/main.png" alt="main_img">Hobby Campus
         </a>
 
-        <!-- Category List -->
+        <!-- Category One List -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle navbar-brand" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">카테고리</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown03">
-            <li><a class="dropdown-item" href="#">언어</a></li>
-            <li><a class="dropdown-item" href="#">수학</a></li>
-            <li><a class="dropdown-item" href="#">체육</a></li>
+	            <!-- GET Category One -->
+	            <c:forEach var="cateOneDTO" items="${cateOneList}">
+	            	<li><a class="dropdown-item" href="#" data-idx="${cateOneDTO.cate1_idx}" data-img="${cateOneDTO.cate1_img}">${cateOneDTO.cate1_name}</a></li>
+	            </c:forEach>
             </ul>
         </li>
         <a class="navbar-brand" href="#">라이브</a>
         <a class="navbar-brand" href="#">온라인</a>
         <a class="navbar-brand" href="#">오프라인</a>
-        <a class="navbar-brand" href="#">공지사항</a>
+        <a class="navbar-brand" href="noticeList.do">공지사항</a>
 
         <!-- Search Button-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">

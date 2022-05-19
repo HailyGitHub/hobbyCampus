@@ -15,6 +15,16 @@
 	
     <!--CSS-->
     <link rel="stylesheet" href="/hobbycampus/css/main.css">
+    <style>
+    td,th {
+    text-align: center;
+    }
+    .list-table{
+    		width: 80%;
+    		margin: 0px auto;
+    		min-height: 70vh;
+    	}
+    </style>
 </head>
 <body id="mainBody">
 	<!-- HEADER -->
@@ -22,19 +32,24 @@
 	
 	<!-- MAIN -->
 
-<!-- Button trigger modal -->
-<div style="margin-top : 100px;  width: 80%; text-align: right;">
-<a href="#" style="text-decoration: none; color: black;" data-bs-toggle="modal" data-bs-target="#exampleModal"><b>쿠폰 등록</b></a>
 
+	<h1 style="text-align: center; padding-top: 150px"><b>쿠폰 관리 페이지</b></h1>
+<!-- Button trigger modal -->
+<div style="margin-top : 28px;  width: 90%; text-align: right;">
+<button class="btn btn-outline-primary btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="createCouponForm()"> 쿠폰등록</button>
 </div>
-	<table>
+<!-- Select Button List -->
+				
+<article class="list-table">
+			<div class="col-md-12">
+	<table class="table m-4 table-hover">
 	<thead>
 		<tr>
-			<th>발급번호</th>
-			<th>쿠폰명</th>
-			<th>할인률</th>
-			<th>이미지</th>
-			<th>만료일</th>
+			<th scope="col" class="col-md-1">발급번호</th>
+			<th scope="col" class="col-md-3">쿠폰명</th>
+			<th scope="col" class="col-md-2">할인률</th>
+			<th scope="col" class="col-md-2">이미지</th>
+			<th scope="col" class="col-md-1">만료일</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -53,7 +68,7 @@
 	</tr>
 	</c:if>
 	<c:forEach var="dto" items="${lists}">
-		<tr>
+		<tr data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getInfo(${dto.coupon_idx})">
 			<td>${dto.coupon_idx}</td>
 			<!-- create url -->
 			<c:url var="url" value="coupon.do">
@@ -61,45 +76,63 @@
 			</c:url>
 			<!-- insert url -->
 			<td>
-				<a href="#" style="text-decoration: none; color: black;" onclick="getResume(${dto.coupon_idx})" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				<a href="#" style="text-decoration: none; color: black;" >
 				${dto.coupon_title} 
 				</a>
 			</td>
 			<td>${dto.coupon_rate}</td>
-			<td>${dto.coupon_img}</td>
+			<td><img src="/hobbycampus/hobbyImg/coupon/${dto.coupon_img}" style="width: 20px;"></td>
 			<td>${dto.coupon_end}</td>
 		</tr>
 	</c:forEach>
 	</tbody>
 	</table>
-
+	</div>
+</article>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="modal_title">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
        <div class="modal-body p-5 pt-0">
         <form class="">
           <div class="form-floating mb-3">
-            <input type="email" class="form-control rounded-4" id="modal_idx"  placeholder="name@example.com">
-           
-            <label for="floatingInput">Email address</label>
-            <a id="modal_idx"></a>
+           <input type="hidden" class="form-control rounded-4" id="modal_coupon_idx" placeholder="modal_coupon_idx">
+        	<h5 class="modal-title" id="t_modal_title">쿠폰명</h5>
+            <input type="hidden" id="h_modal_title">
+           <input type="Text" class="form-control rounded-4" id="modal_coupon_title" placeholder="modal_title">
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
+        	<h5 class="modal-title" id="t_modal_rate">할인율</h5>
+            <input type="hidden" id="h_modal_rate">
+	            <div class="form mb-3" name="i_option" >
+		          <select class="form-select form-select-lg mb-3 fs-9" aria-label=".form-select-lg example" id="modal_coupon_rate">
+					  <option selected >할인율을 선택해주세요!</option>
+					<c:forEach var="i" begin="5" end="100" step="5">
+					  <option value="${i}" >${i} %</option>				
+					</c:forEach>
+				  </select>
+			  </div>
           </div>
-          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up</button>
-          <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+           <div class="form-floating mb-3">
+        	<h5 class="modal-title" id="t_modal_idx">상태</h5>
+        		<div class="form mb-3" name="s_option" >
+		          <select class="form-select form-select-lg mb-3 fs-9" aria-label=".form-select-lg example" id="modal_coupon_state">
+					  <option selected >활성 여부 </option>
+					  <option value="활성">활성</option>
+					  <option value="비활성">비활성</option>
+				  </select>
+			  	</div>
+          </div>	
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="return gettrue()">Save changes</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+        <button type="button" id="modal_udt_btn" class="btn btn-primary" onclick="return updtCoupon()">Update</button>
+        <button type="button" id="modal_crt_btn" class="btn btn-primary" onclick="return couponMake()">Create</button>
       </div>
     </div>
   </div>
@@ -112,35 +145,94 @@
 </body>
 
 <script>
-function gettrue(){
-	if(!confirm('test')) return false;
-	alert('true 확인');
-	$('#exampleModal').modal('hide');
+
+function createCouponForm(){
+	$('#modal_title').text('쿠폰등록');
+
+	$('#modal_udt_btn').css('display','none');
+	$('#modal_crt_btn').css('display','block');
+
+	$('#modal_coupon_idx').attr('value', '');
+	$('#modal_coupon_rate').attr('value', '');
+	$('#modal_coupon_state').attr('value', '');
+	$('#modal_coupon_title').attr('value', '');
+
+}
+
+function updtCoupon(){
+	if(!confirm('수정사항을 저장하시겠습니까?')) return false;
+	
+	
+	$.ajax({
+	      type: 'GET',
+	      url: 'couponUpdate.do',
+	      data: {'coupon_title': $('#modal_coupon_title').val(), 
+	    	  'coupon_rate': $('#modal_coupon_rate').val(), 
+	    	  'coupon_state': $('#modal_coupon_state').val(),
+	    	  'coupon_img': $('#modal_coupon_rate').val()+'.jpg',
+	    	  'coupon_idx': $('#modal_coupon_idx').val()},
+	      dataType: 'json',
+	      success: function(result){
+	    	  console.log('수정되었습니다.');
+	    	  
+	      }
+	   });//ajax
+		alert('수정되었습니다.');
+	   location.reload();
+	   //$('#exampleModal').modal('hide');
+}
+
+function couponMake(){
+	if(!confirm('쿠폰을 생성하시겠습니까?')) return false;
+	
+	
+	$.ajax({
+	      type: 'GET',
+	      url: 'couponMake.do',
+	      data: {'coupon_title': $('#modal_coupon_title').val(), 
+	    	  'coupon_rate': $('#modal_coupon_rate').val(), 
+	    	  'coupon_img': $('#modal_coupon_rate').val()+'.jpg',
+	    	  'coupon_state': $('#modal_coupon_state').val()},
+	      dataType: 'json',
+	      success: function(result){
+	    	  
+	      }
+	   });//ajax
+		alert('생성되었습니다.');
+	   location.reload();
+	   //$('#exampleModal').modal('hide');
 }
 
 /* Input Info to Modal */
-function getResume(idx){
-   console.log(idx);
+function getInfo(idx){
+
+	console.log(idx);
+	$('#modal_udt_btn').css('display','block');
+	$('#modal_crt_btn').css('display','none');
    $.ajax({
       type: 'GET',
       url: 'couponMakeForm.do',
-      data: {'coupon_idx': idx},
+      data: {'coupon_idx': idx, },
       dataType: 'json',
-      success: function(result){// json에서 불러온 결과값을 호출하는 함수. 즉 couponMakeForm 메소드 그 자체라 생각하면 된다.
-         var dto = result.dto; // couponMakeFor에 저장된 데이터인 dto를 호출 couponMakeForm ().dto;
-        // var ImgSrc = '/hobbycampus/img/';
+      success: function(result){
         console.log(result);
-        console.log(dto.coupon_idx); //couponMakeForm().dto.coupon_idx;
-		
-        $('#exampleModalLabel').text('쿠폰정보'); //coupon_idx 라는 키값으로 해시데이터를 삽입, 화면에는 안보임.
-        $('#modal_idx').attr('data-coupon_idx', dto.coupon_idx); //coupon_idx 라는 키값으로 해시데이터를 삽입, 화면에는 안보임.
-        $('#modal_idx').attr('value', dto.coupon_idx); //해당 태그의 value에 데이터 삽입
-        $('#modal_idx').text(dto.coupon_idx);
-        // $('#modal_img').attr('src', ImgSrc + dto.resume_img);
-        // $('#modal_intro').text(dto.resume_intro);
-         //$('#modal_cate1_name').text(dto.cate1_name);
-        // $('#modal_cate2_name').text(dto.cate2_name);
-       }//success : function
+        console.log(result.dto.coupon_idx); //couponMakeForm().dto.coupon_idx;
+        $('#modal_title').text('쿠폰정보'); 
+        
+        $('#modal_coupon_idx').attr('data-coupon_idx', idx); 
+        $('#modal_coupon_idx').attr('value', result.dto.coupon_idx);
+        
+       // $('#modal_coupon_title').attr('data-coupon_idx', title); 
+        $('#modal_coupon_title').attr('value', result.dto.coupon_title);
+    	
+        
+        $('#modal_coupon_state').val( result.dto.coupon_state).prop("selected",true);
+    	
+       //$('#modal_coupon_rate').attr('data-coupon_rate', rate); 
+        $('#modal_coupon_rate').val(result.dto.coupon_rate).prop("selected",true);
+        
+       
+       }
    });//ajax
 }//getResume()
 </script>

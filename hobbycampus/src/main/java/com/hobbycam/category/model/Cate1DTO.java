@@ -40,6 +40,5 @@ public class Cate1DTO {
 	public void setCate1_img(String cate1_img) {
 		this.cate1_img = cate1_img;
 	}
-	
-	
+
 }

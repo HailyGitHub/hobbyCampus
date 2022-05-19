@@ -1,10 +1,11 @@
 //$(window).onload(function(){
-    //var executed = 0;
+    
+    //var $count = true;
 
     $(window).scroll(function(){
         var threshold = $('#dynamic-box').offset().top - 700;
 		
-		//if(executed===0){
+		//if($count==true){
             if($(window).scrollTop() >= threshold) {
 				
                 var rate1 = $('#dynamic1').attr('data-rate');
@@ -41,7 +42,7 @@
                     }
                 });
             }
-            executed = 1;
+            //$count = false;
          //}
     });
 //});

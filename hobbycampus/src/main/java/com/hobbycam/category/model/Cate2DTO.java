@@ -10,7 +10,7 @@ public class Cate2DTO {
 	private String cate2_img;
 	
 	public Cate2DTO() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public Cate2DTO(int cate2_idx, int cate1_idx, String cate1_name, String cate1_img, String cate2_name,
@@ -73,11 +73,8 @@ public class Cate2DTO {
 	}
 	
 	
-
-
-
-
 	
 	
+
 	
 }

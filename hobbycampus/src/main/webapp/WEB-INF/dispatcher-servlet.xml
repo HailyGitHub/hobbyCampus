@@ -35,7 +35,7 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
-	
+
 	<!-- DAO -->
 	<bean id="adminDao" class="com.hobbycam.admin.model.AdminDAOImple">
 		<constructor-arg>
@@ -103,7 +103,30 @@
 		</constructor-arg>
 	</bean>
 
+
 	<bean id="likeDao" class="com.hobbycam.like.model.LikeDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="noticeDao" class="com.hobbycam.notice.model.NoticeDAOImple">
+	<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+
+	<bean id="categoryDao" class="com.hobbycam.category.model.CategoryDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="indexDao" class="com.hobbycam.index.model.IndexDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="totalDao" class="com.hobbycam.total.model.TotalDAOImple">
+
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
@@ -113,6 +136,7 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+
 
 	<!-- Views -->
 	<bean id="hobbyDown" class="com.hobbycam.view.DownloadView"></bean> <!-- File Download Class  -->

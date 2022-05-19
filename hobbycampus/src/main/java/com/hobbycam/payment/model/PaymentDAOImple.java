@@ -29,13 +29,13 @@ public class PaymentDAOImple implements PaymentDAO {
 
 	@Override
 	public int updateRefundstate(PaymentDTO dto) {
-		int count = sqlMap.update("updateRefundstate",dto);
+		int count = sqlMap.update("updateRefundState",dto);
 		return count;
 	}
 
 	@Override
-	public int updaterefundPoint(PaymentDTO dto) {
-		int count = sqlMap.update("updaterefundPoint",dto);
+	public int updateRefundPoint(PaymentDTO dto) {
+		int count = sqlMap.update("updateRefundPoint",dto);
 		return count;
 	}
 	

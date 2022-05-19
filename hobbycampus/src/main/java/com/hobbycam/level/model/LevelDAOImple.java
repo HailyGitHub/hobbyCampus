@@ -30,6 +30,7 @@ private SqlSessionTemplate sqlMap;
 
 	@Override
 	public LevelDTO getUpdateLevelInfo(int lev_idx) {
+		System.out.println("DAO : "+ lev_idx);
 		LevelDTO dto = sqlMap.selectOne("selectLevelInfo",lev_idx);
 		return dto;
 	}

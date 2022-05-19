@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,7 +101,7 @@
 			</table>
 		</article>
 
-		<!-- Catgory Introduce Video -->
+		<!-- Category Introduce Video -->
 		<article class="col-md-12" align="center">
 			<table class="col-md-12">
 				<tr>
@@ -133,10 +134,10 @@
 						<th class="col-md-3 display-4 text-warning"><i class="bi bi-palette2"></i></th>
 					</tr>
 					<tr id="dynamic-number">
-						<td class="display-1 text-danger" id="dynamic1" data-rate="100"><b></b></td>
-						<td class="display-1 text-success" id="dynamic2" data-rate="300"><b></b></td>
-						<td class="display-1 text-primary" id="dynamic3" data-rate="150"><b></b></td>
-						<td class="display-1 text-warning" id="dynamic4" data-rate="25"><b></b></td>
+						<td class="display-1 text-danger" id="dynamic1" data-rate="${teacherCnt}"><b></b></td>
+						<td class="display-1 text-success" id="dynamic2" data-rate="${userCnt}"><b></b></td>
+						<td class="display-1 text-primary" id="dynamic3" data-rate="${classCnt}"><b></b></td>
+						<td class="display-1 text-warning" id="dynamic4" data-rate="${categoryCnt}"><b></b></td>
 					</tr>
 					<tr id="dynamic-title">
 						<td class="text-danger"><h3>강사</h3></td>
@@ -244,31 +245,19 @@
 			</div>
 		</article>
 		
-		<!-- Category List -->
+		<!-- Category Two List -->
 		<article class="category_list">
 			<h2 align="center" class="intro_tag">카테고리 목록</h2>
 			<div class="wrap" align="center">
-			 	<div class="hex">
-					<p>카테고리 1</p>
-			    </div>
-			 	<div class="hex">
-					<p>카테고리 2</p>
-			    </div>
-				<div class="hex">
-					<p>카테고리 3</p>
-			    </div>
-			 	<div class="hex">
-					<p>카테고리 4</p>
-			    </div>
-			 	<div class="hex">
-					<p>카테고리 5</p>
-			    </div>
-			 	<div class="hex">
-					<p>카테고리 6</p>
-			    </div>
-			 	<div class="hex">
-					<p>카테고리 7</p>
-			    </div>
+				<!-- GET Category Two -->
+				<c:forEach var="cateTwoDTO" items="${cateTwoList}">
+				 	<div class="hex">
+						<p style="font-size:20px;">
+						${cateTwoDTO.cate2_name}
+						<img src="/hobbycampus/hobbyImg/category2/${cateTwoDTO.cate2_img}" style="width:60px;" class="rounded-circle">
+						</p>
+				    </div>
+				</c:forEach>
 			</div>
 		</article>
 		
@@ -286,9 +275,120 @@
 
 	</main>
 	
+	
+	<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+       <div class="modal-body p-5 pt-0">
+        <form class="">
+        <input type="hidden" id="notice_idx">
+          <div class="form-floating mb-3" name="i_subject">
+           <input type="Text" class="form-control rounded-4" id="notice_subj" placeholder="modal_title">
+           <label for="notice_subj">Subject</label>
+           <p id="t_notice_subj"></p>
+          </div>
+          <div class="form mb-3" name="i_option" >
+	          <select class="form-select form-select-lg mb-3 fs-9" aria-label=".form-select-lg example" id="noticeOpt">
+				  <option selected >공개 대상을 선택하세요.</option>
+				  <option value="전체">전체</option>
+				  <option value="강사">강사</option>
+				  <option value="노출">노출</option>
+			  </select>
+		  </div>
+          <div class="form-floating mb-3" name="i_content" >
+        	<h5 class="modal-title" id="t_modal_rate"></h5> <!-- title -->
+			<pre class="form-floating mb-3" id ="t_notice_cont"></pre> <!-- content (response) -->
+            <textarea class="form-control" placeholder="Leave a comment here" style="height: 100px;" id="notice_cont"></textarea>
+			<label for="notice_cont">Content</label>
+			
+          </div>	
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="sevendaysblind()">일주일동안 보지않기</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+	        <button type="button" id="modal_udt_btn" class="btn btn-primary" onclick="return updateNotice()">Update</button>
+	        <button type="button" id="modal_udt_ok_btn" class="btn btn-primary" onclick="return updateOk()">Update_OK</button>
+	        <button type="button" id="modal_crt_btn" class="btn btn-primary" onclick="return createNotice()">Create</button>
+	        <button type="button" id="modal_crt_ok_btn" class="btn btn-primary" onclick="return createOk()">Create_OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 <!-- JavaScript -->
 <script type="text/javascript" src="/hobbycampus/js/dynamicNumber.js"></script>
+<script>
+
+var setCookie = function(name, value, exp) {
+    var date = new Date();
+    date.setTime(date.getTime() + exp*24*60*60*1000);
+    document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+};
+
+var getCookie = function(name) {
+	var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+	return value? value[2] : null;
+};
+
+
+ window.onload = function(){
+	 
+	var noticeBlind = getCookie("noticeBlind");
+	
+	//alert("쿠키 noticeBlind변수에 저장된 값: "+noticeBlind);
+	
+	
+	$('#modal_title').text('공지사항');
+	$('#notice_subj').css('display', 'none');
+	$('#noticeOpt').css('display', 'none');
+	$('#notice_cont').css('display', 'none');
+	$('label').css('display', 'none');
+	
+	$('#t_notice_subj').css('display', 'block');
+	$('#t_notice_cont').css('display', 'block');
+	
+	$('#modal_crt_ok_btn').css('display', 'none');
+	$('#modal_crt_btn').css('display', 'none');
+	$('#modal_udt_btn').css('display', 'none');
+	$('#modal_udt_ok_btn').css('display', 'none');
+
+	 
+ 	$.ajax({
+		type: 'GET',
+		url: 'getNoticeExpose.do',
+		dataType: 'json',
+		success: function(result){
+			if(result.dto.notice_idx!=){
+				console.log(result.dto.notice_idx); //couponMakeForm().dto.coupon_idx;	 
+				$('#t_notice_subj').text(result.dto.notice_subj);
+				$('#t_notice_cont').text(result.dto.notice_cont);
+				$('#notice_idx').val(result.dto.notice_idx);
+				$('#notice_subj').val(result.dto.notice_subj);
+				$('#notice_cont').val(result.dto.notice_cont);
+				$("#noticeOpt").val(result.dto.notice_viewer).prop("selected", true);
+			};
+			if(noticeBlind!='true'){
+				$('#exampleModal').modal('show');
+			}
+		},error:function(){}, complete : function(){}
+	});//ajax	
+ } 
+
+
+
+function sevendaysblind(){
+	setCookie("noticeBlind", "true", 1);
+
+}
+</script>
+
 </html>

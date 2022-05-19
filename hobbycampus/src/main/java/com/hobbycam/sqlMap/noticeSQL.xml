@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.notice"> 
+ <select id="selectNoticeList" parameterType="hashMap" resultType="com.hobbycam.notice.model.NoticeDTO">
+ select * from 
+		(select rownum as rnum,a.* from 
+		(select * from notice where notice_viewer = '전체' order by notice_idx desc)a)b 
+		where rnum<![CDATA[>=]]>#{start} 
+		and rnum<![CDATA[<=]]>#{end}
+ </select>
+
+<select id="selectTeacherNoticeList" parameterType="hashMap" resultType="com.hobbycam.notice.model.NoticeDTO">
+ select * from 
+		(select rownum as rnum,a.* from 
+		(select * from notice where notice_viewer = '강사' order by notice_idx desc)a)b 
+		where rnum<![CDATA[>=]]>#{start} 
+		and rnum<![CDATA[<=]]>#{end}
+ </select>
+
+<select id="selectAllNoticeList" parameterType="hashMap" resultType="com.hobbycam.notice.model.NoticeDTO">
+ select * from 
+		(select rownum as rnum,a.* from 
+		(select * from notice order by notice_idx desc)a)b 
+		where rnum<![CDATA[>=]]>#{start} 
+		and rnum<![CDATA[<=]]>#{end}
+ </select>
+
+ <select id="selectNotice" parameterType="Integer" resultType="com.hobbycam.notice.model.NoticeDTO">
+  select * from 
+  	notice
+  where notice_idx=#{notice_idx}
+ </select>
+
+ <insert id="insertNotice" parameterType="com.hobbycam.notice.model.NoticeDTO">
+ insert into notice values(seq_notice.nextval, #{a_idx}, #{notice_subj}, #{notice_viewer}, sysdate, #{notice_cont} )
+ </insert>
+
+ <update id="updateNotice" parameterType="com.hobbycam.notice.model.NoticeDTO">
+ update 
+	notice 
+ set
+ 	notice_subj=#{notice_subj},
+ 	notice_viewer=#{notice_viewer},
+ 	notice_cont=#{notice_cont}
+ where 
+ 	notice_idx= #{notice_idx}
+ and
+ 	a_idx= #{a_idx}
+ </update>
+ <delete id="deleteNotice" parameterType="com.hobbycam.notice.model.NoticeDTO">
+ delete from notice where notice_idx=#{notice_idx}
+ and a_idx=#{a_idx}
+ </delete>
+ 
+ <select id="totalNoticeCntS" resultType="Integer">
+		select 
+			count(*) 
+		from 
+			notice
+		where 
+			notice_viewer ='전체'
+	</select>
+ <select id="totalNoticeCntT" resultType="Integer">
+		select 
+			count(*) 
+		from 
+			notice
+		where
+			notice_viewer ='강사'
+	</select>
+ <select id="totalNoticeCntA" resultType="Integer">
+		select 
+			count(*) 
+		from 
+			notice
+	</select>
+<select id="noticeExpose" parameterType="Integer" resultType="com.hobbycam.notice.model.NoticeDTO">
+	select notice.* from (select max(notice_idx) as a from notice where notice_viewer ='노출')a, 
+	notice where notice_viewer ='노출' and notice_idx= a.a
+</select>
+ </mapper>

@@ -17,6 +17,12 @@ public class PaymentController {
 	@Autowired
 	private PaymentDAO paymentDao;
 	
+	
+	public PaymentController(PaymentDAO paymentDao) {
+		super();
+		this.paymentDao = paymentDao;
+	}
+
 	@RequestMapping("/paymentList.do")
 	public ModelAndView paymentList(@RequestParam(value="cp",defaultValue = "1")int cp) {
 		ModelAndView mav = new ModelAndView();
@@ -37,15 +43,17 @@ public class PaymentController {
 	public ModelAndView refund(PaymentDTO dto) {
 		ModelAndView mav = new ModelAndView();
 		
-		int point = paymentDao.updaterefundPoint(dto);
+		System.out.println("controller dto.idx : "+dto.pay_list_idx);
 		int state = paymentDao.updateRefundstate(dto);
+		int point = paymentDao.updateRefundPoint(dto);
+		System.out.println("controller point, state : "+ point+", "+state);
 		if(point==1&&state==1) {
 			mav.addObject("msg","완료");
 		}else {
-			mav.addObject("msg","문제 발생");
+			mav.addObject("msg","거부됨");
 		}
 		mav.addObject("gopage","paymentList.do");
-		mav.setViewName("");
+		mav.setViewName("hobbyJson");
 		return mav;
 	}
 	
