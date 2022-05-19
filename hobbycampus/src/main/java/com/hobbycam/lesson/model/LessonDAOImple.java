@@ -105,9 +105,86 @@ public class LessonDAOImple implements LessonDAO {
 	}
 	
 	@Override
-
-	public List lessonList() {
-		List lists=sqlMap.selectList("selectLessonList");
+	public int lessonTotalCnt(String lesson_type) {
+		int count = sqlMap.selectOne("selectLessonTotalCnt",lesson_type);
+		return count;
+	}
+	
+	@Override
+	public int lessonTotalCntByCateTwo(String lesson_type, int cate2_idx) {
+		Map map = new HashMap();
+		map.put("lesson_type", lesson_type);
+		map.put("cate2_idx", cate2_idx);
+		int count = sqlMap.selectOne("selectLessonTotalCntByCateTwo", map);
+		return count;
+	}
+	
+	@Override
+	public int lessonTotalCntByCateOne(int cate1_idx) {
+		int count = sqlMap.selectOne("selectLessonTotalCntByCateOne", cate1_idx);
+		return count;
+	}
+	
+	@Override
+	public int lessonTotalCntByKeyword(String lesson_type, String keyword) {
+		Map map = new HashMap();
+		map.put("lesson_type", lesson_type);
+		map.put("keyword", keyword);
+		int count = sqlMap.selectOne("selectLessonTotalCntByKeyword", map);
+		return count;
+	}
+	
+	@Override
+	public List lessonList(int cp, int listSize, String lesson_type) {
+		int start = ((cp-1)*listSize)+1;
+		int end = cp*listSize;
+		
+		Map map = new HashMap();
+		map.put("lesson_type", lesson_type);
+		map.put("start", start);
+		map.put("end", end);
+		List lists = sqlMap.selectList("selectLessonList", map); // Fix Method
+		return lists;
+	}
+	
+	@Override
+	public List lessonListByCateTwo(int cp, int listSize, String lesson_type, int cate2_idx) {
+		int start = ((cp-1)*listSize)+1;
+		int end = cp*listSize;
+		
+		Map map = new HashMap();
+		map.put("lesson_type", lesson_type);
+		map.put("cate2_idx", cate2_idx);
+		map.put("start", start);
+		map.put("end", end);
+		List lists = sqlMap.selectList("selectLessonListByCateTwo", map);
+		return lists;
+	}
+	
+	@Override
+	public List lessonListByCateOne(int cp, int listSize, int cate1_idx) {
+		int start = ((cp-1)*listSize)+1;
+		int end = cp*listSize;
+		
+		Map map = new HashMap();
+		map.put("cate1_idx", cate1_idx);
+		map.put("start", start);
+		map.put("end", end);
+		List lists = sqlMap.selectList("selectLessonListByCateOne", map);
+		return lists;
+	}
+	
+	@Override
+	public List lessonListByKeyword(int cp, int listSize, String lesson_type, String keyword) {
+		int start = ((cp-1)*listSize)+1;
+		int end = cp*listSize;
+		
+		Map map = new HashMap();
+		map.put("lesson_type", lesson_type);
+		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+		List lists = sqlMap.selectList("selectLessonListByKeyword", map);
 		return lists;
 	}
 

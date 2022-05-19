@@ -20,7 +20,7 @@ public class IndexController {
 	@RequestMapping("/index.do")
 	public ModelAndView index() {
 		
-		List cateOneList = indexDao.getCateOneList(); //GET CategoryOne List
+		//List cateOneList = indexDao.getCateOneList(); //GET CategoryOne List
 		List cateTwoList = indexDao.getCateTwoList(); //GET CategoryTwo List
 		
 		int teacherCnt = indexDao.getTeacherCnt(); //GET Teacher Count
@@ -29,7 +29,7 @@ public class IndexController {
 		int categoryCnt = indexDao.getCategoryCnt(); //GET Category Count
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("cateOneList", cateOneList);
+		//mav.addObject("cateOneList", cateOneList);
 		mav.addObject("cateTwoList", cateTwoList);
 		mav.addObject("teacherCnt", teacherCnt);
 		mav.addObject("userCnt", userCnt);

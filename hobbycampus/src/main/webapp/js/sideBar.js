@@ -36,7 +36,7 @@ function showCateTwo(idx){
 			
 			$('#ul_'+idx).empty();
 			for(var i=0; i<$cateTwo.length; i++){
-				$('#ul_'+idx).append('<li><a a href="#" class="link-dark rounded">'+$cateTwo[i].cate2_name+'</a></li>');				
+				$('#ul_'+idx).append('');				
 			}
 		}
 	});
