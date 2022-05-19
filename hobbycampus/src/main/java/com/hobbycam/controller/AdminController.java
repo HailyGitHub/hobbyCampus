@@ -68,7 +68,7 @@ public class AdminController {
 		session.removeAttribute("s_a_email");
 		session.removeAttribute("s_a_img");
 		session.removeAttribute("s_a_name");
-		session.removeAttribute("s_a_idx");
+		session.removeAttribute("a_idx");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("url", "index.do");
