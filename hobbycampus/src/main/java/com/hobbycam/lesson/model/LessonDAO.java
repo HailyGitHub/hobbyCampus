@@ -6,11 +6,11 @@ public interface LessonDAO {
 
 	public int lessonInsert(LessonDTO dto);
 	
-	public int onlineLessonInsert(LessonOnlineDTO onlinedto);
+	public int onlineLessonInsert(LessonOnlineDTO dto,int idx);
 	
-	public int offlineLessonInsert(LessonOfflineDTO offlinedto);
+	public int offlineLessonInsert(LessonOfflineDTO dto,int idx);
 	
-	public int liveLessonInsert(LessonLiveDTO livedto);
+	public int liveLessonInsert(LessonLiveDTO dto,int idx);
 	
 	public List teacherLessonList(String t_name);
 	
@@ -42,5 +42,8 @@ public interface LessonDAO {
 	
 	public int SelectLessonIdxByLessonThumbnail(String th_count);
 	
+	public int lessonReqAccept(int idx);
+	
+	public int lessonReqCancel(int idx);
 	
 }

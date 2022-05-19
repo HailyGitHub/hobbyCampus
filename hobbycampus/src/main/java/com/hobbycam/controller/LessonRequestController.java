@@ -36,11 +36,11 @@ public class LessonRequestController {
 	@RequestMapping("/lessonRequest.do")
 	public ModelAndView mypage(@RequestParam Map<String, String> param) {
 
-		// lessonIdx를 int로 변환하는 와중 오류 체크 해야함(param.get("lessonIdx")가 없거나 숫자가 아닌 경우)
+		
 		int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
 		LessonScheduleVO lessonScheduleVO = lessonScheduleService.getLessonSchedule(lessonScheduleIdx);
 		
-		// TODO 수정해야함( 유저가 3이라고 가정했을 뿐)
+		
 		int uIdx = 3;
 		UserVO userVO = userDAO.getUser(uIdx);
 		
@@ -49,7 +49,7 @@ public class LessonRequestController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("payment/lessonRequest");
 
-		//kit가 있는 경우
+		
 		if("있음".equals(lessonScheduleVO.getLessonKit())) {
 			PostVO postVO = postDAO.getPost(uIdx);
 			// 기존에 저장되어있지 않음.
@@ -60,7 +60,7 @@ public class LessonRequestController {
 			mav.addObject("postVO", postVO);
 		}
 
-		// todo 정보 set
+		
 		mav.addObject("lessonScheduleIdx", lessonScheduleIdx);
 		mav.addObject("userVO", userVO);
 		mav.addObject("lessonVO", lessonScheduleVO);

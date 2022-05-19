@@ -1,6 +1,8 @@
 package com.hobbycam.lesson.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -20,20 +22,30 @@ public class LessonDAOImple implements LessonDAO {
 	}
 	
 	@Override
-	public int onlineLessonInsert(LessonOnlineDTO onlinedto) {
-		int count=sqlMap.insert("insertOnlineLesson",onlinedto);
+	public int onlineLessonInsert(LessonOnlineDTO dto,int idx) {
+		
+		Map map=new HashMap();
+		map.put("dto",dto );
+		map.put("idx",idx);
+		int count=sqlMap.insert("insertOnlineLesson",map);
 		return count;
 	}
 	
 	@Override
-	public int offlineLessonInsert(LessonOfflineDTO offlinedto) {
-		int count=sqlMap.insert("insertOfflineLesson",offlinedto);
+	public int offlineLessonInsert(LessonOfflineDTO dto,int idx) {
+		Map map=new HashMap();
+		map.put("dto", dto);
+		map.put("idx", idx);
+		int count=sqlMap.insert("insertOfflineLesson",map);
 		return count;
 	}
 	
 	@Override
-	public int liveLessonInsert(LessonLiveDTO livedto) {
-		int count=sqlMap.insert("insertLiveLesson",livedto);
+	public int liveLessonInsert(LessonLiveDTO dto,int idx) {
+		Map map=new HashMap();
+		map.put("dto", dto);
+		map.put("idx", idx);
+		int count=sqlMap.insert("insertLiveLesson",map);
 		return count;
 	}
 	
@@ -97,11 +109,13 @@ public class LessonDAOImple implements LessonDAO {
 		return lists;
 	}
 	
+	@Override
 	public List cate1List() {
 		List lists=sqlMap.selectList("selectCate1List");
 		return lists;
 	}
 	
+	@Override
 	public List cate2List(int cate1_idx) {
 		List lists=sqlMap.selectList("selectCate2List",cate1_idx);
 		return lists;
@@ -119,8 +133,21 @@ public class LessonDAOImple implements LessonDAO {
 		return count;
 	}
 	
+	@Override
 	public int SelectLessonIdxByLessonThumbnail(String th_count) {
 		int l_idx=sqlMap.selectOne("SelectLessonIdxByLessonThumbnail",th_count);
 		return l_idx;
+	}
+	
+	@Override
+	public int lessonReqAccept(int idx) {
+		int count=sqlMap.update("lessonReqAccept",idx);
+		return count;
+	}
+	
+	@Override
+	public int lessonReqCancel(int idx) {
+		int count=sqlMap.update("lessonReqCancel",idx);
+		return count;
 	}
 }

@@ -22,11 +22,15 @@
     </style>
 </head>
 <body>
-	<!-- HEADER -->
+<!-- HEADER -->
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-
-	<!-- MAIN -->
-	<main class="main-area">
+	<!-- SIDEBar -->
+	<main class="row main-area">
+		<div class="col-md-2">
+			<jsp:include page="/WEB-INF/views/myPageSide.jsp"></jsp:include>		
+		</div>
+		<!-- main -->
+		<div class="col-md-10">
 		<!-- Title -->
 		<article class="title">
 			<div class="row text-center m-5">
@@ -61,17 +65,52 @@
 							<td>${dto.u_name}</td>
 							<td>${dto.lesson_buy_date}</td>
 							<td>
-								<button type="button" class="btn btn-outline-success">수락</button>
-								<button type="button" class="btn btn-outline-danger">취소</button>
+								<button type="button" class="btn btn-outline-success" 
+										onclick="return lessonAccept(${dto.lesson_record_idx })" >수락</button>
+								<button type="button" class="btn btn-outline-danger"  
+										onclick="return lessonCancel(${dto.lesson_record_idx })" >취소</button>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</article>
+	</div>
 	</main>
-	
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
+<script>
+	function lessonAccept(idx){
+		if(!confirm('수락 하시겠습니까?')) return false;
+		
+		// Ajax
+		$.ajax({
+			type: 'GET',
+			url: 'lessonReqAccept.do',
+			data: {'lesson_record_idx':idx},
+			dataType: 'json',
+			success: function(data){
+				alert(data.msg);
+			}
+			
+		});
+	}
+	function lessonCancel(idx){
+		if(!confirm('취소 하시겠습니까?')) return false;
+		
+		// Ajax
+		$.ajax({
+			type: 'GET',
+			url: 'lessonReqCancel.do',
+			data: {'lesson_record_idx':idx},
+			dataType: 'json',
+			success: function(data){
+				alert(data.msg);
+			}
+			
+		});
+	}
+	
+</script>
 </html>

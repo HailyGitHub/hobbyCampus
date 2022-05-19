@@ -2,7 +2,9 @@ package com.hobbycam.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 
@@ -86,6 +88,7 @@ public class LessonController {
 		String s_th_count=Integer.toString(th_count);
 		int l_idx=ldao.SelectLessonIdxByLessonThumbnail(s_th_count);
 		mav.addObject("l_idx",l_idx);
+		mav.addObject("save",s_th_count);
 		
 		switch (type) {
 		case "온라인":
@@ -114,41 +117,62 @@ public class LessonController {
 	public ModelAndView onlineLessonSubmit(@RequestParam("onlineImg")MultipartFile img,
 										   @RequestParam("onlineFile")MultipartFile video,
 										   @RequestParam("l_idx")String idx,
+										   @RequestParam("save")String save,
 										   LessonOnlineDTO ldto) {
 		
-		
-		
 		String imgName = img.getOriginalFilename();
+		String videoName = video.getOriginalFilename();
 		String savePathImg = "";
+		String savePathVideo = "";
 		
-		String imgExtension = imgName.substring(imgName.length()-4, imgName.length());
+		if(imgName==null||imgName.equals("")) {
+			savePathImg="default";
+		}else {
+			String imgExtension = imgName.substring(imgName.length()-4, imgName.length());
+			String savePathImgFolder =servletContext.getRealPath("hobbyImg/lesson/"+save+"/img/");
+			File f=new File(savePathImgFolder);
+			if(!f.exists()) {
+				try {
+					f.mkdir();
+				} catch (Exception e) {
+					e.getStackTrace();
+				}
+			}
+			ImgUplod iu = new ImgUplod();
 			
-		String savePathImgFolder ="C:\\image\\"; 
+			savePathImg = iu.copyInto(img,"temp", savePathImgFolder, imgExtension);
 			
-		ImgUplod iu = new ImgUplod();
-		savePathImg = iu.copyInto(img,"temp", savePathImgFolder, imgExtension);
-			
+		}
 		
 		ldto.setOnline_img(savePathImg);
 		
-		String videoName = video.getOriginalFilename();
-		String savePathVideo = "";
+		if(videoName==null||videoName.equals("")) {
+			savePathVideo="default";
+		}else {
+			String videoExtension = videoName.substring(videoName.length()-4, videoName.length());
+			String savePathVideoFolder =servletContext.getRealPath("hobbyImg/lesson/"+save+"/video/");
+			File f=new File(savePathVideoFolder);
+			if(!f.exists()) {
+				try {
+					f.mkdir();
+				} catch (Exception e) {
+					e.getStackTrace();
+				}
+			}
+			ImgUplod iu = new ImgUplod();
+			savePathVideo = iu.copyInto(video,"temp", savePathVideoFolder, videoExtension);
+		}
 		
-		String videoExtension = videoName.substring(videoName.length()-4, videoName.length());
-			
-		String savePathVideoFolder ="C:\\video\\"; 
-			
-		ImgUplod vu = new ImgUplod();
-		savePathVideo = iu.copyInto(video,"temp", savePathVideoFolder, videoExtension);
-			
+		ImgUplod iu = new ImgUplod();
+		
 		
 		ldto.setOnline_file(savePathVideo);
-		
-		
-		
+			
 		ModelAndView mav=new ModelAndView();
 		
-		int result=ldao.onlineLessonInsert(ldto);
+		int i_idx=Integer.parseInt(idx);
+		
+		int result=ldao.onlineLessonInsert(ldto,i_idx);
 		String msg=result>0?"강의 등록 성공":"강의 등록 실패";
 		mav.addObject("msg",msg);
 		mav.addObject("gopage","index.do");
@@ -165,24 +189,38 @@ public class LessonController {
 	}
 	
 	@RequestMapping(value = "/offlineLessonForm.do",method = RequestMethod.POST)
-	public ModelAndView offlineLessonSubmit(@RequestParam("offlineFolder")MultipartFile img,LessonOfflineDTO ldto) {
+	public ModelAndView offlineLessonSubmit(@RequestParam("offlineFolder")MultipartFile img,
+											@RequestParam("l_idx")String idx,
+											@RequestParam("save")String save,
+											LessonOfflineDTO ldto) {
 		
-		String fileName = img.getOriginalFilename();
+		ModelAndView mav=new ModelAndView();
+		String imgName = img.getOriginalFilename();
 		String savePathImg = "";
 		
-		String fileExtension = fileName.substring(fileName.length()-4, fileName.length());
+		if(imgName==null||imgName.equals("")) {
+			savePathImg="default";
+		}else {
+			String imgExtension = imgName.substring(imgName.length()-4, imgName.length());
+			String savePathImgFolder =servletContext.getRealPath("hobbyImg/lesson/"+save+"/img/");
+			File f=new File(savePathImgFolder);
+			if(!f.exists()) {
+				try {
+					f.mkdir();
+				} catch (Exception e) {
+					e.getStackTrace();
+				}
+			}
+			ImgUplod iu = new ImgUplod();
 			
-		String savePathFolder ="C:\\Thumbnail\\"; 
+			savePathImg = iu.copyInto(img,"temp", savePathImgFolder, imgExtension);
 			
-		ImgUplod iu = new ImgUplod();
-		savePathImg = iu.copyInto(img,"temp", savePathFolder, fileExtension);
-			
+		}
 		
 		ldto.setOffline_folder(savePathImg);
-		
-		int result=ldao.offlineLessonInsert(ldto);
+		int i_idx=Integer.parseInt(idx);
+		int result=ldao.offlineLessonInsert(ldto,i_idx);
 	   
-		ModelAndView mav=new ModelAndView();
 		String msg=result>0?"강의 등록 성공":"강의 등록 실패";
 		mav.addObject("msg",msg);
 		mav.addObject("gopage","index.do");
@@ -199,25 +237,39 @@ public class LessonController {
 	}
 	
 	@RequestMapping(value = "/liveLessonForm.do",method = RequestMethod.POST)
-	public ModelAndView liveLessonSubmit(@RequestParam("liveFolder")MultipartFile img,LessonLiveDTO ldto) {
-		
-		String fileName = img.getOriginalFilename();
-		String savePathImg = "";
-		
-		String fileExtension = fileName.substring(fileName.length()-4, fileName.length());
-			
-		String savePathFolder ="C:\\Thumbnail\\"; 
-			
-		ImgUplod iu = new ImgUplod();
-		savePathImg = iu.copyInto(img,"temp", savePathFolder, fileExtension);
-			
-		
-		ldto.setLive_folder(savePathImg);
-		
+	public ModelAndView liveLessonSubmit(@RequestParam("liveFolder")MultipartFile img,
+										@RequestParam("l_idx")String idx,
+										@RequestParam("save")String save,
+										LessonLiveDTO ldto) {
 		
 		ModelAndView mav=new ModelAndView();
 		
-		int result=ldao.liveLessonInsert(ldto);
+		String imgName = img.getOriginalFilename();
+		String savePathImg = "";
+		
+		if(imgName==null||imgName.equals("")) {
+			savePathImg="default";
+		}else {
+			String imgExtension = imgName.substring(imgName.length()-4, imgName.length());
+			String savePathImgFolder =servletContext.getRealPath("hobbyImg/lesson/"+save+"/img/");
+			File f=new File(savePathImgFolder);
+			if(!f.exists()) {
+				try {
+					f.mkdir();
+				} catch (Exception e) {
+					e.getStackTrace();
+				}
+			}
+			ImgUplod iu = new ImgUplod();
+			
+			savePathImg = iu.copyInto(img,"temp", savePathImgFolder, imgExtension);
+			
+		}
+		
+		ldto.setLive_folder(savePathImg);
+		int i_idx=Integer.parseInt(idx);
+		
+		int result=ldao.liveLessonInsert(ldto,i_idx);
 		String msg=result>0?"강의 등록 성공":"강의 등록 실패";
 		mav.addObject("msg",msg);
 		mav.addObject("gopage","index.do");
@@ -288,8 +340,33 @@ public class LessonController {
 		mav.addObject("lists",lists);
 		mav.setViewName("/lesson/lessonReqList");
 		return mav;
-		
 	}
+	
+	@RequestMapping("/lessonReqAccept.do")
+	public ModelAndView lessonReqAccept(@RequestParam("lesson_record_idx")int idx) {
+		
+		int result=ldao.lessonReqAccept(idx);
+		String msg =result>0?"수락 되었습니다.":"";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.setViewName("hobbyJson");
+		return mav;
+	}
+	
+	@RequestMapping("/lessonReqCancel.do")
+	public ModelAndView lessonReqCancel(@RequestParam("lesson_record_idx")int idx) {
+		
+		int result=ldao.lessonReqCancel(idx);
+		String msg =result>0?"취소 되었습니다.":"";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.setViewName("hobbyJson");
+		return mav;
+	}
+	
+	
 	
 	@RequestMapping("/lessonCont.do")
 	public ModelAndView lessonCont(int lesson_idx) {

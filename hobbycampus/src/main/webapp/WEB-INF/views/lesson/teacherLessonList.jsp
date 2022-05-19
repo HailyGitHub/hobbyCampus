@@ -25,9 +25,16 @@
     </style>
 </head>
 <body>
-	<!-- HEADER -->
+<!-- HEADER -->
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-
+	<!-- SIDEBar -->
+	<main class="mainArea">
+	<div class="row">
+		<div class="col-md-2">
+			<jsp:include page="/WEB-INF/views/myPageSide.jsp"></jsp:include>		
+		</div>
+		<!-- main -->
+		<div class="col-md-10">
 	<!-- MAIN -->
 	<main class="main-area">
 		<!-- Title -->
@@ -62,7 +69,7 @@
 						<p class="card-text">${dto.lesson_short_cont}</p>
 					</div>
 					<div class="mb-2">
-						<button type="button" class="btn btn-outline-success">강의 등록</button>
+						<button type="button" class="btn btn-outline-success">강의 정보 수정</button>
 						<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#scheduleModal" onclick="showSchedule(${dto.lesson_idx})">스케줄 관리</button>
 					</div>
 				</div>
@@ -145,7 +152,7 @@
 			</div>
 		</div>
 	</div>
-
+	</div>
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

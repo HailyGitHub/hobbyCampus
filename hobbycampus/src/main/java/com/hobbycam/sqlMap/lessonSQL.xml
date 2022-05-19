@@ -20,41 +20,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			#{lesson_kit}
   		)
   	</insert>
-  	<insert id="insertOnlineLesson" parameterType="com.hobbycam.lesson.model.LessonOnlineDTO">
+  	<insert id="insertOnlineLesson" parameterType="HashMap" >
   		INSERT INTO
   			LESSON_ONLINE
   		VALUES(
   			seq_lesson_online.nextval,
-  			seq_lesson_list.nextval-1,
-  			#{online_subj},
-  			#{online_img},
-  			#{online_file},
-  			#{online_cont}
+  			#{idx},
+  			#{dto.online_subj},
+  			#{dto.online_img},
+  			#{dto.online_file},
+  			#{dto.online_cont}
   		)
   		
   	</insert>
-  	<insert id="insertOfflineLesson" parameterType="com.hobbycam.lesson.model.LessonOfflineDTO">
+  	<insert id="insertOfflineLesson" parameterType="HashMap">
   		INSERT INTO
   			LESSON_OFFLINE
   		VALUES(
   			seq_lesson_offline.nextval,
-  			seq_lesson_list.nextval-1,
-  			#{offline_runtime},
-  			#{offline_folder},
-  			#{offline_cont},
-  			#{offline_addr}
+  			#{idx},
+  			#{dto.offline_runtime},
+  			#{dto.offline_folder},
+  			#{dto.offline_cont},
+  			#{dto.offline_addr}
   		)
   	</insert>
-  	<insert id="insertLiveLesson" parameterType="com.hobbycam.lesson.model.LessonLiveDTO">
+  	<insert id="insertLiveLesson" parameterType="HashMap">
   		INSERT INTO
   			LESSON_LIVE
   		VALUES(
   			seq_lesson_live.nextval,
-  			seq_lesson_list.nextval-1,
-  			#{live_runtime},
-  			#{live_tool},
-  			#{live_folder},
-  			#{live_cont}
+  			#{idx},
+  			#{dto.live_runtime},
+  			#{dto.live_tool},
+  			#{dto.live_folder},
+  			#{dto.live_cont}
   		)
   	</insert>
   	<select id="selectTeacherLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
@@ -93,7 +93,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	<select id="SelectLessonReq" resultType="com.hobbycam.lessonRecord.model.LessonRecordDTO">
   		SELECT B.U_NAME,
        		   B.LESSON_BUY_DATE,
-               LL.LESSON_SUBJ   
+       		   B.LESSON_RECORD_IDX,
+               LL.LESSON_SUBJ  
 			  		FROM LESSON_LIST LL,(SELECT A.*,
                             				  LS.LESSON_IDX 
 					                     FROM  	  
@@ -104,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					                                                  LESSON_RECORD LR,
 					                                                  USERS U
 					                                              WHERE 
-					                                                  LR.LESSON_RECORD_STATE='수업' AND
+					                                                  LR.LESSON_RECORD_STATE='예약대기' AND
 					                                                  LR.U_IDX=U.U_IDX) A	  
                      					 WHERE 
                        						  LS.LESSON_SCHEDULE_IDX=A.LESSON_SCHEDULE_IDX)B
@@ -216,4 +217,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		WHERE
   			LESSON_THUMBNAIL=#{th_count}
   	</select>
+  	<update id="lessonReqAccept" parameterType="int">
+  		UPDATE
+  			LESSON_RECORD
+  		SET
+  			LESSON_RECORD_STATE='예약완료'
+  		WHERE
+  			LESSON_RECORD_IDX=#{IDX}
+  	</update>
+  	<update id="lessonReqCancel" parameterType="int">
+  		UPDATE
+  			LESSON_RECORD
+  		SET
+  			LESSON_RECORD_STATE='취소'
+  		WHERE
+  			LESSON_RECORD_IDX=#{IDX}
+  	</update>
   </mapper>
