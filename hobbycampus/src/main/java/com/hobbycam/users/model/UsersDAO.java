@@ -1,5 +1,14 @@
 package com.hobbycam.users.model;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.hobbycam.VO.UserVO;
+
+
 public interface UsersDAO {
 
 	public static final int NOT_ID=1;
@@ -34,5 +43,10 @@ public interface UsersDAO {
 	public int updateUserInfo(UsersDTO dto);
 
 	public int deleteUserInfo(int idx);
-	
+
+	UserVO getUser(int uIdx);
+	int updateUPoint(int uIdx, int newUPoint);
+	int addUPoint(int uIdx, int point);
+	int subUPoint(int uIdx, int point);
+
 }

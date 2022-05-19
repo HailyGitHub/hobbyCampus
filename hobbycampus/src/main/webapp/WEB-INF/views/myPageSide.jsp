@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,8 +46,7 @@
  </head>
  <body>
     
- 
- 
+
  <div class="container-fluid">
    <div class="row">
      <nav id="sidebarMenu" class="d-md-block bg-light sidebar collapse">
@@ -60,27 +60,45 @@
                    <button class="btn btn-outline-primary" id="student" onclick="studentClick();">&nbsp;&nbsp;학생&nbsp;&nbsp;</button>
                    
                  </span>
-                 |
+
+			<c:if test="${!empty sessionScope.t_idx}">
                  <span class="fs-3">
+                 
                    <button class="btn btn-outline-primary" id="teacher" onclick="teacherClick();">&nbsp;&nbsp;강사&nbsp;&nbsp;</button>
                  </span>
+                </c:if>
+
                  <hr>
                </div>
                <ul class="nav nav-pills flex-column mb-auto">
+               
                  <li class="nav-item">
-                   <a href="#" class="nav-link">
-                     <span class="studentList" >학생 기능1</span>
+                   <a href="mylessonList.do" class="nav-link">
+                     <span class="studentList" >내 수강내역</span>
                    </a>
+                   
                    <a href="#" class="nav-link">
                     <span class="teacherList" style="display: none;" >내 강의 신청</span>
                    </a>                     
                  </li>
+                 
                  <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <span class="studentList" >학생 기능1</span>
+                  <a href="myPointList.do" class="nav-link">
+                    <span class="studentList" >내 포인트</span>
                   </a>
+                  
                   <a href="#" class="nav-link">
                    <span class="teacherList" style="display: none;" >내 강의 보기</span>
+                  </a>                     
+                </li>
+                
+                <li class="nav-item">
+                  <a href="pointShop.do" class="nav-link">
+                    <span class="studentList" >포인트 충전</span>
+                  </a>
+                  
+                  <a href="teacherRecord.do?t_idx=1" class="nav-link">
+                   <span class="teacherList" style="display: none;" id="teacherRecord" >내 강의 이력</span>
                   </a>                     
                 </li>
                 
@@ -88,26 +106,37 @@
                   <a href="review.do" class="nav-link">
                     <span class="studentList" >내 리뷰</span>
                   </a>
-                  <a href="teacherRecord.do?t_idx=1" class="nav-link">
-                   <span class="teacherList" style="display: none;" id="teacherRecord" >내 강의 이력</span>
-                  </a>                     
-                </li>
-                <li class="nav-item">
-                  <a href="myLikeList.do" class="nav-link">
-                    <span class="studentList" >내찜 </span>
-                  </a>
+                  
                   <a href="teacherPoint.do?t_idx=1" class="nav-link">
                    <span class="teacherList" style="display: none;" id="teacherPoint">포인트 관리</span>
                   </a>                     
                 </li>
                 
                 <li class="nav-item">
-                  <a href="userUpdateForm.do" class="nav-link">
-                    <span class="studentList" >정보 수정</span>
+                 <a href="myLikeList.do" class="nav-link">
+                    <span class="studentList" >찜 목록</span>
                   </a>
+                  
                   <a href="teacherInfo.do?t_idx=1" class="nav-link">
                    <span class="teacherList" style="display: none;" id="teacherInfo">프로필 관리</span>
                   </a>                     
+                </li>
+                
+                <li class="nav-item">
+                  <a href="mycoupon.do" class="nav-link">
+                    <span class="studentList" >내 쿠폰</span>
+                  </a>   
+                                  
+                  <a href="teacherInfo.do?t_idx=1" class="nav-link">
+                   <span class="teacherList" style="display: none;" id="teacherInfo">프로필 관리</span>
+                  </a>                     
+				</li>
+
+				 <li class="nav-item">
+                  <a href="userUpdateForm.do" class="nav-link">
+                    <span class="studentList" >정보 수정</span>
+                  </a>
+
                 </li>
          </ul>
        </div>

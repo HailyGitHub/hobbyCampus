@@ -7,7 +7,7 @@
 	
 	
 <mapper namespace="couponMapper">
-	<select id="getCoupons" resultType="com.hobbycam.VO.CouponVO">
+	<select id="selectMyCoupons" resultType="com.hobbycam.VO.CouponVO">
 		select 
 			COUPON_IDX as couponIdx,
 			COUPON_TITLE as couponTitle,

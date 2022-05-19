@@ -179,7 +179,7 @@
 						</div>
 						<!-- Model Body -->
 						<div class="modal-body p-5 pt-0">
-							<form name="Cate_Form_1" action="" method="post" enctype="multipart/form-data">
+							<form name="Cate_Form_1" action="uploadCate1.do" method="post" enctype="multipart/form-data">
 								<!-- Input Category Name -->
 								<div class="form-floating mb-3">
 									<input type="text" class="form-control rounded-4" name="cate1_name" id="cate1_name" maxlength="7" placeholder="큰 카테고리 이름 입력" required>
@@ -187,7 +187,7 @@
 								</div>
 								<!-- Upload Category Image -->
 								<div class="form-floating mb-3">
-									<input type="file" name="cate1_img">
+									<input type="file" name="cate1_img" id="cate1_img">
 								</div>
 								<hr class="my-4">
 								<!-- Submit Button -->						
@@ -293,9 +293,10 @@
 </body>
 <script type="text/javascript">
 	function checkFile(){
-		var filename = $('#cate1_name').val();
+		var filename = $('#cate1_img').val();
 		filename = filename.substring(filename.length-3, filename.length);
-		if(filename!='jpg' || filename!='png'){
+		alert(filename);
+		if(filename!='jpg' && filename!='png'){
 			alert('jpg,png 이미지 파일만 업로드 가능합니다.');
 			return false;
 		}

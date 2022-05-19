@@ -144,5 +144,48 @@
   	where u_idx=#{u_idx}
 </update>
   
+  <select id="getUser" resultType="com.hobbycam.VO.UserVO">
+		select 
+			U_IDX	 as uIdx,
+			U_EMAIL as uEmail,
+			U_NAME as uName,
+			U_IMG as uImg,
+			U_GENDER as uGender,
+			U_POINT as uPoint,
+			U_TEL as uTel,
+			U_STATE as uState
+		from 
+			users
+		where 
+			U_IDX = #{uIdx}
+	</select>
+
+	<update id="updateUPoint" parameterType="map">
+		update 
+			users
+		set 
+			U_POINT = #{newUPoint}
+		where 
+			U_IDX = #{uIdx}
+	</update>
+	
+	<update id="addUPoint" parameterType="map">
+		update 
+			users
+		set 
+			U_POINT = U_POINT + #{point}
+		where 
+			U_IDX = #{uIdx}
+	</update>
+	
+	<update id="subUPoint" parameterType="map">
+		update 
+			users
+		set 
+			U_POINT = U_POINT - #{point}
+		where 
+			U_IDX = #{uIdx}
+	</update>
+	
   
   </mapper>
