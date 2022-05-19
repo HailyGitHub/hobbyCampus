@@ -5,12 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
 <body>
-<h2>강의 타입</h2>
-<a href="onlineLessonForm.do">온라인</a>
-<a href="offlineLessonForm.do">오프라인</a>
-<a href="liveLessonForm.do">라이브</a>
+
+<a href="lessonUpdate.do">강의수정</a>
+
+
+
+
 </body>
 </html>

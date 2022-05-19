@@ -11,7 +11,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
  
+<<<<<<< HEAD
   	 <!--BootStarp-->
+=======
+      <!--BootStarp-->
+>>>>>>> teacher_kdw
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -35,7 +39,11 @@
           color : black;
         }
         a:hover{
+<<<<<<< HEAD
         	color:orange;
+=======
+           color:orange;
+>>>>>>> teacher_kdw
         }
         a:active {
           color : black
@@ -46,6 +54,11 @@
  </head>
  <body>
     
+<<<<<<< HEAD
+=======
+ 
+ 
+>>>>>>> teacher_kdw
  <div class="container-fluid">
    <div class="row">
      <nav id="sidebarMenu" class="d-md-block bg-light sidebar collapse">
@@ -57,6 +70,7 @@
                <div>
                  <span class="fs-3">
                    <button class="btn btn-outline-primary" id="student" onclick="studentClick();">&nbsp;&nbsp;학생&nbsp;&nbsp;</button>
+<<<<<<< HEAD
                 
                  </span>
 
@@ -66,10 +80,19 @@
                  </span>
                 </c:if>
 
+=======
+                   
+                 </span>
+                 |
+                 <span class="fs-3">
+                   <button class="btn btn-outline-primary" id="teacher" onclick="teacherClick();">&nbsp;&nbsp;강사&nbsp;&nbsp;</button>
+                 </span>
+>>>>>>> teacher_kdw
                  <hr>
                </div>
                <ul class="nav nav-pills flex-column mb-auto">
                  <li class="nav-item">
+<<<<<<< HEAD
                    <a href="mylessonList.do" class="nav-link">
                      <span class="studentList" >내 수강내역</span>
                    </a>
@@ -88,19 +111,62 @@
                   <a href="#" class="nav-link">
                    <span class="teacherList" style="display: none;" >내 강의 보기</span>
                   </a>                     
+=======
+                   <a href="#" class="nav-link">
+                     <span class="studentList" >학생 기능1</span>
+                   </a>
+                   <a href="lessonReqList.do?t_idx=1" class="nav-link">
+                    <span class="teacherList" style="display: none;" >강의 신청 관리</span>
+                   </a>                     
+                 </li>
+                 <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <span class="studentList" >학생 기능1</span>
+                  </a>
+                  <a href="lessonBasicForm.do?t_idx=1" class="nav-link">
+                   <span class="teacherList" style="display: none;" >강의 등록</span>
+                  </a>                     
                 </li>
                 
                 <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <span class="studentList" >학생 기능1</span>
+                  </a>
+                  <a href="teacherLessonList.do?t_idx=1"  class="nav-link">
+                   <span class="teacherList" style="display: none;" id="teacherRecord" >내 강의 목록</span>
+                  </a>                    
+>>>>>>> teacher_kdw
+                </li>
+                
+                <li class="nav-item">
+<<<<<<< HEAD
                   <a href="pointShop.do" class="nav-link">
                     <span class="studentList" >포인트 충전</span>
                   </a>
                   
                   <a href="teacherRecord.do?t_idx=1" class="nav-link">
                    <span class="teacherList" style="display: none;" id="teacherRecord" >내 강의 이력</span>
+=======
+                  <a href="#" class="nav-link">
+                    <span class="studentList" >학생 기능1</span>
+                  </a>
+                  <a href="teacherRecord.do?t_idx=1" class="nav-link">
+                   <span class="teacherList" style="display: none;" id="teacherPoint">내 강의 이력</span>
                   </a>                     
                 </li>
                 
                 <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <span class="studentList" >학생 기능1</span>
+                  </a>
+                  <a href="teacherPoint.do?t_idx=1" class="nav-link">
+                   <span class="teacherList" style="display: none;" id="teacherInfo">포인트 관리</span>
+>>>>>>> teacher_kdw
+                  </a>                     
+                </li>
+                
+                <li class="nav-item">
+<<<<<<< HEAD
                   <a href="review.do" class="nav-link">
                     <span class="studentList" >내 리뷰</span>
                   </a>
@@ -137,6 +203,16 @@
 
                 </li>
 
+=======
+                  <a href="#" class="nav-link">
+                    <span class="studentList" >학생 기능1</span>
+                  </a>
+                  <a href="teacherInfo.do?t_idx=1" class="nav-link">
+                   <span class="teacherList" style="display: none;" id="teacherInfo">강사 프로필 관리</span>
+                  </a>                     
+                </li>
+                </ul>
+>>>>>>> teacher_kdw
          </ul>
        </div>
      </nav>
@@ -145,6 +221,7 @@
  
  </body>
  <script>
+<<<<<<< HEAD
 
  $(document).ready(function(){
 	 if(${t_idx==null}){
@@ -156,6 +233,8 @@
  }
  
 
+=======
+>>>>>>> teacher_kdw
  function studentClick(){
    $(".teacherList").css("display","none");
    $(".studentList").css("display","");
@@ -166,7 +245,10 @@
    $("#student").addClass('btn-warning');
    $("#teacher").addClass('btn-light');
  }
+<<<<<<< HEAD
  
+=======
+>>>>>>> teacher_kdw
  function teacherClick(){
  
    $(".studentList").css("display","none");

@@ -36,7 +36,14 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
 
+<<<<<<< HEAD
 
+=======
+	<!-- controllers -->
+	<bean id="mypageController" class="com.hobbycam.controller.MypageController"></bean>
+
+	
+>>>>>>> teacher_kdw
 	<!-- DAO -->
 	<bean id="adminDao" class="com.hobbycam.admin.model.AdminDAOImple">
 		<constructor-arg>
@@ -99,6 +106,11 @@
 		</constructor-arg>
 	</bean>
 	<bean id="payListDao" class="com.hobbycam.payList.model.PayListDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="scheduleDao" class="com.hobbycam.schedule.model.ScheduleDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
