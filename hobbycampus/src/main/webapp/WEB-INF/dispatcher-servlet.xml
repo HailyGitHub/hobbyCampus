@@ -110,9 +110,12 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
-
-
-
+	<bean id="likeDao" class="com.hobbycam.like.model.LikeDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	
 	<!-- Views -->
 	<bean id="hobbyDown" class="com.hobbycam.view.DownloadView"></bean> <!-- File Download Class  -->
 	<bean id="hobbyJson" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean> <!-- JSON -->
@@ -138,6 +141,10 @@
 	            <prop key="mail.smtp.auth">true</prop>
 	            <prop key="mail.smtp.starttls.enable">true</prop>
 	            <prop key="mail.debug">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+	            <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+
 	        </props>
 	    </property>
 	</bean>

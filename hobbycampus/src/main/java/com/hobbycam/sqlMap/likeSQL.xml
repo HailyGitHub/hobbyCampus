@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="hobbycam.like">
+  
+  <select id="selectMyLikeList" parameterType="int" resultType="com.hobbycam.like.model.LikeVO">
+	select 
+		like_list.u_idx, like_list.lesson_idx, 
+		lesson_list.t_idx, lesson_list.lesson_subj, lesson_list.lesson_thumbnail
+		, teacher.t_name
+	
+	from like_list, lesson_list, teacher
+	
+	where like_list.u_idx=#{u_idx}
+		and lesson_list.lesson_idx=like_list.lesson_idx
+		and lesson_list.t_idx = teacher.t_idx
+  </select>
+  
+  
+  <select id="selectMyLike" parameterType="com.hobbycam.like.model.LikeDTO" resultType="Integer">
+  	select lesson_idx
+  	from like_list 
+  	where u_idx=#{u_idx} and lesson_idx=#{lesson_idx}
+  </select>
+  
+  <insert id="insertMyLike" parameterType="com.hobbycam.like.model.LikeDTO">
+  	insert into like_list 
+  	values(
+  		#{u_idx},
+  		#{lesson_idx})
+  </insert>
+  
+  <delete id="deleteMyLike" parameterType="com.hobbycam.like.model.LikeDTO">
+  delete like_list 
+  	where u_idx=#{u_idx} 
+  		and lesson_idx=#{lesson_idx}
+  
+  </delete>
+  
+  </mapper>

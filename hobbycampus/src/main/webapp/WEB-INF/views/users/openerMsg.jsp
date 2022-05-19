@@ -2,5 +2,7 @@
     pageEncoding="UTF-8"%>
 <script>
 	window.alert('${msg}');
-	location.href="${gopage}";
+	opener.location.href='${gopage}';
+	window.self.close();
+
 </script>

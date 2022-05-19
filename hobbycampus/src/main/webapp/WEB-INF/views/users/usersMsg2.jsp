@@ -2,5 +2,6 @@
     pageEncoding="UTF-8"%>
 <script>
 	window.alert('${msg}');
-	location.href="${gopage}";
+	window.location=document.referrer;
+	window.self.close();
 </script>

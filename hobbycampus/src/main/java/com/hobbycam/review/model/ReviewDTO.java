@@ -6,7 +6,6 @@ public class ReviewDTO {
 
 	private int review_idx;
 	private int lesson_record_idx;
-	private int lesson_schedule_idx;
 	private int star_point;
 	private String review_cont;
 	private Date review_date;
@@ -15,12 +14,10 @@ public class ReviewDTO {
 		super();
 	}
 
-	public ReviewDTO(int review_idx, int lesson_record_idx, int lesson_schedule_idx, int star_point, String review_cont,
-			Date review_date) {
+	public ReviewDTO(int review_idx, int lesson_record_idx, int star_point, String review_cont, Date review_date) {
 		super();
 		this.review_idx = review_idx;
 		this.lesson_record_idx = lesson_record_idx;
-		this.lesson_schedule_idx = lesson_schedule_idx;
 		this.star_point = star_point;
 		this.review_cont = review_cont;
 		this.review_date = review_date;
@@ -40,14 +37,6 @@ public class ReviewDTO {
 
 	public void setLesson_record_idx(int lesson_record_idx) {
 		this.lesson_record_idx = lesson_record_idx;
-	}
-
-	public int getLesson_schedule_idx() {
-		return lesson_schedule_idx;
-	}
-
-	public void setLesson_schedule_idx(int lesson_schedule_idx) {
-		this.lesson_schedule_idx = lesson_schedule_idx;
 	}
 
 	public int getStar_point() {
@@ -73,6 +62,5 @@ public class ReviewDTO {
 	public void setReview_date(Date review_date) {
 		this.review_date = review_date;
 	}
-	
 	
 }

@@ -280,8 +280,8 @@
 				<img src="img/user.png" class="rounded" alt="..." width="150">
 				<h3>지금 당장 가입하고 시작해 보세요!</h3>
 				<p>다양한 분야의 클래스를 받아보고 <br>자기계발에 힘을 써보세요</p>
-				<button type="button" class="btn btn-warning" id="end_line">지금 가입하기</button>
-			</div>
+				<button type="button" class="btn btn-warning" id="end_line" onclick="window.open('userJoin.do','user','width=600,height=1000');return false;">지금 가입하기</button>
+			</div> 
 		</article>
 
 	</main>

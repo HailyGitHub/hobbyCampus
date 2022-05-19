@@ -1,7 +1,5 @@
 package com.hobbycam.users.model;
 
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,29 +23,41 @@ public class UsersDAOImple implements UsersDAO {
 	/**email Join*/
 	//email Check
 	@Override
-	public int usersEmailCheck(String email) {
-		int result=sqlMap.selectOne("usersEmailCheck",email);
+	public int getEmailCount(String email) {
+		int result=sqlMap.selectOne("selectEmailCount",email);
 		
 		return result;
 	}
 
 	//name Check
 	@Override
-	public int usersNameCheck(String name) {
-		int result=sqlMap.selectOne("usersNameCheck",name);
+	public int getNameCount(String name) {
+		int result=sqlMap.selectOne("selectNameCount",name);
 		
+		return result;
+	}
+	
+	
+	public int getTel(String tel) {
+		System.out.println(tel);
+		
+		
+		
+		int result=sqlMap.selectOne("selectTel",tel)==null?
+				0:1;
+	
 		return result;
 	}
 	
 	
 	/**email Join*/
 	@Override
-	public int usersEmailJoin(UsersDTO dto) {
-		int emailCheck=usersEmailCheck(dto.getU_email());
-		int nameCheck=usersNameCheck(dto.getU_name());
+	public int setUser(UsersDTO dto) {
+		int emailCheck=getEmailCount(dto.getU_email());
+		int nameCheck=getNameCount(dto.getU_name());
 
 		if(emailCheck==0&&nameCheck==0) {
-			int count=sqlMap.insert("usersEmailJoin",dto);
+			int count=sqlMap.insert("insertUser",dto);
 			return count;
 		} else {
 			return -1;
@@ -58,9 +68,13 @@ public class UsersDAOImple implements UsersDAO {
 	
 	/**Login*/
 	@Override
-	public int usersLogin(String email, String pwd) {
+	public int getLoginPwd(String email, String pwd) {
 
-		UsersDTO dto=sqlMap.selectOne("usersLogin",email);
+		UsersDTO dto=sqlMap.selectOne("selectPwd",email);
+		
+		if(dto==null) {
+			return NOT_ID;
+		}
 		
 		String u_pwd=dto.getU_pwd();
 		String u_state=dto.getU_state();
@@ -83,35 +97,70 @@ public class UsersDAOImple implements UsersDAO {
 	}
 	
 	
-	public UsersDTO usersname(String email) {
-		UsersDTO dto =sqlMap.selectOne("usersname",email);
+	public UsersDTO getUserName(String email) {
+		UsersDTO dto =sqlMap.selectOne("selectUserName",email);
 		
 		return dto;
 	}
 	
 	//getusername
 	@Override
-	public Integer usersTidx(int idx){
-		Integer u_tidx=sqlMap.selectOne("userTidx",idx); 
+	public Integer getUserTidx(int idx){
+		Integer u_tidx=sqlMap.selectOne("selectUserTidx",idx); 
 		
 		return u_tidx;
 	}
 	
+
+	
 	@Override
-	public UsersDTO userUpForm(int idx) {
-		UsersDTO dto=sqlMap.selectOne("userUpForm",idx);
+	public UsersDTO getUserEmail(String u_tel, String u_gender) {
+	
+		UsersDTO dto=new UsersDTO();
+		dto.setU_tel(u_tel);
+		dto.setU_gender(u_gender);
+		
+		UsersDTO udto=sqlMap.selectOne("selectUserEmail",dto);
+		
+		return udto;
+	}
+	
+	public int getPwdCount(String email) {
+		String u_state=sqlMap.selectOne("selectState",email);
+		if(u_state==null||u_state.equals("")) {
+			return NOT_ID;
+		} else if(u_state.equals("탈퇴")){
+			return DEL;
+		} else {
+			return LOGIN_OK;
+		}
+		
+	}
+	
+	
+	@Override
+	public int updateUserPwd(UsersDTO dto) {
+		int count=sqlMap.update("updateUserPwd",dto);
+		return count;
+	}
+	
+	@Override
+	public UsersDTO getUserInfo(int idx) {
+		UsersDTO dto=sqlMap.selectOne("selectUserInfo",idx);
 		return dto;
 	}
 	
 	@Override
-	public int userUp(UsersDTO dto) {
-		int count=sqlMap.update("userUp",dto);
+	public int updateUserInfo(UsersDTO dto) {
+		int count=sqlMap.update("UpdateUserInfo",dto);
 		return count;
 	}
 	
 	@Override
-	public int userDel(int idx) {
-		int count=sqlMap.update("usersDel",idx);
+	public int deleteUserInfo(int idx) {
+		int count=sqlMap.update("DeleteUserInfo",idx);
 		return count;
 	}
+	
+	
 	}
