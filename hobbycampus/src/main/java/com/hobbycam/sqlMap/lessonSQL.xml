@@ -187,7 +187,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        B.LESSON_IDX=LL.LESSON_IDX)C
 		WHERE LESSON_IDX=#{lesson_idx}
   	</select>
-<<<<<<< HEAD
+
+  	<select id="selectLessonList" resultType="com.hobbycam.lesson.model.LessonDTO">
+  		SELECT
+  			*
+  		FROM
+  			LESSON_LIST
+  	</select>
+  	<select id="selectCate1List" resultType="com.hobbycam.category.model.Cate1DTO">
+  		SELECT
+  			*
+  		FROM
+  			CATE1
+  	</select>
+  	<select id="selectCate2List" parameterType="int" resultType="com.hobbycam.category.model.Cate2DTO">
+  		SELECT
+  			*
+  		FROM
+  			CATE2
+  		WHERE
+  			CATE1_idx=#{cate1_idx}
+  	</select>
+  	<select id="selectLessonListByTidx" parameterType="int" resultType="com.hobbycam.lesson.model.LessonDTO">
+  		SELECT
+  			*
+  		FROM
+  			LESSON_LIST
+  		WHERE
+  			T_IDX={t_idx}
+  	</select>
+  	<select id="SelectLessonIdxByLessonThumbnail" parameterType="String" resultType="int">
+  		SELECT
+  			LESSON_IDX
+  		FROM
+  			LESSON_LIST
+  		WHERE
+  			LESSON_THUMBNAIL=#{th_count}
+  	</select>
+  	<update id="lessonReqAccept" parameterType="int">
+  		UPDATE
+  			LESSON_RECORD
+  		SET
+  			LESSON_RECORD_STATE='예약완료'
+  		WHERE
+  			LESSON_RECORD_IDX=#{IDX}
+  	</update>
+  	<update id="lessonReqCancel" parameterType="int">
+  		UPDATE
+  			LESSON_RECORD
+  		SET
+  			LESSON_RECORD_STATE='취소'
+  		WHERE
+  			LESSON_RECORD_IDX=#{IDX}
+  	</update>
+
   	<select id="selectScheduleDate" parameterType="int" resultType="com.hobbycam.lesson.model.LessonScheduleDTO">
   		SELECT distinct ls.lesson_start
   			FROM lesson_schedule ls
@@ -235,58 +288,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		FROM lesson_list
   		WHERE lesson_idx=#{lesson_idx}
   	</select>
-=======
-  	<select id="selectLessonList" resultType="com.hobbycam.lesson.model.LessonDTO">
-  		SELECT
-  			*
-  		FROM
-  			LESSON_LIST
-  	</select>
-  	<select id="selectCate1List" resultType="com.hobbycam.cate1.model.Cate1DTO">
-  		SELECT
-  			*
-  		FROM
-  			CATE1
-  	</select>
-  	<select id="selectCate2List" parameterType="int" resultType="com.hobbycam.cate2.model.Cate2DTO">
-  		SELECT
-  			*
-  		FROM
-  			CATE2
-  		WHERE
-  			CATE1_idx=#{cate1_idx}
-  	</select>
-  	<select id="selectLessonListByTidx" parameterType="int" resultType="com.hobbycam.lesson.model.LessonDTO">
-  		SELECT
-  			*
-  		FROM
-  			LESSON_LIST
-  		WHERE
-  			T_IDX={t_idx}
-  	</select>
-  	<select id="SelectLessonIdxByLessonThumbnail" parameterType="String" resultType="int">
-  		SELECT
-  			LESSON_IDX
-  		FROM
-  			LESSON_LIST
-  		WHERE
-  			LESSON_THUMBNAIL=#{th_count}
-  	</select>
-  	<update id="lessonReqAccept" parameterType="int">
-  		UPDATE
-  			LESSON_RECORD
-  		SET
-  			LESSON_RECORD_STATE='예약완료'
-  		WHERE
-  			LESSON_RECORD_IDX=#{IDX}
-  	</update>
-  	<update id="lessonReqCancel" parameterType="int">
-  		UPDATE
-  			LESSON_RECORD
-  		SET
-  			LESSON_RECORD_STATE='취소'
-  		WHERE
-  			LESSON_RECORD_IDX=#{IDX}
-  	</update>
->>>>>>> teacher_kdw
   </mapper>

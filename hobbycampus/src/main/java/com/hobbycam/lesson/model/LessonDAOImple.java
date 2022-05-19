@@ -105,29 +105,68 @@ public class LessonDAOImple implements LessonDAO {
 	}
 	
 	@Override
-<<<<<<< HEAD
-	public List scheduleDate(int lesson_idx) {
-		List lists = sqlMap.selectList("selectScheduleDate",lesson_idx);
-=======
+
 	public List lessonList() {
 		List lists=sqlMap.selectList("selectLessonList");
->>>>>>> teacher_kdw
+		return lists;
+	}
+
+	public List scheduleDate(int lesson_idx) {
+		List lists = sqlMap.selectList("selectScheduleDate",lesson_idx);
+
 		return lists;
 	}
 	
 	@Override
-<<<<<<< HEAD
-	public List scheduleTime(String lessonDate) {
-		List lists = sqlMap.selectList("selectScheduleTime",lessonDate);
-=======
+
 	public List cate1List() {
 		List lists=sqlMap.selectList("selectCate1List");
->>>>>>> teacher_kdw
+		return lists;
+	}
+
+	public List scheduleTime(String lessonDate) {
+		List lists = sqlMap.selectList("selectScheduleTime",lessonDate);
+
 		return lists;
 	}
 	
 	@Override
-<<<<<<< HEAD
+
+	public List cate2List(int cate1_idx) {
+		List lists=sqlMap.selectList("selectCate2List",cate1_idx);
+		return lists;
+	}
+	
+	@Override
+	public LessonDTO LessonListByTidx(int t_idx) {
+		LessonDTO dto=sqlMap.selectOne("selectLessonListByTidx",t_idx);
+		return dto;
+	}
+	
+	@Override
+	public int countLessonList() {
+		int count=sqlMap.selectOne("countLessonList");
+		return count;
+	}
+	
+	@Override
+	public int SelectLessonIdxByLessonThumbnail(String th_count) {
+		int l_idx=sqlMap.selectOne("SelectLessonIdxByLessonThumbnail",th_count);
+		return l_idx;
+	}
+	
+	@Override
+	public int lessonReqAccept(int idx) {
+		int count=sqlMap.update("lessonReqAccept",idx);
+		return count;
+	}
+	
+	@Override
+	public int lessonReqCancel(int idx) {
+		int count=sqlMap.update("lessonReqCancel",idx);
+		return count;
+	}
+
 	public String teacherEmail(int lesson_idx) {
 		String teacherEmail = sqlMap.selectOne("selectTeacherEmail", lesson_idx);
 		return teacherEmail;
@@ -176,41 +215,7 @@ public class LessonDAOImple implements LessonDAO {
 	public String getThumbnail(int lesson_idx) {
 		String thumbnail = sqlMap.selectOne("selectThumb", lesson_idx);
 		return thumbnail;
-=======
-	public List cate2List(int cate1_idx) {
-		List lists=sqlMap.selectList("selectCate2List",cate1_idx);
-		return lists;
-	}
-	
-	@Override
-	public LessonDTO LessonListByTidx(int t_idx) {
-		LessonDTO dto=sqlMap.selectOne("selectLessonListByTidx",t_idx);
-		return dto;
-	}
-	
-	@Override
-	public int countLessonList() {
-		int count=sqlMap.selectOne("countLessonList");
-		return count;
-	}
-	
-	@Override
-	public int SelectLessonIdxByLessonThumbnail(String th_count) {
-		int l_idx=sqlMap.selectOne("SelectLessonIdxByLessonThumbnail",th_count);
-		return l_idx;
-	}
-	
-	@Override
-	public int lessonReqAccept(int idx) {
-		int count=sqlMap.update("lessonReqAccept",idx);
-		return count;
-	}
-	
-	@Override
-	public int lessonReqCancel(int idx) {
-		int count=sqlMap.update("lessonReqCancel",idx);
-		return count;
->>>>>>> teacher_kdw
+
 	}
 }
 

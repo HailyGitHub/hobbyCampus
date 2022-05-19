@@ -30,7 +30,22 @@ public interface LessonDAO {
 	
 	public List lessonReview(int lesson_idx);
 	
-<<<<<<< HEAD
+	public List lessonList();
+	
+	public List cate1List();
+	
+	public List cate2List(int cate1_idx);
+	
+	public LessonDTO LessonListByTidx(int t_idx);
+	
+	public int countLessonList();
+	
+	public int SelectLessonIdxByLessonThumbnail(String th_count);
+	
+	public int lessonReqAccept(int idx);
+	
+	public int lessonReqCancel(int idx);
+
 	public List scheduleDate(int lesson_idx);
 	
 	public List scheduleTime(String lessonDate);
@@ -48,22 +63,6 @@ public interface LessonDAO {
 	public String getAddr(int lesson_idx);
 	
 	public String getThumbnail(int lesson_idx);
-=======
-	public List lessonList();
-	
-	public List cate1List();
-	
-	public List cate2List(int cate1_idx);
-	
-	public LessonDTO LessonListByTidx(int t_idx);
-	
-	public int countLessonList();
-	
-	public int SelectLessonIdxByLessonThumbnail(String th_count);
-	
-	public int lessonReqAccept(int idx);
-	
-	public int lessonReqCancel(int idx);
->>>>>>> teacher_kdw
+
 	
 }
