@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.hobbycam.VO.CouponVO;
 
 public class CouponDAOImple implements CouponDAO {
 	
@@ -47,6 +50,19 @@ public class CouponDAOImple implements CouponDAO {
 		cnt=cnt==0?1:cnt;
 		
 		return cnt;
+	}
+	
+	@Override
+	public List<CouponVO> getCoupons() {
+		return sqlMap.selectList("couponMapper.getCoupons");
+	}
+
+	@Override
+	public List<CouponVO> getCouponsByUser(int uIdx, boolean stat) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("uIdx", uIdx);
+		param.put("stat", stat);
+		return sqlMap.selectList("couponMapper.getCouponsByUser", param);
 	}
 
 }

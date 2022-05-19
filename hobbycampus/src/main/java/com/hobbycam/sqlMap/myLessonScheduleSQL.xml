@@ -19,7 +19,8 @@
 			l.LESSON_SHORT_CONT as lessonShortCount,
 			l.LESSON_STATE as lessonState,
 			l.LESSON_KIT as lessonKit,
-			t.T_NAME as tName
+			t.T_NAME as tName,
+			to_char(ls.lesson_start, 'yyyy-mm-dd hh24:mi:ss') as lessonStart
 		from 
 			lesson_schedule ls,
 			lesson_list l,

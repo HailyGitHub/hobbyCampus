@@ -13,7 +13,6 @@
 		<mapper resource="com/hobbycam/sqlMap/myCouponSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/myLessonScheduleSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/myPostSQL.xml"/>
-		<mapper resource="com/hobbycam/sqlMap/myUserSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/myLessonRecordSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/myPaySQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/usersSQL.xml"/>
@@ -21,10 +20,15 @@
 		<mapper resource="com/hobbycam/sqlMap/couponSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/paymentSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/levelSQL.xml"/>
+
 		<mapper resource="com/hobbycam/sqlMap/noticeSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/categorySQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/indexSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/totalSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/scheduleSQL.xml"/>
+
+		<mapper resource="com/hobbycam/sqlMap/likeSQL.xml"/>
+		
+
 	</mappers>
 </configuration>

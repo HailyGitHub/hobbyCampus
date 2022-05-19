@@ -46,7 +46,6 @@ public class HobbyEmailGoogle implements HobbyEmail {
         transport.sendMessage(message,
             message.getRecipients(Message.RecipientType.TO));
         transport.close();
-
 	}
 	
     //mail Authenticator

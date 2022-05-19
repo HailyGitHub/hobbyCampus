@@ -115,6 +115,15 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	
+	
+
+	<bean id="likeDao" class="com.hobbycam.like.model.LikeDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+
 	<bean id="indexDao" class="com.hobbycam.index.model.IndexDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
@@ -130,6 +139,7 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+
 
 
 
@@ -158,6 +168,10 @@
 	            <prop key="mail.smtp.auth">true</prop>
 	            <prop key="mail.smtp.starttls.enable">true</prop>
 	            <prop key="mail.debug">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+	            <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+
 	        </props>
 	    </property>
 	</bean>

@@ -1,4 +1,6 @@
 @charset "UTF-8";
+
+
 #wrap{
 	width: 90%;
 	margin: 10px auto;
@@ -10,7 +12,7 @@
 	padding:20px;
 	margin-bottom:20px;
 	float:left;
-	border: 1px solid #bcbcbc;
+	border: 1px solid orange;
 
 }
 #right_content{
@@ -18,7 +20,7 @@
 	padding:20px;
 	margin-bottom:20px;
 	float:left;
-	border: 1px solid #bcbcbc;
+	border: 1px solid orange;
 
 }
 #addr_content{
@@ -27,7 +29,7 @@
 	margin-bottom:20px;
 	float:left;
 
-	border: 1px solid #bcbcbc;
+	border: 1px solid orange;
 
 }
 

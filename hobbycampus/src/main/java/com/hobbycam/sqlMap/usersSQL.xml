@@ -5,7 +5,7 @@
   <mapper namespace="hobbycam.users">
   
   <!-- emailJoin -->
-  <select id="usersEmailCheck" parameterType="String" resultType="int">
+<select id="selectEmailCount" parameterType="String" resultType="int">
     select count(*) from 
       (select u.u_email,
       		a.a_email
@@ -15,10 +15,10 @@
       	 	
       where u.u_email=#{email}
         or a.a_email=#{email})
-  </select>
+</select>
   
 
-  <select id="usersNameCheck" parameterType="String" resultType="int">
+<select id="selectNameCount" parameterType="String" resultType="int">
     select count(*) from 
       (select u.u_name,
       		t.t_name,
@@ -32,10 +32,26 @@
         or t.t_name=#{name}
         or a.a_name=#{name})
   
+</select>
+  
+  
+  <select id="selectEmail" parameterType="String" resultType="String">
+  	select u_email 
+  		from users
+  	where u_idx=#{u_idx}
+
   </select>
   
+<select id="selectTel" parameterType="String" resultType="Integer">
+      select u_idx
+      	 from users
+      where u_tel=#{u_tel}
+</select>
 
-  <insert id="usersEmailJoin" parameterType="com.hobbycam.users.model.UsersDTO">
+
+
+
+<insert id="insertUser" parameterType="com.hobbycam.users.model.UsersDTO">
   	insert into users 
   	values(
   		seq_users.nextval,
@@ -49,62 +65,66 @@
   		'활성',
   		sysdate)
   	
-  </insert>
-  
-  
-  <!-- user kakaoJoin -->
-  <insert id="usersKakaoJoin" parameterType="com.hobbycam.users.model.UsersDTO">
-  insert into users 
-  	values(
-  		seq_users.nextval,
-  		#{u_email},
-  		'kakao',
-  		#{u_name},
-  		#{u_img},
-  		#{u_gender},
-  		0,
-  		#{u_tel},
-  		'활성',
-  		sysdate)
-  </insert>
+</insert>
   
 
-
-  <!-- Login -->
-  <select id="usersLogin" parameterType="String" resultType="com.hobbycam.users.model.UsersDTO">
+ <!-- Login -->
+<select id="selectPwd" parameterType="String" resultType="com.hobbycam.users.model.UsersDTO">
   	select u_pwd, u_state
   	from users 
   	where u_email=#{e_mail}
   
-  </select>
+</select>
   
-    <select id="usersname" parameterType="String" resultType="com.hobbycam.users.model.UsersDTO">
+<select id="selectUserName" parameterType="String" resultType="com.hobbycam.users.model.UsersDTO">
 	select u_name, u_idx
   	from users
   	where users.u_email=#{e_mail}
-  </select>
+</select>
   
-  
-  
-  <!-- getUserName -->
-  <select id="userTidx" parameterType="int" resultType="integer">
+
+<select id="selectUserTidx" parameterType="int" resultType="integer">
 	select t_idx 
   	from teacher
   	where teacher.u_idx =#{u_idx}
   	      
-  </select>
+</select>
+
   
-	<select id="userUpForm" parameterType="int" resultType="com.hobbycam.users.model.UsersDTO">
+<select id="selectUserEmail" parameterType="com.hobbycam.users.model.UsersDTO" resultType="com.hobbycam.users.model.UsersDTO">
+  	select u_email , u_state
+  	from users
+  	where u_tel=#{u_tel} 
+  		and u_gender=#{u_gender}
+  
+</select>
+  
+  <select id="selectState" parameterType="String" resultType="String">
+  	select u_state
+  	from users 
+  	where u_email=#{e_mail}
+  
+</select>
+
+  <!-- pwd Change -->
+<update id="updateUserPwd" parameterType="com.hobbycam.users.model.UsersDTO">
+  	update users
+  		set u_pwd=#{u_pwd}
+  		
+  	where u_email=#{u_email}
+  
+</update>
+  
+
+<select id="selectUserInfo" parameterType="int" resultType="com.hobbycam.users.model.UsersDTO">
 	select  u_img,u_name,u_tel  
 	from users
 	where u_idx=#{u_idx}
 
-	</select>
-  
-  
+</select>
   
   <!--  user UPdate -->
-  <update id="userUp" parameterType="com.hobbycam.users.model.UsersDTO">
+<update id="UpdateUserInfo" parameterType="com.hobbycam.users.model.UsersDTO">
   	update users 
   	
   		set u_pwd=#{u_pwd} ,
@@ -113,27 +133,59 @@
   			u_tel=#{u_tel}
   			
   	where u_idx=#{u_idx}
-  </update>
-  
-  
-  
-  <!-- pwd Change -->
-  <update id="usersPwdUp" parameterType="com.hobbycam.users.model.UsersDTO">
-  	update users
-  		set u_pwd=#{u_pwd}
-  		
-  	where u_idx=#{u_idx}
-  
-  </update>
+</update>
   
   
   
   <!--  userDelete -->
-  <update id="usersDel" parameterType="int">
+<update id="DeleteUserInfo" parameterType="int">
   	update users 
   	set u_state='탈퇴' 
   	where u_idx=#{u_idx}
-  </update>
+</update>
   
+  <select id="getUser" resultType="com.hobbycam.VO.UserVO">
+		select 
+			U_IDX	 as uIdx,
+			U_EMAIL as uEmail,
+			U_NAME as uName,
+			U_IMG as uImg,
+			U_GENDER as uGender,
+			U_POINT as uPoint,
+			U_TEL as uTel,
+			U_STATE as uState
+		from 
+			users
+		where 
+			U_IDX = #{uIdx}
+	</select>
+
+	<update id="updateUPoint" parameterType="map">
+		update 
+			users
+		set 
+			U_POINT = #{newUPoint}
+		where 
+			U_IDX = #{uIdx}
+	</update>
+	
+	<update id="addUPoint" parameterType="map">
+		update 
+			users
+		set 
+			U_POINT = U_POINT + #{point}
+		where 
+			U_IDX = #{uIdx}
+	</update>
+	
+	<update id="subUPoint" parameterType="map">
+		update 
+			users
+		set 
+			U_POINT = U_POINT - #{point}
+		where 
+			U_IDX = #{uIdx}
+	</update>
+	
   
   </mapper>
