@@ -108,11 +108,24 @@
           <div class="form-floating mb-3">
         	<h5 class="modal-title" id="t_modal_rate">할인율</h5>
             <input type="hidden" id="h_modal_rate">
-           <input type="Text" class="form-control rounded-4" id="modal_coupon_rate" placeholder="modal_rate">
+	            <div class="form mb-3" name="i_option" >
+		          <select class="form-select form-select-lg mb-3 fs-9" aria-label=".form-select-lg example" id="modal_coupon_rate">
+					  <option selected >할인율을 선택해주세요!</option>
+					<c:forEach var="i" begin="5" end="100" step="5">
+					  <option value="${i}" >${i} %</option>				
+					</c:forEach>
+				  </select>
+			  </div>
           </div>
            <div class="form-floating mb-3">
         	<h5 class="modal-title" id="t_modal_idx">상태</h5>
-           <input type="Text" class="form-control rounded-4" id="modal_coupon_state" placeholder="modal_coupon_state">
+        		<div class="form mb-3" name="s_option" >
+		          <select class="form-select form-select-lg mb-3 fs-9" aria-label=".form-select-lg example" id="modal_coupon_state">
+					  <option selected >활성 여부 </option>
+					  <option value="활성">활성</option>
+					  <option value="비활성">비활성</option>
+				  </select>
+			  	</div>
           </div>	
         </form>
       </div>
@@ -156,6 +169,7 @@ function updtCoupon(){
 	      data: {'coupon_title': $('#modal_coupon_title').val(), 
 	    	  'coupon_rate': $('#modal_coupon_rate').val(), 
 	    	  'coupon_state': $('#modal_coupon_state').val(),
+	    	  'coupon_img': $('#modal_coupon_rate').val()+'.jpg',
 	    	  'coupon_idx': $('#modal_coupon_idx').val()},
 	      dataType: 'json',
 	      success: function(result){
@@ -177,7 +191,7 @@ function couponMake(){
 	      url: 'couponMake.do',
 	      data: {'coupon_title': $('#modal_coupon_title').val(), 
 	    	  'coupon_rate': $('#modal_coupon_rate').val(), 
-	    	  'coupon_img': 'img.jpg',
+	    	  'coupon_img': $('#modal_coupon_rate').val()+'.jpg',
 	    	  'coupon_state': $('#modal_coupon_state').val()},
 	      dataType: 'json',
 	      success: function(result){
@@ -212,10 +226,10 @@ function getInfo(idx){
         $('#modal_coupon_title').attr('value', result.dto.coupon_title);
     	
         
-        $('#modal_coupon_state').attr('value', result.dto.coupon_state);
+        $('#modal_coupon_state').val( result.dto.coupon_state).prop("selected",true);
     	
        //$('#modal_coupon_rate').attr('data-coupon_rate', rate); 
-        $('#modal_coupon_rate').attr('value', result.dto.coupon_rate);
+        $('#modal_coupon_rate').val(result.dto.coupon_rate).prop("selected",true);
         
        
        }

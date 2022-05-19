@@ -368,14 +368,13 @@ var getCookie = function(name) {
 		dataType: 'json',
 		success: function(result){
 			if(result.dto.notice_idx!=){
-				
-			console.log(result.dto.notice_idx); //couponMakeForm().dto.coupon_idx;	 
-			$('#t_notice_subj').text(result.dto.notice_subj);
-			$('#t_notice_cont').text(result.dto.notice_cont);
-			$('#notice_idx').val(result.dto.notice_idx);
-			$('#notice_subj').val(result.dto.notice_subj);
-			$('#notice_cont').val(result.dto.notice_cont);
-			$("#noticeOpt").val(result.dto.notice_viewer).prop("selected", true);
+				console.log(result.dto.notice_idx); //couponMakeForm().dto.coupon_idx;	 
+				$('#t_notice_subj').text(result.dto.notice_subj);
+				$('#t_notice_cont').text(result.dto.notice_cont);
+				$('#notice_idx').val(result.dto.notice_idx);
+				$('#notice_subj').val(result.dto.notice_subj);
+				$('#notice_cont').val(result.dto.notice_cont);
+				$("#noticeOpt").val(result.dto.notice_viewer).prop("selected", true);
 			};
 			if(noticeBlind!='true'){
 				$('#exampleModal').modal('show');

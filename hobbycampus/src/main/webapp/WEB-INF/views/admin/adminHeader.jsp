@@ -21,7 +21,7 @@
 	        <!-- Category List -->
 	        <a class="navbar-brand" href="resumeList.do">이력서</a>
 	        <a class="navbar-brand" href="memberUserList.do">계정관리</a>
-	        <a class="navbar-brand" href="cotegoryList.do">카테고리</a>
+	        <a class="navbar-brand" href="categoryList.do">카테고리</a>
 	        <a class="navbar-brand" href="paymentList.do">결제</a>
 	        <a class="navbar-brand" href="couponList.do">쿠폰</a>
 	        <a class="navbar-brand" href="levelList.do">레벨</a>
