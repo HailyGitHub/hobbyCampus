@@ -169,5 +169,14 @@
 			U_IDX = #{uIdx}
 	</update>
 	
+	<update id="subUPoint" parameterType="map">
+		update 
+			users
+		set 
+			U_POINT = U_POINT - #{point}
+		where 
+			U_IDX = #{uIdx}
+	</update>
+	
   
   </mapper>

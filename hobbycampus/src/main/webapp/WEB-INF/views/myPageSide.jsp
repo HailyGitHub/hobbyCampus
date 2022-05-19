@@ -71,7 +71,7 @@
                </div>
                <ul class="nav nav-pills flex-column mb-auto">
                  <li class="nav-item">
-                   <a href="#" class="nav-link">
+                   <a href="mylessonList.do" class="nav-link">
                      <span class="studentList" >내 수강내역</span>
                    </a>
                    <a href="#" class="nav-link">
@@ -79,7 +79,7 @@
                    </a>                     
                  </li>
                  <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="myPointList.do" class="nav-link">
                     <span class="studentList" >내 포인트</span>
                   </a>
                   <a href="#" class="nav-link">
@@ -88,7 +88,7 @@
                 </li>
                 
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="pointShop.do" class="nav-link">
                     <span class="studentList" >포인트 충전</span>
                   </a>
                   <a href="teacherRecord.do?t_idx=1" class="nav-link">
@@ -113,7 +113,7 @@
                   </a>                     
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="mycoupon.do" class="nav-link">
                     <span class="studentList" >내 쿠폰</span>
                   </a>                   
                 </li>

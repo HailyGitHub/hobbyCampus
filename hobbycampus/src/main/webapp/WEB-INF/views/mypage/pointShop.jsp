@@ -149,9 +149,9 @@
 			return;
 		}
 
-		var IMP = window.IMP; // 생략 가능
+		var IMP = window.IMP; 
 		IMP.init("imp02490270"); // 예: imp00000000
-		// IMP.request_pay(param, callback) 결제창 호출
+		// IMP.request_pay(param, callback) call  payment Window
 		IMP.request_pay({ // param
 			pg : "html5_inicis",
 			pay_method : "card",
@@ -163,10 +163,10 @@
 			buyer_name : $pointShop.uName,
 			buyer_tel : $pointShop.uTel
 		}, function(rsp) { // callback
-			if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-				// jQuery로 HTTP 요청
+			if (rsp.success) { // 
+				// jQuery-> HTTP req
 				jQuery.ajax({	
-					url : "http://localhost:9090/hobbycampus/payComplete.do", // 예: https://www.myservice.com/payments/complete
+					url : "http://localhost:9090/hobbycampus/payComplete.do", // ex: https://www.myservice.com/payments/complete
 					method : "POST",
 					headers : {
 						"Content-Type" : "application/json"

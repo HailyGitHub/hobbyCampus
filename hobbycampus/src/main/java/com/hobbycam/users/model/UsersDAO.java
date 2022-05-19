@@ -45,5 +45,5 @@ public interface UsersDAO {
 	UserVO getUser(int uIdx);
 	int updateUPoint(int uIdx, int newUPoint);
 	int addUPoint(int uIdx, int point);
-	
+	int subUPoint(int uIdx, int point);
 }

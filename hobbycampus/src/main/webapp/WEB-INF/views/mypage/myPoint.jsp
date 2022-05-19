@@ -76,7 +76,7 @@
 					</c:forEach>
 				</tbody>
 				<tfoot>
-					<!-- 페이징 com.hobbycam.page-->
+					<!--  com.hobbycam.page-->
 					<td colspan="5" align="center">${pageMake}</td>
 				</tfoot>
 			</table>

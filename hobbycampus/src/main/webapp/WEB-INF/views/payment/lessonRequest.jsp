@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/hobbycampus/js/myLessonRequest.js"></script>
@@ -36,9 +35,6 @@
 <!--CSS-->
 <link rel="stylesheet" href="/hobbycampus/css/main.css">
 <link rel="stylesheet" href="/hobbycampus/css/pointShop.css">
-<!--  
-<link rel="stylesheet" href="/hobbycampus/css/lessonreq.css">
--->
 <style>
 dt {
 	font-weight: bold;
@@ -93,12 +89,14 @@ dd {
 					    ${lessonVO.lessonType}
 				   
 				   </li>
+				   <c:if test="${lessonVO.lessonType != '온라인'}">
 				   <li class="list-group-item">
 				   <div class="fs-5 text-black-50 fw-bolder">
 							<i class="bi bi-bookmark-star"></i> 날짜
 						</div>
-					    $강의 날짜
+						${lessonVO.lessonStart}
 				   </li>
+				   </c:if>
 				   <li class="list-group-item">
 				   <div class="fs-5 text-black-50  fw-bolder">
 							<i class="bi bi-bookmark-star"></i> 키트유무

@@ -13,6 +13,7 @@ public class LessonScheduleVO {
 	private String lessonState;
 	private String lessonKit;
 	private String tName;
+	private String lessonStart;
 
 
 	public int getLessonIdx() {
@@ -94,6 +95,12 @@ public class LessonScheduleVO {
 				+ lessonSubj + ", lessonUpDate=" + lessonUpDate + ", lessonType=" + lessonType + ", lessonPrice="
 				+ lessonPrice + ", lessonThumbnail=" + lessonThumbnail + ", lessonShortCount=" + lessonShortCount
 				+ ", lessonState=" + lessonState + ", lessonKit=" + lessonKit + "]";
+	}
+	public String getLessonStart() {
+		return lessonStart;
+	}
+	public void setLessonStart(String lessonStart) {
+		this.lessonStart = lessonStart;
 	}
 	
 	

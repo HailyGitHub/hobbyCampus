@@ -67,46 +67,46 @@ a:hover { text-decoration:none !important }
 					onclick="$myLesson.goWithFilter(this)">
 			</div>
 			<br>
-			<!--lesson_record_state of user  -->
-			
+			<!--lesson_record_state of user  -->		
 			<c:choose>
 				<c:when test="${empty lessonRecordList}">
-			해당 수강 내역이 없습니다.
-		</c:when>
-				<c:otherwise>
-				<div class="divLine">
-						<c:forEach items="${lessonRecordList}" var="lessonRecord">
-							<div class="lesson_item">
-								<span class="lesson_record_state "><i class="bi bi-list-stars"></i> ${lessonRecord.lessonRecordState}</span>
-								<div>${lessonRecord.lesson_type}</div>
-								<c:if test="${lessonRecord.lesson_type=='온라인'}">
-									<input type="button" value="강의보기">
-								</c:if>
-								<br>
-								<!-- Link: lessonCont.do-->
-								<a href="#"> <!--lesson thumbnail  --> <img
-									src="/hobbycampus/hobbyImg/lesson/강사인덱스/레슨인덱스/" width="60"
-									height="60">
-									<div class="lesson_info">
-										<p class="lesson_subj">${lessonRecord.lessonSubj}</p>
-											<span class="lessonT"><i class="bi bi-mortarboard-fill"></i> 강사명</span>
-											<p class="lessonRecoT">${lessonRecord.tName}</p>
-											<span class="lessonT"><i class="bi bi-calendar-check"></i> 시작일</span>
-											<p class="lessonStart">$시작일</p>
-											
-											<span class="lesson_paydate">강의 구매날짜: ${lessonRecord.lessonBuyDate}</span>
-										<span class="spanHR">─────────────────────────────────</span>
-									</div>		
-								</a>
-							</div>
-						</c:forEach>
-						</div>
-				</c:otherwise>
-			</c:choose>
+			<hr class="text-warning"><p align="center" class="text-warning">해당 수강 내역이 없습니다.</p>
+				</c:when>
+			<c:otherwise>
+		<div>
+		<c:forEach items="${lessonRecordList}" var="lessonRecord">
+			<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0 border border-warning">
+	    <div class="col-md-4 ">
+	      <img src="..." class="img-fluid rounded-start" alt="...">
+	    </div>
+    <div class="col-md-8 ">
+    <div class="card-body ">
+      	 <span class="lesson_record_state "><i class="bi bi-list-stars"></i> ${lessonRecord.lessonRecordState}</span>
+        <h5 class="card-title fw-bolder">${lessonRecord.lessonSubj}</h5>
+		<div class="lesson_record_state">${lessonRecord.lesson_type}
+		<c:if test="${lessonRecord.lesson_type=='온라인'}"><i class="bi bi-camera-reels"></i></i>
+			 <input type="button" value="강의보기" class="btn btn-outline-warning fs-6"> 
+		</c:if>
 		</div>
+		<hr>
+        <p class="card-text fw-bolder text-black-50 fs-6">강사명 <i class="bi bi-mortarboard-fill"></i></p>
+        <p class="card-text fw-bolder fs-5">${lessonRecord.tName}</p>
+        <a href="#" class="btn btn-warning">상세 보기</a>
+        <p class="card-text"><small class="text-muted">강의 구매날짜: ${lessonRecord.lessonBuyDate}</small></p>
+	</div>
+ 	</div>
 	</div>
 	</div>
+   </c:forEach>
+ </div>
+</c:otherwise>
+</c:choose>
 </div>
+</div>
+</div>
+</div>
+
 </body>
 <!-- FOOTER -->
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
