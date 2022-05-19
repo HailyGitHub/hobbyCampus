@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<mappers>
-
 		<mapper resource="com/hobbycam/sqlMap/lessonSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/teacherSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/memberSQL.xml"/>
@@ -23,5 +22,9 @@
 		<mapper resource="com/hobbycam/sqlMap/paymentSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/levelSQL.xml"/>
 		<mapper resource="com/hobbycam/sqlMap/noticeSQL.xml"/>
+		<mapper resource="com/hobbycam/sqlMap/categorySQL.xml"/>
+		<mapper resource="com/hobbycam/sqlMap/indexSQL.xml"/>
+		<mapper resource="com/hobbycam/sqlMap/totalSQL.xml"/>
+		<mapper resource="com/hobbycam/sqlMap/scheduleSQL.xml"/>
 	</mappers>
 </configuration>

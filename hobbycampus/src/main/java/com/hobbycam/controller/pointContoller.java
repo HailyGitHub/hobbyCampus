@@ -36,7 +36,7 @@ public class pointContoller {
 	@RequestMapping("/pointShop.do")
 	public ModelAndView pointShop(@RequestParam Map<String, String> param) {
 
-		// TODO 수정해야함( 유저가 3이라고 가정했을 뿐)
+		// TODO 
 		int uIdx = 3;
 		UserVO userVO = userDAO.getUser(uIdx);
 
@@ -44,9 +44,9 @@ public class pointContoller {
 		String postTel = param.get("postTel");
 		String postAddr = param.get("postAddr");
 		String postEtc = param.get("postEtc");
-		// postReceiver 관련된 정보가 있을 때
+		// postReceiver 
 		if (postReceiver != null) {
-			// 저장 로직
+			// 
 			Map<String, Object> map = new HashMap<>();
 			map.put("uIdx", uIdx);
 			map.put("postReceiver", postReceiver);
@@ -56,7 +56,7 @@ public class pointContoller {
 			postDAO.insert(map);
 		}
 
-		// 충전을 마치고 돌아가야할 주소(수강신청 주소)
+		// 
 		String rurl = param.get("rurl");
 
 		ModelAndView mav = new ModelAndView();
@@ -71,7 +71,7 @@ public class pointContoller {
 	@RequestMapping("/myPointList.do")
 	public ModelAndView myPointList(@RequestParam Map<String, String> param) {
 
-		// TODO 수정해야함( 유저가 3이라고 가정했을 뿐)
+		// TODO 
 		int uIdx = 3;
 		UserVO userVO = userDAO.getUser(uIdx);
 
@@ -101,7 +101,7 @@ public class pointContoller {
 		return mav;
 	}
 
-	// 포인트 구매 완료 페이지 이동
+	// 
 	@RequestMapping("/payComplete.do")
 	public ModelAndView payComlete() {
 		ModelAndView mav = new ModelAndView();
@@ -119,7 +119,7 @@ public class pointContoller {
 			return "payListIdx is not ";
 		}
 
-		// TODO 수정해야함( 유저가 3이라고 가정했을 뿐)
+		// TODO 
 		int uIdx = 3;
 		UserVO userVO = userDAO.getUser(uIdx);
 		
@@ -130,10 +130,10 @@ public class pointContoller {
 			try {
 				int newUPoint = userVO.getuPoint() - payVO.getPoint();
 				System.out.println("newUPoint : " + newUPoint);
-				// user point 차감
+				// user point 
 				userDAO.updateUPoint(uIdx, newUPoint);
 
-				// 해당 payListIdx 상태 업데이트
+				// 해당 payListIdx 
 				int result = payDAO.updatePayValue(payListIdx, "환불");
 				if(result == 0) {
 					return "update fail";
@@ -145,7 +145,7 @@ public class pointContoller {
 			}
 		}
 
-		// 잔액 부족
+		// 
 		return "need more balance";
 	}
 

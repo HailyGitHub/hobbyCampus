@@ -70,7 +70,7 @@
 						<c:forEach var="dto" items="${lists}">
 							<tr>
 								<th scope="row">${dto.u_idx}</th>
-								<td><img src="/hobbycampus/img/none.png" class="rounded-circle" data-img="${dto.u_img}"></td>
+								<td><img src="/hobbycampus/hobbyImg/userImg/${dto.u_img}" class="rounded-circle" data-img="${dto.u_img}"></td>
 								<td>${dto.u_email}</td>
 								<td>${dto.u_name}</td>
 								<td>${dto.u_gender}</td>

@@ -32,6 +32,25 @@
     		width: 200px;
     		border: 1px solid black;
     	}
+		.wrap-loading{ 
+		    position: fixed;
+		    left:0;
+		    right:0;
+		    top:0;
+		    bottom:0;
+		    background: rgba(0,0,0,0.2);
+		    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',endColorstr='#20000000');
+		}
+		.wrap-loading div{ 
+		     position: fixed;
+		     top:50%;
+		     left:50%;
+		     margin-left: -21px;
+		     margin-top: -21px;
+		}
+		.display-none{ 
+		     display:none;
+		}
     </style>
 </head>
 <body>
@@ -82,7 +101,7 @@
 						<c:forEach var="dto" items="${lists}">
 							<tr class="${dto.interview_result=='대기'? '':'table-secondary'}" data-bs-toggle="modal" data-bs-target="#resumeInfoModal" onclick="getResume(${dto.resume_idx}, '${dto.u_email}')">
 								<th scope="row">${dto.resume_idx}</th>
-								<td><img src="/hobbycampus/img/${dto.resume_img}" class="rounded-circle"></td>
+								<td><img src="/hobbycampus/hobbyImg/resumeImg/${dto.resume_img}" class="rounded-circle"></td>
 								<td>${dto.u_email}</td>
 								<td>${dto.resume_name}</td>
 								<td>${dto.u_gender}</td>
@@ -202,6 +221,11 @@
 		</article>
 	</main>
 	
+	<!-- Loading Image -->
+	<div class="wrap-loading display-none">
+	    <div><img src="/hobbycampus/img/loading.gif" /></div>
+	</div> 
+	
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
@@ -248,7 +272,7 @@
 			success: function(result){
 				resultText = result; // To Trim???
 				var dto = resultText.result;
-				var ImgSrc = '/hobbycampus/img/';
+				var ImgSrc = '/hobbycampus/hobbyImg/resumeImg/';
 				
 				$('#modal_title').attr('data-idx', dto.resume_idx);
 				$('#modal_title').attr('data-email', email);
@@ -271,7 +295,14 @@
 					if($(this).val() == dto.interview_result)
 						$(this).attr('checked', true);
 					});
-			}//success : function
+			}
+			,beforeSend: function(){
+				$('.wrap-loading').removeClass('display-none');
+			}
+			,complete: function(){
+				$('.wrap-loading').addClass('display-none');
+			}
+			,timeout:100000
 		});//ajax
 	}//getResume()
 	
