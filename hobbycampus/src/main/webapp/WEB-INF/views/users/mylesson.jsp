@@ -53,13 +53,13 @@ a:hover { text-decoration:none !important }
 				<input type="button" name="list_bt" value="전체 목록"
 					class="btn btn-outline-warning"
 					onclick="$myLesson.goWithFilter(this)"> <input
-					type="button" name="lesson_bt" value="수업"
+					type="button" name="lesson_bt" value="예약대기"
 					class="btn btn-outline-warning"
 					onclick="$myLesson.goWithFilter(this)"> <input
-					type="button" name="reser_bt" value="예약"
+					type="button" name="reser_bt" value="예약완료"
 					class="btn btn-outline-warning"
 					onclick="$myLesson.goWithFilter(this)"> <input
-					type="button" name="end_bt" value="완료"
+					type="button" name="end_bt" value="수강완료"
 					class="btn btn-outline-warning"
 					onclick="$myLesson.goWithFilter(this)"> <input
 					type="button" name="cencel_bt" value="취소"
