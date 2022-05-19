@@ -19,7 +19,6 @@ public class HobbyEmailGoogle implements HobbyEmail {
 	@Override
 	public void emailSend(String email, String subject, String content) throws Exception {
 		
-        //int code=(int)(Math.random()*10000);
 		
 		// SET to use g-mail
         Properties props = new Properties();

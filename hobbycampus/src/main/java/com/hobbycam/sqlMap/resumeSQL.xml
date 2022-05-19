@@ -3,9 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="hobbycam.resume">
- 	<select id="selectCate1" resultType="com.hobbycam.cate1.model.Cate1DTO">
- 		SELECT *
+ 	<select id="selectCate1" resultType="com.hobbycam.category.model.Cate1DTO">
+ 			SELECT *
 			FROM cate1
+			Order by cate1_idx desc	
  	</select>
  	<select id="selectRecordCnt" resultType="int" parameterType="int">	
 		SELECT COUNT(*)
@@ -15,10 +16,10 @@
 					where lr.lesson_schedule_idx=ls.lesson_schedule_idx)a, lesson_list
 					where t_idx=#{t_idx})
  	</select>
- 	<select id="selectCate2" resultType="com.hobbycam.cate2.model.Cate2DTO">
+ 	<select id="selectCate2" parameterType="int" resultType="com.hobbycam.category.model.Cate2DTO">
  		SELECT *
-			FROM cate2
-		Order by cate1_idx desc	
+			FROM cate2	
+		WHERE cate1_idx=#{cate1_idx}		
  	</select>
  	
  	<insert id="insertResume" parameterType="com.hobbycam.resume.model.ResumeDTO">

@@ -36,8 +36,6 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
 	
-
-	
 	<!-- DAO -->
 	<bean id="adminDao" class="com.hobbycam.admin.model.AdminDAOImple">
 		<constructor-arg>
@@ -104,12 +102,18 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+
 	<bean id="likeDao" class="com.hobbycam.like.model.LikeDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
-	
+	<bean id="scheduleDao" class="com.hobbycam.schedule.model.ScheduleDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+
 	<!-- Views -->
 	<bean id="hobbyDown" class="com.hobbycam.view.DownloadView"></bean> <!-- File Download Class  -->
 	<bean id="hobbyJson" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean> <!-- JSON -->

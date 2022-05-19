@@ -43,8 +43,10 @@ public class LessonRequestController {
 	private LessonRecordDAO lessonRecordDao;
 
 	@RequestMapping("/lessonRequest.do")
+
 	public ModelAndView mypage(@RequestParam Map<String, String> param, HttpServletRequest req) {
 		HttpSession session = req.getSession();
+
 		ModelAndView mav = new ModelAndView();
 		if (session.getAttribute("u_idx") == null) {
 			mav.setViewName("redirect:/index.do");
@@ -62,8 +64,10 @@ public class LessonRequestController {
 
 		mav.setViewName("payment/lessonRequest");
 
-		// kit
-		if ("있음".equals(lessonScheduleVO.getLessonKit())) {
+
+		
+		if("있음".equals(lessonScheduleVO.getLessonKit())) {
+
 			PostVO postVO = postDAO.getPost(uIdx);
 			// not post .
 			if (postVO == null) {
@@ -73,7 +77,10 @@ public class LessonRequestController {
 			mav.addObject("postVO", postVO);
 		}
 
+
 		// set todo info 
+
+
 		mav.addObject("lessonScheduleIdx", lessonScheduleIdx);
 		mav.addObject("userVO", userVO);
 		mav.addObject("lessonVO", lessonScheduleVO);

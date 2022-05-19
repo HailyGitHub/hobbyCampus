@@ -39,8 +39,10 @@ public class MypageController {
 			return mav;
 		}
 		
+
 		
 		int uIdx = (int) session.getAttribute("u_idx");
+
 
 		boolean stat = true;
 		if ("N".equals(param.get("stat"))) {

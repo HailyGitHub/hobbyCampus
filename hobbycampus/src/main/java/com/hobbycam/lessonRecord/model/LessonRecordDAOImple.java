@@ -36,7 +36,6 @@ public class LessonRecordDAOImple implements LessonRecordDAO {
 	/**get count total lessonRecord List*/
 	@Override
 	public int teacherRecordCnt(int t_idx) {
-		t_idx = 1;
 		int cnt = sqlMap.selectOne("selectRecordCnt", t_idx);
 		return cnt;
 	}

@@ -68,6 +68,25 @@ public class TeacherDAOImple implements TeacherDAO {
 			return false;
 		}	
 	}
+	
+	//
+	@Override
+	public void lessonExStateUpdate(int t_idx) {
+		//update lesson exchange if more than 7 days have passed since class time 
+		
+		
+		//and get the lesson_schedule_idx list updated 
+		
+		
+		
+		//sum lesson_price from the updated list(^)
+		
+		
+		//plus point if lesson exchange state exchanged
+		
+	}
+	
+	//exchange t_point to cash
 		@Override
 		public boolean exchageCash(int t_idx, int exPoint) {
 			Map map = new HashedMap();

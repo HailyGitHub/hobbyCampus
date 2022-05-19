@@ -22,6 +22,18 @@
     		margin-bottom:80px;
     		padding:100px; 
     	}
+    	#teacherImg{
+    	 width : 200px;
+    	 
+    	}
+    	#teacherInfo{
+    		background-color: beige;
+    		color : black;
+    		font-weight: bold;
+    		text-decoration: underline;
+    	} 
+    	 
+    	
     </style>
     <script>
 	function nameCheck() {
@@ -45,12 +57,10 @@
 		    <h2>내 정보</h2>
 		  	</div>
 		  <form class="row g-3 " name="updateTeacher" action="teacherInfo.do" method="post" enctype="multipart/form-data">
-		    <input type="hidden" name="t_idx" value="1">
 		    
 		    <div class="col-md-1"></div>
 		    <div class="col-md-3">
-		    	<img src="${dto.t_img}" >
-		    	${dto.t_img}
+		    <img id="teacherImg" src="/hobbycampus/hobbyImg/teacherImg/${dto.t_img} ">
 		    </div>
 		    <div class="col-md-3">
 		      프로필사진
@@ -101,14 +111,17 @@
 		    
 		    <div class="col-md-4"></div>
 		    <div class="col-md-4">
-		    	<button class="btn btn-secondary" type="reset" onclick="location.href='teacherInfo.do?t_idx=1'">되돌리기</button>
+		    	<button class="btn btn-secondary" type="reset" onclick="location.href='teacherInfo.do'">되돌리기</button>
 		    	<button class="btn btn-primary" type="submit">수정하기</button>
 		    </div>
 		    <div class="col-md-4"></div>
 		
 		  </form>
+		</div>
 		</div>	
 		</div>
+		</div>
+		</main>
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

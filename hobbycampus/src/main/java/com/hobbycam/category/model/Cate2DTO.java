@@ -1,9 +1,11 @@
-package com.hobbycam.cate2.model;
+package com.hobbycam.category.model;
 
 public class Cate2DTO {
 
 	private int cate2_idx;
 	private int cate1_idx;
+	private String cate1_name;
+	private String cate1_img;
 	private String cate2_name;
 	private String cate2_img;
 	
@@ -11,10 +13,13 @@ public class Cate2DTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cate2DTO(int cate2_idx, int cate1_idx, String cate2_name, String cate2_img) {
+	public Cate2DTO(int cate2_idx, int cate1_idx, String cate1_name, String cate1_img, String cate2_name,
+			String cate2_img) {
 		super();
 		this.cate2_idx = cate2_idx;
 		this.cate1_idx = cate1_idx;
+		this.cate1_name = cate1_name;
+		this.cate1_img = cate1_img;
 		this.cate2_name = cate2_name;
 		this.cate2_img = cate2_img;
 	}
@@ -35,6 +40,22 @@ public class Cate2DTO {
 		this.cate1_idx = cate1_idx;
 	}
 
+	public String getCate1_name() {
+		return cate1_name;
+	}
+
+	public void setCate1_name(String cate1_name) {
+		this.cate1_name = cate1_name;
+	}
+
+	public String getCate1_img() {
+		return cate1_img;
+	}
+
+	public void setCate1_img(String cate1_img) {
+		this.cate1_img = cate1_img;
+	}
+
 	public String getCate2_name() {
 		return cate2_name;
 	}
@@ -50,6 +71,12 @@ public class Cate2DTO {
 	public void setCate2_img(String cate2_img) {
 		this.cate2_img = cate2_img;
 	}
+	
+	
+
+
+
+
 	
 	
 	

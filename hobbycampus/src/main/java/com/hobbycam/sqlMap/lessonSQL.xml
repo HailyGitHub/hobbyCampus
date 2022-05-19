@@ -16,11 +16,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			#{lesson_price},
   			#{lesson_thumbnail},
   			#{lesson_short_cont},
-  			'haha',
+  			'진행',
   			#{lesson_kit}
   		)
   	</insert>
-  	<select id="selectLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
+  	<insert id="insertOnlineLesson" parameterType="HashMap" >
+  		INSERT INTO
+  			LESSON_ONLINE
+  		VALUES(
+  			seq_lesson_online.nextval,
+  			#{idx},
+  			#{dto.online_subj},
+  			#{dto.online_img},
+  			#{dto.online_file},
+  			#{dto.online_cont}
+  		)
+  		
+  	</insert>
+  	<insert id="insertOfflineLesson" parameterType="HashMap">
+  		INSERT INTO
+  			LESSON_OFFLINE
+  		VALUES(
+  			seq_lesson_offline.nextval,
+  			#{idx},
+  			#{dto.offline_runtime},
+  			#{dto.offline_folder},
+  			#{dto.offline_cont},
+  			#{dto.offline_addr}
+  		)
+  	</insert>
+  	<insert id="insertLiveLesson" parameterType="HashMap">
+  		INSERT INTO
+  			LESSON_LIVE
+  		VALUES(
+  			seq_lesson_live.nextval,
+  			#{idx},
+  			#{dto.live_runtime},
+  			#{dto.live_tool},
+  			#{dto.live_folder},
+  			#{dto.live_cont}
+  		)
+  	</insert>
+  	<select id="selectTeacherLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
   		SELECT 
   			LESSON_LIST.LESSON_SUBJ,
   			LESSON_LIST.LESSON_THUMBNAIL,
@@ -56,7 +93,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	<select id="SelectLessonReq" resultType="com.hobbycam.lessonRecord.model.LessonRecordDTO">
   		SELECT B.U_NAME,
        		   B.LESSON_BUY_DATE,
-               LL.LESSON_SUBJ   
+       		   B.LESSON_RECORD_IDX,
+               LL.LESSON_SUBJ  
 			  		FROM LESSON_LIST LL,(SELECT A.*,
                             				  LS.LESSON_IDX 
 					                     FROM  	  
@@ -67,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					                                                  LESSON_RECORD LR,
 					                                                  USERS U
 					                                              WHERE 
-					                                                  LR.LESSON_RECORD_STATE='수업' AND
+					                                                  LR.LESSON_RECORD_STATE='예약대기' AND
 					                                                  LR.U_IDX=U.U_IDX) A	  
                      					 WHERE 
                        						  LS.LESSON_SCHEDULE_IDX=A.LESSON_SCHEDULE_IDX)B
@@ -96,11 +134,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		WHERE
   			LL.LESSON_IDX=LON.LESSON_IDX AND
   			LL.LESSON_IDX=#{lesson_idx}
-  		
-  			
   	</select>
-  	<select id="SelectOfflineLessonCont"></select>
-  	<select id="SelectLiveLessonCont"></select>
+  	<select id="SelectOfflineLessonCont" parameterType="int" resultType="com.hobbycam.lesson.model.LessonOfflineDTO" >
+  		SELECT ll.*, lo.offline_idx, lo.offline_runtime, lo.offline_map, lo.offline_folder, lo.offline_cont, lo.offline_addr
+		FROM lesson_offline lo, lesson_list ll
+		WHERE ll.lesson_idx=#{lesson_idx}
+  	</select>
+  	<select id="SelectLiveLessonCont" parameterType="int" resultType="com.hobbycam.lesson.model.LessonLiveDTO">
+		SELECT ls.*, lv.live_idx, lv.live_runtime, lv.live_tool, lv.live_folder, lv.live_cont
+				FROM lesson_live lv, lesson_list ls
+				WHERE ls.lesson_idx=#{lesson_idx}
+  	</select>
   	<select id="SelectLessonLikeCount" parameterType="int" resultType="int">
   		SELECT
   			COUNT(*)
@@ -108,6 +152,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			LIKE_LIST
   		WHERE 
   			LESSON_IDX=#{lesson_idx}
+  	</select>
+  	<select id="countLessonList" resultType="int">
+  		SELECT
+  			COUNT(*)
+  		FROM
+  			LESSON_LIST
   	</select>
   	<select id="SelectLessonReview" parameterType="int" resultType="com.hobbycam.review.model.ReviewDTO">
 		SELECT
@@ -136,5 +186,106 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    WHERE
 		        B.LESSON_IDX=LL.LESSON_IDX)C
 		WHERE LESSON_IDX=#{lesson_idx}
+  	</select>
+
+  	<select id="selectLessonList" resultType="com.hobbycam.lesson.model.LessonDTO">
+  		SELECT
+  			*
+  		FROM
+  			LESSON_LIST
+  	</select>
+  	<select id="selectCate1List" resultType="com.hobbycam.category.model.Cate1DTO">
+  		SELECT
+  			*
+  		FROM
+  			CATE1
+  	</select>
+  	<select id="selectCate2List" parameterType="int" resultType="com.hobbycam.category.model.Cate2DTO">
+  		SELECT
+  			*
+  		FROM
+  			CATE2
+  		WHERE
+  			CATE1_idx=#{cate1_idx}
+  	</select>
+  	<select id="selectLessonListByTidx" parameterType="int" resultType="com.hobbycam.lesson.model.LessonDTO">
+  		SELECT
+  			*
+  		FROM
+  			LESSON_LIST
+  		WHERE
+  			T_IDX={t_idx}
+  	</select>
+  	<select id="SelectLessonIdxByLessonThumbnail" parameterType="String" resultType="int">
+  		SELECT
+  			LESSON_IDX
+  		FROM
+  			LESSON_LIST
+  		WHERE
+  			LESSON_THUMBNAIL=#{th_count}
+  	</select>
+  	<update id="lessonReqAccept" parameterType="int">
+  		UPDATE
+  			LESSON_RECORD
+  		SET
+  			LESSON_RECORD_STATE='예약완료'
+  		WHERE
+  			LESSON_RECORD_IDX=#{IDX}
+  	</update>
+  	<update id="lessonReqCancel" parameterType="int">
+  		UPDATE
+  			LESSON_RECORD
+  		SET
+  			LESSON_RECORD_STATE='취소'
+  		WHERE
+  			LESSON_RECORD_IDX=#{IDX}
+  	</update>
+
+  	<select id="selectScheduleDate" parameterType="int" resultType="com.hobbycam.lesson.model.LessonScheduleDTO">
+  		SELECT distinct ls.lesson_start
+  			FROM lesson_schedule ls
+  				WHERE ls.lesson_idx=#{lesson_idx}
+  	</select>
+  	
+  	<select id="selectScheduleTime" parameterType="String" resultType="com.hobbycam.lesson.model.LessonScheduleDTO">
+  		SELECT *
+  			FROM lesson_schedule ls
+  				WHERE ls.lesson_start=to_date(#{lesson_time},'YYYY-MM-DD')
+  	</select>
+  	<select id="checkLike"  parameterType="map" resultType="int">
+	  	SELECT count(*)
+			FROM like_list
+				WHERE u_idx=#{u_idx} And lesson_idx=#{lesson_idx}
+  	</select>
+  	<select id="selectTeacherEmail" parameterType="int" resultType="String">
+  		SELECT u.u_email 
+		    FROM (SELECT t.u_idx
+			    FROM lesson_list ls, teacher t
+			    WHERE ls.lesson_idx=#{lesson_idx}
+			    	AND ls.t_idx=t.t_idx) a, users u
+		WHERE a.u_idx = u.u_idx
+  	</select>
+  	<delete id="deleteLike" parameterType="map">
+  		DELETE FROM like_list
+  		WHERE u_idx=#{u_idx} and lesson_idx=#{lesson_idx}
+  	</delete>
+  	<insert id="insertLike" parameterType="map">
+  		INSERT INTO like_list
+  		VALUES(#{u_idx},#{lesson_idx} )
+  	</insert>
+  	<select id="selectScIdx" parameterType="int" resultType="int">
+  		SELECT lesson_schedule_idx
+			FROM  lesson_schedule
+			WHERE lesson_idx=#{lesson_idx}
+  	</select>
+  	<select id="selectMap" parameterType="int" resultType="String">
+  		SELECT offline_addr
+  		FROM lesson_offline
+  		WHERE lesson_idx=#{lesson_idx}
+  	</select>
+  	<select id="selectThumb" parameterType="int" resultType="String">
+  		SELECT lesson_thumbnail
+  		FROM lesson_list
+  		WHERE lesson_idx=#{lesson_idx}
   	</select>
   </mapper>

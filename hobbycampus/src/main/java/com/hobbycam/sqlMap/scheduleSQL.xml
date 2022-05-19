@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hobby.schedule">
+
+	<select id="selectScheduleInfoList" parameterType="Integer" resultType="com.hobbycam.schedule.model.ScheduleDTO">
+		SELECT
+		   lesson_schedule_idx,
+		   lesson_idx,
+		   to_char(lesson_start,'YYYY-MM-DD') AS lesson_start,
+		   lesson_time,
+		   lesson_people
+		FROM
+		    lesson_schedule
+		WHERE
+		    lesson_idx = #{lesson_idx}
+		ORDER BY
+		    lesson_schedule_idx ASC
+	</select>
+
+	
+	<insert id="insertScheduleList" parameterType="com.hobbycam.schedule.model.ScheduleDTO">
+		INSERT INTO
+			lesson_schedule
+				(lesson_schedule_idx,
+				lesson_idx,
+				lesson_start,
+				lesson_time,
+				lesson_people
+				)
+		VALUES(
+			seq_lesson_schedule.NEXTVAL,
+			#{lesson_idx},
+			#{lesson_start},
+			#{lesson_time},
+			#{lesson_people}
+		)
+	</insert>
+
+
+	<delete id="deleteScheduleInfo" parameterType="Integer">
+		DELETE FROM
+			lesson_schedule
+		WHERE
+			lesson_schedule_idx = #{lesson_schedule_idx} 
+	</delete>
+
+</mapper>
