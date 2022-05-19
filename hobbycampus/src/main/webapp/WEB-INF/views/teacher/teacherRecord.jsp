@@ -23,13 +23,21 @@
     		margin-bottom:80px;
     		padding:100px; 
     	}
+    	#teacherRecord{
+    		background-color: beige;
+    		color : black;
+    		font-weight: bold;
+    		text-decoration: underline;
+    	}
     </style>
+    
+	
 </head>
 <body>
 <!-- HEADER -->
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<!-- SIDEBar -->
-	<main class="mainArea">
+	<main class="mainArea" onload="sideBar();">
 	<div class="row">
 		<div class="col-md-2">
 			<jsp:include page="/WEB-INF/views/myPageSide.jsp"></jsp:include>		
@@ -37,6 +45,8 @@
 		<!-- main -->
 		<div class="col-md-10">
 		<div class="col-md-10">
+			  <div style="padding: 40px; "></div>
+			<h3 style="text-align: center">내 강의 이력</h3>
 			<table id="recordTable" class="table table-hover">
 					<thead>
 						<tr>
@@ -76,6 +86,5 @@
 		<div class="col-md-1">
 	</div>
 	</main>	
-	
 </body>
 </html>

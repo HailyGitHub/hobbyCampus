@@ -50,4 +50,5 @@ public class Cate2DTO {
 	public void setCate2_img(String cate2_img) {
 		this.cate2_img = cate2_img;
 	}
+
 }

@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 	window.alert('${msg}');
-	location.href="teacherInfo.do?t_idx=1";
+	location.href="teacherInfo.do";
 </script>

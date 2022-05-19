@@ -17,7 +17,7 @@
     
   </style>
 	<script>
-		                                                                                                            
+   	 var mapAddr = '${map}';                                                                                              
 	</script>
 <head>
 <meta charset="UTF-8">
@@ -38,18 +38,15 @@
 		      </div>
 		      <div class="carousel-inner">
 		        <div class="carousel-item active" >
-		          <img src="img/banner_01.png" class="d-block w-100" alt="간판1" height="500em">
+		          <img src="/hobbycampus/hobbyImg/lesson/${thumbnail }/thumbnail.jpg" class="d-block w-100" alt="간판1" height="500em">
 		        </div>
-		        <div class="carousel-item">
-		          <img src="img/banner_02.png" class="d-block w-100" alt="간판2" height="500em">
-		        </div>
-		        <div class="carousel-item">
-		          <img src="img/banner_03.png" class="d-block w-100" alt="간판3" height="500em">
-		        </div>
-		        <div class="carousel-item">
-		          <img src="img/banner_04.png" class="d-block w-100" alt="간판3" height="500em">
-		        </div>
+		        <c:forEach var="lessonImg" items="${imgLists }"> 
+			      <div class="carousel-item">
+			          <img src="/hobbycampus/hobbyImg/lesson/${thumbnail }/img/${lessonImg}" class="d-block w-100" height="500em">
+			      </div>
+			  </c:forEach>
 		      </div>
+		      
 		      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 		        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 		        <span class="visually-hidden">Previous</span>
@@ -76,22 +73,10 @@
 			        <h4>강의 상세 설명</h4>
 			     </div>
 			     	<!-- content description -->
-		                 <c:if test="${lessonType=='오프라인' }">
-		                  <div id="lessonContentLists">
-		                       ${dto.offline_cont }
-		                    </div>
-		               </c:if>
-		                <c:if test="${lessonType=='온라인' }">
-		                     <div id="onlineLessonContentLists">
-		                       ${dto.online_cont }
-		                    </div>
-		               </c:if>     
-		                <c:if test="${lessonType=='라이브' }">
-		                     <div id="liveLessonContentLists">
-		                       ${dto.live_cont }
-		                    </div>
-		               </c:if>     
-
+			     	
+						<div id="lessonContentLists">
+				        	${dto.offline_cont }
+				     	</div>
 					
 					
 				     	<c:if test="${empty lists }">
@@ -167,7 +152,7 @@
 		        <div id="cont" class="text-end  fs-5">${dto.lesson_short_cont }</div>
 		        
 		       
-			        <div id="scheduleDate">
+			        <div id="scheduleDate" class="text-end">
 			        <span class="fs-6 text-muted  text-end fw-light">강의 날짜</span>
 			        	<select class="form-select" id="scheduleDateList" name="scheduleDate"  required>
 					      	<option>::날짜선택::</option>
@@ -176,7 +161,9 @@
 					      	</c:forEach>
 					      </select>
 			        </div>
-		       		<span class="fs-6 text-muted text-end fw-light">강의 시간</span>
+		       		<div class="text-end">
+		       		<span class="fs-6 text-muted text-end fw-light ">강의 시간</span>
+		       		</div>
 			        <div id="lessonTime">
 			        	<!-- from Jquery -->
 			        </div>
@@ -202,15 +189,6 @@
 		</div>
 		</div>
 	
-	
-	
-	<!-- <c:forEach var="rv" items="${review }"> --> 
-	<!-- <tr> -->
-	<!-- 	<th>별점</th> <td>${rv.star_point }</td> -->
-	<!--</tr><tr><th>리뷰 내용</th><td>${rv.review_cont }</td>  -->		
-	<!-- </tr><tr><th>리뷰 날짜</th><td>${rv.review_date }</td></tr></c:forEach></table> -->	
-			
-		
 	<!-- Modal -->
 		<div class="modal fade" id="sendMail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
@@ -236,10 +214,11 @@
 		  </div>
 		</div>	
 
+	<!-- FOOTER -->
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 <script>
 	$(document).ready(function(){
-		console.log(${likeCheck} );
 		if(${likeCheck} ){
 			var icon = '<i id="heartFill" class="bi bi-suit-heart-fill"></i>';	 
 			var likeCnt ='찜('+${like }+')';
@@ -254,7 +233,7 @@
 
 	/**like button clicked*/
 	$('#likeBnt').click(function () {
-		var btState = $("#heartFill").hasClass("bi-heart");
+		var btState = $("#heartFill").hasClass("bi-heart"); //true -> need to click
 		$.ajax({
 			url :"likeBtnCk.do",
 			type : "get",
@@ -263,13 +242,13 @@
 			success : function(data) {
 				var addOption = '';
 				var $likeCnt = data.likeCnt;
-				if($("#heartFill").hasClass("bi-heart")){//already not like
+				if(btState){//already not like, Add 1
 					$('#likeBnt').empty();
 					var $likeCnt = data.likeCnt;
 					var icon = '<i id="heartFill" class="bi bi-suit-heart-fill"></i>';
 					var likeCnt ='찜('+$likeCnt+')';
 					$('#likeBnt').append(icon+likeCnt);
-				}else{//already like
+				}else{//already like // minus 1
 					$('#likeBnt').empty();
 					var $likeCnt = data.likeCnt;
 					var icon = '<i id="heartFill" class="bi bi-heart"></i>';

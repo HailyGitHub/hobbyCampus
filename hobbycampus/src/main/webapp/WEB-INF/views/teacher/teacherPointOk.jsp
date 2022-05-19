@@ -9,6 +9,6 @@
 		window.alert("포인트 전환/환전 신청이 실패되었습니다.");
 	}
 	
-	location.href="teacherPoint.do?t_idx=1";
+	location.href="teacherPoint.do";
 	
 </script>

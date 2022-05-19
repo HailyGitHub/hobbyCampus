@@ -18,11 +18,19 @@ public class ResumeDAOImple implements ResumeDAO {
 		super();
 		this.sqlMap = sqlMap;
 	}
-
+	
 	/**select all cate1 List*/
 	@Override
-	public List cate2List() {
-		List cate2List =  sqlMap.selectList("selectCate2");
+	public List cate1List() {
+		List cate1List =  sqlMap.selectList("selectCate1");
+		return cate1List;
+	}
+	
+	
+	/**select all cate2 List*/
+	@Override
+	public List cate2List(int cate1_idx) {
+		List cate2List =  sqlMap.selectList("selectCate2", cate1_idx);
 		return cate2List;
 	}
 
