@@ -36,12 +36,7 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
 
-
-	<!-- controllers -->
-	<bean id="mypageController" class="com.hobbycam.controller.MypageController"></bean>
-
 	
-
 	<!-- DAO -->
 	<bean id="adminDao" class="com.hobbycam.admin.model.AdminDAOImple">
 		<constructor-arg>
@@ -113,27 +108,21 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
-
 	<bean id="noticeDao" class="com.hobbycam.notice.model.NoticeDAOImple">
 	<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
-
 	<bean id="categoryDao" class="com.hobbycam.category.model.CategoryDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
-	
-	
-
 	<bean id="likeDao" class="com.hobbycam.like.model.LikeDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
-
 	<bean id="indexDao" class="com.hobbycam.index.model.IndexDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
@@ -145,10 +134,7 @@
 		</constructor-arg>
 	</bean>
 	
-	<!-- service -->
 	
-
-
 	<!-- Views -->
 	<bean id="hobbyDown" class="com.hobbycam.view.DownloadView"></bean> <!-- File Download Class  -->
 	<bean id="hobbyJson" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean> <!-- JSON -->

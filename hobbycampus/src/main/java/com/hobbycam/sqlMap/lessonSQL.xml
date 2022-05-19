@@ -242,13 +242,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		FROM
   			LESSON_LIST
   	</select>
-  	<select id="selectCate1List" resultType="com.hobbycam.cate1.model.Cate1DTO">
+  	<select id="selectCate1List" resultType="com.hobbycam.category.model.Cate1DTO">
   		SELECT
   			*
   		FROM
   			CATE1
   	</select>
-  	<select id="selectCate2List" parameterType="int" resultType="com.hobbycam.cate2.model.Cate2DTO">
+  	<select id="selectCate2List" parameterType="int" resultType="com.hobbycam.category.model.Cate2DTO">
   		SELECT
   			*
   		FROM
