@@ -351,8 +351,6 @@ var getCookie = function(name) {
 };
 
 
-
-
  window.onload = function(){
 	 
 	var noticeBlind = getCookie("noticeBlind");
