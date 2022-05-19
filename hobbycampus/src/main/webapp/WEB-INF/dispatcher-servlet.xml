@@ -36,7 +36,14 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
 
+<<<<<<< HEAD
 
+=======
+	<!-- controllers -->
+	<bean id="mypageController" class="com.hobbycam.controller.MypageController"></bean>
+
+	
+>>>>>>> teacher_kdw
 	<!-- DAO -->
 	<bean id="adminDao" class="com.hobbycam.admin.model.AdminDAOImple">
 		<constructor-arg>
@@ -103,6 +110,11 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	<bean id="scheduleDao" class="com.hobbycam.schedule.model.ScheduleDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 
 	<bean id="noticeDao" class="com.hobbycam.notice.model.NoticeDAOImple">
 	<constructor-arg>
@@ -115,6 +127,15 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	
+	
+
+	<bean id="likeDao" class="com.hobbycam.like.model.LikeDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+
 	<bean id="indexDao" class="com.hobbycam.index.model.IndexDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>
@@ -130,6 +151,7 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+
 
 
 
@@ -158,6 +180,10 @@
 	            <prop key="mail.smtp.auth">true</prop>
 	            <prop key="mail.smtp.starttls.enable">true</prop>
 	            <prop key="mail.debug">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+	            <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+
 	        </props>
 	    </property>
 	</bean>

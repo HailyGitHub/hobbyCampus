@@ -2,7 +2,7 @@ $myPoint = {
 	refund: function(e) {
 		var payListIdx = e.getAttribute('payListIdx');
 		
-		var url = "/hobbycampus/refund.do?payListIdx=" + payListIdx;
+		var url = "/hobbycampus/myPointRefund.do?payListIdx=" + payListIdx;
 		$ajax.get(url, {}, $myPoint.refundCallback, $myPoint.refundErrorCallback)
 
 	},

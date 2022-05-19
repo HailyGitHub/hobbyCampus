@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.hobbycam.VO.LessonRecordVO;
+
 public class LessonRecordDAOImple implements LessonRecordDAO {
 
 	SqlSessionTemplate sqlMap;
@@ -43,6 +45,19 @@ public class LessonRecordDAOImple implements LessonRecordDAO {
 	public List lessonReqList(int t_idx) {
 		List lists= sqlMap.selectList("SelectLessonReq",t_idx);
 		return lists;
+	}
+	
+	@Override
+	public int insert(Map<String, Object> map) {
+		return sqlMap.insert("lessonRecordMapper.insertRecordLesson", map);
+	}
+
+	@Override
+	public List<LessonRecordVO> getLessonRecords(int uIdx, String lessonRecordState) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("uIdx", uIdx);
+		map.put("lessonRecordState", lessonRecordState);
+		return sqlMap.selectList("lessonRecordMapper.getLessonRecords", map);
 	}
 
 
