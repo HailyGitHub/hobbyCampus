@@ -52,6 +52,8 @@ public class ScheduleController {
 		return mav;
 	}
 	
-
+<<<<<<< HEAD
 }
-
+=======
+}
+>>>>>>> teacher_kdw

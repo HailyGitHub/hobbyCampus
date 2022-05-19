@@ -105,35 +105,29 @@ public class LessonDAOImple implements LessonDAO {
 	}
 	
 	@Override
-
+<<<<<<< HEAD
 	public List scheduleDate(int lesson_idx) {
 		List lists = sqlMap.selectList("selectScheduleDate",lesson_idx);
-		return lists;
-	
-	}
-
+=======
 	public List lessonList() {
 		List lists=sqlMap.selectList("selectLessonList");
-
+>>>>>>> teacher_kdw
 		return lists;
 	}
 	
 	@Override
-
+<<<<<<< HEAD
 	public List scheduleTime(String lessonDate) {
 		List lists = sqlMap.selectList("selectScheduleTime",lessonDate);
-		return lists;
-	
-	}
-
+=======
 	public List cate1List() {
 		List lists=sqlMap.selectList("selectCate1List");
-
+>>>>>>> teacher_kdw
 		return lists;
 	}
 	
 	@Override
-
+<<<<<<< HEAD
 	public String teacherEmail(int lesson_idx) {
 		String teacherEmail = sqlMap.selectOne("selectTeacherEmail", lesson_idx);
 		return teacherEmail;
@@ -182,8 +176,7 @@ public class LessonDAOImple implements LessonDAO {
 	public String getThumbnail(int lesson_idx) {
 		String thumbnail = sqlMap.selectOne("selectThumb", lesson_idx);
 		return thumbnail;
-	}
-
+=======
 	public List cate2List(int cate1_idx) {
 		List lists=sqlMap.selectList("selectCate2List",cate1_idx);
 		return lists;
@@ -217,7 +210,7 @@ public class LessonDAOImple implements LessonDAO {
 	public int lessonReqCancel(int idx) {
 		int count=sqlMap.update("lessonReqCancel",idx);
 		return count;
-
+>>>>>>> teacher_kdw
 	}
 }
 

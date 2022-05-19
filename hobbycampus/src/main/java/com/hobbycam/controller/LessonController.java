@@ -5,17 +5,25 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.ServletContext;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+<<<<<<< HEAD
+=======
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+>>>>>>> teacher_kdw
 import org.springframework.web.servlet.ModelAndView;
+
 import com.hobbycam.email.HobbyEmailGoogle;
 import com.hobbycam.lesson.model.LessonDAO;
 import com.hobbycam.lesson.model.LessonDTO;
@@ -23,12 +31,12 @@ import com.hobbycam.lesson.model.LessonLiveDTO;
 import com.hobbycam.lesson.model.LessonOfflineDTO;
 import com.hobbycam.lesson.model.LessonOnlineDTO;
 import com.hobbycam.lessonRecord.model.LessonRecordDAO;
-
+<<<<<<< HEAD
 import com.hobbycam.upload.getLessonImg;
-
-
+=======
+import com.hobbycam.teacher.model.TeacherDTO;
 import com.hobbycam.upload.ImgUplod;
-
+>>>>>>> teacher_kdw
 
 @Controller
 public class LessonController {
@@ -39,13 +47,21 @@ public class LessonController {
 	@Autowired
 	private LessonRecordDAO lrdao;
 	
-
+<<<<<<< HEAD
 	@Autowired ServletContext servletContext;
 
+	@RequestMapping(value = "/lesson.do",method = RequestMethod.GET)
+	public ModelAndView lessonForm() {
+		
+=======
+	@Autowired
+	ServletContext servletContext;
+	
+	
 	
 	@RequestMapping("/lessonBasicForm.do")
 	public ModelAndView lessonBasicForm() {
-
+>>>>>>> teacher_kdw
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("/lesson/lessonBasicForm");
 		return mav;
@@ -348,10 +364,10 @@ public class LessonController {
 		return mav;
 	}
 	
-
+<<<<<<< HEAD
 	
 	/**get lesson Content by lesson_idx*/
-
+=======
 	@RequestMapping("/lessonReqAccept.do")
 	public ModelAndView lessonReqAccept(@RequestParam("lesson_record_idx")int idx) {
 		
@@ -378,7 +394,7 @@ public class LessonController {
 	
 	
 	
-
+>>>>>>> teacher_kdw
 	@RequestMapping("/lessonCont.do")
 	public ModelAndView lessonCont(int lesson_idx, HttpServletRequest req) {
 
@@ -458,7 +474,7 @@ public class LessonController {
 		return mav;
 		
 	}
-
+<<<<<<< HEAD
 	
 	/**send email to teacher*/
 	@RequestMapping("/sendEmail.do")
@@ -521,4 +537,8 @@ public class LessonController {
 		return mav;
 	}
 	
+	
+=======
+
+>>>>>>> teacher_kdw
 }

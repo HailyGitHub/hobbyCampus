@@ -187,7 +187,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        B.LESSON_IDX=LL.LESSON_IDX)C
 		WHERE LESSON_IDX=#{lesson_idx}
   	</select>
-
+<<<<<<< HEAD
   	<select id="selectScheduleDate" parameterType="int" resultType="com.hobbycam.lesson.model.LessonScheduleDTO">
   		SELECT distinct ls.lesson_start
   			FROM lesson_schedule ls
@@ -235,7 +235,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		FROM lesson_list
   		WHERE lesson_idx=#{lesson_idx}
   	</select>
-
+=======
   	<select id="selectLessonList" resultType="com.hobbycam.lesson.model.LessonDTO">
   		SELECT
   			*
@@ -288,5 +288,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		WHERE
   			LESSON_RECORD_IDX=#{IDX}
   	</update>
-
+>>>>>>> teacher_kdw
   </mapper>
