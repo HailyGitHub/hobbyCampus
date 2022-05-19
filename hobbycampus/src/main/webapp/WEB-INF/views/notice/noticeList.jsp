@@ -37,12 +37,14 @@
 <body>
 <!-- HEADER -->
 <c:set var="adminSession" value="${s_a_idx}"></c:set>
+<c:set var="tSession" value="${t_idx}"></c:set>
 <c:if test="${empty adminSession}">
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 </c:if>
 <c:if test="${!empty adminSession}">
 	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
-	<input type="hidden" id="adminSession" value="${adminSession}">
+	<input type="hidden" id="adminSession" value="${adminSession}" style="display: none;">
+	<input type="hidden" id="tSession" value="${tSession}" style="display: none;">
 </c:if>	
 
 
@@ -166,7 +168,15 @@
 </body>
 
 <script>
-
+window.onload = function(){
+	if( $('#adminSession').val()==null){
+		$('#btn_3').css('display', 'none');
+	}
+	if( $('#tSession').val()==null&&$('#adminSession').val()==null){
+		$('#btn_2').css('display', 'none');
+	}
+	
+}
 
 	/* List Button CSS */
 	var $uri = $(location).attr('pathname'); //Get pathname

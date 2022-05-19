@@ -86,7 +86,7 @@ public class CouponController {
 		}
 		
 		mav.setViewName("hobbyJson");
-		
+	
 		return mav;
 	}
 	

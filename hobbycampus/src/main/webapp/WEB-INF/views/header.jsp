@@ -31,8 +31,8 @@
             <img src="/hobbycampus/img/main.png" alt="main_img">Hobby Campus
         </a>
 
-        <!-- Category One List -->
-        <li class="nav-item dropdown">
+		<!-- Category One List -->
+		<li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle navbar-brand" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">카테고리</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown03">
 	            <!-- GET Category One -->
