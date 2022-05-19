@@ -52,7 +52,7 @@ public class AdminController {
 			session.setAttribute("s_a_email", dto.getA_email());
 			session.setAttribute("s_a_img", dto.getA_img());
 			session.setAttribute("s_a_name", dto.getA_name());
-			session.setAttribute("a_idx", dto.getA_idx());
+			session.setAttribute("s_a_idx", dto.getA_idx());
 			
 			mav.addObject("url", "resumeList.do");
 			mav.addObject("msg", dto.getA_name() + "님 환영합니다.");
@@ -68,7 +68,7 @@ public class AdminController {
 		session.removeAttribute("s_a_email");
 		session.removeAttribute("s_a_img");
 		session.removeAttribute("s_a_name");
-		session.removeAttribute("a_idx");
+		session.removeAttribute("s_a_idx");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("url", "index.do");
