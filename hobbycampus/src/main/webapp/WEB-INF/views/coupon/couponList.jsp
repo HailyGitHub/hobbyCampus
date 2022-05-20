@@ -222,7 +222,7 @@ function getInfo(idx){
        // $('#modal_coupon_idx').attr('value', result.dto.coupon_idx);
         
        // $('#modal_coupon_title').attr('data-coupon_idx', title); 
-        $('#modal_coupon_title').attr('value', result.dto.coupon_title);
+        $('#modal_coupon_title').val(result.dto.coupon_title);
     	
         
         $('#modal_coupon_state').val( result.dto.coupon_state).prop("selected",true);
