@@ -62,5 +62,59 @@
 		FROM
 		    cate2
 	</select>
+	
+	
+	<select id="selectLikeTeacherList" resultType="com.hobbycam.member.model.MemberTeacherDTO">
+		SELECT
+		    teacher.*
+		    FROM
+		    (SELECT
+		        t_idx, COUNT(d.t_idx) AS cnt
+		    FROM
+		        (SELECT
+		            c.*
+		        FROM
+		            like_list a, lesson_list b, teacher c
+		        WHERE
+		            a.lesson_idx = b.lesson_idx
+		        AND
+		            b.t_idx = c.t_idx) d
+		    GROUP BY
+		        t_idx
+		    ORDER BY
+		        t_idx DESC) e, teacher
+		WHERE
+		    e.t_idx = teacher.t_idx
+		ORDER BY
+		    e.cnt DESC
+	</select>
+	
+	
+	<select id="selectLikelessonList" resultType="com.hobbycam.lesson.model.LessonDTO">
+		SELECT
+		    d.*
+		FROM
+		    (SELECT
+		        b.lesson_idx
+		    FROM
+		        (SELECT
+		            rownum AS rnum, a.lesson_idx
+		        FROM 
+		            (SELECT 
+		                lesson_idx,
+		                COUNT(lesson_idx) AS count
+		            FROM
+		                like_list
+		            GROUP BY
+		                lesson_idx
+		            ORDER BY
+		                count DESC) a) b
+		    WHERE
+		        rnum<![CDATA[>=]]>1
+		    AND
+		        rnum<![CDATA[<=]]>4) c, lesson_list d
+		WHERE
+		    c.lesson_idx = d.lesson_idx
+	</select>
 
 </mapper>

@@ -358,6 +358,25 @@ public class LessonController {
 		return mav;
 	}
 	
+	@RequestMapping("/lessonListByTeacherIdx.do")
+	public ModelAndView lessonListByTeacherIdx(
+			@RequestParam(value = "cp", defaultValue = "1") int cp, int t_idx) {
+		
+		int totalCnt = ldao.lessonTotalCntByTeacherIdx(t_idx); //Get Total lesson List By t_idx
+		int listSize = 12;
+		int pageSize = 10;
+		
+		String addParam = "&t_idx=" + t_idx;
+		String pageStr = com.hobbycam.page.BootstrapPageModule2.pageMake("lessonListByTeacherIdx.do", totalCnt, listSize, pageSize, cp, addParam);
+		List lists = ldao.lessonListByTeacherIdx(cp, listSize, t_idx);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("pageStr",pageStr);
+		mav.addObject("lists",lists);
+		mav.setViewName("/lesson/lessonList");
+		return mav;
+	}
+	
 	
 	//lesson List view
 	@RequestMapping("/teacherLessonList.do")

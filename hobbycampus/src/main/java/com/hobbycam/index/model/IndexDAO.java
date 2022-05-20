@@ -10,5 +10,7 @@ public interface IndexDAO {
 	public int getUserCnt();
 	public int getLessonCnt();
 	public int getCategoryCnt();
+	public List getLikeTeacher();
+	public List getLikeLesson();
 
 }

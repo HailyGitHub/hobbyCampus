@@ -45,7 +45,7 @@
 		<section class="col-md-9">
 			<!-- Title Area -->
 			<article>
-				<div class="row text-center m-4" id="aside" data-type="${type}${type==null? "라이브" : ""}">
+				<div class="row text-center m-4" id="aside" data-type="${type}${type==null? '라이브' : ''}">
 					<h2><i class="bi bi-file-ruled"></i> ${type} 수업 목록</h2>
 				</div>
 			</article>
