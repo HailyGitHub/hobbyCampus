@@ -65,7 +65,7 @@
 							<tbody>
 							<c:if test="${empty couponList}">
 							<tr>
-								<td colspan="3" align="center">확인 가능한 쿠폰이 없습니다</td>
+								<td colspan="3" align="center" class="hb_yellow">확인 가능한 쿠폰이 없습니다</td>
 							
 							</tr>
 						
