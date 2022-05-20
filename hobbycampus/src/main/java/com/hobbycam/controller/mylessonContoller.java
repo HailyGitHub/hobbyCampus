@@ -59,30 +59,26 @@ public class mylessonContoller {
 		}
 	
 		// add lessonlist
-		try {
-			
-			int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
-		
-			int pricePoint = Integer.valueOf(param.get("pricePoint"));
-			String lessonRecordState = "예약";
-			String lessonExchangeState = "미정산";
-			Map<String, Object> map = new HashMap<>();
-			map.put("uIdx", uIdx);
-			map.put("lessonScheduleIdx", lessonScheduleIdx);
-			map.put("pricePoint", pricePoint);
-			map.put("lessonBuyDate", LocalDateTime.now());
-			map.put("lessonRecordState", lessonRecordState);
-			map.put("lessonExchangeState", lessonExchangeState);
-			
-			String lessonTime = lessonRecordDao.getLessonTime(lessonScheduleIdx);
-			System.out.println("data:"+lessonTime);
-			mav.addObject("lessonTime", lessonTime);
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		/*
+		 * try {
+		 * 
+		 * int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
+		 * 
+		 * int pricePoint = Integer.valueOf(param.get("pricePoint")); String
+		 * lessonRecordState = "예약"; String lessonExchangeState = "미정산"; Map<String,
+		 * Object> map = new HashMap<>(); map.put("uIdx", uIdx);
+		 * map.put("lessonScheduleIdx", lessonScheduleIdx); map.put("pricePoint",
+		 * pricePoint); map.put("lessonBuyDate", LocalDateTime.now());
+		 * map.put("lessonRecordState", lessonRecordState);
+		 * map.put("lessonExchangeState", lessonExchangeState);
+		 * 
+		 * String lessonTime = lessonRecordDao.getLessonTime(lessonScheduleIdx);
+		 * //System.out.println("data:"+lessonTime); mav.addObject("lessonTime",
+		 * lessonTime);
+		 * 
+		 * System.out.println("성공"); } catch (Exception e) { e.printStackTrace();
+		 * System.out.println("오류"); }
+		 */
 		
 		
 		
@@ -91,6 +87,7 @@ public class mylessonContoller {
 		List<LessonRecordVO> lessonRecordList = lessonRecordDao.getLessonRecords(uIdx, lessonRecordState);
 		
 		mav.addObject("lessonRecordList", lessonRecordList);
+		mav.addObject("lessonRecordState", lessonRecordState);
 		mav.setViewName("/users/mylesson");
 
 		return mav;
