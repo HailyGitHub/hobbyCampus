@@ -152,10 +152,10 @@ function createCouponForm(){
 	$('#modal_udt_btn').css('display','none');
 	$('#modal_crt_btn').css('display','block');
 
-	$('#modal_coupon_idx').attr('value', '');
-	$('#modal_coupon_rate').attr('value', '');
-	$('#modal_coupon_state').attr('value', '');
-	$('#modal_coupon_title').attr('value', '');
+	$('#modal_coupon_idx').val('');
+	$('#modal_coupon_rate').val('');
+	$('#modal_coupon_state').val('');
+	$('#modal_coupon_title').val('');
 
 }
 
@@ -173,11 +173,10 @@ function updtCoupon(){
 	    	  'coupon_idx': $('#modal_coupon_idx').val()},
 	      dataType: 'json',
 	      success: function(result){
-	    	  console.log('수정되었습니다.');
+	    	  alert(result.msg);
 	    	  
 	      }
 	   });//ajax
-		alert('수정되었습니다.');
 	   location.reload();
 	   //$('#exampleModal').modal('hide');
 }
@@ -195,10 +194,10 @@ function couponMake(){
 	    	  'coupon_state': $('#modal_coupon_state').val()},
 	      dataType: 'json',
 	      success: function(result){
+		alert(result.msg);
 	    	  
 	      }
 	   });//ajax
-		alert('생성되었습니다.');
 	   location.reload();
 	   //$('#exampleModal').modal('hide');
 }
@@ -219,8 +218,8 @@ function getInfo(idx){
         console.log(result.dto.coupon_idx); //couponMakeForm().dto.coupon_idx;
         $('#modal_title').text('쿠폰정보'); 
         
-        $('#modal_coupon_idx').attr('data-coupon_idx', idx); 
-        $('#modal_coupon_idx').attr('value', result.dto.coupon_idx);
+        $('#modal_coupon_idx').val(result.dto.coupon_idx); 
+       // $('#modal_coupon_idx').attr('value', result.dto.coupon_idx);
         
        // $('#modal_coupon_title').attr('data-coupon_idx', title); 
         $('#modal_coupon_title').attr('value', result.dto.coupon_title);

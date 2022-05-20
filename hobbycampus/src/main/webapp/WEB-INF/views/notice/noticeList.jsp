@@ -313,7 +313,6 @@ $.ajax({
 		$('#modal_title').text('공지사항 수정');
 		$('#modal_udt_ok_btn').css('display', 'block');
 		
-		
 	}
 	
 	function updateOk(){
