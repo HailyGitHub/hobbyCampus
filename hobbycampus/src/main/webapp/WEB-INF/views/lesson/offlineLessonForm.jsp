@@ -6,53 +6,38 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=09e575b6e58e258e273960eece5ed355&libraries=services"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fa752bb8bee88bb512ff3ddcbd04a52f&libraries=services"></script>
 <script type="text/javascript">
-	
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+	var mapContainer = document.getElementById('map'), 
 	mapOption = {
-	    center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-	    level: 5 // 지도의 확대 레벨
+	    center: new daum.maps.LatLng(37.537187, 127.005476), 
+	    level: 5 
 	};
-	
-	//지도를 미리 생성
 	var map = new daum.maps.Map(mapContainer, mapOption);
-	//주소-좌표 변환 객체를 생성
 	var geocoder = new daum.maps.services.Geocoder();
-	//마커를 미리 생성
 	var marker = new daum.maps.Marker({
 	position: new daum.maps.LatLng(37.537187, 127.005476),
 	map: map
 	});
-	
-	
 	function sample5_execDaumPostcode() {
 	new daum.Postcode({
 	    oncomplete: function(data) {
-	        var addr = data.address; // 최종 주소 변수
-	
-	        // 주소 정보를 해당 필드에 넣는다.
-	        document.getElementById("offline_addr").value = addr;
-	        // 주소로 상세 정보를 검색
+	        var addr = data.address; 
+	        document.getElementById("offline_addr").value = addr;	        
 	        geocoder.addressSearch(data.address, function(results, status) {
-	            // 정상적으로 검색이 완료됐으면
-	            if (status === daum.maps.services.Status.OK) {
-	
-	                var result = results[0]; //첫번째 결과의 값을 활용
-	
-	                // 해당 주소에 대한 좌표를 받아서
+	            
+	            if (status === daum.maps.services.Status.OK) {	
+	                var result = results[0]; 		            
 	                var coords = new daum.maps.LatLng(result.y, result.x);
-	                // 지도를 보여준다.
 	                mapContainer.style.display = "block";
 	                map.relayout();
-	                // 지도 중심을 변경한다.
 	                map.setCenter(coords);
-	                // 마커를 결과값으로 받은 위치로 옮긴다.
 	                marker.setPosition(coords)
 	            }
 	        });
 	    }
 	}).open();
+	self.close();
 	}
 </script>
 <!-- Title Icon -->
@@ -76,43 +61,55 @@
 		</div>
 		<!-- main -->
 		<div class="col-md-10">
-		<h1>강의 등록</h1>
+		<h1 align="center">오프라인 강의 등록</h1>
 		<form action="offlineLessonForm.do" method="post" name="offlineLessonForm" enctype="multipart/form-data">
-			<fieldset>
-			<legend>강의 등록</legend>
-				<table>
+			<div class="row g-3">
 				<input type="hidden" name="l_idx" value="${l_idx}">
 				<input type="hidden" name="save" value="${save}">
-					<tr>
-						<th>오프라인 강의시간</th>
-						<td><input type="text" name="offline_runtime"></td>
-					</tr>
-					<tr>
-						<th>이미지 파일</th>
-						<td><input type="file" name="offlineFolder"></td>
-					</tr>
-					<tr>
-						<th>주소</th>
-						<td><input type="text" id="offline_addr" name="offline_addr" placeholder="주소"></td>
-						<td><input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"></td>
-					</tr>
-					<tr>
-						<th>상세 설명</th>
-						<td><textarea name="offline_cont"></textarea></td>
-					</tr>
-					<tr>
-						<td>
-							<input type="submit" value="확인">
-						</td>
-						<td>
-							<input type="reset" value="다시 작성">
-						</td>
-					</tr>
-				</table>	
-				<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-			</fieldset>
+			
+			<div class="col-12">
+            	<label for="offlineFolder" class="form-label">이미지 등록</label>
+				<input type="file" class="form-file" name="offlineFolder">
+            </div>
+			
+			
+			<div class="col-12">
+              <label for="online_subj" class="form-label">주소</label>
+              <input type="text" class="form-control" id="offline_addr" name="offline_addr" 
+              		 required="required" placeholder="주소" readonly="readonly">
+              <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색">
+              <div class="invalid-feedback">
+                주소를 입력해주세요
+              </div>
+            </div>
+            
+            <div class="col-12">
+            	<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
+            </div>
+            
+            <div class="col-md-5">
+              <label for="offline_runtime" class="form-label">강의 시간</label>
+              <select class="form-select" name="offline_runtime" >
+                <option value="1">1시간</option>
+                <option value="2">2시간</option>
+              </select>
+            </div>
+            
+            
+            <div class="col-12">
+              <label for="offline_cont" class="form-label">강의 상세 설명</label>
+              <textarea name="offline_cont" class="form-textarea" ></textarea>
+              <div class="invalid-feedback">
+                강의 상세 설명을 입력해주세요
+              </div>
+            </div>
+            <button class="w-100 btn btn-primary btn-lg" type="submit">강의 등록</button>
+            </div>
 		</form>
+		
 		</div>
+		</div>
+	</main>
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

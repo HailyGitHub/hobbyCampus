@@ -61,19 +61,35 @@
 			<!-- IF have data then For Each List -->
 			<c:forEach var="dto" items="${lists}">
 				<div class="card mb-3">
-					<div>
+					<div class="row">
+					<div class="col-md-4" >
 						<img src="/hobbycampus/img/none.png" data-img="${dto.lesson_thumbnail}" class="card-img-top center-block">				
 					</div>
-					<div class="card-body">
-						<h5 class="card-title">${dto.lesson_subj}</h5>
+					<div class="col-md-6">
+						<h5 class="card-title m-4">${dto.lesson_subj}</h5>
 						<p class="card-text">${dto.lesson_short_cont}</p>
 					</div>
-					<div class="mb-2">
-						<button type="button" class="btn btn-outline-success">강의 정보 수정</button>
-						<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#scheduleModal" onclick="showSchedule(${dto.lesson_idx})">스케줄 관리</button>
+					<div class="col-md-2 align-self-center">
+						<button type="button" class="btn btn-outline-success m-2">강의 정보 수정</button>
+						<button type="button" class="btn btn-outline-warning m-2" data-bs-toggle="modal" data-bs-target="#scheduleModal" onclick="showSchedule(${dto.lesson_idx})">스케줄 관리</button>
+					</div>
 					</div>
 				</div>
 			</c:forEach>
+			<div class="m-5">
+					<c:choose>
+						<c:when test="${empty lists}">
+							<nav aria-label="Page navigation empty data">
+							<ul class="pagination justify-content-center">
+								<li class="page-item active"><a class="page-link" href="#">1</a></li>
+							</ul>
+							</nav>
+						</c:when>
+						<c:when test="${!empty lists}">
+							${pageStr}									
+						</c:when>
+					</c:choose>
+				</div>
 		</article>
 	</main>
 	
@@ -153,6 +169,8 @@
 		</div>
 	</div>
 	</div>
+	</div>
+	</main>
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

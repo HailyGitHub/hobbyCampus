@@ -26,41 +26,53 @@
 		</div>
 		<!-- main -->
 		<div class="col-md-10">
-		<h1>강의 등록</h1>
-		<form action="liveLessonForm.do" method="post" name="onlineLessonForm" enctype="multipart/form-data">
-			<fieldset>
-			<legend>강의 등록</legend>
-				<table>
-					<input type="hidden" name="l_idx" value="${l_idx}">
-					<input type="hidden" name="save" value="${save}">
-					<tr>
-						<th>라이브 강의시간</th>
-						<td><input type="text" name="live_runtime"></td>
-					</tr>
-					<tr>
-						<th>사용 어플</th>
-						<td><input type="text" name="live_tool"></td>
-					</tr>
-					<tr>
-						<th>이미지 파일</th>
-						<td><input type="file" value="이미지 업로드" name="liveFolder"></td>
-					</tr>
-					<tr>
-						<th>상세 설명</th>
-						<td><textarea name="live_cont"></textarea></td>
-					</tr>
-					<tr>
-						<td>
-							<input type="submit" value="확인">
-						</td>
-						<td>
-							<input type="reset" value="다시 작성">
-						</td>
-					</tr>
-				</table>	
-			</fieldset>
+		<h1 align="center">라이브 강의 등록</h1>
+		<form action="liveLessonForm.do" method="post" name="liveLessonForm" enctype="multipart/form-data">
+			<input type="hidden" name="l_idx" value="${l_idx}">
+			<input type="hidden" name="save" value="${save}">
+			<div class="row g-3">
+				<input type="hidden" name="l_idx" value="${l_idx}">
+				<input type="hidden" name="save" value="${save}">
+			
+			<div class="col-12">
+            	<label for="liveFolder" class="form-label">이미지 등록</label>
+				<input type="file" class="form-file" name="liveFolder">
+            </div>
+            
+            <div class="col-md-5">
+              <label for="live_runtime" class="form-label">강의 시간</label>
+              <select class="form-select" name="live_runtime" >
+                <option value="1">1시간</option>
+                <option value="2">2시간</option>
+              </select>
+            </div>
+            
+            <div class="col-md-5">
+              <label for="live_tool" class="form-label">사용 어플</label>
+              <select class="form-select" name="live_tool" >
+                <option value="줌">줌</option>
+                <option value="스카이프">스카이프</option>
+                <option value="디스코드" >디스코드</option>
+              </select>
+              <div class="invalid-feedback">
+                카테고리를 설정해주세요.
+              </div>
+            </div>
+            
+            
+            <div class="col-10">
+              <label for="live_cont" class="form-label">강의 상세 설명</label>
+              <textarea name="live_cont" class="form-control" rows="20" style="resize: none;" ></textarea>
+              <div class="invalid-feedback">
+                강의 상세 설명을 입력해주세요
+              </div>
+            </div>
+            <button class="w-100 btn btn-primary btn-lg" type="submit">강의 등록</button>
+            </div>
 		</form>
 		</div>
+		</div>
+	</main>
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

@@ -57,17 +57,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			#{dto.live_cont}
   		)
   	</insert>
-  	<select id="selectTeacherLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
-  		SELECT 
-  			LESSON_LIST.LESSON_SUBJ,
-  			LESSON_LIST.LESSON_THUMBNAIL,
-  			LESSON_LIST.LESSON_SHORT_CONT,
-  			TEACHER.T_NAME
+  	<select id="selectTeacherLessonCount" parameterType="int" resultType="int" >
+  		SELECT
+  			COUNT(*)
   		FROM 
-  			LESSON_LIST,
-  			TEACHER
+  			LESSON_LIST
   		WHERE
-  			T_NAME='두껍'
+  			T_IDX=#{t_idx}
+  	</select>
+  	
+  	<select id="selectTeacherLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
+		SELECT   
+		    B.*
+		FROM       
+		    (SELECT 
+		        ROWNUM AS RNUM,
+		        A.*
+		    FROM    
+		        (SELECT 
+		        	*
+		        FROM 
+		        	LESSON_LIST
+		        WHERE
+		        	T_IDX=#{t_idx})A)B
+		WHERE
+		    rnum<![CDATA[>=]]>#{start}
+		AND 
+		    rnum<![CDATA[<=]]>#{end}
   	</select>
   	<select id="selectUpdateLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
   		SELECT
@@ -136,14 +152,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			LL.LESSON_IDX=#{lesson_idx}
   	</select>
   	<select id="SelectOfflineLessonCont" parameterType="int" resultType="com.hobbycam.lesson.model.LessonOfflineDTO" >
-  		SELECT ll.*, lo.offline_idx, lo.offline_runtime, lo.offline_map, lo.offline_folder, lo.offline_cont, lo.offline_addr
+  		SELECT ll.*, lo.offline_idx, lo.offline_runtime, lo.offline_folder, lo.offline_cont, lo.offline_addr
 		FROM lesson_offline lo, lesson_list ll
-		WHERE ll.lesson_idx=#{lesson_idx}
+		WHERE ll.lesson_idx=#{lesson_idx} and ll.lesson_idx=lo.lesson_idx
   	</select>
   	<select id="SelectLiveLessonCont" parameterType="int" resultType="com.hobbycam.lesson.model.LessonLiveDTO">
 		SELECT ls.*, lv.live_idx, lv.live_runtime, lv.live_tool, lv.live_folder, lv.live_cont
 				FROM lesson_live lv, lesson_list ls
-				WHERE ls.lesson_idx=#{lesson_idx}
+				WHERE ls.lesson_idx=#{lesson_idx} and ls.lesson_idx=lv.lesson_idx
   	</select>
   	<select id="SelectLessonLikeCount" parameterType="int" resultType="int">
   		SELECT
@@ -187,13 +203,157 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        B.LESSON_IDX=LL.LESSON_IDX)C
 		WHERE LESSON_IDX=#{lesson_idx}
   	</select>
-
-  	<select id="selectLessonList" resultType="com.hobbycam.lesson.model.LessonDTO">
-  		SELECT
-  			*
-  		FROM
-  			LESSON_LIST
+  	
+  	<select id="selectLessonTotalCnt" parameterType="String" resultType="Integer">
+		SELECT
+		    COUNT(*)
+		FROM
+		    lesson_list
+		WHERE
+		    lesson_state = '진행'
+		AND
+		    lesson_type = #{lesson_type}
   	</select>
+  	
+  	<select id="selectLessonTotalCntByCateTwo" parameterType="hashmap" resultType="Integer">
+		SELECT 
+		    COUNT(*)
+		FROM
+		    lesson_list
+		WHERE
+			lesson_state = '진행'
+		AND
+		    lesson_type = #{lesson_type}
+		AND
+		    cate2_idx = #{cate2_idx}
+  	</select>
+  	
+  	<select id="selectLessonTotalCntByCateOne" parameterType="Integer" resultType="Integer">
+		SELECT
+		    COUNT(*)
+		FROM
+		    (SELECT
+		        *
+		    FROM
+		        lesson_list a, cate2 b
+		    WHERE
+		        a.cate2_idx = b.cate2_idx
+		    AND
+		        lesson_state = '진행') c
+		WHERE
+		    cate1_idx = #{cate1_idx}
+  	</select>
+  	
+  	<select id="selectLessonTotalCntByKeyword" parameterType="hashmap" resultType="Integer">
+		SELECT
+		    COUNT(*)
+		FROM
+		    lesson_list
+		WHERE
+		    lesson_type = #{lesson_type} 
+		AND
+		    (lesson_subj LIKE '%'||#{keyword}||'%'
+		OR
+		    lesson_short_cont LIKE '%'||#{keyword}||'%')
+  	</select>
+
+  	<select id="selectLessonList" parameterType="hashmap" resultType="com.hobbycam.lesson.model.LessonDTO">
+		SELECT
+		    *
+		FROM
+		    (SELECT
+		        rownum as rnum, a.*
+		    FROM
+		        (SELECT
+		        	*
+		        FROM
+		        	LESSON_LIST
+		        WHERE
+		        	lesson_state = '진행' and
+		        	lesson_type = #{lesson_type}
+
+		        ORDER BY
+		        	lesson_idx DESC) a) b
+		WHERE
+		    rnum<![CDATA[>=]]>#{start}
+		AND 
+		    rnum<![CDATA[<=]]>#{end}
+  	</select>
+  	
+  	<select id="selectLessonListByCateTwo" parameterType="hashmap" resultType="com.hobbycam.lesson.model.LessonDTO">
+		SELECT
+		    *
+		FROM
+		    (SELECT
+		        rownum as rnum, a.*
+		    FROM
+		        (SELECT
+		        	*
+		        FROM
+		        	LESSON_LIST
+		        WHERE
+		        	lesson_state = '진행'
+		        ORDER BY
+		        	lesson_idx DESC) a) b
+		WHERE
+		    lesson_type = #{lesson_type}
+		AND
+			cate2_idx = #{cate2_idx}
+		AND
+		    rnum<![CDATA[>=]]>#{start}
+		AND 
+		    rnum<![CDATA[<=]]>#{end}
+  	</select>
+  	
+  	<select id="selectLessonListByCateOne" parameterType="hashmap" resultType="com.hobbycam.lesson.model.LessonDTO">
+		SELECT
+		    *
+		FROM
+		    (SELECT
+		        rownum as rnum, c.*
+		    FROM
+		        (SELECT
+		            a.*, b.cate1_idx
+		        FROM
+		            lesson_list a, cate2 b
+		        WHERE
+		            a.cate2_idx = b.cate2_idx
+		        AND
+		            lesson_state = '진행'
+		        ORDER BY
+		            lesson_idx DESC) c) d
+		WHERE
+		    cate1_idx = #{cate1_idx}
+		AND
+		    rnum<![CDATA[>=]]>#{start}
+		AND 
+		    rnum<![CDATA[<=]]>#{end}
+  	</select>
+  	
+  	<select id="selectLessonListByKeyword" parameterType="hashmap" resultType="com.hobbycam.lesson.model.LessonDTO">
+		SELECT
+		    *
+		FROM
+		    (SELECT
+		        rownum AS rnum, a.*
+		    FROM
+		        (SELECT
+		            *
+		        FROM
+		            lesson_list
+		        WHERE
+		        	LESSON_TYPE=#{lesson_type} 
+		        AND
+		        	(lesson_subj LIKE '%'||#{keyword}||'%' OR
+					lesson_short_cont LIKE '%'||#{keyword}||'%')
+		        ORDER BY
+		            lesson_idx DESC) a) b
+		WHERE
+		    rnum<![CDATA[>=]]>#{start}
+		AND 
+		    rnum<![CDATA[<=]]>#{end}
+  	</select>
+  	
   	<select id="selectCate1List" resultType="com.hobbycam.category.model.Cate1DTO">
   		SELECT
   			*

@@ -27,42 +27,41 @@
 		</div>
 		<!-- main -->
 		<div class="col-md-10">
-		<h1>강의 등록</h1>
+		<h1 align="center">온라인강의 등록</h1>
 		<form action="onlineLessonForm.do" method="post" name="onlineLessonForm" enctype="multipart/form-data">
-			<fieldset>
-			<legend>강의 등록</legend>
-				<table>
-					<input type="hidden" name="l_idx" value="${l_idx}">
-					<input type="hidden" name="save" value="${save}">
-					<tr>
-						<th>온라인 강의 제목</th>
-						<td><input type="text" name="online_subj"></td>
-						
-					</tr>
-					<tr>
-						<th>이미지 파일</th>
-						<td><input type="file" name="onlineImg"  ></td>
-					</tr>
-					<tr>
-						<th>강의 동영상</th>
-						<td><input type="file"  name="onlineFile" ></td>
-					</tr>
-					<tr>
-						<th>상세 설명</th>
-						<td><textarea name="online_cont"></textarea></td>
-					</tr>
-					<tr>
-						<td>
-							<input type="submit" value="확인">
-						</td>
-						<td>
-							<input type="reset" value="다시 작성">
-						</td>
-					</tr>
-				</table>	
-			</fieldset>
+			<div class="row g-3">
+				<input type="hidden" name="l_idx" value="${l_idx}">
+				<input type="hidden" name="save" value="${save}">
+				
+		    <div class="col-12">
+              <label for="online_subj" class="form-label">온라인 강의 제목</label>
+              <input type="text" class="form-control" name="online_subj" required="required">
+              <div class="invalid-feedback">
+                온라인 강의 제목을 입력해주세요
+              </div>
+            </div>
+			<div class="col-12">
+            	<label for="onlineImg" class="form-label">이미지 등록</label>
+				<input type="file" class="form-file" name="onlineImg">
+              </div>	
+			<div class="col-12">
+            	<label for="onlineFile" class="form-label">강의 동영상</label>
+				<input type="file" class="form-file" name="onlineFile">
+            </div>	
+			<div class="col-12">
+              <label for="online_cont" class="form-label">강의 상세 설명</label>
+              <textarea name="online_cont" class="form-textarea" ></textarea>
+              <div class="invalid-feedback">
+                강의 상세 설명을 입력해주세요
+              </div>
+            </div>
+			<button class="w-100 btn btn-primary btn-lg" type="submit">강의 등록</button>
+			</div>
 		</form>
 		</div>
+	   </div>
+	   
+	  </main>
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

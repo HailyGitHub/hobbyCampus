@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.hobbycam.email.HobbyEmailGoogle;
 import com.hobbycam.lesson.model.LessonDAO;
 import com.hobbycam.lesson.model.LessonDTO;
@@ -25,6 +27,7 @@ import com.hobbycam.lesson.model.LessonLiveDTO;
 import com.hobbycam.lesson.model.LessonOfflineDTO;
 import com.hobbycam.lesson.model.LessonOnlineDTO;
 import com.hobbycam.lessonRecord.model.LessonRecordDAO;
+import com.hobbycam.page.PageModule;
 import com.hobbycam.teacher.model.TeacherDTO;
 import com.hobbycam.upload.ImgUplod;
 import com.hobbycam.upload.getLessonImg;
@@ -283,30 +286,99 @@ public class LessonController {
 	}
 	
 	
-	
 	@RequestMapping("/lessonList.do")
-	public ModelAndView lessonList() {
+	public ModelAndView lessonList(
+			@RequestParam(value = "cp", defaultValue = "1") int cp,
+			@RequestParam(value = "lesson_type", defaultValue = "라이브") String lesson_type,
+			@RequestParam(value = "cate2_idx", defaultValue = "0") int cate2_idx) {
+		
+		int listSize = 12;
+		int pageSize = 10;
+		String pageStr = "";
+		List lists = null;
+		
+		if(cate2_idx==0) { // Without cate2_idx
+			int totalCnt = ldao.lessonTotalCnt(lesson_type); // Count By lesson_type
+			String addParam = "&lesson_type=" + lesson_type;
+			pageStr = com.hobbycam.page.BootstrapPageModule2.pageMake("lessonList.do", totalCnt, listSize, pageSize, cp, addParam); //Get pagination code
+			lists = ldao.lessonList(cp, listSize, lesson_type);
+		}else if(cate2_idx>0) {
+			int totalCnt = ldao.lessonTotalCntByCateTwo(lesson_type, cate2_idx);
+			String addParam = "&lesson_type="+lesson_type+"&cate2_idx="+cate2_idx;
+			pageStr = com.hobbycam.page.BootstrapPageModule2.pageMake("lessonList.do", totalCnt, listSize, pageSize, cp, addParam); //Get pagination code
+			lists = ldao.lessonListByCateTwo(cp, listSize, lesson_type, cate2_idx);
+		}
+		
 		ModelAndView mav=new ModelAndView();
-		
-		
-		
-		List lists=ldao.lessonList();
-		List cate1=ldao.cate1List();
-		List cate2=ldao.cate2List(1);
-		mav.addObject("cate1",cate1);
+		mav.addObject("pageStr",pageStr);
 		mav.addObject("lists",lists);
-		mav.addObject("cate2",cate2);
+		mav.addObject("type",lesson_type);
 		mav.setViewName("/lesson/lessonList");
 		return mav;
 	}
 	
-	//lesson List view
-	@RequestMapping("/teacherLessonList.do")
-	public ModelAndView teacherLessonList(String t_name) {
+	
+	@RequestMapping("/findLessonByKeyword.do")
+	public ModelAndView findLessonByKeyword(String lesson_type, String keyword,
+			@RequestParam(value = "cp", defaultValue = "1") int cp) {
+		
+		int totalCnt = ldao.lessonTotalCntByKeyword(lesson_type, keyword);
+		int listSize = 12;
+		int pageSize = 10;
+		
+		String addParam = "&lesson_type=" + lesson_type + "&keyword=" + keyword;
+		String pageStr = com.hobbycam.page.BootstrapPageModule2.pageMake("findLessonByKeyword.do", totalCnt, listSize, pageSize, cp, addParam); //Get pagination code
+		List lists = ldao.lessonListByKeyword(cp, listSize, lesson_type, keyword);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pageStr",pageStr);
+		mav.addObject("lists",lists);
+		mav.addObject("type",lesson_type);
+		mav.setViewName("/lesson/lessonList");
+		return mav;
+	}
+	
+	
+	@RequestMapping("/lessonListByCateOne.do")
+	public ModelAndView lessonListByCateOne(
+			@RequestParam(value = "cp", defaultValue = "1") int cp,
+			@RequestParam(value = "cate1_idx", defaultValue = "0") int cate1_idx) {
+		
+		int totalCnt = ldao.lessonTotalCntByCateOne(cate1_idx);
+		int listSize = 12;
+		int pageSize = 10;
+		
+		String addParam = "&cate1_idx=" + cate1_idx;
+		String pageStr = com.hobbycam.page.BootstrapPageModule2.pageMake("lessonListByCateOne.do", totalCnt, listSize, pageSize, cp, addParam);
+		List lists = ldao.lessonListByCateOne(cp, listSize, cate1_idx);
 		
 		ModelAndView mav=new ModelAndView();
+		mav.addObject("pageStr",pageStr);
+		mav.addObject("lists",lists);
+		mav.setViewName("/lesson/lessonList");
+		return mav;
+	}
+	
+	
+	//lesson List view
+	@RequestMapping("/teacherLessonList.do")
+	public ModelAndView teacherLessonList(@RequestParam(value = "cp", defaultValue = "1") int cp,
+										  HttpServletRequest req) {
 		
-		List lists=ldao.teacherLessonList(t_name);
+		
+		HttpSession session=req.getSession();
+		int t_idx=(int)session.getAttribute("t_idx");
+		
+		int totalCnt=ldao.selectTeacherLessonCount(t_idx);
+		int listSize = 6;
+		int pageSize = 5;
+		String pageStr = "";
+		
+		pageStr=com.hobbycam.page.BootstrapPageModule.pageMake("teacherLessonList.do", totalCnt, listSize, pageSize, cp);
+		
+		List lists=ldao.teacherLessonList(cp,listSize,t_idx);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("pageStr",pageStr);
 		mav.addObject("lists",lists);
 		mav.setViewName("/lesson/teacherLessonList");
 		return mav;

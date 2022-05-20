@@ -12,7 +12,7 @@ public interface LessonDAO {
 	
 	public int liveLessonInsert(LessonLiveDTO dto,int idx);
 	
-	public List teacherLessonList(String t_name);
+	public List teacherLessonList(int cp,int listSize,int t_idx);
 	
 	public List lessonUpdateForm(String lesson_idx);
 	
@@ -30,7 +30,21 @@ public interface LessonDAO {
 	
 	public List lessonReview(int lesson_idx);
 	
-	public List lessonList();
+	public int lessonTotalCnt(String lesson_type); //Add
+	
+	public int lessonTotalCntByCateTwo(String lesson_type, int cate2_idx); //Add
+	
+	public int lessonTotalCntByCateOne(int cate1_idx); //ADD
+	
+	public int lessonTotalCntByKeyword(String lesson_type, String keyword);
+	
+	public List lessonList(int cp, int listSize, String lesson_type); // Fix 
+	
+	public List lessonListByCateTwo(int cp, int listSize, String lesson_type, int cate2_idx); //ADD
+	
+	public List lessonListByCateOne(int cp, int listSize, int cate1_idx);
+	
+	public List lessonListByKeyword(int cp, int listSize, String lesson_type, String keyword);
 	
 	public List cate1List();
 	
@@ -64,5 +78,5 @@ public interface LessonDAO {
 	
 	public String getThumbnail(int lesson_idx);
 
-	
+	public int selectTeacherLessonCount(int t_idx);
 }
