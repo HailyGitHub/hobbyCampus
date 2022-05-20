@@ -58,6 +58,11 @@
 					</tr>
 				</thead>
 				<tbody>
+				<c:if test="${empty payList}">
+						<tr>
+							<td colspan="4" align="center" class="hb_yellow">사용한 포인트 내역이 없습니다</td>
+						
+						</tr>
 					<c:forEach items="${payList}" var="pay">
 						<tr>
 							<td><c:out value="${pay.payDate}" /></td>
@@ -74,6 +79,7 @@
 								</c:choose></td>
 						</tr>
 					</c:forEach>
+					</c:if>
 				</tbody>
 				<tfoot>
 					<!--  com.hobbycam.page-->
