@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hobbycam.index.model.*;
+import com.hobbycam.lesson.model.*;
+import com.hobbycam.member.model.*;
 
 @Controller
 public class IndexController {
@@ -20,7 +22,7 @@ public class IndexController {
 	@RequestMapping("/index.do")
 	public ModelAndView index() {
 		
-		List cateOneList = indexDao.getCateOneList(); //GET CategoryOne List
+		//List cateOneList = indexDao.getCateOneList(); //GET CategoryOne List
 		List cateTwoList = indexDao.getCateTwoList(); //GET CategoryTwo List
 		
 		int teacherCnt = indexDao.getTeacherCnt(); //GET Teacher Count
@@ -28,13 +30,18 @@ public class IndexController {
 		int classCnt = indexDao.getLessonCnt(); //GET Lesson Count
 		int categoryCnt = indexDao.getCategoryCnt(); //GET Category Count
 		
+		List teacher =  indexDao.getLikeTeacher(); // Like Teacher
+		List lesson = indexDao.getLikeLesson(); // Like lesson
+		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("cateOneList", cateOneList);
+		//mav.addObject("cateOneList", cateOneList);
 		mav.addObject("cateTwoList", cateTwoList);
 		mav.addObject("teacherCnt", teacherCnt);
 		mav.addObject("userCnt", userCnt);
 		mav.addObject("classCnt", classCnt);
 		mav.addObject("categoryCnt", categoryCnt);
+		mav.addObject("teacher", teacher);
+		mav.addObject("lesson", lesson);
 		mav.setViewName("index");
 		return mav;
 	}

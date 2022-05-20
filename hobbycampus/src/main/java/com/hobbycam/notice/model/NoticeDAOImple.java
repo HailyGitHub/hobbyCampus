@@ -55,6 +55,18 @@ public class NoticeDAOImple implements NoticeDAO {
 	}
 
 	@Override
+	public List noticeExposeList(int cp, int listSize) {
+		
+		int start=(cp-1)*listSize+1;
+		int end= cp*listSize;
+		Map map= new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		List lists = sqlMap.selectList("noticeExposeList",map); 
+		return lists;
+	}
+
+	@Override
 	public int setNotice(NoticeDTO dto) {
 		int count = sqlMap.insert("insertNotice",dto); 
 		return count;
@@ -94,6 +106,13 @@ public class NoticeDAOImple implements NoticeDAO {
 	@Override
 	public int getTotalCntA() {
 		int cnt= sqlMap.selectOne("totalNoticeCntA");
+		cnt=cnt==0?1:cnt;
+		
+		return cnt;
+	}
+	@Override
+	public int getTotalCntEx() {
+		int cnt= sqlMap.selectOne("totalNoticeCntEx");
 		cnt=cnt==0?1:cnt;
 		
 		return cnt;

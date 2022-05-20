@@ -50,5 +50,17 @@ public class IndexDAOImple implements IndexDAO {
 		return count;
 	}
 	
+	@Override
+	public List getLikeTeacher() {
+		List lesson = sqlMap.selectList("selectLikeTeacherList");
+		return lesson;
+	}
+	
+	@Override
+	public List getLikeLesson() {
+		List lesson = sqlMap.selectList("selectLikelessonList");
+		return lesson;
+	}
+	
 	
 }

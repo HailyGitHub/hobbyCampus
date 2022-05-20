@@ -148,6 +148,14 @@ public class LessonDAOImple implements LessonDAO {
 	}
 	
 	@Override
+
+	public int lessonTotalCntByTeacherIdx(int t_idx) {
+		int count = sqlMap.selectOne("selectLessonTotalByTeacherIdx", t_idx);
+		return count;
+	}
+	
+	@Override
+
 	public List lessonList(int cp, int listSize, String lesson_type) {
 		int start = ((cp-1)*listSize)+1;
 		int end = cp*listSize;
@@ -198,6 +206,21 @@ public class LessonDAOImple implements LessonDAO {
 		map.put("start", start);
 		map.put("end", end);
 		List lists = sqlMap.selectList("selectLessonListByKeyword", map);
+
+		return lists;
+	}
+	
+	@Override
+	public List lessonListByTeacherIdx(int cp, int listSize, int t_idx) {
+		int start = ((cp-1)*listSize)+1;
+		int end = cp*listSize;
+		
+		Map map = new HashMap();
+		map.put("t_idx", t_idx);
+		map.put("start", start);
+		map.put("end", end);
+		List lists = sqlMap.selectList("selectLessonListByTeacherIdx", map);
+
 		return lists;
 	}
 

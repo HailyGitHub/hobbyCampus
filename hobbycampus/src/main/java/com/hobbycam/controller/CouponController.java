@@ -40,7 +40,6 @@ public class CouponController {
 		
 		ModelAndView mav = new ModelAndView();
 		CouponDTO dto = couponDao.getCouponInfo(coupon_idx);
-		System.out.println(dto.getCoupon_idx());
 		mav.addObject("dto",dto);
 		mav.setViewName("hobbyJson");
 		
@@ -77,12 +76,14 @@ public class CouponController {
 	@RequestMapping("/couponUpdate.do")
 	public ModelAndView couponUpdate(CouponDTO dto) {
 		ModelAndView mav = new ModelAndView();
+		System.out.println("couponUpdate.do : ");
 		int count = couponDao.updateCoupon(dto);
-		
 		if(count>0){
 			mav.addObject("msg","완료");
+			System.out.println("완료");
 		}else {
 			mav.addObject("msg","문제발생");
+			System.out.println("문제발생");
 		}
 		
 		mav.setViewName("hobbyJson");

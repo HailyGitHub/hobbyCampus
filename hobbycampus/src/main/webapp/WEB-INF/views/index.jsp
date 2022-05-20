@@ -155,93 +155,39 @@
 		<article>
 			<h2 align="center" class="intro_tag">인기 강사</h2>
 			<div class="row row-cols-1 row-cols-md-4 g-4">
+			<!-- Like Teacher Best Four -->
+			<c:forEach var="likeTeacher" items="${teacher}">
 			  <div class="col">
 			    <div class="card">
-			      <img src="img/none.png" class="card-img-top" alt="...">
+			      <img src="/hobbycampus/hobbyImg/teacherImg/none.png" class="card-img-top">
 			      <div class="card-body text-center">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-			      	<a href="#" class="btn btn-primary">수업보러 가기</a>
+			        <h5 class="card-title">${likeTeacher.t_name}</h5>
+			        <p class="card-text">${likeTeacher.t_profile}</p>
+			      	<a href="lessonListByTeacherIdx.do?t_idx=${likeTeacher.t_idx}" class="btn btn-primary">수업보러 가기</a>
 			      </div>
 			    </div>
 			  </div>
-			  <div class="col">
-			    <div class="card">
-			      <img src="img/none.png" class="card-img-top" alt="...">
-			      <div class="card-body text-center">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-			      	<a href="#" class="btn btn-primary">수업보러 가기</a>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="col">
-			    <div class="card">
-			      <img src="img/none.png" class="card-img-top" alt="...">
-			      <div class="card-body text-center">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-			      	<a href="#" class="btn btn-primary">수업보러 가기</a>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="col">
-			    <div class="card">
-			      <img src="img/none.png" class="card-img-top" alt="...">
-			      <div class="card-body text-center">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-			      	<a href="#" class="btn btn-primary">수업보러 가기</a>
-			      </div>
-			    </div>
-			  </div>
+			</c:forEach>
 			</div>
 		</article>
 		
-		<!-- Lesson List -->
+		<!-- Like Lesson List -->
 		<article>
 			<h2 align="center" class="intro_tag">인기 클래스</h2>
 			<div class="row row-cols-1 row-cols-md-4 g-4">
+			<!-- Like lesson Best Four -->
+			<c:forEach var="likeLesson" items="${lesson}">
 			  <div class="col">
 			    <div class="card">
-			      <img src="img/none.png" class="card-img-top" alt="...">
+			      <img src="img/none.png" class="card-img-top">
 			      <div class="card-body text-center">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-			      	<a href="#" class="btn btn-primary">수업보러 가기</a>
+			        <h5 class="card-title">${likeLesson.lesson_subj}</h5>
+			        <p class="card-text">${likeLesson.lesson_short_cont}</p>
+			      	<a href="lessonCont.do?lesson_idx=${likeLesson.lesson_idx}" class="btn btn-primary">수업보러 가기</a>
 			      </div>
 			    </div>
 			  </div>
-			  <div class="col">
-			    <div class="card">
-			      <img src="img/none.png" class="card-img-top" alt="...">
-			      <div class="card-body text-center">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-			      	<a href="#" class="btn btn-primary">수업보러 가기</a>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="col">
-			    <div class="card">
-			      <img src="img/none.png" class="card-img-top" alt="...">
-			      <div class="card-body text-center">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-			      	<a href="#" class="btn btn-primary">수업보러 가기</a>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="col">
-			    <div class="card">
-			      <img src="img/none.png" class="card-img-top" alt="...">
-			      <div class="card-body text-center">
-			        <h5 class="card-title">Card title</h5>
-			        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-			      	<a href="#" class="btn btn-primary">수업보러 가기</a>
-			      </div>
-			    </div>
-			  </div>
+			</c:forEach>
 			</div>
 		</article>
 		
@@ -367,17 +313,17 @@ var getCookie = function(name) {
 		url: 'getNoticeExpose.do',
 		dataType: 'json',
 		success: function(result){
-			if(result.dto.notice_idx!=){
+			if(result.dto!=null){
 				console.log(result.dto.notice_idx); //couponMakeForm().dto.coupon_idx;	 
 				$('#t_notice_subj').text(result.dto.notice_subj);
 				$('#t_notice_cont').text(result.dto.notice_cont);
 				$('#notice_idx').val(result.dto.notice_idx);
 				$('#notice_subj').val(result.dto.notice_subj);
 				$('#notice_cont').val(result.dto.notice_cont);
-				$("#noticeOpt").val(result.dto.notice_viewer).prop("selected", true);
-			};
-			if(noticeBlind!='true'){
-				$('#exampleModal').modal('show');
+				$("#noticeOpt").val(result.dto.notice_viewer).prop("selected", true);				
+				if(noticeBlind!='true'){
+					$('#exampleModal').modal('show');
+				}
 			}
 		},error:function(){}, complete : function(){}
 	});//ajax	

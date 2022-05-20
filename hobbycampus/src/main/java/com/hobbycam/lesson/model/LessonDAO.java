@@ -36,7 +36,11 @@ public interface LessonDAO {
 	
 	public int lessonTotalCntByCateOne(int cate1_idx); //ADD
 	
-	public int lessonTotalCntByKeyword(String lesson_type, String keyword);
+
+	public int lessonTotalCntByKeyword(String lesson_type, String keyword); //ADD
+	
+	public int lessonTotalCntByTeacherIdx(int t_idx); //ADD
+
 	
 	public List lessonList(int cp, int listSize, String lesson_type); // Fix 
 	
@@ -44,8 +48,11 @@ public interface LessonDAO {
 	
 	public List lessonListByCateOne(int cp, int listSize, int cate1_idx);
 	
-	public List lessonListByKeyword(int cp, int listSize, String lesson_type, String keyword);
 	
+	public List lessonListByKeyword(int cp, int listSize, String lesson_type, String keyword); //ADD
+	
+	public List lessonListByTeacherIdx(int cp, int listSize, int t_idx); //ADD
+
 	public List cate1List();
 	
 	public List cate2List(int cate1_idx);

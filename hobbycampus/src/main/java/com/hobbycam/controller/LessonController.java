@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -354,6 +353,7 @@ public class LessonController {
 		String addParam = "&cate1_idx=" + cate1_idx;
 		String pageStr = com.hobbycam.page.BootstrapPageModule2.pageMake("lessonListByCateOne.do", totalCnt, listSize, pageSize, cp, addParam);
 		List lists = ldao.lessonListByCateOne(cp, listSize, cate1_idx);
+
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("pageStr",pageStr);
@@ -362,6 +362,24 @@ public class LessonController {
 		return mav;
 	}
 	
+	@RequestMapping("/lessonListByTeacherIdx.do")
+	public ModelAndView lessonListByTeacherIdx(
+			@RequestParam(value = "cp", defaultValue = "1") int cp, int t_idx) {
+		
+		int totalCnt = ldao.lessonTotalCntByTeacherIdx(t_idx); //Get Total lesson List By t_idx
+		int listSize = 12;
+		int pageSize = 10;
+		
+		String addParam = "&t_idx=" + t_idx;
+		String pageStr = com.hobbycam.page.BootstrapPageModule2.pageMake("lessonListByTeacherIdx.do", totalCnt, listSize, pageSize, cp, addParam);
+		List lists = ldao.lessonListByTeacherIdx(cp, listSize, t_idx);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("pageStr",pageStr);
+		mav.addObject("lists",lists);
+		mav.setViewName("/lesson/lessonList");
+		return mav;
+	}
 	
 	//lesson List view
 	@RequestMapping("/teacherLessonList.do")

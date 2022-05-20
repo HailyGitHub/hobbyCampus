@@ -261,6 +261,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    (lesson_subj LIKE '%'||#{keyword}||'%'
 		OR
 		    lesson_short_cont LIKE '%'||#{keyword}||'%')
+
+  	</select>
+  	
+  	<select id="selectLessonTotalByTeacherIdx" parameterType="Integer" resultType="Integer">
+		SELECT
+		    COUNT(*)
+		FROM
+		    lesson_list
+		WHERE
+		    lesson_state = '진행'
+		AND
+		    t_idx = #{t_idx}
   	</select>
 
   	<select id="selectLessonList" parameterType="hashmap" resultType="com.hobbycam.lesson.model.LessonDTO">
@@ -277,7 +289,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        WHERE
 		        	lesson_state = '진행' and
 		        	lesson_type = #{lesson_type}
-
 		        ORDER BY
 		        	lesson_idx DESC) a) b
 		WHERE
@@ -352,6 +363,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        AND
 		        	(lesson_subj LIKE '%'||#{keyword}||'%' OR
 					lesson_short_cont LIKE '%'||#{keyword}||'%')
+		        ORDER BY
+		            lesson_idx DESC) a) b
+		WHERE
+		    rnum<![CDATA[>=]]>#{start}
+		AND 
+		    rnum<![CDATA[<=]]>#{end}
+  	</select>
+  	
+  	<select id="selectLessonListByTeacherIdx" parameterType="hashmap" resultType="com.hobbycam.lesson.model.LessonDTO">
+		SELECT
+		    *
+		FROM
+		    (SELECT
+		        rownum AS rnum, a.*
+		    FROM
+		        (SELECT
+		            *
+		        FROM
+		            lesson_list
+		        WHERE
+		            lesson_state = '진행'
+		        AND
+		            t_idx = #{t_idx}
 		        ORDER BY
 		            lesson_idx DESC) a) b
 		WHERE
