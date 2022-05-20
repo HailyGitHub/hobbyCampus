@@ -57,7 +57,8 @@
 		    color: transparent;
 			text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);	}
 			
-  a{text-decoration:none; color:black;}  
+ .form-review a{text-decoration:none; color:black;}  
+ .form-review a:hover{text-decoration:none; color:black;}
 </style>
 
 
@@ -65,67 +66,69 @@
 
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<!-- mypage Side -->
 <div class="row">
-<div class="col-2">
-<jsp:include page="/WEB-INF/views/myPageSide.jsp"></jsp:include>
-</div>
-<div class="col-10">
-<main class="form-review">
-
-<a href="review.do"><label class="text-warning fw-semibold">작성한 리뷰</label></a> | <a href="unreview.do">작성 가능한 리뷰</a>
-<div> &nbsp;</div>
- <h1 class="h2 text-warning" text-align="center"> 작성한 리뷰 <i class="bi bi-brush-fill"></i> </h1>
- 
-<c:if test="${empty reviewVo}">
-
-	<img src="img/user.png" alter="꿀벌" height="300" width="300"><br>
-	<label> 등록된 리뷰가 없습니다 ^^ </label>
-	
-</c:if>
-<!-- review  -->
-<c:forEach var="vo"  items="${reviewVo}">
-
-
-	
-	<div class="card border border-warning p-5" style="width: 40rem;" >
-	<div class="card-body">
-		<div class="row">
-			<div class="col-4">	
-				<img src="/hobbycampus/hobbyImg/lesson/${vo.lesson_thumbnail}" class="card-img-top" alter="강의섬네일" weight="50" height="50" >
-			</div>
-		
-			<div class="col-6">
-			    <h5 class="card-title fw-semibold" align="left">${vo.lesson_subj}</h5>
-			    <p class="card-text" align="left"> ${vo.t_name}</p>
-			</div>  
-			<div class="col-2">
-		   	  	<button type="button" class="btn-close" aria-label="Close" align="right"
-		   			onclick="location.href='deleteReview.do?reviewidx='+'${vo.review_idx}'"></button>
-	   			<button type="button" class="btn btn-warning" id="buttonUp"
-	   				onclick="reviewUp('r_${vo.review_idx}','c_${vo.review_idx}');">
-	   				수정</button> 
-	   		</div>
-		</div>
+	<div class="col-2">
+		<jsp:include page="/WEB-INF/views/myPageSide.jsp"></jsp:include>
 	</div>
-	
-	
-	 
 
-   	
-   	
-	<!-- review Content -->
-   <div class="card-footer" align="left"  style="background-color:#FFFFFF">
-	   	<div class="row" id="c_${vo.review_idx}">
-	   		<div>
-	   			<c:forEach begin="1" end="${vo.star_point}"><label id="stars" text-align="left">★</label></c:forEach>
-	   			 &nbsp;&nbsp; 	<label class="text-black-50">${vo.review_date}</label> 
-	   	 	</div>
-
-	   		 <div align="left"> ${vo.review_cont}</div>   
-   		</div>
-   		 
-<!--  review Update -->
+	
+	<div class="col-10">
+		<main class="form-review">
+	
+		<a href="review.do"><label class="text-warning fw-semibold">작성한 리뷰</label></a> | <a href="unreview.do">작성 가능한 리뷰</a>
+			<div> &nbsp;</div>
+	 		<h1 class="h2 text-warning" text-align="center"> 작성한 리뷰 <i class="bi bi-brush-fill"></i> </h1>
 	 
+				<c:if test="${empty reviewVo}">
+					<img src="img/user.png" alter="꿀벌" height="300" width="300"><br>
+					<label> 등록된 리뷰가 없습니다 ^^ </label>
+				</c:if>
+		
+		
+		<!-- review  -->
+		<c:forEach var="vo"  items="${reviewVo}">
+
+			<div class="card border border-warning p-2" style="width: 40rem;" >
+			
+			<!--  review card header -->
+				<div class="card-body">
+					<div class="row">
+						<div class="col-4">	
+							<img src="/hobbycampus/hobbyImg/lesson/${vo.lesson_thumbnail}" class="card-img-top" alter="강의섬네일" weight="100" height="100" >
+						</div>
+					
+						<div class="col-6">
+						    <h5 class="card-title fw-semibold" align="left">${vo.lesson_subj}</h5>
+						    <p class="card-text" align="left"> ${vo.t_name}</p>
+						</div>  
+						
+						<div class="col-2">
+					   	  	<button type="button" class="btn-close" aria-label="Close" align="right"
+					   			onclick="location.href='deleteReview.do?reviewidx='+'${vo.review_idx}'"></button>
+				   			<button type="button" class="btn btn-warning" id="buttonUp"
+				   				onclick="reviewUp('r_${vo.review_idx}','c_${vo.review_idx}');">	수정</button> 
+				   		</div>
+					</div>
+				</div>
+		
+		
+
+	<!-- card - footer-->
+	 <div class="card-footer" align="left"  style="background-color:#FFFFFF">
+	 
+			<!--  review content -->
+		   	<div class="row" id="c_${vo.review_idx}">
+		   		<div>
+		   			<c:forEach begin="1" end="${vo.star_point}"><label id="stars" text-align="left">★</label></c:forEach>
+		   			 &nbsp;&nbsp; 	<label class="text-black-50">${vo.review_date}</label> 
+		   	 	</div>
+	
+		   		<div align="left"> <pre>${vo.review_cont}</pre></div>   
+	  		 </div>
+			   
+			   
+			<!-- review Update -->
 		   <div class="star" align="left"  id="r_${vo.review_idx}" style="display:none">
 		     <form name="myreview" action="updateReview.do" id="myreview">
 			   <div>
@@ -157,14 +160,18 @@
 				    	<button class="w-100 btn btn-warning" type="submit">리뷰 작성하기</button>
 					</div>
 				</div>
-				</form>
-			</div>
-
+			</form>
+		</div>
 	</div>
 </div>
+
 <div> &nbsp; &nbsp; </div>
 </c:forEach>
+<div>
+	<c:if test="${!empty reviewVo}">
+${pageStr }
 
+</c:if></div>
 </main>
 </div>
 </div>

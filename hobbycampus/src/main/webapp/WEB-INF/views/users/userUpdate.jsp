@@ -13,8 +13,7 @@
     <!-- JQuery -->
    	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
    
-    <link rel="stylesheet" href="/hobbycampus/css/main.css"> 
-    <script type="text/javascript" src="/hobbycampus/js/httpRequest.js"></script>
+    <link rel="stylesheet" href="/hobbycampus/css/main.css">
     
   <style>	
 		.form-userUp {
@@ -25,12 +24,12 @@
 			align-items: center;
 			text-align: center;
 		}
-img{width:300px;
-	  height:150px;
-	  object-fit:fill;
+	.form-userUp img{width:300px;
+		  height:150px;
+		  object-fit:fill;
 	  }  
 	  
-  a{text-decoration:none; color:black;}  
+ .form-userUp a{text-decoration:none; color:black;}  
 </style>
 </head>
 <body>
@@ -41,21 +40,25 @@ img{width:300px;
 </div>
 <div class="col-10">
 
+
 <main class="form-userUp">
 <form name="userUp" action="userUpdate.do" method="POST" enctype="multipart/form-data" onsubmit="return allCheck();">
 <h1 class="h2 text-warning">회원정보 수정</h1>
 
-	 <div><label>	프로필 사진 <input type="file" name="upload" class="form-control"
-	 		aria-label="profile" accept=".gif, .jpg, .png" onchange="setThumbnail(event);"
-	 		style="display:none">
-	 		<div id="image_container" height="150" width="300">
-	 		<img src="/hobbycampus/hobbyImg/userImg/${dto.u_img}" class="mb-4" alt="이미지" width="200" height="200"><br>
-	 		</div><input type="hidden" name="u_img" value="${dto.u_img }">
-	 		<!-- <img src="img/user.png" height="100" weight="100"> -->
-	 		<div class="invalid-feedback">.jsp, png 파일만 가능합니다.</div>
-	 </div> </label>
+	 <div>
+	 	<label>	프로필 사진 
+	 		<input type="file" name="upload" class="form-control"
+		 		aria-label="profile" accept=".gif, .jpg, .png" onchange="setThumbnail(event);"	style="display:none">
+			 <div id="image_container" height="150" width="300">
+		 		<img src="/hobbycampus/hobbyImg/userImg/${dto.u_img}" alt="이미지">
+		 	 </div>
+		 	</label>
+		 	<input type="hidden" name="u_img" value="${dto.u_img}">
+		 	<input type="hidden" name="u_email" value="${dto.u_email }">
+	 	<div class="invalid-feedback">.jsp, png 파일만 가능합니다.</div>
+	 </div> 
 	 
-
+		<br>
 	<div class="form-floating">
 		  <input type="text" name="u_name" value="${u_name}" placeholder="닉네임" class="form-control"  
 		  		id="validationName"  pattern="^[a-zA-Z가-힣0-9]{1,10}$">
@@ -69,7 +72,7 @@ img{width:300px;
 	    </div>
 	</div>	
 		
-		<div id="msg" class="mt-3 mb-3 text-muted">  &nbsp;</div>
+		<div id="msg" class="mt-3 mb-3 text-danger">  &nbsp;</div>
 		
 	<div class="col-12">
 	   <label for="validationTel" class="form-label">핸드폰번호</label>

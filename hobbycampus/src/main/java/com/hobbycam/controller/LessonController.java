@@ -374,12 +374,8 @@ public class LessonController {
 		return mav;
 	}
 	
-	
-	
 
-	
 	/**get lesson Content by lesson_idx*/
-
 	@RequestMapping("/lessonCont.do")
 	public ModelAndView lessonCont(int lesson_idx, HttpServletRequest req) {
 

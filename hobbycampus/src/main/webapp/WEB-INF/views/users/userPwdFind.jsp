@@ -41,9 +41,13 @@ function fnuserPwdFind(){
 		url: "userPwdSend.do",
 		data:{'email':$useremail},
 		dataType: 'json',
-		success: function(data){ //msg From controller (addObject)
-			console.log(data.msg);
-			document.getElementById('msg').innerHTML=data.msg;
+		success: function(msg){ //msg From controller (addObject)
+			document.getElementById('msg').innerHTML=msg.msg;
+			
+			if(msg.result==="true"){
+				window.alert('인증 메일을 확인해 주세요');
+				window.self.close();
+			}
 
 		},
 	});
@@ -65,7 +69,7 @@ function fnuserPwdFind(){
    <div>
     	<input type="button" class="w-100 btn btn-lg btn-warning" value="메일 인증하기" onclick="fnuserPwdFind()">
  	</div>
-    	<div id="msg" class="mt-5 mb-3 text-muted"> 비밀번호 찾기를 진행해 주세요 &nbsp;</div>
+    	<div id="msg" class="mt-5 mb-3 text-danger"> 비밀번호 찾기를 진행해 주세요 &nbsp;</div>
      <div>
         	<a href="userLogin.do"> 로그인 </a> |
    			<a href="userJoin.do">회원가입</a> |

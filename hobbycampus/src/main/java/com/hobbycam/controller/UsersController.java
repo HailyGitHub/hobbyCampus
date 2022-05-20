@@ -39,12 +39,6 @@ public class UsersController {
 	private JavaMailSender mailSender;
 
 
-	 @RequestMapping("/userTest.do")
-	 public ModelAndView userTest() {
-			 ModelAndView mav=new ModelAndView();
-			 mav.setViewName("users/test");
-			 return mav;
-	 }
 	 
 /**join*/
 	//change page emailCheck
@@ -66,6 +60,7 @@ public class UsersController {
 			String msg="";
 			if(count>0) {
 				msg="이미 가입하거나 탈퇴한 email입니다.";
+				mav.addObject("result","false");
 				
 			} else if(count==0) {
 
@@ -77,13 +72,19 @@ public class UsersController {
 		                   + " ^^";
 				
 				msg=sendEmailAuth(email, subject, content, code, session, resp);
-
+				
+				if(msg.equals("")) {
+					msg="이메일을 보낼 수 없습니다. 메일 주소를 다시 확인해 주세요";
+					mav.addObject("result","false");
+					
+				} else {
+					mav.addObject("result","true");
+				}
+				
 			}
-			 
 			mav.addObject("msg",msg);
 			mav.setViewName("hobbyJson");
 			return mav;
-			
 		}
 			
 			
@@ -92,7 +93,8 @@ public class UsersController {
 								String subject, String content, String code,
 								HttpSession session, HttpServletResponse resp) {
 						
-							String msg="";
+							String msg;
+							
 							try {
 									emailSend(email, subject, content);
 									
@@ -109,8 +111,9 @@ public class UsersController {
 						    			
 								} catch (Exception e) {
 									e.printStackTrace();
-									msg="메일주소를 다시 확인해 주세요 ";
+									msg="";
 								}
+							
 							return msg;
 						}
 	
@@ -434,21 +437,34 @@ public class UsersController {
 			String msg="";
 			if(count==usersDao.NOT_ID) {
 				msg="가입하지 않은 아이디입니다.";
-				System.out.println(count);
+				mav.addObject("result","false");
+				
+				
 			} else if(count==usersDao.DEL) {
 				msg="탈퇴한 아이디입니다.";
-				System.out.println(count);
+				mav.addObject("result","false");
+				
+				
 			} else if(count==3) {
-				System.out.println(count);
-				String code=(int)(Math.random()*10000)+"";
-				String subject="hobbyCampus 비밀번호 변경입니다 ";
-				String content="비밀번호 변경을 위해 인증을 진행해 주세요~  "
-		                   +"<a href='http://localhost:9090/hobbycampus/userPwdAuth.do?"
-		                   + "email="+email+"&code="+code+"'target=_blank'>비밀번호 변경 클릭클릭</a>"
-		                   + "클릭클릭</a> ^^";
-				
-				msg=sendEmailAuth(email, subject, content, code, session, resp);
-				
+					System.out.println(count);
+					String code=(int)(Math.random()*10000)+"";
+					String subject="hobbyCampus 비밀번호 변경입니다 ";
+					String content="비밀번호 변경을 위해 인증을 진행해 주세요~  "
+			                   +"<a href='http://localhost:9090/hobbycampus/userPwdAuth.do?"
+			                   + "email="+email+"&code="+code+"'target=_blank'>비밀번호 변경 클릭클릭</a>"
+			                   + "클릭클릭</a> ^^";
+					
+					msg=sendEmailAuth(email, subject, content, code, session, resp);
+					System.out.println(code);
+					
+					if(msg.equals("")) {
+						msg="이메일을 보낼 수 없습니다. 메일 주소를 다시 확인해 주세요";
+						mav.addObject("result","false");
+						
+					} else {
+						mav.addObject("result","true");
+					}
+					
 			}
 			 
 			mav.addObject("msg",msg);
@@ -535,12 +551,14 @@ public class UsersController {
 		int idx=(int)session.getAttribute("u_idx");
 		dto.setU_idx(idx);
 		
-		
-		
+		String imgname="";
+
 		if (!upload.isEmpty()) {
-			String imgname=copyInto(dto.getU_email(), upload);
-			dto.setU_img(imgname);
+			imgname=copyInto(dto.getU_email(), upload);
+		} else {
+			imgname=dto.getU_img();
 		}
+		dto.setU_img(imgname);
 		
 		int count=usersDao.updateUserInfo(dto);
 		String msg=count>0?"회원정보가 수정되었습니다.":"수정 불가합니다.";

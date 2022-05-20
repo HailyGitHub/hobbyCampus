@@ -36,7 +36,7 @@
 
 </head>
 
-<body > <!-- onload="emailCheck();" -->
+<body onload="emailCheck();">
 <main class="form-userJoin">
 
 	 <h1 class="h3 mb-3 fw-normal"> 회원가입 </h1>
@@ -49,11 +49,11 @@
 			value="${u_email}" readonly>
 	</div>	
 
-	 <div><label>	프로필 사진 <input type="file" name="upload" class="form-control"
-	 		aria-label="profile" accept=".gif, .jpg, .png" onchange="setThumbnail(event);"
+	 <div><label>	프로필 사진(사진 눌러서 변경!)<input type="file" name="upload" class="form-control"
+	 		aria-label="profile" accept=".jpg, .png" onchange="setThumbnail(event);"
 	 		style="display:none">
 	 		<div id="image_container" height="150" width="300">
-	 		<img src="img/user.png" alter="프로필 기본 이미지">
+	 			<img src="img/user.png" alter="프로필 기본 이미지">
 	 		</div>
 	 		<!-- <img src="img/user.png" height="100" weight="100"> -->
 	 		<div class="invalid-feedback">.jsp, png 파일만 가능합니다.</div>
@@ -61,7 +61,7 @@
 	 
 
 	  <div class="col-12">
-	    <label for="validationName" class="form-label">닉네임 10글자 내 한글영문숫자</label>
+	    <label for="validationName" class="form-label">닉네임 (10글자 내 한글영문숫자)</label>
 	   <input type="text" name="u_name" placeholder="닉네임을 입력해 주세요" onkeyup="userNameCheck()" 
 	   	class="form-control" id="validationName" pattern="^[a-zA-Z가-힣0-9]{1,10}$" maxlength="10" required>
 	    <div class="invalid-feedback">
@@ -75,7 +75,7 @@
 		 
 	 
   <div class="col-12">
-	    <label for="validationPwd" class="form-label">비밀번호</label>
+	    <label for="validationPwd" class="form-label">비밀번호 (6~12글자 숫자영문)</label>
 	    <input type="password" name="u_pwd"  maxlength="12"  onkeyup="checkPwd()" pattern="[a-zA-Z0-9]{6,12}" 
 	    	class="form-control" id="validationPwd" required> 
 	    <div class="invalid-feedback">
@@ -100,9 +100,9 @@
   </div>
   
      <div class="col-12">
-	   <label for="validationTel" class="form-label">핸드폰번호</label>
+	   <label for="validationTel" class="form-label">핸드폰번호(숫자만 입력)</label>
 	 	<input type="text" name="u_tel" maxlength="11" pattern="^01(0|1|6|7|8|9){1}[0-9]{7,8}" 
-	    	class="form-control" id="validationTel" onkeyup="checkTel()" required> 
+	    	class="form-control" id="validationTel" placeholder ="01012345678" onkeyup="checkTel()" required> 
 	    <div class="invalid-feedback">
 	 	   01로 시작하는 핸드폰 입력 가능합니다.
 	    </div>
@@ -115,7 +115,7 @@
   <div>	성별 <input type="radio" name="u_gender" value="남자" checked> 남자
 		<input type="radio" name="u_gender" value="여자"> 여자
 	</div><div>
-	<a href="javascript:window.open('userJoinPolicy.do','joinpolicy','width:400;height:600;')">이용약관, 개인정보 수집 및 이용, 개인정보 제공 내용</a>
+	<a href="javascript:window.open('userJoinPolicy.do','joinpolicy','width:600;height:600;')">이용약관, 개인정보 수집 및 이용</a>
 			을 확인하였고 동의합니다. 
 	</div><div>	<input type="submit" class="w-100 btn btn-warning btn-lg" value="회원가입" >
 	</div>
@@ -124,7 +124,7 @@
  
 <script>
 var timer;
-/*
+
 function emailCheck(){
 	var userName = document.usersJoin.u_email.value;
 	
@@ -133,7 +133,7 @@ function emailCheck(){
 			window.self.close();
 	}
 }
-*/
+
 
 function setThumbnail(event) { 
 	var reader = new FileReader(); 
@@ -309,8 +309,8 @@ function allCheck(){
 	var filename=document.usersJoin.upload.value;
 	filename=filename.substring(filename.length-3,filename.length);
 	
-	if(filename!='jpg'&&filename!='png'&&filename!='gif'){
-		window.alert('jpg, png, gif 이미지만 업로드 가능합니다.');
+	if(filename!='jpg'&&filename!='png'){
+		window.alert('jpg, png 이미지만 업로드 가능합니다.');
 		return false;
 	}
 }

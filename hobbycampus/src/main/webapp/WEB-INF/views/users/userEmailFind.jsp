@@ -60,8 +60,8 @@
 <h1 class="h3 mb-3 fw-normal">아이디 찾기</h1>
 
 	<div class="form-floating">
-	  <input type="tel" name="u_tel" placeholder="tel" class="form-control" id="floatingTel">
-	  <label for="floatingTel">가입시 입력한 핸드폰 번호</label>
+	  <input type="tel" name="u_tel" placeholder="01012345678" class="form-control" id="floatingTel">
+	  <label for="floatingTel">핸드폰 01012345678</label>
 	</div>
 	<div>
 
@@ -71,9 +71,10 @@
 	</div>
 
    <div>
-    	<input type="button" class="w-100 btn btn-lg btn-warning" value="메일 찾기" onclick="userEmailCheck();">
+    	<input type="button" class="w-100 btn btn-lg btn-warning" value="메일 찾기"
+    		onclick="userEmailCheck();">
  	</div>
-    	<div id="msg" class="mt-5 mb-3 text-muted">   &nbsp;</div>
+    	<div id="msg" class="mt-5 mb-3 text-danger">   &nbsp;</div>
  
      <div>
         	<a href="userLogin.do"> 로그인 </a> |

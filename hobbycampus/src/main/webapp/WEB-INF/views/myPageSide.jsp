@@ -11,8 +11,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
  
-  	 <!--BootStarp-->
-
+      <!--BootStarp-->
+      
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -29,26 +29,25 @@
        .sideDiv{
          height: 100%;
        }
-       a:link {
+       .nav-item a:link {
           color : black;
         }
-        a:visited {
+        
+         .nav-item a:visited {
           color : black;
         }
-        a:hover{
-
-
-        	color:orange;
+        .nav-item a:hover{
+           color:orange;
 
         }
-        a:active {
+        .nav-item a:active {
           color : black
         }
      </style>
  
      
  </head>
- <body>
+ <body onload="myerror();">
     
 
 
@@ -66,15 +65,17 @@
                    
                  </span>
 
-			<c:if test="${!empty sessionScope.t_idx}">
-                 <span class="fs-3">
+            <c:if test="${!empty sessionScope.t_idx}">
+                    <span class="fs-3">
                  
                    <button class="btn btn-outline-primary" id="teacher" onclick="teacherClick();">&nbsp;&nbsp;강사&nbsp;&nbsp;</button>
                  </span>
                 </c:if>
-
+         
                  <hr>
                </div>
+               
+               
                <ul class="nav nav-pills flex-column mb-auto">
                 
                  <li class="nav-item">
@@ -133,52 +134,106 @@
                   </a>                    
                 </li>
                 
-				 <li class="nav-item">
+             <li class="nav-item">
                   <a href="userUpdateForm.do" class="nav-link">
                     <span class="studentList" >정보 수정</span>
                   </a>
                 </li>
+      
+      
+         </ul>
+         
+            </li>
          </ul>
        </div>
+
      </nav>
    </div>
  </div>
  
  </body>
+ 
  <script>
-
-
+ 
  $(document).ready(function(){
-	 if(${t_idx==null}){
-		 $(".teacher").css("display","none");
-		 $(".student").css("display","none");
-		 $(".teacherList").css("display","none");
-	 }
-	 
- }
- 
 
+    if(${t_idx==null}){
+       $(".teacher").css("display","none");
+       $(".student").css("display","none");
+       $(".teacherList").css("display","none");
+    }
+    
+    if(getCookie('teacher')&&${t_idx!=null}){
+		 
+		   $(".studentList").css("display","none");
+		   $(".teacherList").css("display","block");
+		   
+		   $("#student").removeClass('btn-warning');
+		   $("#teacher").removeClass('btn-light');
+		 
+		   $("#student").addClass('btn-light');
+		   $("#teacher").addClass('btn-warning');
+		 
+	 } else {
+		   $(".teacherList").css("display","none");
+		   $(".studentList").css("display","block");
+		   
+		   $("#student").removeClass('btn-light');
+		   $("#teacher").removeClass('btn-warning');
+		 
+		   $("#student").addClass('btn-warning');
+		   $("#teacher").addClass('btn-light');
+	 }
+ })
+ 
+ 
+ var setCookie = function(name, value, day) {
+     var date = new Date();
+     date.setTime(date.getTime() + day * 60 * 1 * 60 * 1000);
+     document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+};
+
+
+var getCookie = function(name) {
+var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+return value? value[2] : null;
+};
+
+
+var deleteCookie = function(name) {
+    var date = new Date();
+    document.cookie = name + "= " + "; expires=" + date.toUTCString() + "; path=/";
+}
+	 
+	 
  function studentClick(){
-   $(".teacherList").css("display","none");
-   $(".studentList").css("display","");
-   
-   $("#student").removeClass('btn-light');
-   $("#teacher").removeClass('btn-warning');
- 
-   $("#student").addClass('btn-warning');
-   $("#teacher").addClass('btn-light');
+	setCookie('student','student',1);
+	deleteCookie('teacher');
+	
+	   $(".teacherList").css("display","none");
+	   $(".studentList").css("display","block");
+	   
+	   $("#student").removeClass('btn-light');
+	   $("#teacher").removeClass('btn-warning');
+	 
+	   $("#student").addClass('btn-warning');
+	   $("#teacher").addClass('btn-light');
+
  }
+ 
  function teacherClick(){
- 
-   $(".studentList").css("display","none");
-   $(".teacherList").css("display","");
-   
-   $("#student").removeClass('btn-warning');
-   $("#teacher").removeClass('btn-light');
- 
-   $("#student").addClass('btn-light');
-   $("#teacher").addClass('btn-warning');
-   
+		setCookie('teacher','teacher',1);
+		deleteCookie('student');
+
+		   $(".studentList").css("display","none");
+		   $(".teacherList").css("display","block");
+		   
+		   $("#student").removeClass('btn-warning');
+		   $("#teacher").removeClass('btn-light');
+		 
+		   $("#student").addClass('btn-light');
+		   $("#teacher").addClass('btn-warning');
  }
+ 
  </script>
 </html>
