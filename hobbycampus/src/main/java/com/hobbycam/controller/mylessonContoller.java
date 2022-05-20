@@ -77,8 +77,8 @@ public class mylessonContoller {
 		  System.out.println("data:"+lessonTime);
 		  mav.addObject("lessonTime",lessonTime);
 		  
-		  System.out.println("성공"); } catch (Exception e) { e.printStackTrace();
-		  System.out.println("오류"); }
+		  } catch (Exception e) {
+		   }
 		 
 		
 		

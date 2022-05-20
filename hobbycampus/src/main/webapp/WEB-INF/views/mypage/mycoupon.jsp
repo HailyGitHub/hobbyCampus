@@ -68,6 +68,7 @@
 								<td colspan="3" align="center" class="hb_yellow">확인 가능한 쿠폰이 없습니다</td>
 							
 							</tr>
+							</c:if>
 						
 							
 								<c:forEach items="${couponList}" var="coupon">
@@ -78,7 +79,6 @@
 									</tr>
 								</c:forEach>
 								
-								</c:if>
 							</tbody>
 						</table>
 					</div>
