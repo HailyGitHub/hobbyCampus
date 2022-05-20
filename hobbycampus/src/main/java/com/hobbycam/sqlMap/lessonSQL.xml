@@ -310,13 +310,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        	LESSON_LIST
 		        WHERE
 		        	lesson_state = '진행'
+		        AND
+		        	lesson_type = #{lesson_type}
+		        AND
+		        	cate2_idx = #{cate2_idx}
 		        ORDER BY
 		        	lesson_idx DESC) a) b
 		WHERE
-		    lesson_type = #{lesson_type}
-		AND
-			cate2_idx = #{cate2_idx}
-		AND
 		    rnum<![CDATA[>=]]>#{start}
 		AND 
 		    rnum<![CDATA[<=]]>#{end}
