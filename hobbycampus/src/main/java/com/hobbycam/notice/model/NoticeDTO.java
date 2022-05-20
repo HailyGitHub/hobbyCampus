@@ -10,13 +10,17 @@ public class NoticeDTO {
 	public String notice_viewer;
 	public Date notice_date;	
 	public String notice_cont;
+	public String a_name;
 
 	public NoticeDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
+
+
+
 	public NoticeDTO(int notice_idx, int a_idx, String notice_subj, String notice_viewer, Date notice_date,
-			String notice_cont) {
+			String notice_cont, String a_name) {
 		super();
 		this.notice_idx = notice_idx;
 		this.a_idx = a_idx;
@@ -24,7 +28,10 @@ public class NoticeDTO {
 		this.notice_viewer = notice_viewer;
 		this.notice_date = notice_date;
 		this.notice_cont = notice_cont;
+		this.a_name = a_name;
 	}
+
+
 
 	public int getNotice_idx() {
 		return notice_idx;
@@ -74,5 +81,12 @@ public class NoticeDTO {
 		this.notice_cont = notice_cont;
 	}
 	
+	public String getA_name() {
+		return a_name;
+	}
+
+	public void setA_name(String a_name) {
+		this.a_name = a_name;
+	}
 	
 }

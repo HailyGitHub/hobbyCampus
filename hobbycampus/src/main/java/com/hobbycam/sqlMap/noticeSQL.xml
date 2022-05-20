@@ -6,30 +6,32 @@
  <select id="selectNoticeList" parameterType="hashMap" resultType="com.hobbycam.notice.model.NoticeDTO">
  select * from 
 		(select rownum as rnum,a.* from 
-		(select * from notice where notice_viewer = '전체' order by notice_idx desc)a)b 
+		(select notice.*,admin.a_name from admin,notice where admin.a_idx=notice.a_idx order by notice_idx desc)a)b 
 		where rnum<![CDATA[>=]]>#{start} 
 		and rnum<![CDATA[<=]]>#{end}
+		and notice_viewer = '전체'
  </select>
 
 <select id="selectTeacherNoticeList" parameterType="hashMap" resultType="com.hobbycam.notice.model.NoticeDTO">
  select * from 
 		(select rownum as rnum,a.* from 
-		(select * from notice where notice_viewer = '강사' order by notice_idx desc)a)b 
+		(select notice.*,admin.a_name from admin,notice where admin.a_idx=notice.a_idx order by notice_idx desc)a)b 
 		where rnum<![CDATA[>=]]>#{start} 
 		and rnum<![CDATA[<=]]>#{end}
+		and notice_viewer = '강사'
  </select>
 
 <select id="selectAllNoticeList" parameterType="hashMap" resultType="com.hobbycam.notice.model.NoticeDTO">
  select * from 
 		(select rownum as rnum,a.* from 
-		(select * from notice order by notice_idx desc)a)b 
+		(select notice.*,admin.a_name from admin,notice where admin.a_idx=notice.a_idx order by notice_idx desc)a)b 
 		where rnum<![CDATA[>=]]>#{start} 
 		and rnum<![CDATA[<=]]>#{end}
  </select>
 <select id="noticeExposeList" parameterType="hashMap" resultType="com.hobbycam.notice.model.NoticeDTO">
  select * from 
 		(select rownum as rnum,a.* from 
-		(select * from notice order by notice_idx desc)a)b 
+		(select notice.*,admin.a_name from admin,notice where admin.a_idx=notice.a_idx order by notice_idx desc)a)b 
 		where rnum<![CDATA[>=]]>#{start} 
 		and rnum<![CDATA[<=]]>#{end}
 		and notice_viewer = '노출'

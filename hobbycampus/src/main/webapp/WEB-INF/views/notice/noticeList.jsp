@@ -56,14 +56,10 @@
 		<article class="select-list m-5">
 			<div class="d-grid gap-2 d-md-block col-md-12 text-center">
 				<button class="btn btn-lg" type="button" id="btn_1"><i class="bi bi-journal-text"></i>학생 공지</button>
-				<button class="btn btn-lg position-relative" type="button" id="btn_2">
-					<!-- Badge Button -->
-					<i class="bi bi-journal-plus"></i> 강사 공지
-					<c:if test="${applyCnt != 0}">
-						<span class="badge bg-danger rounded-pill">${applyCnt}</span>					
-					</c:if>
+				<button class="btn btn-lg position-relative" type="button" id="btn_2"><i class="bi bi-journal-plus"></i> 강사 공지
 				</button>
 				<button class="btn btn-lg" type="button" id="btn_3"><i class="bi bi-journal-check"></i> 전체 공지</button>
+				<button class="btn btn-lg" type="button" id="btn_4"><i class="bi bi-journal-check"></i> 노출 공지</button>
 			</div>
 		</article>
 	
@@ -96,7 +92,7 @@
 							<td>
 							${dto.notice_idx}</td>
 							<td>${dto.notice_subj}</td>
-							<td>${dto.a_idx}</td>
+							<td>${dto.a_name}</td>
 							<td>${dto.notice_date}</td>
 						</tr>
 					</c:forEach>
@@ -171,6 +167,7 @@
 window.onload = function(){
 	if( $('#adminSession').val()==null){
 		$('#btn_3').css('display', 'none');
+		$('#btn_4').css('display', 'none');
 	}
 	if( $('#tSession').val()==null&&$('#adminSession').val()==null){
 		$('#btn_2').css('display', 'none');
@@ -185,14 +182,22 @@ window.onload = function(){
 		$('#btn_1').addClass('btn-primary');
 		$('#btn_2').addClass('btn-outline-primary');
 		$('#btn_3').addClass('btn-outline-primary');
+		$('#btn_4').addClass('btn-outline-primary');
 	}else if($uri=='/hobbycampus/noticeListTeacher.do'){
 		$('#btn_1').addClass('btn-outline-primary');
 		$('#btn_2').addClass('btn-primary');
 		$('#btn_3').addClass('btn-outline-primary');
+		$('#btn_4').addClass('btn-outline-primary');
 	}else if($uri=='/hobbycampus/noticeListAll.do'){
 		$('#btn_1').addClass('btn-outline-primary');
 		$('#btn_2').addClass('btn-outline-primary');
 		$('#btn_3').addClass('btn-primary');
+		$('#btn_4').addClass('btn-outline-primary');
+	}else if($uri=='/hobbycampus/noticeExposeList.do'){
+		$('#btn_1').addClass('btn-outline-primary');
+		$('#btn_2').addClass('btn-outline-primary');
+		$('#btn_3').addClass('btn-outline-primary');
+		$('#btn_4').addClass('btn-primary');
 	}
 	
 	/* Click Button to move page */
@@ -204,6 +209,9 @@ window.onload = function(){
 	});
 	$('#btn_3').click(function(){
 		$(location).attr('href', 'noticeListAll.do');
+	});
+	$('#btn_4').click(function(){
+		$(location).attr('href', 'noticeExposeList.do');
 	});
 	
 	function btnOff(){
