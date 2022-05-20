@@ -12,11 +12,11 @@
       	</c:if>
       
       <c:if test="${!empty sessionScope.u_name}">
-      	${sessionScope.u_name} 님  | <a href="mylessonList.do">마이페이지</a> ||  <a href="resume.do">강사신청 </a> ||
+      	${sessionScope.u_name} 님  | <a href="mylessonList.do">마이페이지</a> ||    <c:if test="${empty sessionScope.t_idx }">   
+          <a href="resume.do">강사신청 </a> ||
+      </c:if>
       	<a href="userLogout.do">로그아웃</a> 
-      	
-      </c:if> 
-
+      </c:if>
         </span>
 
     </div>

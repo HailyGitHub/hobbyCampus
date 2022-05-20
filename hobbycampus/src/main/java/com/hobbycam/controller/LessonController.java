@@ -561,7 +561,7 @@ public class LessonController {
 	
 	/**send email to teacher*/
 	@RequestMapping("/sendEmail.do")
-	public ModelAndView sendEmail(@RequestParam("teacherEmail")String tEmail, @RequestParam("userMail")String uEmail,@RequestParam("mailSubject")String subject, @RequestParam("mailContent")String content ) {
+	public ModelAndView sendEmail(@RequestParam("lesson_idx")String lesson_idx , @RequestParam("teacherEmail")String tEmail, @RequestParam("userMail")String uEmail,@RequestParam("mailSubject")String subject, @RequestParam("mailContent")String content ) {
 		ModelAndView mav=new ModelAndView();
 		HobbyEmailGoogle heg = new HobbyEmailGoogle();
 		boolean result = false;
@@ -574,7 +574,9 @@ public class LessonController {
 			e.printStackTrace();
 			result = false;
 		}
+		
 		mav.addObject("result", result);
+		mav.addObject("lesson_idx", lesson_idx);
 		mav.setViewName("lesson/lessonContEmailOk");
 		return mav;
 		
