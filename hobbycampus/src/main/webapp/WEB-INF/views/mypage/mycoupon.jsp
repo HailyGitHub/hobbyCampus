@@ -63,6 +63,13 @@
 								</tr>
 							</thead>
 							<tbody>
+							<c:if test="${empty couponList}">
+							<tr>
+								<td colspan="3" align="center">확인 가능한 쿠폰이 없습니다</td>
+							
+							</tr>
+						
+							
 								<c:forEach items="${couponList}" var="coupon">
 									<tr>
 										<td><c:out value="${coupon.couponStart}" /></td>
@@ -70,6 +77,8 @@
 										<td><c:out value="${coupon.couponEnd}" /></td>
 									</tr>
 								</c:forEach>
+								
+								</c:if>
 							</tbody>
 						</table>
 					</div>
