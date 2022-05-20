@@ -58,7 +58,7 @@
 	</tr>
 	</c:if>
 	<c:forEach var="dto" items="${lists}">
-		<tr>
+		<tr onclick="getInfo(${dto.lev_idx})" data-bs-toggle="modal" data-bs-target="#exampleModal">
 			<td>${dto.lev_idx}</td>
 			<!-- create url -->
 			<c:url var="url" value="levelList.do">
@@ -70,7 +70,7 @@
 			<td>
 				<a href="${url}">
 				</a>
-				<a href="#" style="text-decoration: none; color: black;" onclick="getInfo(${dto.lev_idx})" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				<a href="#" style="text-decoration: none; color: black;">
 				${dto.lev_name} 
 				</a>
 			</td>
