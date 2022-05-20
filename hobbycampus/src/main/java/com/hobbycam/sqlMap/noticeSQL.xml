@@ -26,6 +26,14 @@
 		where rnum<![CDATA[>=]]>#{start} 
 		and rnum<![CDATA[<=]]>#{end}
  </select>
+<select id="noticeExposeList" parameterType="hashMap" resultType="com.hobbycam.notice.model.NoticeDTO">
+ select * from 
+		(select rownum as rnum,a.* from 
+		(select * from notice order by notice_idx desc)a)b 
+		where rnum<![CDATA[>=]]>#{start} 
+		and rnum<![CDATA[<=]]>#{end}
+		and notice_viewer = '노출'
+ </select>
 
  <select id="selectNotice" parameterType="Integer" resultType="com.hobbycam.notice.model.NoticeDTO">
   select * from 
@@ -69,6 +77,14 @@
 			notice
 		where
 			notice_viewer ='강사'
+	</select>
+ <select id="totalNoticeCntEx" resultType="Integer">
+		select 
+			count(*) 
+		from 
+			notice
+		where
+			notice_viewer ='노출'
 	</select>
  <select id="totalNoticeCntA" resultType="Integer">
 		select 

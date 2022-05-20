@@ -59,6 +59,22 @@ public class NoticeController {
 		mav.setViewName("notice/noticeList");
 		return mav;
 	}
+
+	@RequestMapping("/noticeExposeList.do")
+	public ModelAndView noticeExposeList(@RequestParam(value="cp",defaultValue = "1")int cp) {
+		ModelAndView mav = new ModelAndView();
+		int totalCnt = noticeDao.getTotalCntEx();
+		int listSize=5;
+		int pageSize=5;
+		String pageStr=com.hobbycam.page.BootstrapPageModule.pageMake("noticeExposeList.do", totalCnt, listSize, pageSize, cp);
+		
+		
+		List lists= noticeDao.noticeExposeList(cp,listSize);
+		mav.addObject("lists",lists);
+		mav.addObject("pageStr",pageStr);
+		mav.setViewName("notice/noticeList");
+		return mav;
+	}
 	
 	@RequestMapping("/noticeInfo.do")
 	public ModelAndView noticInfo(int notice_idx) {
