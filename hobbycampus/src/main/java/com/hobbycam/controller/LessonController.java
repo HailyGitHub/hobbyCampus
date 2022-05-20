@@ -201,7 +201,10 @@ public class LessonController {
 											@RequestParam("l_idx")String idx,
 											@RequestParam("save")String save,
 											LessonOfflineDTO ldto) {
-		
+		System.out.println("이미지 : "+img);
+		System.out.println("idx : "+idx);
+		System.out.println(save);
+		System.out.println(ldto.getOffline_cont());
 		ModelAndView mav=new ModelAndView();
 		String imgName = img.getOriginalFilename();
 		String savePathImg = "";
@@ -456,7 +459,14 @@ public class LessonController {
 	public ModelAndView lessonCont(int lesson_idx, HttpServletRequest req) {
 
 		HttpSession session=req.getSession();
-	    int u_idx=(int)session.getAttribute("u_idx");
+		int u_idx=0;
+		
+		if(session.getAttribute("u_idx")==null||session.getAttribute("u_idx").equals("")) {
+			u_idx=0;
+		}else {
+			u_idx=(int)session.getAttribute("u_idx");
+		}
+	    
 		String type=ldao.lessonContIndentify(lesson_idx);
 		ModelAndView mav=new ModelAndView();
 		

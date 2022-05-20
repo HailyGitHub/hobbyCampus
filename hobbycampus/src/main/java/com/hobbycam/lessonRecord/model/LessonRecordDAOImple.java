@@ -48,6 +48,14 @@ public class LessonRecordDAOImple implements LessonRecordDAO {
 	}
 	
 	@Override
+	public int lessonReqCnt(int t_idx) {
+		List lists= sqlMap.selectList("SelectLessonReq",t_idx);
+		int reqCnt =lists.size();
+		return reqCnt;
+
+	}
+	
+	@Override
 	public int insert(Map<String, Object> map) {
 		return sqlMap.insert("lessonRecordMapper.insertRecordLesson", map);
 	}

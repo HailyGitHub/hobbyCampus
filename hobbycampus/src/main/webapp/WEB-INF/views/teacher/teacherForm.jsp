@@ -39,6 +39,21 @@
 	function nameCheck() {
 		window.open('nameCheck.do','nameCheck','width=400 height=300');
 	}
+	
+	function allCheck(){
+	
+	   var filename=document.userUp.upload.value;
+	   filename=filename.substring(filename.length-3,filename.length);
+	   
+	   if(filename!='jpg'){
+	      window.alert('jpg 이미지만 업로드 가능합니다.');
+	      return false;
+	   }else{
+		return true;
+	   }
+	}
+</script>
+	
 </script>
 </head>
 <body>
@@ -56,7 +71,7 @@
 			<div class="py-5 text-center">
 		    <h2>내 정보</h2>
 		  	</div>
-		  <form class="row g-3 " name="updateTeacher" action="teacherInfo.do" method="post" enctype="multipart/form-data">
+		  <form class="row g-3" onsubmit="return allCheck();" name="updateTeacher" action="teacherInfo.do" method="post" enctype="multipart/form-data">
 		    
 		    <div class="col-md-1"></div>
 		    <div class="col-md-3">
@@ -105,7 +120,9 @@
 		    <div class="col-md-9">
 		      자기소개
 		      <hr class="m-1">
-		      <textarea class="form-control" rows="4" id="t_profile" cols="40" name="t_profile" style="resize: none;" required="required">${dto.t_profile}</textarea>
+		      <textarea class="form-control" rows="4" id="t_profile" cols="40" wrap="hard" name="t_profile" style="resize: none;" required="required">
+		    	${dto.t_profile}
+			</textarea>
 		    </div>
 		    <div class="col-md-2"></div>
 		    

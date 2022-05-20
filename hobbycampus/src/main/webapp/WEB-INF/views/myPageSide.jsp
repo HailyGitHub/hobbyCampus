@@ -84,7 +84,9 @@
                      <span class="studentList" >내 수강내역</span>
                    </a>
                    <a href="lessonReqList.do?t_idx=1" class="nav-link">
-                    <span class="teacherList" style="display: none;" >강의 신청 관리</span>
+                    <span class="teacherList" style="display: none;" >강의 신청 관리
+					  <span class="badge bg-primary">${sessionScope.reqCnt}</span>
+                    </span>
                    </a>                     
                  </li>
                  
@@ -102,7 +104,7 @@
                     <span class="studentList" >포인트 충전</span>
                   </a>
                   <a href="teacherLessonList.do"  class="nav-link">
-                   <span class="teacherList" style="display: none;" id="teacherRecord" >내 강의 목록</span>
+                   <span class="teacherList" style="display: none;" id="" >내 강의 목록</span>
                   </a>                    
                      
                 </li>
@@ -121,7 +123,7 @@
                     <span class="studentList" >찜 목록</span>
                   </a>
                   <a href="teacherPoint.do" class="nav-link">
-                   <span class="teacherList" style="display: none;" id="teacherInfo">포인트 관리</span>    
+                   <span class="teacherList" style="display: none;" id="teacehrPoint">포인트 관리</span>    
                   </a>                     
                 </li>
                 
@@ -153,9 +155,8 @@
  </div>
  
  </body>
+ 
  <script>
-
-
  $(document).ready(function(){
     if(${t_idx==null}){
        $(".teacher").css("display","none");
@@ -163,31 +164,78 @@
        $(".teacherList").css("display","none");
     }
     
+    if(getCookie('teacher')&&${t_idx!=null}){
+       
+         $(".studentList").css("display","none");
+         $(".teacherList").css("display","block");
+         
+         $("#student").removeClass('btn-warning');
+         $("#teacher").removeClass('btn-light');
+       
+         $("#student").addClass('btn-light');
+         $("#teacher").addClass('btn-warning');
+       
+    } else {
+         $(".teacherList").css("display","none");
+         $(".studentList").css("display","block");
+         
+         $("#student").removeClass('btn-light');
+         $("#teacher").removeClass('btn-warning');
+       
+         $("#student").addClass('btn-warning');
+         $("#teacher").addClass('btn-light');
+    }
+
  })
  
-
- function studentClick(){
-   $(".teacherList").css("display","none");
-   $(".studentList").css("display","");
-   
-   $("#student").removeClass('btn-light');
-   $("#teacher").removeClass('btn-warning');
  
-   $("#student").addClass('btn-warning');
-   $("#teacher").addClass('btn-light');
+ var setCookie = function(name, value, day) {
+     var date = new Date();
+     date.setTime(date.getTime() + day * 60 * 1 * 60 * 1000);
+     document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+};
+
+
+var getCookie = function(name) {
+var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+return value? value[2] : null;
+};
+
+
+var deleteCookie = function(name) {
+    var date = new Date();
+    document.cookie = name + "= " + "; expires=" + date.toUTCString() + "; path=/";
+}
+    
+    
+ function studentClick(){
+   setCookie('student','student',1);
+   deleteCookie('teacher');
+   
+      $(".teacherList").css("display","none");
+      $(".studentList").css("display","block");
+      
+      $("#student").removeClass('btn-light');
+      $("#teacher").removeClass('btn-warning');
+    
+      $("#student").addClass('btn-warning');
+      $("#teacher").addClass('btn-light');
+
  }
  
  function teacherClick(){
- 
-   $(".studentList").css("display","none");
-   $(".teacherList").css("display","");
-   
-   $("#student").removeClass('btn-warning');
-   $("#teacher").removeClass('btn-light');
- 
-   $("#student").addClass('btn-light');
-   $("#teacher").addClass('btn-warning');
-   
+      setCookie('teacher','teacher',1);
+      deleteCookie('student');
+
+         $(".studentList").css("display","none");
+         $(".teacherList").css("display","block");
+         
+         $("#student").removeClass('btn-warning');
+         $("#teacher").removeClass('btn-light');
+       
+         $("#student").addClass('btn-light');
+         $("#teacher").addClass('btn-warning');
  }
+ 
  </script>
 </html>

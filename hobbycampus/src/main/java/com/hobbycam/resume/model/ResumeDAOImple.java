@@ -36,7 +36,16 @@ public class ResumeDAOImple implements ResumeDAO {
 
 	@Override
 	public int resumeInsert(ResumeDTO dto) {
+		
 		int count = sqlMap.insert("insertResume",dto);
-		return count;
+		//set img name = resume_idx
+			//1. get resume_idx.nextval-1
+			int resumeImg = sqlMap.selectOne("resumeNextval");
+			
+			//2. update resumeImg = resume_idx
+			sqlMap.update("updateResume", resumeImg);
+			
+			
+		return resumeImg;
 	}
 }

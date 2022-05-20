@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hobbycam.lessonRecord.model.LessonRecordDAO;
 import com.hobbycam.users.model.UsersDAO;
 import com.hobbycam.users.model.UsersDTO;
 
@@ -35,6 +36,9 @@ public class UsersController {
 	@Autowired
 	UsersDAO usersDao;
 
+	@Autowired
+	private LessonRecordDAO lrdao;
+	
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -335,6 +339,9 @@ public class UsersController {
 	    			session.setAttribute("t_idx", t_idx);
 	    			System.out.println("tidx 세션 저장됨 ");
 	    			System.out.println(t_idx);
+	    			
+	    			int reqCnt = lrdao.lessonReqCnt(t_idx);
+	    			session.setAttribute("reqCnt", reqCnt);
 	    		}
 	    		
 	    		

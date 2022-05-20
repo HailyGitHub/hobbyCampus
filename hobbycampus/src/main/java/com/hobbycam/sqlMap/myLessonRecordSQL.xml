@@ -30,6 +30,7 @@
 	
 	<select id="getLessonRecords" parameterType="map" resultType="com.hobbycam.VO.LessonRecordVO">
 		select 
+			 l.lesson_thumbnail,
 			 l.lesson_subj as lessonSubj,
 			 l.lesson_type,
 			 t.t_name as tName,
