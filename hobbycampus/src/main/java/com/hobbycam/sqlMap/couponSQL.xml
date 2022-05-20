@@ -37,6 +37,7 @@
 	update coupon_list 
 	set coupon_title = #{coupon_title},
 	coupon_rate = #{coupon_rate},
+	coupon_img = #{coupon_img},
 	coupon_state = #{coupon_state}
 	where coupon_idx= #{coupon_idx}
 	</update>
