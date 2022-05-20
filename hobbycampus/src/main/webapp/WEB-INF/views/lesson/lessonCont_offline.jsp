@@ -26,7 +26,6 @@
 <body>
 <!-- HEADER -->
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>	
-
 <!--img-->
   <article class="mx-auto" style="width: 83%;">
 		  <div id="carouselExampleIndicators" class="carousel slide col-md-12" data-bs-ride="carousel">
@@ -36,17 +35,16 @@
 		        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 		         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
 		      </div>
-		      <div class="carousel-inner">
+		     <div class="carousel-inner">
 		        <div class="carousel-item active" >
 		          <img src="/hobbycampus/hobbyImg/lesson/${thumbnail }/thumbnail.jpg" class="d-block w-100" alt="간판1" height="500em">
 		        </div>
 		        <c:forEach var="lessonImg" items="${imgLists }"> 
 			      <div class="carousel-item">
 			          <img src="/hobbycampus/hobbyImg/lesson/${thumbnail }/img/${lessonImg}" class="d-block w-100" height="500em">
-			      </div>
+			     </div>
 			  </c:forEach>
 		      </div>
-		      
 		      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 		        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 		        <span class="visually-hidden">Previous</span>
@@ -58,6 +56,7 @@
 		  </div>
 		</article>
 		
+      
       
 	
  
@@ -75,7 +74,7 @@
 			     	<!-- content description -->
 			     	
 						<div id="lessonContentLists">
-				        	${dto.offline_cont }
+				        <pre>${dto.offline_cont}</pre>
 				     	</div>
 					
 					
@@ -95,11 +94,11 @@
 					      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					        <h4>수강 위치</h4>
 					     </div>
-			     		<div id="map" style="width:50%;height:200px;"></div>
+			     		<div id="map" style="width:100%;height:200px;"></div>
 			     	</div>	
 			   
 					<!-- review -->
-					<div id="contentReview">	
+					<div id="contentReview" style="margin-bottom: 300px">	
 						<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 						        <h4>리뷰</h4>
 						     </div>
@@ -141,8 +140,9 @@
 										</c:forEach>
 									</tbody>	
 								 </table>
-						</div>		 
+						</div>	
 			    </main>
+			    
 		<!--side bar-->	
 		    <nav id="sidebarMenu" class="col-md-4 col-lg-2 d-md-block bg-light sidebar collapse">
 		      <div class="remote">
@@ -174,7 +174,7 @@
 		        <div class="text-center">
 		          <button type="button" class="btn btn-warning" style="width:95%" id="lessonEnrollBtn">수강 신청</button>
 			     
-			          <button type="button" class="btn btn-outline-danger"  id="likeBnt" style="width:45%" >
+			          <button type="button" class="btn btn-outline-danger"  id="likeBnt" style="width:45%" onClick="loginCheck();">
 			          	<!-- From JQUERY --> 
 			          </button>
 			          <button  data-bs-toggle="modal" data-bs-target="#sendMail" type="button" class="btn btn-outline-primary" id="mail" style="width:45%">
@@ -207,7 +207,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-			        <button type="submit" class="btn btn-primary">보내기</button>
+			        <button type="submit" class="btn btn-primary" >보내기</button>
 			      </div>
 		      </form>
 		    </div>
@@ -229,36 +229,45 @@
 			var likeCnt ='찜('+${like }+')' ;
 			$('#likeBnt').append(icon+likeCnt);
 		};
-	});
-
-	/**like button clicked*/
-	$('#likeBnt').click(function () {
-		var btState = $("#heartFill").hasClass("bi-heart"); //true -> need to click
-		$.ajax({
-			url :"likeBtnCk.do",
-			type : "get",
-			data : {'lesson_idx': ${lesson_idx}, 'u_idx' : ${u_idx}, 'btState' : btState},
-			dataType : "json",
-			success : function(data) {
-				var addOption = '';
-				var $likeCnt = data.likeCnt;
-				if(btState){//already not like, Add 1
-					$('#likeBnt').empty();
-					var $likeCnt = data.likeCnt;
-					var icon = '<i id="heartFill" class="bi bi-suit-heart-fill"></i>';
-					var likeCnt ='찜('+$likeCnt+')';
-					$('#likeBnt').append(icon+likeCnt);
-				}else{//already like // minus 1
-					$('#likeBnt').empty();
-					var $likeCnt = data.likeCnt;
-					var icon = '<i id="heartFill" class="bi bi-heart"></i>';
-					var likeCnt ='찜('+$likeCnt+')';
-					$('#likeBnt').append(icon+likeCnt);
-				}
-			}
-		});
 		
 	});
+	
+	
+	
+	/**like button clicked > loginCheck*/
+	function loginCheck() {
+		if(${empty sessionScope.u_idx}){
+			
+			alert('로그인 후 사용 가능합니다.');
+		}else{
+			var btState = $("#heartFill").hasClass("bi-heart"); //true -> need to click
+			$.ajax({
+				url :"likeBtnCk.do",
+				type : "get",
+				data : {'lesson_idx': ${lesson_idx}, 'u_idx' : ${u_idx}, 'btState' : btState},
+				dataType : "json",
+				success : function(data) {
+					var addOption = '';
+					var $likeCnt = data.likeCnt;
+					if(btState){//already not like, Add 1
+						$('#likeBnt').empty();
+						var $likeCnt = data.likeCnt;
+						var icon = '<i id="heartFill" class="bi bi-suit-heart-fill"></i>';
+						var likeCnt ='찜('+$likeCnt+')';
+						$('#likeBnt').append(icon+likeCnt);
+					}else{//already like // minus 1
+						$('#likeBnt').empty();
+						var $likeCnt = data.likeCnt;
+						var icon = '<i id="heartFill" class="bi bi-heart"></i>';
+						var likeCnt ='찜('+$likeCnt+')';
+						$('#likeBnt').append(icon+likeCnt);
+					}
+				}
+			});
+			
+		}
+	}
+	
 	
 	/**lesson enrollment*/
 	$('#lessonEnrollBtn').click(function () {
@@ -288,7 +297,8 @@
 			}
 		});	
 	});
-
+	
+	
 </script>
 
 <jsp:include page="/WEB-INF/views/map.jsp"></jsp:include>

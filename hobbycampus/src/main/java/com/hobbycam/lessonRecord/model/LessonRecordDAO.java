@@ -16,6 +16,7 @@ public interface LessonRecordDAO {
 	int insert(Map<String, Object> map);
 
 	List<LessonRecordVO> getLessonRecords(int uIdx, String lessonRecordState);
-
+	
+	public int lessonReqCnt(int t_idx);
 
 }

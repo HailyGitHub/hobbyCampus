@@ -39,7 +39,7 @@ public class mylessonContoller {
 			 return mav;
 		 }
 	     int uIdx=(int)session.getAttribute("u_idx");
-		
+	     
 		// post save
 		String postReceiver = param.get("postReceiver");
 		String postTel = param.get("postTel");
@@ -76,7 +76,6 @@ public class mylessonContoller {
 		} catch (Exception e) {
 		}
 
-		
 		mav.setViewName("/users/mylesson");
 		
 		

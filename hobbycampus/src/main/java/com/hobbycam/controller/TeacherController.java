@@ -81,7 +81,7 @@ public class TeacherController {
 			fileExtension = fileName.substring(fileName.length()-4, fileName.length());
 			
 
-			String savePathFolder =servletContext.getRealPath("/hobbyImg/teacherImg");
+			String savePathFolder =servletContext.getRealPath("/hobbyImg/teacherImg/");
 				
 			ImgUplod iu = new ImgUplod();
 			savePathImg = iu.copyInto(t_img, ""+dto.getT_idx(), savePathFolder, fileExtension);

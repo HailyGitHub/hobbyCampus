@@ -86,60 +86,51 @@
 						</table>
 						</c:if>
 				</div>		
-				
-					<!-- map -->
-					<div id="contentMap">
-					      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					        <h4>수강 위치</h4>
+				<!-- review -->
+				<div id="contentReview" style="margin-bottom: 300px">	
+					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					        <h4>리뷰</h4>
 					     </div>
-			     		<div id="map" style="width:50%;height:200px;"></div>
-			     	</div>	
-			   
-					<!-- review -->
-					<div id="contentReview">	
-						<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-						        <h4>리뷰</h4>
-						     </div>
-							<c:if test="${empty review }">
-								<table id="reviewTable">
+						<c:if test="${empty review }">
+							<table id="reviewTable">
+								<tr> 
+									<td colspan="2" align="center">
+									아직 등록된 리뷰가 없습니다.
+									</td>
+								</tr>
+							</table>
+						</c:if>
+						
+							<table class="table  table-hover" id="reviewList" style="text-align: center">
+							 	<thead>
 									<tr>
-										<td colspan="2" align="center">
-										아직 등록된 리뷰가 없습니다.
-										</td>
-									</tr>
-								</table>
-							</c:if>
-							
-								<table class="table  table-hover" id="reviewList" style="text-align: center">
-								 	<thead>
-										<tr>
-									      <th scope="col">별점</th>
-									      <th scope="col">리뷰 내용</th>
-									      <th scope="col">리뷰 날짜</th>
-									    </tr>
-									</thead>
-									<tbody>
-									 	<c:if test="${empty lists }">
-									 		<tr>
-									 			<td>아직 등록된 리뷰가 없습니다.</td>
-									 		</tr>
-									 	
-									 	</c:if>
-									 	<c:forEach var="rv" items="${review }">
-													<tr>
-														<td>
-															<c:forEach begin="1" end="${rv.star_point }">
-																<label id="stars" text-align="left">★</label>
-															</c:forEach>
-														</td>
-														<td>${rv.review_cont }</td>
-														<td>${rv.review_date }</td>
-													</tr>
-										</c:forEach>
-									</tbody>	
-								 </table>
-						</div>		 
-			    </main>
+								      <th scope="col">별점</th>
+								      <th scope="col">리뷰 내용</th>
+								      <th scope="col">리뷰 날짜</th>
+								    </tr>
+								</thead>
+								<tbody>
+								 	<c:if test="${empty lists }">
+								 		<tr>
+								 			<td>아직 등록된 리뷰가 없습니다.</td>
+								 		</tr>
+								 	
+								 	</c:if>
+								 	<c:forEach var="rv" items="${review }">
+												<tr>
+													<td>
+														<c:forEach begin="1" end="${rv.star_point }">
+															<label id="stars" text-align="left">★</label>
+														</c:forEach>
+													</td>
+													<td>${rv.review_cont }</td>
+													<td>${rv.review_date }</td>
+												</tr>
+									</c:forEach>
+								</tbody>	
+							 </table>
+					</div>		 
+		    </main>
 		<!--side bar-->	
 		    <nav id="sidebarMenu" class="col-md-4 col-lg-2 d-md-block bg-light sidebar collapse">
 		      <div class="remote">
@@ -154,7 +145,7 @@
 		        <div class="text-center">
 		          <button type="button" class="btn btn-warning" style="width:95%" id="lessonEnrollBtn">수강 신청</button>
 			     
-			          <button type="button" class="btn btn-outline-danger"  id="likeBnt" style="width:45%" >
+			          <button type="button" class="btn btn-outline-danger"  id="likeBnt" style="width:45%" onClick="loginCheck();">
 			          	<!-- From JQUERY --> 
 			          </button>
 			          <button  data-bs-toggle="modal" data-bs-target="#sendMail" type="button" class="btn btn-outline-primary" id="mail" style="width:45%">
@@ -211,38 +202,40 @@
 	});
 
 	/**like button clicked*/
-	$('#likeBnt').click(function () {
-		console.log('220줄 : u_idx = ${u_idx}');
-		console.log('lesson_idx = ${lesson_idx}');
-		
-		
-		
-		var btState = $("#heartFill").hasClass("bi-heart");
-		$.ajax({
-			url :"likeBtnCk.do",
-			type : "get",
-			data : {'lesson_idx': ${lesson_idx}, 'u_idx' : ${u_idx}, 'btState' : btState},
-			dataType : "json",
-			success : function(data) {
-				var addOption = '';
-				var $likeCnt = data.likeCnt;
-				if($("#heartFill").hasClass("bi-heart")){//already not like
-					$('#likeBnt').empty();
+	
+	/**like button clicked > loginCheck*/
+	function loginCheck() {
+		if(${empty sessionScope.u_idx}){
+			
+			alert('로그인 후 사용 가능합니다.');
+		}else{
+			var btState = $("#heartFill").hasClass("bi-heart"); //true -> need to click
+			$.ajax({
+				url :"likeBtnCk.do",
+				type : "get",
+				data : {'lesson_idx': ${lesson_idx}, 'u_idx' : ${u_idx}, 'btState' : btState},
+				dataType : "json",
+				success : function(data) {
+					var addOption = '';
 					var $likeCnt = data.likeCnt;
-					var icon = '<i id="heartFill" class="bi bi-suit-heart-fill"></i>';
-					var likeCnt ='찜('+$likeCnt+')';
-					$('#likeBnt').append(icon+likeCnt);
-				}else{//already like
-					$('#likeBnt').empty();
-					var $likeCnt = data.likeCnt;
-					var icon = '<i id="heartFill" class="bi bi-heart"></i>';
-					var likeCnt ='찜('+$likeCnt+')';
-					$('#likeBnt').append(icon+likeCnt);
+					if(btState){//already not like, Add 1
+						$('#likeBnt').empty();
+						var $likeCnt = data.likeCnt;
+						var icon = '<i id="heartFill" class="bi bi-suit-heart-fill"></i>';
+						var likeCnt ='찜('+$likeCnt+')';
+						$('#likeBnt').append(icon+likeCnt);
+					}else{//already like // minus 1
+						$('#likeBnt').empty();
+						var $likeCnt = data.likeCnt;
+						var icon = '<i id="heartFill" class="bi bi-heart"></i>';
+						var likeCnt ='찜('+$likeCnt+')';
+						$('#likeBnt').append(icon+likeCnt);
+					}
 				}
-			}
-		});
-		
-	});
+			});
+			
+		}
+	}
 	
 	/**lesson enrollment*/
 	$('#lessonEnrollBtn').click(function () {

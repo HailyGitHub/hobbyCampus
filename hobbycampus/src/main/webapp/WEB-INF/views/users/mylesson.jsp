@@ -78,15 +78,19 @@ a:hover { text-decoration:none !important }
 			<div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0 border border-warning">
 	    <div class="col-md-4 ">
-	      <img src="..." class="img-fluid rounded-start" alt="...">
+	      <img src="/hobbycampus/hobbyImg/lesson/${lessonRecord.lesson_thumbnail }/thumbnail.jpg" class="img-fluid rounded-start" alt="...">
 	    </div>
     <div class="col-md-8 ">
     <div class="card-body ">
       	 <span class="lesson_record_state "><i class="bi bi-list-stars"></i> ${lessonRecord.lessonRecordState}</span>
-        <h5 class="card-title fw-bolder">${lessonRecord.lessonSubj}</h5>
+        <h5 class="card-title fw-bolder" id="lessonSubj" >${lessonRecord.lessonSubj}</h5>
 		<div class="lesson_record_state">${lessonRecord.lesson_type}
 		<c:if test="${lessonRecord.lesson_type=='온라인'}"><i class="bi bi-camera-reels"></i></i>
-			 <input type="button" value="강의보기" class="btn btn-outline-warning fs-6"> 
+			 <button type="button" class="btn btn-warning fs-6" data-bs-toggle="modal" data-bs-target="#onlineVideo" id="videoClick">
+				<div>강의보기
+				 <span id="videoPath" style="visibility: hidden; font-size: 0px" data-thum="${lessonRecord.lesson_thumbnail}" > ${lessonRecord.lesson_thumbnail}</span> 
+				</div>
+			</button>
 		</c:if>
 		</div>
 		<hr>
@@ -107,7 +111,34 @@ a:hover { text-decoration:none !important }
 </div>
 </div>
 
+	<!-- MODAL -->
+	<div class="modal fade" id="onlineVideo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg"">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">online video</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        <div id="playVideo">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 <!-- FOOTER -->
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+
+	<script>
+	$('#videoClick').click(function(){
+		var $thumb = $('#videoPath').attr('data-thum');
+		var setVideo = '<video controls ><source type="video/mp4" src="/hobbycampus/hobbyImg/lesson/'+$thumb+'/video/online.mp4"></video>';
+		$('#playVideo').empty();
+		$('#playVideo').append(setVideo);
+	});
+		
+	</script>
+
 </html>

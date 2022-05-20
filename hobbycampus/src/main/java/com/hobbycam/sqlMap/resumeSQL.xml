@@ -9,19 +9,18 @@
 			Order by cate1_idx desc	
  	</select>
  	<select id="selectRecordCnt" resultType="int" parameterType="int">	
-		SELECT COUNT(*)
-			FROM (select distinct * from(
-					select ls.lesson_idx
-					from lesson_record lr, lesson_schedule ls
-					where lr.lesson_schedule_idx=ls.lesson_schedule_idx)a, lesson_list
-					where t_idx=#{t_idx})
+ 		select count(*)
+		from(select ls.lesson_idx
+		    from lesson_record lr, lesson_schedule ls
+		    where lr.lesson_schedule_idx = ls.lesson_schedule_idx)a, lesson_list ll
+		where a.lesson_idx = ll.lesson_idx
+			and ll.t_idx=#{t_idx}
  	</select>
  	<select id="selectCate2" parameterType="int" resultType="com.hobbycam.category.model.Cate2DTO">
  		SELECT *
 			FROM cate2	
 		WHERE cate1_idx=#{cate1_idx}		
  	</select>
- 	
  	<insert id="insertResume" parameterType="com.hobbycam.resume.model.ResumeDTO">
  		INSERT INTO
  			teacher_resume
@@ -39,4 +38,13 @@
  				#{interview_date_param}
  			)
  	</insert>
+ 	<select id="resumeNextval" resultType="int">
+	 	SELECT seq_teacher_resume.NEXTVAL-1
+	 	FROM DUAL
+ 	</select>
+ 	<update id="updateResume" parameterType="int">
+ 	UPDATE teacher_resume
+ 		SET resume_img=to_char(#{resumeImg})
+	WHERE resume_idx=#{resumeImg} 
+ 	</update>
  </mapper>

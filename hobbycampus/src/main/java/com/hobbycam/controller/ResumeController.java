@@ -39,24 +39,36 @@ public class ResumeController {
 	@RequestMapping(value="/resume.do", method = RequestMethod.POST)
 	public ModelAndView insertResume(ResumeDTO dto, @RequestParam("resumeImg")MultipartFile resumeImg, HttpServletRequest req) {
 		
-		 HttpSession session=req.getSession();
-	      int u_idx=(int)session.getAttribute("u_idx");
-		dto.setU_idx(u_idx);
+
+		HttpSession session=req.getSession();
+		int u_idx=0;
 		
-		String savePathFolder = servletContext.getRealPath("/hobbyImg/resumeImg/");
+		if(session.getAttribute("u_idx")==null||session.getAttribute("u_idx").equals("")) {
+			u_idx=0;
+		}else {
+			u_idx=(int)session.getAttribute("u_idx");
+		}
 		
+	
+		
+		//insert data
+		ModelAndView mav = new ModelAndView();
+		int resumeImgFileName = dao.resumeInsert(dto);
+		
+		String msg = "강사 신청이 완료되었습니다. 결과는 메일로 전달 드리겠습니다. ";
+		
+
+		//upload img
+		String savePathFolder =servletContext.getRealPath("hobbyImg/resumeImg/"); 
 		
 		String fileName = resumeImg.getOriginalFilename();
 		String fileExtension = fileName.substring(fileName.length()-4, fileName.length());
 		
 		
 		ImgUplod iu = new ImgUplod();
-		String savePathImg = iu.copyInto(resumeImg, ""+dto.getU_idx(), savePathFolder, fileExtension) ;
-		dto.setResume_img(savePathFolder+savePathImg+fileExtension);
+		String savePathImg = iu.copyInto(resumeImg, ""+resumeImgFileName, savePathFolder, fileExtension) ;
 		
-		ModelAndView mav = new ModelAndView();
-		int result = dao.resumeInsert(dto);
-		String msg = result>0?"강사 신청이 완료되었습니다. 결과는 메일로 전달 드리겠습니다. ":"강사 신청이 실패되었습니다. 다시 제출 부탁드립니다.";
+		
 		mav.addObject("msg", msg);
 		mav.setViewName("resume/resumeMsg");
 		return mav;
