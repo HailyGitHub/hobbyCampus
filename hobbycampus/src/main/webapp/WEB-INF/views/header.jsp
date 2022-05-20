@@ -6,18 +6,19 @@
     <div class="top_nav">
         <span class="top_nav_area">
 
-             <a href="temp.do">강사</a> | <a href="mylessonList.do">마이페이지</a>
-
-
         <c:if test="${empty sessionScope.u_name}">
             <a href="userJoin.do" onclick="window.open(this.href,'user','width=600,height=1000');return false;">회원가입</a> 
             | <a href="userLogin.do" onclick="window.open(this.href,'user','width=600,height=1000');return false;">로그인</a>
       	</c:if>
       
       <c:if test="${!empty sessionScope.u_name}">
-      	${sessionScope.u_name} 님  | <a href="userLogout.do">로그아웃</a>
+      	${sessionScope.u_name} 님  | <a href="mylessonList.do">마이페이지</a> ||  <a href="resume.do">강사신청 </a> ||
+      	<a href="userLogout.do">로그아웃</a> 
+      	
       </c:if> 
+
         </span>
+
     </div>
     
     <!-- Logo -->

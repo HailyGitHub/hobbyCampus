@@ -29,6 +29,7 @@
 			margin: auto;
 		}
 	a{text-decoration:none; color:black;}  
+	
 </style>
 
 <script type="text/javascript" src="js/httpRequest.js"></script>
@@ -42,9 +43,13 @@ function emailSend(){
 		data: {'email':$useremail},
 		dataType: 'json',
 		success: function(msg){ //msg From controller (addObject)
-			console.log(msg.msg); // msg
-
 			document.all.msg.innerHTML=msg.msg;
+			
+			if(msg.result==="true"){
+				window.alert('인증 메일을 확인해 주세요');
+				window.self.close();
+			}
+			
 		}
 	});
 }
@@ -62,7 +67,7 @@ function emailSend(){
  	</div>
 	<div>
 		<input type="button" value="이메일 인증하기"  class="w-100 btn btn-lg btn-warning" onclick="emailSend()">
-			<div id="msg" class="mt-5 mb-3 text-muted"> 회원가입 전에 이메일 인증을 합니다. 
+			<div id="msg" class="mt-5 mb-3 text-danger"> 회원가입 전에 이메일 인증을 합니다. 
 									<br> 버튼을 누르고 조금 기다려주세요</div>
 	</div>
      <div>

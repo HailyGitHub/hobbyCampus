@@ -29,26 +29,27 @@
        .sideDiv{
          height: 100%;
        }
-       a:link {
+       .nav-item a:link {
           color : black;
         }
-        a:visited {
+        
+         .nav-item a:visited {
           color : black;
         }
-        a:hover{
 
+        .nav-item a:hover{
 
            color:orange;
 
         }
-        a:active {
+        .nav-item a:active {
           color : black
         }
      </style>
  
      
  </head>
- <body>
+ <body onload="myerror();">
     
 
 
@@ -157,6 +158,7 @@
  </body>
  
  <script>
+
  $(document).ready(function(){
     if(${t_idx==null}){
        $(".teacher").css("display","none");
@@ -206,6 +208,7 @@ var deleteCookie = function(name) {
     var date = new Date();
     document.cookie = name + "= " + "; expires=" + date.toUTCString() + "; path=/";
 }
+
     
     
  function studentClick(){
@@ -221,9 +224,11 @@ var deleteCookie = function(name) {
       $("#student").addClass('btn-warning');
       $("#teacher").addClass('btn-light');
 
+
  }
  
  function teacherClick(){
+
       setCookie('teacher','teacher',1);
       deleteCookie('student');
 
@@ -235,6 +240,7 @@ var deleteCookie = function(name) {
        
          $("#student").addClass('btn-light');
          $("#teacher").addClass('btn-warning');
+
  }
  
  </script>

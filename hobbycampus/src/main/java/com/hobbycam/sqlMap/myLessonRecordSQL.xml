@@ -35,7 +35,9 @@
 			 l.lesson_type,
 			 t.t_name as tName,
 			 to_char(lr.lesson_buy_date, 'yyyy-mm-dd hh24:mi:ss') as lessonBuyDate,
-			 lr.lesson_record_state as lessonRecordState
+			 lr.lesson_record_state as lessonRecordState,
+			 ls.LESSON_TIME as lessonTime,
+			 to_char(ls.lesson_start, 'yyyy-mm-dd') as lessonStart
 		from 
 			lesson_record lr, 
 			lesson_schedule ls, 

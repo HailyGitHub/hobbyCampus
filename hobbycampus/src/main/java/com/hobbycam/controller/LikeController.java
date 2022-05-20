@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hobbycam.like.model.LikeDAO;
@@ -21,7 +22,9 @@ public class LikeController {
 	LikeDAO likeDao;
 	
 	@RequestMapping("/myLikeList.do")
-	public ModelAndView myLike(HttpServletRequest req) {
+	public ModelAndView myLike(HttpServletRequest req,
+			@RequestParam(value="cp", defaultValue = "1")int cp) {
+
 		ModelAndView mav=new ModelAndView();
 		
 		HttpSession session=req.getSession();
@@ -31,35 +34,35 @@ public class LikeController {
 			mav.setViewName("users/usersMsg");
 			return mav;
 		}
+
+		int u_idx=(int)session.getAttribute("u_idx");
+		int totalCnt=likeDao.myLikeCnt(u_idx);
+		int listSize=6;
+		int pageSize=5;
+		String pageStr=com.hobbycam.page.BootstrapPageModule.pageMake("myLikeList.do",totalCnt,listSize,pageSize,cp);
 		
-		int idx=(int)session.getAttribute("u_idx");
-		System.out.println("mylike u_idx="+idx);
+		ArrayList<LikeVO> likeVo=likeDao.myLike(cp, listSize, u_idx);
 		
 	
-		ArrayList<LikeVO> likeVo=likeDao.myLike(idx);
-
-		
-		System.out.println("likeVO");
-		
 		mav.addObject("likeVo",likeVo);
 		mav.setViewName("users/myLike");
+		mav.addObject("pageStr",pageStr);
 		return mav;
 	}
+	
+	
+	
 	
 	@RequestMapping("/myLike.do")
 	public ModelAndView getMyLike(HttpServletRequest req, int lesson_idx) {
 		ModelAndView mav=new ModelAndView();
 		HttpSession session=req.getSession();
 		int idx=(int)session.getAttribute("u_idx");
-		LikeDTO dto=new LikeDTO(idx, lesson_idx);
-		System.out.println("idx="+idx+"lesson_idx"+lesson_idx);
+
+
+		likeDao.getMyLike(idx,lesson_idx);
 		
-		
-		likeDao.getMyLike(dto);
-		
-		ArrayList<LikeVO> likeVo=likeDao.myLike(idx);
-		mav.addObject("likeVo",likeVo);
-		mav.setViewName("users/myLike");
+		mav.setViewName("redirect:/myLikeList.do");
 		return mav;
 	}
 	

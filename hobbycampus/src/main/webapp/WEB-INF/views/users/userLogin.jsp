@@ -99,7 +99,7 @@ function inuserLogin(){
    <div>
    	<input type="submit" class="w-100 btn btn-lg btn-warning" value="로그인"> 
   	</div>
-    	<div id="msg" class="mt-5 mb-3 text-muted"> &nbsp;</div>
+    	<div id="msg" class="mt-5 mb-3 text-danger"> &nbsp;</div>
      <div>
   
    			<a href="userJoin.do">회원가입</a> |

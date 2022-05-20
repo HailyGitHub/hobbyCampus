@@ -164,7 +164,7 @@ public class LessonController {
 				try {
 					f.mkdir();
 				} catch (Exception e) {
-					e.getStackTrace();
+					
 				}
 			}
 			ImgUplod iu = new ImgUplod();
@@ -449,12 +449,8 @@ public class LessonController {
 		return mav;
 	}
 	
-	
-	
 
-	
 	/**get lesson Content by lesson_idx*/
-
 	@RequestMapping("/lessonCont.do")
 	public ModelAndView lessonCont(int lesson_idx, HttpServletRequest req) {
 

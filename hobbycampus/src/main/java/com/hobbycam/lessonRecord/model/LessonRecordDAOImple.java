@@ -20,6 +20,13 @@ public class LessonRecordDAOImple implements LessonRecordDAO {
 	}
 
 
+	/**get lesson_time by lesson schedule idx*/
+	@Override
+	public String getLessonTime(int lesson_schedule_idx) {
+		String lessonTime = sqlMap.selectOne("getLessonTime",lesson_schedule_idx);
+		return lessonTime;
+	}
+	
 	/**Get list if losson_record using by t_idx*/
 	@Override
 	public List teacherRecord(int t_idx, int cp, int listSize) {

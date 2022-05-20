@@ -117,7 +117,7 @@
   
 
 <select id="selectUserInfo" parameterType="int" resultType="com.hobbycam.users.model.UsersDTO">
-	select  u_img,u_name,u_tel  
+	select *
 	from users
 	where u_idx=#{u_idx}
 

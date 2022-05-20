@@ -14,8 +14,8 @@ public class LessonScheduleVO {
 	private String lessonKit;
 	private String tName;
 	private String lessonStart;
-
-
+	private String lessonTime;
+	
 	public int getLessonIdx() {
 		return lessonIdx;
 	}
@@ -101,6 +101,12 @@ public class LessonScheduleVO {
 	}
 	public void setLessonStart(String lessonStart) {
 		this.lessonStart = lessonStart;
+	}
+	public String getLessonTime() {
+		return lessonTime;
+	}
+	public void setLessonTime(String lessonTime) {
+		this.lessonTime = lessonTime;
 	}
 	
 	

@@ -92,9 +92,11 @@ dd {
 				   <c:if test="${lessonVO.lessonType != '온라인'}">
 				   <li class="list-group-item">
 				   <div class="fs-5 text-black-50 fw-bolder">
-							<i class="bi bi-bookmark-star"></i> 날짜
+							<i class="bi bi-bookmark-star"></i> 스케쥴
 						</div>
 						${lessonVO.lessonStart}
+						${lessonVO.lessonTime}
+						<!-- lessonTime -->
 				   </li>
 				   </c:if>
 				   <li class="list-group-item">
