@@ -17,5 +17,6 @@ public interface LessonRecordDAO {
 
 	List<LessonRecordVO> getLessonRecords(int uIdx, String lessonRecordState);
 
+	public String getLessonTime(int lesson_schedule_idx);
 
 }

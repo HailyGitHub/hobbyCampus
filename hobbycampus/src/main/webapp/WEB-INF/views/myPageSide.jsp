@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
  
-  	 <!--BootStarp-->
+      <!--BootStarp-->
 
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -38,7 +38,7 @@
         a:hover{
 
 
-        	color:orange;
+           color:orange;
 
         }
         a:active {
@@ -66,15 +66,17 @@
                    
                  </span>
 
-			<c:if test="${!empty sessionScope.t_idx}">
-                 <span class="fs-3">
+            <c:if test="${!empty sessionScope.t_idx}">
+                    <span class="fs-3">
                  
                    <button class="btn btn-outline-primary" id="teacher" onclick="teacherClick();">&nbsp;&nbsp;강사&nbsp;&nbsp;</button>
                  </span>
                 </c:if>
-
+         
                  <hr>
                </div>
+               
+               
                <ul class="nav nav-pills flex-column mb-auto">
                 
                  <li class="nav-item">
@@ -133,13 +135,19 @@
                   </a>                    
                 </li>
                 
-				 <li class="nav-item">
+             <li class="nav-item">
                   <a href="userUpdateForm.do" class="nav-link">
                     <span class="studentList" >정보 수정</span>
                   </a>
                 </li>
+      
+      
+         </ul>
+         
+            </li>
          </ul>
        </div>
+
      </nav>
    </div>
  </div>
@@ -149,13 +157,13 @@
 
 
  $(document).ready(function(){
-	 if(${t_idx==null}){
-		 $(".teacher").css("display","none");
-		 $(".student").css("display","none");
-		 $(".teacherList").css("display","none");
-	 }
-	 
- }
+    if(${t_idx==null}){
+       $(".teacher").css("display","none");
+       $(".student").css("display","none");
+       $(".teacherList").css("display","none");
+    }
+    
+ })
  
 
  function studentClick(){
@@ -168,6 +176,7 @@
    $("#student").addClass('btn-warning');
    $("#teacher").addClass('btn-light');
  }
+ 
  function teacherClick(){
  
    $(".studentList").css("display","none");

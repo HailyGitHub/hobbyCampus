@@ -29,7 +29,8 @@ public class mylessonContoller {
 	private LessonRecordDAO lessonRecordDao;
 
 	@RequestMapping("/mylessonList.do")
-	public ModelAndView mylessonList(@RequestParam Map<String, String> param , HttpServletRequest req) {
+	public ModelAndView mylessonList
+	(@RequestParam Map<String, String> param , HttpServletRequest req) {
 
 		ModelAndView mav = new ModelAndView();
 		
@@ -56,11 +57,12 @@ public class mylessonContoller {
 			map.put("postEtc", postEtc);
 			postDAO.insert(map);
 		}
-
+	
 		// add lessonlist
 		try {
 			
 			int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
+		
 			int pricePoint = Integer.valueOf(param.get("pricePoint"));
 			String lessonRecordState = "예약";
 			String lessonExchangeState = "미정산";
@@ -71,18 +73,25 @@ public class mylessonContoller {
 			map.put("lessonBuyDate", LocalDateTime.now());
 			map.put("lessonRecordState", lessonRecordState);
 			map.put("lessonExchangeState", lessonExchangeState);
-
-			lessonRecordDao.insert(map);
+			
+			String lessonTime = lessonRecordDao.getLessonTime(lessonScheduleIdx);
+			System.out.println("data:"+lessonTime);
+			mav.addObject("lessonTime", lessonTime);
+			
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
 		
-		mav.setViewName("/users/mylesson");
+		
+		
 		
 		
 		String lessonRecordState = param.get("lessonRecordState");
 		List<LessonRecordVO> lessonRecordList = lessonRecordDao.getLessonRecords(uIdx, lessonRecordState);
+		
 		mav.addObject("lessonRecordList", lessonRecordList);
+		mav.setViewName("/users/mylesson");
 
 		return mav;
 	}
