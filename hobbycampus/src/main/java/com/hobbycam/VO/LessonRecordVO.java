@@ -8,6 +8,9 @@ public class LessonRecordVO {
 	private String lessonBuyDate;
 	private String lessonRecordState;
 	private String lesson_type;
+	private String lessonTime;
+	private String lessonStart;
+	
 	
 	public String getLessonSubj() {
 		return lessonSubj;
@@ -67,6 +70,22 @@ public class LessonRecordVO {
 	public String toString() {
 		return "LessonRecordVO [lessonSubj=" + lessonSubj + ", tName=" + tName + ", lessonBuyDate=" + lessonBuyDate
 				+ ", lessonRecordState=" + lessonRecordState + "]";
+	}
+
+	public String getLessonTime() {
+		return lessonTime;
+	}
+
+	public void setLessonTime(String lessonTime) {
+		this.lessonTime = lessonTime;
+	}
+
+	public String getLessonStart() {
+		return lessonStart;
+	}
+
+	public void setLessonStart(String lessonStart) {
+		this.lessonStart = lessonStart;
 	}
 
 }

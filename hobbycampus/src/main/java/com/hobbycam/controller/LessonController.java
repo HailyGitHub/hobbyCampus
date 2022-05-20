@@ -161,7 +161,7 @@ public class LessonController {
 				try {
 					f.mkdir();
 				} catch (Exception e) {
-					e.getStackTrace();
+					
 				}
 			}
 			ImgUplod iu = new ImgUplod();

@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="/hobbycampus/js/myLesson.js"></script>
+<!--<script src="/hobbycampus/js/myLesson.js"></script>  -->
+<!-- Title Icon -->
+<link href="img/main.ico" rel="shortcut icon" type="image/x-icon">
 <!--BootStarp-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -17,19 +19,17 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!--  
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+-->
 <!--CSS-->
 <link rel="stylesheet" href="/hobbycampus/css/main.css">
 <link rel="stylesheet" href="/hobbycampus/css/pointShop.css">
 <script src="/hobbycampus/js/lib/ajax.js"></script>
-<style>
-
-a { text-decoration:none !important }
-a:hover { text-decoration:none !important }
-
-</style>
 </head>
 <body>
 <!-- HEADER -->
@@ -46,24 +46,23 @@ a:hover { text-decoration:none !important }
 	<div class="container">
 		<div id="wrap">
 			<h2>
-				<span class="hb_yellow">내 수강 내역 <i class="bi bi-bank2"></i></span>
+				<span class="hb_yellow" id="param-data" data-param="${lessonRecordState}">내 수강 내역 <i class="bi bi-bank2"></i></span>
 			</h2>
 			<br>
 			<div>
-				<input type="button" name="list_bt" value="전체 목록"
-					class="btn btn-outline-warning"
+				<input type="button" name="list_bt" value="전체 목록" id="btn-1" class="btn btn-outline-warning ${lessonRecordState=='전체 목록'? 'active' : ''}${empty lessonRecordState? 'active' : ''}" 
 					onclick="$myLesson.goWithFilter(this)"> <input
-					type="button" name="lesson_bt" value="수업"
-					class="btn btn-outline-warning"
+					type="button" name="lesson_bt" value="수업" id="btn-2"
+					class="btn btn-outline-warning ${lessonRecordState=='수업'? 'active' : ''}"
 					onclick="$myLesson.goWithFilter(this)"> <input
-					type="button" name="reser_bt" value="예약"
-					class="btn btn-outline-warning"
+					type="button" name="reser_bt" value="예약" id="btn-3"
+					class="btn btn-outline-warning ${lessonRecordState=='예약'? 'active' : ''}"
 					onclick="$myLesson.goWithFilter(this)"> <input
-					type="button" name="end_bt" value="완료"
-					class="btn btn-outline-warning"
+					type="button" name="end_bt" value="완료" id="btn-4"
+					class="btn btn-outline-warning ${lessonRecordState=='완료'? 'active' : ''}"
 					onclick="$myLesson.goWithFilter(this)"> <input
-					type="button" name="cencel_bt" value="취소"
-					class="btn btn-outline-warning"
+					type="button" name="cencel_bt" value="취소" id="btn-5"
+					class="btn btn-outline-warning ${lessonRecordState=='취소'? 'active' : ''}"
 					onclick="$myLesson.goWithFilter(this)">
 			</div>
 			<br>
@@ -74,11 +73,12 @@ a:hover { text-decoration:none !important }
 				</c:when>
 			<c:otherwise>
 		<div>
+		<div class="row row-cols-1 row-cols-md-2 g-4">
 		<c:forEach items="${lessonRecordList}" var="lessonRecord">
-			<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0 border border-warning">
-	    <div class="col-md-4 ">
-	      <img src="..." class="img-fluid rounded-start" alt="...">
+			<div class="card mb-3 border border-warning" style="max-width: 540px;">
+  <div class="row g-0 ">
+	    <div class="col-md-4 align-self-center">
+	      <img src="/hobbycampus/img/none.png" class="img-fluid rounded-start align-self-center" alt="...">
 	    </div>
     <div class="col-md-8 ">
     <div class="card-body ">
@@ -91,14 +91,20 @@ a:hover { text-decoration:none !important }
 		</div>
 		<hr>
         <p class="card-text fw-bolder text-black-50 fs-6">강사명 <i class="bi bi-mortarboard-fill"></i></p>
-        <p class="card-text fw-bolder fs-5">${lessonRecord.tName}</p>
-        <a href="#" class="btn btn-warning">상세 보기</a>
+        <p class="card-text fw-bolder fs-5">${lessonRecord.tName}</p>      
+        <c:if test="${lessonRecord.lesson_type!='온라인'}">
+        <p class="card-text fw-bolder text-black-50 fs-6">스케쥴 <i class="bi bi-calendar-check"></i></i></p>
+			    <p class="card-text fw-bolder fs-5">${lessonRecord.lessonStart} : ${lessonRecord.lessonTime}</p>
+        <a href="lessonCont.do?lesson_idx=${lesson_idx}"" class="btn btn-warning">상세 보기</a>
+		</c:if>
+     
         <p class="card-text"><small class="text-muted">강의 구매날짜: ${lessonRecord.lessonBuyDate}</small></p>
 	</div>
  	</div>
 	</div>
 	</div>
    </c:forEach>
+   </div>
  </div>
 </c:otherwise>
 </c:choose>
@@ -110,4 +116,18 @@ a:hover { text-decoration:none !important }
 </body>
 <!-- FOOTER -->
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+<script>
+
+
+$myLesson = {
+		goWithFilter: function(e){
+			
+			var url = "/hobbycampus/mylessonList.do"
+			if(e.value != '전체 목록'){
+				url += "?lessonRecordState=" +encodeURIComponent(e.value); 
+			}
+			location.href = url;
+		}
+	}
+</script>
 </html>

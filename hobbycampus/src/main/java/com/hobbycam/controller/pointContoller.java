@@ -79,12 +79,12 @@ public class pointContoller {
 		mav.addObject("userVO", userVO);
 		mav.addObject("rurl", rurl);
 
-		try {
-			int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
-			mav.addObject("lessonScheduleIdx", lessonScheduleIdx);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	try {
+		int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
+		mav.addObject("lessonScheduleIdx", lessonScheduleIdx);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 
 		return mav;
 

@@ -8,6 +8,7 @@
 <mapper namespace="lessonScheduleMapper">
 	<select id="getLessonSchedule" resultType="com.hobbycam.VO.LessonScheduleVO">
 		select 
+            ls.lesson_time,
 			l.LESSON_IDX	 as lessonIdx,
 			l.CATE2_IDX	 as cate2Idx,
 			l.T_IDX as tIdx,
@@ -20,7 +21,8 @@
 			l.LESSON_STATE as lessonState,
 			l.LESSON_KIT as lessonKit,
 			t.T_NAME as tName,
-			to_char(ls.lesson_start, 'yyyy-mm-dd hh24:mi:ss') as lessonStart
+			to_char(ls.lesson_start, 'yyyy-mm-dd hh24:mi:ss') as lessonStart,
+			ls.LESSON_TIME as lessonTime
 		from 
 			lesson_schedule ls,
 			lesson_list l,
@@ -31,5 +33,10 @@
 			ls.lesson_idx = l.lesson_idx
 		and 
 			l.T_IDX = t.T_IDX
+	</select>
+	<select id="getLessonTime" parameterType="int" resultType="String">
+		SELECT lesson_time
+		FROM lesson_schedule
+		WHERE lesson_schedule_idx
 	</select>
 </mapper>
