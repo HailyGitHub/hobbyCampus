@@ -54,7 +54,7 @@
                   <th>구매일</th>
                   <th>포인트</th>
                   <th>사용 내용</th>
-                  <th>환불</th>
+                  <th>상태</th>
                </tr>
             </thead>
             <tbody>
