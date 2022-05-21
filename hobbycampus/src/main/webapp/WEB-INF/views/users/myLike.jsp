@@ -46,7 +46,7 @@
 			<h1 class="h2 text-warning" text-align="center"> 내 찜 목록 보기<i class="bi bi-arrow-through-heart-fill"></i> </h1>
 				<!-- like empty -->
 				 <c:if test="${empty likeVo }">
-					 <img src="img/user.png" alter="꿀벌" height="300" width="300"><br>
+					 <img src="img/users/bee.gif" alter="꿀벌" height="300" width="300"><br>
 					 	<label> 찜한 강의가 없네요!! 강의를 둘러보시는 건 어때요? ^^</label>
 				</c:if>
 				
