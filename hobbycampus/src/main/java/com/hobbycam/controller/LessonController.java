@@ -182,7 +182,7 @@ public class LessonController {
 		int result=ldao.onlineLessonInsert(ldto,i_idx);
 		String msg=result>0?"강의 등록 성공":"강의 등록 실패";
 		mav.addObject("msg",msg);
-		mav.addObject("gopage","index.do");
+		mav.addObject("gopage","mylessonList.do");
 		mav.setViewName("/teacher/msg");
 		return mav;
 	}
@@ -200,10 +200,7 @@ public class LessonController {
 											@RequestParam("l_idx")String idx,
 											@RequestParam("save")String save,
 											LessonOfflineDTO ldto) {
-		System.out.println("이미지 : "+img);
-		System.out.println("idx : "+idx);
-		System.out.println(save);
-		System.out.println(ldto.getOffline_cont());
+		
 		ModelAndView mav=new ModelAndView();
 		String imgName = img.getOriginalFilename();
 		String savePathImg = "";
@@ -233,7 +230,7 @@ public class LessonController {
 	   
 		String msg=result>0?"강의 등록 성공":"강의 등록 실패";
 		mav.addObject("msg",msg);
-		mav.addObject("gopage","index.do");
+		mav.addObject("gopage","mylessonList.do");
 		mav.setViewName("/teacher/msg");
 		return mav;
 		
@@ -282,7 +279,7 @@ public class LessonController {
 		int result=ldao.liveLessonInsert(ldto,i_idx);
 		String msg=result>0?"강의 등록 성공":"강의 등록 실패";
 		mav.addObject("msg",msg);
-		mav.addObject("gopage","index.do");
+		mav.addObject("gopage","mylessonList.do");
 		mav.setViewName("/teacher/msg");
 		return mav;
 	}
@@ -407,13 +404,14 @@ public class LessonController {
 	}
 	
 	@RequestMapping(value = "/lessonUpdate.do",method = RequestMethod.GET)
-	public ModelAndView lessonUpdateForm(String lesson_idx) {
+	public ModelAndView lessonUpdateForm(int lesson_idx) {
 		
 		
 		ModelAndView mav=new ModelAndView();
 		
-		List lists=ldao.lessonUpdateForm(lesson_idx);
-		mav.addObject("lists",lists);
+		LessonDTO dto=ldao.lessonUpdateForm(lesson_idx);
+		String thumbnail=dto.getLesson_thumbnail();
+		mav.addObject("dto",dto);
 		mav.setViewName("/lesson/lessonUpdate");
 		return mav;
 	}
@@ -430,6 +428,8 @@ public class LessonController {
 		mav.setViewName("/teacher/msg");
 		return mav;
 	}
+	
+	
 	
 	@RequestMapping("/lessonReqList.do")
 	public ModelAndView lessonReqList(int t_idx) {

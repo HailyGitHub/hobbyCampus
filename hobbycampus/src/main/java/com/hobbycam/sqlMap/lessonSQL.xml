@@ -85,13 +85,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND 
 		    rnum<![CDATA[<=]]>#{end}
   	</select>
-  	<select id="selectUpdateLesson" resultType="com.hobbycam.lesson.model.LessonDTO">
+  	<select id="selectUpdateLesson" parameterType="int" resultType="com.hobbycam.lesson.model.LessonDTO">
   		SELECT
   			*
   		FROM
   			LESSON_LIST
   		WHERE
-  			LESSON_IDX=4
+  			LESSON_IDX=#{lesson_idx}
   	</select>
   	<update id="updateLesson" parameterType="com.hobbycam.lesson.model.LessonDTO">
   		UPDATE

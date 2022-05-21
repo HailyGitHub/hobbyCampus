@@ -24,6 +24,12 @@
     	}
     </style>
 </head>
+<script type="text/javascript">
+	function updateLesson(idx) {
+		
+		window.location.href='lessonUpdate.do?lesson_idx='+idx;
+	}
+</script>
 <body>
 <!-- HEADER -->
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
@@ -40,7 +46,7 @@
 		<!-- Title -->
 		<article class="title">
 			<div class="row text-center m-5">
-				<h2><i class="bi bi-arrow-down-circle-fill"></i> 내 강의 목록 </h2>
+				<h2><i class="bi bi-arrow-down-circle-fill "></i> 내 강의 목록 </h2>
 			</div>
 		</article>
 		
@@ -60,17 +66,17 @@
 			</c:if>
 			<!-- IF have data then For Each List -->
 			<c:forEach var="dto" items="${lists}">
-				<div class="card mb-3">
+				<div class="card col-md-11 mb-3">
 					<div class="row">
-					<div class="col-md-4" >
+					<div class="col-md-2" >
 						<img src="/hobbycampus/img/none.png" data-img="${dto.lesson_thumbnail}" class="card-img-top center-block">				
 					</div>
-					<div class="col-md-6">
-						<h5 class="card-title m-4">${dto.lesson_subj}</h5>
+					<div class="col-md-8" >
+						<h5 class="card-title m-5">${dto.lesson_subj}</h5>
 						<p class="card-text">${dto.lesson_short_cont}</p>
 					</div>
 					<div class="col-md-2 align-self-center">
-						<button type="button" class="btn btn-outline-success m-2">강의 정보 수정</button>
+						<button type="button" class="btn btn-outline-success m-2" onclick="updateLesson(${dto.lesson_idx})" >강의 정보 수정</button>
 						<button type="button" class="btn btn-outline-warning m-2" data-bs-toggle="modal" data-bs-target="#scheduleModal" onclick="showSchedule(${dto.lesson_idx})">스케줄 관리</button>
 					</div>
 					</div>

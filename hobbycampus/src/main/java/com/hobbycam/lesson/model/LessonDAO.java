@@ -14,7 +14,7 @@ public interface LessonDAO {
 	
 	public List teacherLessonList(int cp,int listSize,int t_idx);
 	
-	public List lessonUpdateForm(String lesson_idx);
+	public LessonDTO lessonUpdateForm(int lesson_idx);
 	
 	public int lessonUpdateSubmit(LessonDTO dto);
 	

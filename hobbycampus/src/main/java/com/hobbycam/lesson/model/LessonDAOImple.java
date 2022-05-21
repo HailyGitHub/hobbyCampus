@@ -70,9 +70,9 @@ public class LessonDAOImple implements LessonDAO {
 	}
 	
 	@Override
-	public List lessonUpdateForm(String lesson_idx) {
-		List lists=sqlMap.selectList("selectUpdateLesson",lesson_idx);
-		return lists;
+	public LessonDTO lessonUpdateForm(int lesson_idx) {
+		LessonDTO dto=sqlMap.selectOne("selectUpdateLesson",lesson_idx);
+		return dto;
 	}
 	
 	@Override

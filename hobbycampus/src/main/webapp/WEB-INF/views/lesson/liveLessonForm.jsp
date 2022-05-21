@@ -26,7 +26,13 @@
 		</div>
 		<!-- main -->
 		<div class="col-md-10">
-		<h1 align="center">라이브 강의 등록</h1>
+		<!-- Title -->
+		<article class="title">
+			<div class="row text-center m-5">
+				<h2><i class="bi bi-arrow-down-circle-fill "></i> 내 강의 목록 </h2>
+			</div>
+		</article>		
+		
 		<form action="liveLessonForm.do" method="post" name="liveLessonForm" enctype="multipart/form-data">
 			<input type="hidden" name="l_idx" value="${l_idx}">
 			<input type="hidden" name="save" value="${save}">
@@ -34,12 +40,12 @@
 				<input type="hidden" name="l_idx" value="${l_idx}">
 				<input type="hidden" name="save" value="${save}">
 			
-			<div class="col-12">
+			<div class="col-10">
             	<label for="liveFolder" class="form-label">이미지 등록</label>
 				<input type="file" class="form-file" name="liveFolder">
             </div>
             
-            <div class="col-md-5">
+            <div class="col-md-10">
               <label for="live_runtime" class="form-label">강의 시간</label>
               <select class="form-select" name="live_runtime" >
                 <option value="1">1시간</option>
@@ -47,7 +53,7 @@
               </select>
             </div>
             
-            <div class="col-md-5">
+            <div class="col-md-10">
               <label for="live_tool" class="form-label">사용 어플</label>
               <select class="form-select" name="live_tool" >
                 <option value="줌">줌</option>
@@ -60,14 +66,16 @@
             </div>
             
             
-            <div class="col-10">
-              <label for="live_cont" class="form-label">강의 상세 설명</label>
-              <textarea name="live_cont" class="form-control" rows="20" style="resize: none;" ></textarea>
+			<div class="col-10">
+              <label for="online_cont" class="form-label">강의 상세 설명</label>
+              <div class="col-10">
+              <textarea name="online_cont" class="form-textarea" style="resize: none" cols="155" rows="5" ></textarea>
+              </div >
               <div class="invalid-feedback">
                 강의 상세 설명을 입력해주세요
               </div>
             </div>
-            <button class="w-100 btn btn-primary btn-lg" type="submit">강의 등록</button>
+            <button class="col-md-10 btn btn-primary btn-lg" type="submit">상세 내용 등록</button>
             </div>
 		</form>
 		</div>

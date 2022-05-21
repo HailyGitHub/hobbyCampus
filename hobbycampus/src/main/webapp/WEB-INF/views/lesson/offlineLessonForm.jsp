@@ -23,7 +23,7 @@
 	new daum.Postcode({
 	    oncomplete: function(data) {
 	        var addr = data.address; 
-	        document.getElementById("offline_addr").value = addr;	        
+	        document.getElementById("offline_addr").value = addr;	  
 	        geocoder.addressSearch(data.address, function(results, status) {
 	            
 	            if (status === daum.maps.services.Status.OK) {	
@@ -37,7 +37,7 @@
 	        });
 	    }
 	}).open();
-	self.close();
+	
 	}
 </script>
 <!-- Title Icon -->
@@ -61,49 +61,71 @@
 		</div>
 		<!-- main -->
 		<div class="col-md-10">
-		<h1 align="center">오프라인 강의 등록</h1>
+		<!-- Title -->
+		<article class="title">
+			<div class="row text-center m-5">
+				<h2><i class="bi bi-arrow-down-circle-fill "></i> 내 강의 목록 </h2>
+			</div>
+		</article>
+		
 		<form action="offlineLessonForm.do" method="post" name="offlineLessonForm" enctype="multipart/form-data">
 			<div class="row g-3">
 				<input type="hidden" name="l_idx" value="${l_idx}">
 				<input type="hidden" name="save" value="${save}">
 			
-			<div class="col-12">
-            	<label for="offlineFolder" class="form-label">이미지 등록</label>
-				<input type="file" class="form-file" name="offlineFolder">
-            </div>
 			
 			
-			<div class="col-12">
+			
+			<div class="col-10">
               <label for="online_subj" class="form-label">주소</label>
+             
+              <div class="col-md-6" >
               <input type="text" class="form-control" id="offline_addr" name="offline_addr" 
               		 required="required" placeholder="주소" readonly="readonly">
+              </div>
+              <div class="col-md-2" >
               <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색">
+              </div>
+              </div>
               <div class="invalid-feedback">
                 주소를 입력해주세요
-              </div>
+              </div>	
             </div>
             
-            <div class="col-12">
+            <div class="col-10">
             	<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
             </div>
             
-            <div class="col-md-5">
+            <div class="col-10">
+            	<label for="offlineFolder" class="form-label">이미지 등록</label>
+				<input type="file" class="form-file" name="offlineFolder">
+            </div>
+            
+            
+            <div class="col-md-10">
               <label for="offline_runtime" class="form-label">강의 시간</label>
               <select class="form-select" name="offline_runtime" >
                 <option value="1">1시간</option>
                 <option value="2">2시간</option>
+                <option value="2">3시간</option>
+                <option value="2">4시간</option>
+                <option value="2">5시간</option>
+                <option value="2">6시간</option>
               </select>
             </div>
             
             
-            <div class="col-12">
+            <div class="col-10">
               <label for="offline_cont" class="form-label">강의 상세 설명</label>
-              <textarea name="offline_cont" class="form-textarea" ></textarea>
+              <div class="col-10">
+              <textarea name="offline_cont" class="form-textarea" style="resize: none;" cols="155" rows="5" ></textarea>
+              </div>
               <div class="invalid-feedback">
                 강의 상세 설명을 입력해주세요
-              </div>
             </div>
-            <button class="w-100 btn btn-primary btn-lg" type="submit">강의 등록</button>
+              </div>
+            <div>
+            <button class="col-md-10 btn btn-primary btn-lg" type="submit">상세 내용 등록</button>
             </div>
 		</form>
 		
