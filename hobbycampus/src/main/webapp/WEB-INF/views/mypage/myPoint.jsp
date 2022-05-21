@@ -26,6 +26,7 @@
 <script src="/hobbycampus/js/lib/ajax.js"></script>
 </head>
 <body>
+<<<<<<< Updated upstream
    <!-- HEADER -->
    <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
    <!-- SIDEBar -->
@@ -83,6 +84,65 @@
          </table>
       </div>
    </div>
+=======
+	<!-- HEADER -->
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	<!-- SIDEBar -->
+	<main class="mainArea">
+		<div class="row">
+			<div class="col-md-2">
+				<jsp:include page="/WEB-INF/views/myPageSide.jsp"></jsp:include>
+			</div>
+			<!-- main -->
+			<div class="col-md-10">
+				<!-- body -->
+				<div class="container">
+		<div id="wrap">
+			<h3>
+				<span class="hb_yellow">포인트 내역 <img src="img/honey.png"
+					class="imgsize"></span>
+			</h3>
+			<br>
+			<h5 class="hb_price">내 포인트</h5>
+			<h4>
+				<span class="hb_yellow"><i class="bi bi-currency-exchange"></i> ${userVO.uPoint} 하빗</span>
+			</h4>
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>구매일</th>
+						<th>포인트</th>
+						<th>사용 내용</th>
+						<th>환불</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${payList}" var="pay">
+						<tr>
+							<td><c:out value="${pay.payDate}" /></td>
+							<td><c:out value="${pay.point}" /></td>
+							<td><c:out value="${pay.title}" /></td>
+							<td><c:choose>
+									<c:when test="${pay.type == '입금' || pay.type == '충전'}">
+										<button payListIdx="${pay.payListIdx}"
+											onclick="$myPoint.refund(this)">환불요청</button>
+									</c:when>
+									<c:otherwise>
+									${pay.type}
+								</c:otherwise>
+								</c:choose></td>
+						</tr>
+					</c:forEach>
+					
+				</tbody>
+				<tfoot>
+					<!--  com.hobbycam.page-->
+					<td colspan="5" align="center">${pageMake}</td>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+>>>>>>> Stashed changes
 </div>
 </div>
 </body>
