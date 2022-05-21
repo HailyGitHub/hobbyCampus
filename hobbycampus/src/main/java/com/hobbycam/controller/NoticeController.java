@@ -80,7 +80,6 @@ public class NoticeController {
 	public ModelAndView noticInfo(int notice_idx) {
 		ModelAndView mav = new ModelAndView();
 		NoticeDTO dto = noticeDao.getNoticeInfo(notice_idx);
-		System.out.println(dto.getNotice_idx());
 		mav.addObject("dto",dto);
 		mav.setViewName("hobbyJson");
 		
@@ -90,7 +89,6 @@ public class NoticeController {
 	public ModelAndView noticeMake(NoticeDTO dto) {
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println("controller notice_idx :"+dto.notice_idx);
 		int count = noticeDao.setNotice(dto);
 		if(count>0) {
 			mav.addObject("msg","완료");
@@ -104,7 +102,6 @@ public class NoticeController {
 	public ModelAndView noticeUpdate(NoticeDTO dto) {
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println("controller notice_idx :"+dto.notice_idx);
 		int count = noticeDao.updateNotice(dto);
 		if(count>0) {
 			mav.addObject("msg","완료");
@@ -118,7 +115,6 @@ public class NoticeController {
 	public ModelAndView getNoticeExpose() {
 		ModelAndView mav = new ModelAndView();
 		NoticeDTO dto = noticeDao.getNoticeExpose();
-		System.out.println(dto.getNotice_idx());
 		mav.addObject("dto",dto);
 		mav.setViewName("hobbyJson");
 		
