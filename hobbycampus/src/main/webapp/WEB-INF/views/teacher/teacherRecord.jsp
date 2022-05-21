@@ -74,7 +74,7 @@
 								<td>${dto.lesson_record_idx }</td>
 								<td>${dto.lesson_subj }</td>
 								<td>${dto.u_name }</td>
-								<td>${dto.lesson_time }</td>
+								<td>${dto.lesson_start}</td>
 								<td>${dto.lesson_record_state }</td>
 								<td>${dto.lesson_exchange_state }</td>
 							</tr>

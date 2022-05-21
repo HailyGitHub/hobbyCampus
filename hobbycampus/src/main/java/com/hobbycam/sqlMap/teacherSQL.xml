@@ -53,13 +53,14 @@
 			select ROWNUM AS RNUM, C.* from ( 
 			 SELECT b.*, u.u_name
 						FROM users u, 
-						    (SELECT r.*, a.lesson_time, a.lesson_subj
+						    (SELECT r.*,a.lesson_time, a.lesson_subj,a.lesson_start
 						    FROM lesson_record r, 
-						    (SELECT l.lesson_subj, s.lesson_time, s.lesson_schedule_idx
+						    (SELECT l.lesson_subj, s.lesson_time, s.lesson_schedule_idx, s.lesson_start
 						    FROM lesson_list l, lesson_schedule s
 						    WHERE l.t_idx=#{t_idx} and l.lesson_idx=s.lesson_idx) a 
 						    WHERE a.lesson_schedule_idx=r.lesson_schedule_idx) b
-						WHERE u.u_idx=b.u_idx )c)d
+						WHERE u.u_idx=b.u_idx )c
+						ORDER BY c.lesson_record_idx desc)d
 			WHERE RNUM<![CDATA[>=]]>#{start} AND RNUM<![CDATA[<=]]>#{end}
  	</select>
  	<select id="selectPoint" parameterType="Integer" resultType="Integer">

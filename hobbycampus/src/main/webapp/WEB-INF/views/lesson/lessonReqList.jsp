@@ -19,6 +19,12 @@
     	.main-area{
 			min-height: 70vh;
     	}
+    	#lessonRequest{
+    		background-color: beige;
+    		color : black;
+    		font-weight: bold;
+    		text-decoration: underline;
+    	}
     </style>
 </head>
 <body>
@@ -92,10 +98,13 @@
 			dataType: 'json',
 			success: function(data){
 				alert(data.msg);
+				window.location.reload();
 			}
 			
 		});
+		
 	}
+	
 	function lessonCancel(idx){
 		if(!confirm('취소 하시겠습니까?')) return false;
 		
@@ -107,6 +116,7 @@
 			dataType: 'json',
 			success: function(data){
 				alert(data.msg);
+				window.location.reload();
 			}
 			
 		});

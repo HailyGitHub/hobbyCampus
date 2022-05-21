@@ -13,6 +13,7 @@ public class LessonRecordDTO {
 	private String u_name;
 	private String lesson_time;
 	private String lesson_subj;
+	private String lesson_start;
 	
 	public LessonRecordDTO() {
 		super();
@@ -32,6 +33,33 @@ public class LessonRecordDTO {
 		this.u_name = u_name;
 		this.lesson_time = lesson_time;
 		this.lesson_subj = lesson_subj;
+	}
+
+	
+	public LessonRecordDTO(int lesson_record_idx, int u_idx, int lesson_schedule_idx, int price_point,
+			Date lesson_buy_date, String lesson_record_state, String lesson_exchange_state, String u_name,
+			String lesson_time, String lesson_subj, String lesson_start) {
+		super();
+		this.lesson_record_idx = lesson_record_idx;
+		this.u_idx = u_idx;
+		this.lesson_schedule_idx = lesson_schedule_idx;
+		this.price_point = price_point;
+		this.lesson_buy_date = lesson_buy_date;
+		this.lesson_record_state = lesson_record_state;
+		this.lesson_exchange_state = lesson_exchange_state;
+		this.u_name = u_name;
+		this.lesson_time = lesson_time;
+		this.lesson_subj = lesson_subj;
+		this.lesson_start = lesson_start;
+	}
+
+	
+	public String getLesson_start() {
+		return lesson_start;
+	}
+
+	public void setLesson_start(String lesson_start) {
+		this.lesson_start = lesson_start;
 	}
 
 	public int getLesson_record_idx() {

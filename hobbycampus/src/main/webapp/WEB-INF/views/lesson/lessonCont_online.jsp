@@ -13,9 +13,15 @@
     <!--CSS-->
     <link rel="stylesheet" href="/hobbycampus/css/main.css">
     <link rel="stylesheet" href="/hobbycampus/css/lessonCont.css">
-  <style>
+     <style>
+       	#lessonAdd{
+   			background-color: beige;
+    		color : black;
+    		font-weight: bold;
+    		text-decoration: underline;
+   	}
+ 	 </style>
     
-  </style>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>

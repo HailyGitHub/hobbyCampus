@@ -14,7 +14,12 @@
     <link rel="stylesheet" href="/hobbycampus/css/main.css">
     <link rel="stylesheet" href="/hobbycampus/css/lessonCont.css">
   <style>
-    
+       	#lessonAdd{
+   			background-color: beige;
+    		color : black;
+    		font-weight: bold;
+    		text-decoration: underline;
+   	}
   </style>
 	<script>
 		                                                                                                            

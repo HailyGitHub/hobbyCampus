@@ -13,8 +13,13 @@
     <!--CSS-->
     <link rel="stylesheet" href="/hobbycampus/css/main.css">
     <link rel="stylesheet" href="/hobbycampus/css/lessonCont.css">
-  <style>
-    
+    <style>
+       	#lessonAdd{
+   			background-color: beige;
+    		color : black;
+    		font-weight: bold;
+    		text-decoration: underline;
+   	}
   </style>
 	<script>
    	 var mapAddr = '${map}';                                                                                              
@@ -92,7 +97,7 @@
 					<!-- map -->
 					<div id="contentMap">
 					      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					        <h4>수강 위치</h4>
+					        <h4>수강 위치 | <span class="fs-6 text-muted  text-end fw-light" id="mapAddrInput"></span></h4>
 					     </div>
 			     		<div id="map" style="width:100%;height:200px;"></div>
 			     	</div>	
@@ -219,6 +224,7 @@
 </body>
 <script>
 	$(document).ready(function(){
+		$('#mapAddrInput').append(mapAddr);
 		if(${likeCheck} ){
 			var icon = '<i id="heartFill" class="bi bi-suit-heart-fill"></i>';	 
 			var likeCnt ='찜('+${like }+')';

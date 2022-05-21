@@ -144,7 +144,7 @@
    <script>
    $('#videoClick').click(function(){
       var $thumb = $('#videoPath').attr('data-thum');
-      var setVideo = '<video controls ><source type="video/mp4" src="/hobbycampus/hobbyImg/lesson/'+$thumb+'/video/online.mp4"></video>';
+      var setVideo = '<video controls ><source controlsList="nodownload" type="video/mp4" src="/hobbycampus/hobbyImg/lesson/'+$thumb+'/video/online.mp4"></video>';
       $('#playVideo').empty();
       $('#playVideo').append(setVideo);
    });

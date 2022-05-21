@@ -86,4 +86,5 @@ public interface LessonDAO {
 	public String getThumbnail(int lesson_idx);
 
 	public int selectTeacherLessonCount(int t_idx);
+	
 }

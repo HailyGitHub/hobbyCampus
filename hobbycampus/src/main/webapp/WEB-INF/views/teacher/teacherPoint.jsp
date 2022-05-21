@@ -26,7 +26,7 @@
     		
     	}
     	
-    	#teacherPoint{
+    	#teacehrPoint{
     		background-color: beige;
     		color : black;
     		font-weight: bold;
