@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>hobbyCampus</title>
 	
    <link href="img/main.ico" rel="shortcut icon" type="image/x-icon">
 	<!--BootStarp-->

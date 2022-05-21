@@ -76,8 +76,8 @@
 				 
 				 <!--  review empty -->
 				 <c:if test="${empty reviewVo}">
-					<img src="img/user.png" alter="꿀벌" height="300" width="300"><br>
-					<label> 작성 가능한 리뷰가 없습니다 ^^ </label>
+					<img src="img/users/bee.gif" alter="꿀벌" height="300" width="300"><br>
+					<label> 작성 가능한 리뷰가 없습니다 </label>
 				</c:if>
 				
 				
@@ -87,7 +87,7 @@
 				  <div class="card-body">
 						<div class="row">
 								<div class="col-4">	
-									<img src="/hobbycampus/hobbyImg/lesson/${vo.lesson_thumbnail}" class="card-img-top" alter="강의섬네일" weight="100" height="100" >
+									<img src="/hobbycampus/hobbyImg/lesson/${vo.lesson_thumbnail}/thumbnail.jpg" class="card-img-top" alter="강의섬네일" weight="100" height="100" >
 								</div>
 							
 								<div class="col-8">

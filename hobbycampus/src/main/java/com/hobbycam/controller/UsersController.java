@@ -56,7 +56,13 @@ public class UsersController {
 	//email Join email send
 		@RequestMapping("/userSendJoinAuth.do")
 		public ModelAndView sendJoinAuth(String email ,
-				HttpSession session, HttpServletResponse resp) {
+				HttpSession session, HttpServletResponse resp,HttpServletRequest req) {
+			
+			StringBuffer url = req.getRequestURL();
+			int findUrl=url.indexOf("hobbycampus");
+			String lastUrl=url.substring(0,findUrl);
+			System.out.println("lastUrl="+lastUrl);
+			
 			
 			ModelAndView mav=new ModelAndView();
 			int count=usersDao.getEmailCount(email);
@@ -71,7 +77,8 @@ public class UsersController {
 				String code=(int)(Math.random()*10000)+"";
 				String subject="hobbyCampus 입니다~ ^^";
 				String content="인증을 진행해 주세요~  "
-		                   +"<a href='http://localhost:9090/hobbycampus/userJoinAuthCheck.do?"
+							
+		                   +"<a href='"+lastUrl+"hobbycampus/userJoinAuthCheck.do?"
 		                   + "email="+email+"&code="+code+"'target=_blank'>이메일 인증확인 클릭클릭</a>"
 		                   + " ^^";
 				
@@ -125,6 +132,9 @@ public class UsersController {
 			
 						// check email auth inner
 						public int checkEmailAuth(String email, String code, HttpServletRequest req) {
+							
+							
+					
 							
 							Cookie cks[]=req.getCookies();
 							String emailvalue="";
@@ -236,9 +246,8 @@ public class UsersController {
 	@RequestMapping("/userTelCheck.do")
 	public ModelAndView findUserTel(String tel) {
 		
-		System.out.println(tel);
 		int result=usersDao.getTel(tel);
-		System.out.println(tel);
+		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("hobbyJson");
@@ -340,8 +349,7 @@ public class UsersController {
 	    		
 	    		if(t_idx!=null) {
 	    			session.setAttribute("t_idx", t_idx);
-	    			System.out.println("tidx 세션 저장됨 ");
-	    			System.out.println(t_idx);
+	    			System.out.println("tidx 세션 저장됨. t_idxx="+t_idx );
 	    			
 	    		}
 	    		
@@ -356,6 +364,8 @@ public class UsersController {
 	    			ck.setMaxAge(60*60*24*30);
 	    			resp.addCookie(ck);
 	    		}
+	    		
+	    	
 	    		
 	    		mav.addObject("msg",u_name+"님 환영합니다.");
 	    		mav.addObject("u_name",u_name);
@@ -376,6 +386,8 @@ public class UsersController {
 	@RequestMapping("/userLogout.do")
 	public ModelAndView userLogout(HttpServletRequest req) {
 		HttpSession session=req.getSession();
+
+		
 		session.invalidate();
 		
 		ModelAndView mav = new ModelAndView();
@@ -433,12 +445,17 @@ public class UsersController {
     
 	
 	@RequestMapping("/userPwdSend.do")
-	public ModelAndView sendPwdAuth(String email,HttpSession session, 
+	public ModelAndView sendPwdAuth(String email,HttpSession session, HttpServletRequest req,
 				HttpServletResponse resp) {
-			System.out.println(email);
+			
+			StringBuffer url = req.getRequestURL();
+			int findUrl=url.indexOf("hobbycampus");
+			String lastUrl=url.substring(0,findUrl);
+			System.out.println("lastUrl="+lastUrl);
+			
 			ModelAndView mav=new ModelAndView();
 			int count=usersDao.getPwdCount(email);
-			System.out.println(count);
+
 			String msg="";
 			if(count==usersDao.NOT_ID) {
 				msg="가입하지 않은 아이디입니다.";
@@ -451,11 +468,11 @@ public class UsersController {
 				
 				
 			} else if(count==3) {
-					System.out.println(count);
+					
 					String code=(int)(Math.random()*10000)+"";
 					String subject="hobbyCampus 비밀번호 변경입니다 ";
 					String content="비밀번호 변경을 위해 인증을 진행해 주세요~  "
-			                   +"<a href='http://localhost:9090/hobbycampus/userPwdAuth.do?"
+			                   +"<a href='"+lastUrl+"hobbycampus/userPwdAuth.do?"
 			                   + "email="+email+"&code="+code+"'target=_blank'>비밀번호 변경 클릭클릭</a>"
 			                   + "클릭클릭</a> ^^";
 					

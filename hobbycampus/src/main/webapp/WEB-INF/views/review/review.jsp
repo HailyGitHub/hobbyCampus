@@ -81,8 +81,8 @@
 	 		<h1 class="h2 text-warning" text-align="center"> 작성한 리뷰 <i class="bi bi-brush-fill"></i> </h1>
 	 
 				<c:if test="${empty reviewVo}">
-					<img src="img/user.png" alter="꿀벌" height="300" width="300"><br>
-					<label> 등록된 리뷰가 없습니다 ^^ </label>
+					<img src="img/users/bee.gif" alter="꿀벌" height="300" width="300"><br>
+					<label> 등록된 리뷰가 없습니다 </label>
 				</c:if>
 		
 		
@@ -95,7 +95,7 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-4">	
-							<img src="/hobbycampus/hobbyImg/lesson/${vo.lesson_thumbnail}" class="card-img-top" alter="강의섬네일" weight="100" height="100" >
+							<img src="/hobbycampus/hobbyImg/lesson/${vo.lesson_thumbnail}/thumbnail.jpg" class="card-img-top" alter="강의섬네일" weight="100" height="100" >
 						</div>
 					
 						<div class="col-6">
@@ -105,7 +105,7 @@
 						
 						<div class="col-2">
 					   	  	<button type="button" class="btn-close" aria-label="Close" align="right"
-					   			onclick="location.href='deleteReview.do?reviewidx='+'${vo.review_idx}'"></button>
+					   	  		onclick="reviewDel('${vo.review_idx}')"></button>
 				   			<button type="button" class="btn btn-warning" id="buttonUp"
 				   				onclick="reviewUp('r_${vo.review_idx}','c_${vo.review_idx}');">	수정</button> 
 				   		</div>
@@ -202,5 +202,17 @@ ${pageStr }
 
 		}
 }
+	
+function reviewDel(idx){
+	
+		var result=window.confirm('삭제하시겠습니까?');
+		
+		if(result){
+			location.href='deleteReview.do?reviewidx='+idx;
+		}else{
+			window.alert('취소되었습니다.');
+		}	
+}
+
 </script>
 </html>

@@ -18,7 +18,6 @@
       	<a href="userLogout.do">로그아웃</a> 
       </c:if>
         </span>
-
     </div>
     
     <!-- Logo -->
