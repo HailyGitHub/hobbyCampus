@@ -3,7 +3,7 @@ $myLessonRequest = {
 	applyCoupon: function(e) {
 		var couponPrice = e.options[e.selectedIndex].getAttribute('price')
 		document.getElementById('price_dd').innerText = couponPrice;
-		$myLessonRequest.paymentPrice = $myLessonRequest.totalPrice - couponPrice;
+		$myLessonRequest.paymentPrice = $myLessonRequest.totalPrice*(100-couponPrice)/100;
 		document.getElementById('total_price_hr').innerText = "총 결제 포인트 : " + Math.max(0, $myLessonRequest.paymentPrice).toString();
 	},
 	payment: function() {

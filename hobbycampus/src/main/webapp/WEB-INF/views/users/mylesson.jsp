@@ -99,20 +99,9 @@
         <p class="card-text fw-bolder text-black-50 fs-6">강사명 <i class="bi bi-mortarboard-fill"></i></p>
         <p class="card-text fw-bolder fs-5">${lessonRecord.tName}</p>      
         <c:if test="${lessonRecord.lesson_type!='온라인'}">
-<<<<<<< Updated upstream
            <p class="card-text fw-bolder text-black-50 fs-6">스케쥴 <i class="bi bi-calendar-check"></i></i></p>
          <p class="card-text fw-bolder fs-5">${lessonRecord.lessonStart} : ${lessonRecord.lessonTime}</p>
       </c:if>
-        <a href="lessonCont.do?lesson_idx=${lesson_idx}"" class="btn btn-warning">상세 보기</a>
-      
-=======
-	        <p class="card-text fw-bolder text-black-50 fs-6">스케쥴 <i class="bi bi-calendar-check"></i></i></p>
-			<p class="card-text fw-bolder fs-5">${lessonRecord.lessonStart} : ${lessonRecord.lessonTime}</p>
-		</c:if>
-        <a href="lessonCont.do?lesson_idx=${lesson_idx}"" class="btn btn-warning">상세 보기</a>
-		
->>>>>>> Stashed changes
-     
         <p class="card-text"><small class="text-muted">강의 구매날짜: ${lessonRecord.lessonBuyDate}</small></p>
    </div>
     </div>
