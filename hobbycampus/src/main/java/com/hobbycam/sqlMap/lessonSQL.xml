@@ -8,8 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			LESSON_LIST
   		VALUES(
   			seq_lesson_list.nextval,
-  			1,
-  			1,
+  			#{idx},
+  			#{cate2_idx},
   			#{lesson_subj},
   			sysdate,
   			#{lesson_type},

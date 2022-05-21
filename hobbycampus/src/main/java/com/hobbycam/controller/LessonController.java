@@ -69,9 +69,9 @@ public class LessonController {
 	@RequestMapping(value =  "/lessonBasicForm.do",method = RequestMethod.POST)
 	public ModelAndView upload(@RequestParam("thumbnail")MultipartFile thumbnail,LessonDTO dto,
 							   @RequestParam("lesson_type")String type,
-							   @RequestParam("lesson_subj")String subj){
+							   @RequestParam("lesson_subj")String subj,
+							   HttpServletRequest req){
 							  
-		
 		
 		
 		int count=ldao.countLessonList();
@@ -99,6 +99,10 @@ public class LessonController {
 			savePaththumbnail = iu.copyInto(thumbnail,"thumbnail", savePathFolder, fileExtension);}
 		
 		dto.setLesson_thumbnail(""+th_count);
+		HttpSession session=req.getSession();
+		int idx=(int)session.getAttribute("t_idx");
+		dto.setT_idx(idx);
+		System.out.println("t_idx:"+idx);
 		
 		ModelAndView mav=new ModelAndView();
 		
