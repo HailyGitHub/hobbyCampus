@@ -32,13 +32,11 @@
        .nav-item a:link {
           color : black;
         }
-        
          .nav-item a:visited {
           color : black;
         }
 
         .nav-item a:hover{
-
            color:orange;
 
         }
@@ -49,10 +47,7 @@
  
      
  </head>
- <body onload="myerror();">
-    
-
-
+ <body>
  <div class="container-fluid">
    <div class="row">
      <nav id="sidebarMenu" class="d-md-block bg-light sidebar collapse">

@@ -118,9 +118,7 @@
 			    <div class="col-md-9">
 			      자기소개
 			      <hr class="m-1">
-			      <textarea class="form-control" rows="4" id="t_profile" cols="40" wrap="hard" name="t_profile" style="resize: none;" required="required">
-			    	${dto.t_profile}
-				</textarea>
+			      <textarea class="form-control" rows="4" id="t_profile" cols="40" wrap="hard" name="t_profile" style="resize: none;" required="required">${dto.t_profile}</textarea>
 			    </div>
 			    <div class="col-md-2"></div>
 			    
