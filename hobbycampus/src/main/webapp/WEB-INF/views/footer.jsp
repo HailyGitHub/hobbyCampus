@@ -25,11 +25,11 @@
             <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="ModalLabel">내용없음</h5>
+                <h5 class="modal-title" id="ModalLabel"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modal-body">
-                  Ajax 구현 내용
+                  
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">내용확인</button>

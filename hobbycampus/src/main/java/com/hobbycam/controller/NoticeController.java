@@ -118,7 +118,7 @@ public class NoticeController {
 	public ModelAndView getNoticeExpose() {
 		ModelAndView mav = new ModelAndView();
 		NoticeDTO dto = noticeDao.getNoticeExpose();
-		System.out.println(dto.getNotice_idx());
+		//System.out.println(dto.getNotice_idx()); //null
 		mav.addObject("dto",dto);
 		mav.setViewName("hobbyJson");
 		

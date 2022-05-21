@@ -273,6 +273,8 @@
 				resultText = result; // To Trim???
 				var dto = resultText.result;
 				var ImgSrc = '/hobbycampus/hobbyImg/resumeImg/';
+				var oneSrc = '/hobbycampus/hobbyImg/category1/';
+				var twoSrc = '/hobbycampus/hobbyImg/category2/';
 				
 				$('#modal_title').attr('data-idx', dto.resume_idx);
 				$('#modal_title').attr('data-email', email);
@@ -281,8 +283,8 @@
 				$('#modal_intro').text(dto.resume_intro);
 				$('#modal_cate1_name').text(dto.cate1_name);
 				$('#modal_cate2_name').text(dto.cate2_name);
-				$('#modal_cate1_img').attr('src', ImgSrc + dto.cate1_img);
-				$('#modal_cate2_img').attr('src', ImgSrc + dto.cate2_img);
+				$('#modal_cate1_img').attr('src', oneSrc + dto.cate1_img);
+				$('#modal_cate2_img').attr('src', twoSrc + dto.cate2_img);
 				$('#modal_plan').text(dto.resume_plan);
 				$('#model_interview_date').text(dto.interview_date_param);
 				$("input:radio[name='interview_state']").removeAttr("checked");
