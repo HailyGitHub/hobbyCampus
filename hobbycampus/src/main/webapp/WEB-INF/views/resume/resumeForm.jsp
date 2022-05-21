@@ -85,8 +85,8 @@
       
       
   
-    <div class="col-md-8"></div>
-    
+    <div class="col-md-2"></div>
+    <div class="col-md-3"></div>
     <div class="col-md-1"></div>
     <div class="col-md-9">
       <label for="resume_plan" class="form-label">수업계획</label>
@@ -96,7 +96,7 @@
 		
 
   <div class="col-md-1"></div>
-    <div class="col-11">
+    <div class="col-10">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="invalidCheck1" required>
         <label class="form-check-label" for="invalidCheck1">

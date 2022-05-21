@@ -82,11 +82,11 @@
                 
                  <li class="nav-item">
                    <a href="mylessonList.do" class="nav-link">
-                     <span class="studentList" >내 수강내역</span>
+                     <span class="studentList" id="secreteIdx" data-idx="${sessionScope.t_idx}">내 수강내역</span>
                    </a>
                    <a href="lessonReqList.do?t_idx=1" class="nav-link">
-                    <span class="teacherList" style="display: none;" >강의 신청 관리
-					  <span class="badge bg-primary">${sessionScope.reqCnt}</span>
+                    <span class="teacherList" id="lessonRequest" style="display: none;" >강의 신청 관리
+					  
                     </span>
                    </a>                     
                  </li>
@@ -96,7 +96,7 @@
                     <span class="studentList" >내 포인트</span>
                   </a>
                   <a href="lessonBasicForm.do?t_idx=1" class="nav-link">
-                   <span class="teacherList" style="display: none;" >강의 등록</span>
+                   <span class="teacherList" id="lessonAdd" style="display: none;" >강의 등록</span>
                   </a>                     
                 </li>
            
@@ -160,7 +160,32 @@
  <script>
 
  $(document).ready(function(){
-    if(${t_idx==null}){
+    
+	 var $idx = $('#secreteIdx').attr('data-idx');
+	 //alert($idx);
+	 
+	 $.ajax({
+		 type: 'GET',
+		 url: 'getLessonReq.do',
+		 data:{'t_idx': $idx},
+		 dataType: 'json',
+		 success: function(i){
+			 if(i.reqCnt!=0){
+				 $('#lessonRequest').empty();
+				 $('#lessonRequest').append('강의 신청 관리');
+				 $('#lessonRequest').append('<span class="badge bg-primary">'+i.reqCnt+'</span>');
+				 
+			 }else{
+				 $('#lessonRequest').empty();
+				 $('#lessonRequest').append('강의 신청 관리');
+			 }
+			  
+		 }
+		 
+	 });
+	 
+	 
+	 if(${t_idx==null}){
        $(".teacher").css("display","none");
        $(".student").css("display","none");
        $(".teacherList").css("display","none");
@@ -187,7 +212,8 @@
          $("#student").addClass('btn-warning');
          $("#teacher").addClass('btn-light');
     }
-
+	
+    
  })
  
  

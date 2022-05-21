@@ -54,6 +54,18 @@ public class LessonController {
 		return mav;
 	}
 	
+	@RequestMapping("/getLessonReq.do")
+	public ModelAndView lessonReqCnt(@RequestParam("t_idx")int t_idx) {
+		
+		ModelAndView mav=new ModelAndView();
+		int reqCnt = lrdao.lessonReqCnt(t_idx);
+		
+		mav.addObject("reqCnt", reqCnt);
+		mav.setViewName("hobbyJson");
+		return mav;
+		
+	}
+	
 	@RequestMapping(value =  "/lessonBasicForm.do",method = RequestMethod.POST)
 	public ModelAndView upload(@RequestParam("thumbnail")MultipartFile thumbnail,LessonDTO dto,
 							   @RequestParam("lesson_type")String type,

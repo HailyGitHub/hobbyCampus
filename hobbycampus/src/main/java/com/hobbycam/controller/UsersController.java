@@ -343,8 +343,6 @@ public class UsersController {
 	    			System.out.println("tidx 세션 저장됨 ");
 	    			System.out.println(t_idx);
 	    			
-	    			int reqCnt = lrdao.lessonReqCnt(t_idx);
-	    			session.setAttribute("reqCnt", reqCnt);
 	    		}
 	    		
 	    		

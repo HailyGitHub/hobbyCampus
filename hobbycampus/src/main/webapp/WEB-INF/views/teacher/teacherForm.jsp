@@ -53,8 +53,6 @@
 	   }
 	}
 </script>
-	
-</script>
 </head>
 <body>
 <!-- HEADER -->
@@ -71,72 +69,70 @@
 			<div class="py-5 text-center">
 		    <h2>내 정보</h2>
 		  	</div>
-		  <form class="row g-3" onsubmit="return allCheck();" name="updateTeacher" action="teacherInfo.do" method="post" enctype="multipart/form-data">
-		    
-		    <div class="col-md-1"></div>
-		    <div class="col-md-3">
-		    <img id="teacherImg" src="/hobbycampus/hobbyImg/teacherImg/${dto.t_img} ">
-		    </div>
-		    <div class="col-md-3">
-		      프로필사진
-		      <hr class="m-1">
-		      <input type="file" name="tImg" value="사진 변경" class="form-control" >
-		    </div>
-		    
-		    <div class="col-md-2 my-3">
-		      닉네임
-		      <hr class="m-1">
-		      <input type="text" name="t_name" class="form-control " id="name" value=${dto.t_name} readonly required="required">
-		    </div>
-		    
-		    <div class="col-md-1">
-		    <label></label>
-		    <hr class="m-1">
-		    	<button class="btn btn-primary" type="button"  onclick="nameCheck();">중복</button>
-		    </div>
-		    <div class="col-md-2"></div>
-		    
-		    
-		    
-		    <div class="col-md-1"></div>
-		    <div class="col-md-3">
-		      은행명
-		      <hr class="m-1">
-		      <input type="text" name="t_account_bank" class="form-control" id="aBank" value=${dto.t_account_bank} required="required" >
-		    </div>
-		    <div class="col-md-3">
-		      계좌주
-		      <hr class="m-1">
-		      <input type="text" name="t_account_owner" class="form-control" id="aOwner" value=${dto.t_account_owner} required="required">
-		    </div>
-		    <div class="col-md-3">
-		      계좌번호
-		      <hr class="m-1">
-		      <input type="text" name="t_account_number" class="form-control" id="aNnumber" value=${dto.t_account_number} required="required">
-		    </div>
-		    <div class="col-md-2"></div>
-		
-		    <div class="col-md-1"></div>
-		    <div class="col-md-9">
-		      자기소개
-		      <hr class="m-1">
-		      <textarea class="form-control" rows="4" id="t_profile" cols="40" wrap="hard" name="t_profile" style="resize: none;" required="required">
-		    	${dto.t_profile}
-			</textarea>
-		    </div>
-		    <div class="col-md-2"></div>
-		    
-		    <div class="col-md-4"></div>
-		    <div class="col-md-4">
-		    	<button class="btn btn-secondary" type="reset" onclick="location.href='teacherInfo.do'">되돌리기</button>
-		    	<button class="btn btn-primary" type="submit">수정하기</button>
-		    </div>
-		    <div class="col-md-4"></div>
-		
-		  </form>
-		</div>
-		</div>	
-		</div>
+			 <form class="row g-3" onsubmit="return allCheck();" name="updateTeacher" action="teacherInfo.do" method="post" enctype="multipart/form-data">
+			    
+			    <div class="col-md-1"></div>
+			    <div class="col-md-3">
+			    <img id="teacherImg" src="/hobbycampus/hobbyImg/teacherImg/${dto.t_img} ">
+			    </div>
+			    <div class="col-md-3">
+			      프로필사진
+			      <hr class="m-1">
+			      <input type="file" name="tImg" value="사진 변경" class="form-control" >
+			    </div>
+			    
+			    <div class="col-md-2 my-3">
+			      닉네임
+			      <hr class="m-1">
+			      <input type="text" name="t_name" class="form-control " id="name" value=${dto.t_name} readonly required="required">
+			    </div>
+			    
+			    <div class="col-md-1">
+			    <label></label>
+			    <hr class="m-1">
+			    	<button class="btn btn-primary" type="button"  onclick="nameCheck();">중복</button>
+			    </div>
+			    <div class="col-md-2"></div>
+			    
+			    
+			    
+			    <div class="col-md-1"></div>
+			    <div class="col-md-3">
+			      은행명
+			      <hr class="m-1">
+			      <input type="text" name="t_account_bank" class="form-control" id="aBank" value=${dto.t_account_bank} required="required" >
+			    </div>
+			    <div class="col-md-3">
+			      계좌주
+			      <hr class="m-1">
+			      <input type="text" name="t_account_owner" class="form-control" id="aOwner" value=${dto.t_account_owner} required="required">
+			    </div>
+			    <div class="col-md-3">
+			      계좌번호
+			      <hr class="m-1">
+			      <input type="text" name="t_account_number" class="form-control" id="aNnumber" value=${dto.t_account_number} required="required">
+			    </div>
+			    <div class="col-md-2"></div>
+			
+			    <div class="col-md-1"></div>
+			    <div class="col-md-9">
+			      자기소개
+			      <hr class="m-1">
+			      <textarea class="form-control" rows="4" id="t_profile" cols="40" wrap="hard" name="t_profile" style="resize: none;" required="required">
+			    	${dto.t_profile}
+				</textarea>
+			    </div>
+			    <div class="col-md-2"></div>
+			    
+			    <div class="col-md-4"></div>
+			    <div class="col-md-4">
+			    	<button class="btn btn-secondary" type="reset" onclick="location.href='teacherInfo.do'">되돌리기</button>
+			    	<button class="btn btn-primary" type="submit">수정하기</button>
+			    </div>
+			    <div class="col-md-4"></div>
+			  </form>
+			</div>
+			</div>	
 		</div>
 		</main>
 	<!-- FOOTER -->
