@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>hobbyCampus</title>
+<title>Insert title here</title>
 <!--<script src="/hobbycampus/js/myLesson.js"></script>  -->
 <!-- Title Icon -->
 <link href="img/main.ico" rel="shortcut icon" type="image/x-icon">
@@ -73,11 +73,11 @@
             </c:when>
          <c:otherwise>
       <div>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="row row-cols-1 row-cols-md-2 g-4 ">
       <c:forEach items="${lessonRecordList}" var="lessonRecord">
 
-         <div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0 border border-warning">
+         <div class="card mb-3 border border-warning" style="max-width: 540px;">
+  <div class="row g-0">
        <div class="col-md-4 ">
          <img src="/hobbycampus/hobbyImg/lesson/${lessonRecord.lesson_thumbnail }/thumbnail.jpg" class="img-fluid rounded-start" alt="...">
 
@@ -102,7 +102,7 @@
            <p class="card-text fw-bolder text-black-50 fs-6">스케쥴 <i class="bi bi-calendar-check"></i></i></p>
          <p class="card-text fw-bolder fs-5">${lessonRecord.lessonStart} : ${lessonRecord.lessonTime}</p>
       </c:if>
-        <a href="lessonCont.do?lesson_idx=${lesson_idx}"" class="btn btn-warning">상세 보기</a>
+        <a href="lessonCont.do?lesson_idx=${lessonRecord.lessonIdx}" class="btn btn-warning">상세 보기</a>
       
      
         <p class="card-text"><small class="text-muted">강의 구매날짜: ${lessonRecord.lessonBuyDate}</small></p>
