@@ -158,8 +158,8 @@
 			<!-- Like Teacher Best Four -->
 			<c:forEach var="likeTeacher" items="${teacher}">
 			  <div class="col">
-			    <div class="card">
-			      <img src="/hobbycampus/hobbyImg/teacherImg/${likeTeacher.t_img}" class="card-img-top">
+			    <div class="card h-100">
+			      <img src="/hobbycampus/hobbyImg/teacherImg/${likeTeacher.t_img}" class="card-img-top img-thumbnail" style="height:360px;">
 			      <div class="card-body text-center">
 			        <h5 class="card-title">${likeTeacher.t_name}</h5>
 			        <p class="card-text">${likeTeacher.t_profile}</p>
@@ -178,8 +178,8 @@
 			<!-- Like lesson Best Four -->
 			<c:forEach var="likeLesson" items="${lesson}">
 			  <div class="col">
-			    <div class="card">
-			      <img src="/hobbycampus/hobbyImg/lesson/${likeLesson.lesson_thumbnail}/thumbnail.jpg" class="card-img-top">
+			    <div class="card h-100">
+			      <img src="/hobbycampus/hobbyImg/lesson/${likeLesson.lesson_thumbnail}/thumbnail.jpg" class="card-img-top img-thumbnail" style="height:330px;">
 			      <div class="card-body text-center">
 			        <h5 class="card-title">${likeLesson.lesson_subj}</h5>
 			        <p class="card-text">${likeLesson.lesson_short_cont}</p>
