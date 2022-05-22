@@ -132,5 +132,19 @@
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+<script>
+function LikeDel(idx){
+	
+	var result=window.confirm('삭제하시겠습니까?');
+	
+	if(result){
+		location.href='deleteReview.do?reviewidx='+idx;
+	}else{
+		window.alert('취소되었습니다.');
+	}	
+}
+
+</script>
 </body>
+
 </html>

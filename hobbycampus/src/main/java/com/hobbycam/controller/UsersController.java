@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -185,7 +185,8 @@ public class UsersController {
 							
 						
 						//save Email get cookies inner
-						public String saveEmail(HttpServletRequest req) {
+						public String saveEmail(HttpServletRequest req,
+								HttpServletResponse resp) {
 							
 							Cookie cks[]=req.getCookies();
 							String emailvalue="";
@@ -194,6 +195,11 @@ public class UsersController {
 								 for(int i=0;i<cks.length;i++) {
 									 if(cks[i].getName().equals("u_email")) {
 										 emailvalue=cks[i].getValue();
+										 
+									Cookie cook=new Cookie("code", null);
+									cook.setMaxAge(0);
+									resp.addCookie(cook);
+
 									 }
 								 }
 							 }
@@ -218,9 +224,10 @@ public class UsersController {
 		
 
 		@RequestMapping("/userJoinForm.do")
-		public ModelAndView userJoinForm(HttpServletRequest req){
+		public ModelAndView userJoinForm(HttpServletRequest req
+					,HttpServletResponse resp){
 			
-			String emailvalue=saveEmail(req);
+			String emailvalue=saveEmail(req,resp);
 			 
 			ModelAndView mav=new ModelAndView();
 			mav.addObject("u_email",emailvalue);
@@ -264,7 +271,7 @@ public class UsersController {
 
 		//file Upload and dto.setU_img	
 		if (upload.isEmpty()) {
-				dto.setU_img("img/user.png");
+				dto.setU_img("user.png");
 		} else {
 			String imgname=copyInto(dto.getU_email(), upload);
 			dto.setU_img(imgname);
@@ -517,9 +524,10 @@ public class UsersController {
 
 	
 	@RequestMapping("/userPwdForm.do")
-		public ModelAndView updateUserPwdForm(HttpServletRequest req){
+		public ModelAndView updateUserPwdForm(HttpServletRequest req,
+				HttpServletResponse resp){
 			
-			String emailvalue=saveEmail(req);
+			String emailvalue=saveEmail(req,resp);
 		
 			ModelAndView mav=new ModelAndView();
 			mav.addObject("u_email",emailvalue);
@@ -580,6 +588,8 @@ public class UsersController {
 		} else {
 			imgname=dto.getU_img();
 		}
+		
+		
 		dto.setU_img(imgname);
 		
 		int count=usersDao.updateUserInfo(dto);
