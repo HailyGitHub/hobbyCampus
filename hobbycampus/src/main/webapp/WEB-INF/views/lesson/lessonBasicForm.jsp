@@ -38,7 +38,7 @@
 		<!-- Title -->
 		<article class="title">
 			<div class="row text-center m-5">
-				<h2><i class="bi bi-arrow-down-circle-fill "></i> 내 강의 목록 </h2>
+				<h2><i class="bi bi-arrow-down-circle-fill "></i> 강의 등록 </h2>
 			</div>
 		</article>
 		
@@ -56,7 +56,7 @@
            
 
             <div class="my-3">
-            <label for="lesson_subj" class="form-label">강의 제목</label>
+            <label for="lesson_subj" class="form-label">강의 타입</label>
               <div class="form-check">
                 <input type="radio"  value="온라인" name="lesson_type" class="form-check-input">
                 <label class="form-check-label">온라인</label>
@@ -95,11 +95,11 @@
 			 <div class="my-3">
 			 <label for="lesson_kit" class="form-label">키트 유무</label>
               <div class="form-check">
-                <input type="radio" name="lesson_kit" value="true" type="radio" class="form-check-input">
+                <input type="radio" name="lesson_kit" value="있음" type="radio" class="form-check-input">
                 <label class="form-check-label">유</label>
             </div>
               <div class="form-check">
-                <input type="radio" name="lesson_kit" value="false" type="radio" class="form-check-input">
+                <input type="radio" name="lesson_kit" value="없음" type="radio" class="form-check-input">
                 <label class="form-check-label">무</label>
             </div>
             </div>
@@ -108,7 +108,7 @@
 
             <div class="col-md-5">
               <label for="cate1_name" class="form-label">카테고리</label>
-              <select class="form-select" id="cateOneList" name="cate1_name" onchange="showCateTwo(idx)">           
+              <select class="form-select" id="cateOneList" name="cate1_idx" onchange="showCateTwo(idx)">           
               	<option>카테고리</option>
               </select>
               <div class="invalid-feedback">
@@ -118,7 +118,7 @@
 
             <div class="col-md-5">
               <label for="cate2_name" class="form-label">세부 카테고리</label>
-              <select class="form-select" id="cateTwoList" name="cate2_name">
+              <select class="form-select" id="cateTwoList" name="cate2_idx">
                 <option value="">세부 카테고리</option>
                 
               </select>

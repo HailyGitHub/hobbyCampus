@@ -102,8 +102,6 @@ public class LessonController {
 		HttpSession session=req.getSession();
 		int idx=(int)session.getAttribute("t_idx");
 		dto.setT_idx(idx);
-		System.out.println("t_idx:"+idx);
-		
 		ModelAndView mav=new ModelAndView();
 		
 		ldao.lessonInsert(dto);
@@ -422,7 +420,6 @@ public class LessonController {
 	@RequestMapping(value = "/lessonUpdate.do",method = RequestMethod.GET)
 	public ModelAndView lessonUpdateForm(int lesson_idx) {
 		
-		
 		ModelAndView mav=new ModelAndView();
 		
 		LessonDTO dto=ldao.lessonUpdateForm(lesson_idx);
@@ -433,14 +430,17 @@ public class LessonController {
 	}
 	
 	@RequestMapping(value = "/lessonUpdate.do",method = RequestMethod.POST)
-	public ModelAndView lessonUpdateSubmit(LessonDTO dto) {
+	public ModelAndView lessonUpdateSubmit(@RequestParam("thumbnail")MultipartFile thumbnail,LessonDTO dto,
+									       @RequestParam("lesson_type")String type,
+									       @RequestParam("lesson_subj")String subj,
+										   HttpServletRequest req){
 		
 		ModelAndView mav=new ModelAndView();
 		
 		int result=ldao.lessonUpdateSubmit(dto);
 		String msg=result>0?"강의 수정 성공":"강의 수정 실패";
 		mav.addObject("msg",msg);
-		mav.addObject("gopage","index.do");
+		mav.addObject("gopage","mylessonList.do");
 		mav.setViewName("/teacher/msg");
 		return mav;
 	}

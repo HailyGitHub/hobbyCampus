@@ -8,8 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			LESSON_LIST
   		VALUES(
   			seq_lesson_list.nextval,
-  			#{idx},
   			#{cate2_idx},
+  			#{t_idx},
   			#{lesson_subj},
   			sysdate,
   			#{lesson_type},
@@ -98,13 +98,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			LESSON_LIST
   		SET
   			LESSON_SUBJ=#{lesson_subj},
-  			LESSON_TYPE=#{lesson_type},
+  			CATE2_IDX=#{cate2_idx},
   			LESSON_PRICE=#{lesson_price},
-  			LESSON_THUMBNAIL=#{lesson_thumbnail},
   			LESSON_SHORT_CONT=#{lesson_short_cont},
   			LESSON_KIT=#{lesson_kit}
   		WHERE
-  			LESSON_IDX=2
+  			LESSON_IDX=#{lesson_idx}
   	</update>
   	<select id="SelectLessonReq" resultType="com.hobbycam.lessonRecord.model.LessonRecordDTO">
   		SELECT B.U_NAME,

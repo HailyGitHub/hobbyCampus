@@ -69,7 +69,7 @@
 						<div class="col">
 							<div class="card h-100 text-center">
 								<div class="text-center m-2">
-									<img src="/hobbycampus/img/none.png" class="card-img-top" style="width:130px;">						
+									<img src="/hobbycampus/hobbyImg/lesson/${dto.lesson_thumbnail}/thumbnail.jpg" class="card-img-top" style="width:130px;">						
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">${dto.lesson_subj}</h5>

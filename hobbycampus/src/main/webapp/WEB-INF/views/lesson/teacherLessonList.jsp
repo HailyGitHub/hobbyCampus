@@ -69,7 +69,7 @@
 				<div class="card col-md-11 mb-3">
 					<div class="row">
 					<div class="col-md-2" >
-						<img src="/hobbycampus/img/none.png" data-img="${dto.lesson_thumbnail}" class="card-img-top center-block">				
+						<img src="/hobbycampus/hobbyImg/lesson/${dto.lesson_thumbnail}/thumbnail.jpg" class="card-img-top center-block">				
 					</div>
 					<div class="col-md-8" >
 						<h5 class="card-title m-5">${dto.lesson_subj}</h5>

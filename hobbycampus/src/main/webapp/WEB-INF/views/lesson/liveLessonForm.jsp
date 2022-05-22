@@ -39,7 +39,7 @@
 		<!-- Title -->
 		<article class="title">
 			<div class="row text-center m-5">
-				<h2><i class="bi bi-arrow-down-circle-fill "></i> 내 강의 목록 </h2>
+				<h2><i class="bi bi-arrow-down-circle-fill "></i> 강의 상세 정보 등록 </h2>
 			</div>
 		</article>		
 		
