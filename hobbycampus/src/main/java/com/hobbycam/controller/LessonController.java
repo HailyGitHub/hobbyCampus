@@ -449,7 +449,11 @@ public class LessonController {
 	
 	
 	@RequestMapping("/lessonReqList.do")
-	public ModelAndView lessonReqList(int t_idx) {
+	public ModelAndView lessonReqList(HttpServletRequest req) {
+		
+		HttpSession session=req.getSession();
+		int t_idx=(int)session.getAttribute("t_idx");
+		
 		
 		
 		ModelAndView mav=new ModelAndView();
