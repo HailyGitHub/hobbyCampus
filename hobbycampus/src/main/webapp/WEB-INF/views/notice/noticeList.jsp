@@ -37,7 +37,7 @@
 <body>
 <!-- HEADER -->
 <c:set var="adminSession" value="${s_a_idx}"></c:set>
-<c:set var="tSession" value="${t_idx}"></c:set>
+<c:set var="tSession" value="${sessionScope.t_idx}"></c:set>
 <c:if test="${empty adminSession}">
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 </c:if>
@@ -169,7 +169,7 @@ window.onload = function(){
 		$('#btn_3').css('display', 'none');
 		$('#btn_4').css('display', 'none');
 	}
-	if( $('#tSession').val()==null || $('#adminSession').val()==null){
+	   if( $('#tSession').val()==null && $('#adminSession').val()==null){
 		$('#btn_2').css('display', 'none');
 	}
 	
