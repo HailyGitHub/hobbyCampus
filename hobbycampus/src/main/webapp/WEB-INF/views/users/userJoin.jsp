@@ -26,7 +26,8 @@
 			padding: 15px;
 			margin: auto;
 		}
-  a{text-decoration:none; color:black;}
+		.form-userJoin a{text-decoration:none; color:orange;}
+
   img{width:300px;
 	  height:150px;
 	  object-fit:fill;
@@ -55,7 +56,6 @@
 	 		<div id="image_container" height="150" width="300">
 	 			<img src="img/user.png" alter="프로필 기본 이미지">
 	 		</div>
-	 		<!-- <img src="img/user.png" height="100" weight="100"> -->
 	 		<div class="invalid-feedback">.jsp, png 파일만 가능합니다.</div>
 	 </div> </label>
 	 
@@ -203,12 +203,14 @@ function checkPwd(){
 
 	var pwd1=document.usersJoin.u_pwd.value;
 	var pwd2=document.usersJoin.u_pwdCheck.value;
+	var pwdReg=/[a-zA-Z0-9]{6,12}/;
+	
 	$('#validationPwd').removeClass('is-valid');
 	$('#validationPwd2').removeClass('is-valid');
 	$('#validationPwd').removeClass('is-invalid');
 	$('#validationPwd2').removeClass('is-invalid');
 	
-	if(pwd1.length>=6) {		
+	if(pwd1.length>=6&&pwdReg.test(pwd1)) {		
 			$('#validationPwd').addClass('is-valid');
 		if(pwd1==pwd2){
 			$('#validationPwd2').addClass('is-valid');	
@@ -307,12 +309,15 @@ function allCheck(){
 	}
 
 	var filename=document.usersJoin.upload.value;
-	filename=filename.substring(filename.length-3,filename.length);
-	
-	if(filename!='jpg'&&filename!='png'){
-		window.alert('jpg, png 이미지만 업로드 가능합니다.');
-		return false;
+	if (filename !== ""){
+		filename=filename.substring(filename.length-3,filename.length);
+		
+		if(filename!='jpg'&&filename!='png'){
+			window.alert('jpg, png 이미지만 업로드 가능합니다.');
+			return false;
+		}
 	}
+	
 }
 
 </script>
