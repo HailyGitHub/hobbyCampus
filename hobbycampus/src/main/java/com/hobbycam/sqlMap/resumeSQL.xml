@@ -33,12 +33,12 @@
  				#{resume_intro},
  				#{resume_plan},
  				to_date(#{interview_date_param}, 'yyyy-mm-dd'),
+ 				#{interview_date_param},
  				'대기',
- 				'대기',
- 				#{interview_date_param}
+ 				'대기'
  			)
  	</insert>
- 	<select id="resumeNextval" resultType="int">
+ 	<select id="resumeNextval" resultType="String">
 	 	SELECT seq_teacher_resume.NEXTVAL-1
 	 	FROM DUAL
  	</select>
