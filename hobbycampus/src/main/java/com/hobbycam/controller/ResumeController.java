@@ -53,7 +53,7 @@ public class ResumeController {
 		
 		//insert data
 		ModelAndView mav = new ModelAndView();
-		int resumeImgFileName = dao.resumeInsert(dto);
+		int resumeImgFileName = Integer.parseInt(dao.resumeInsert(dto)) ;
 		
 		String msg = "강사 신청이 완료되었습니다. 결과는 메일로 전달 드리겠습니다. ";
 		

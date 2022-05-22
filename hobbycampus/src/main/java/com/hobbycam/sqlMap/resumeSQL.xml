@@ -26,7 +26,7 @@
  			teacher_resume
  			VALUES(
  				seq_teacher_resume.nextval,
- 				1,
+ 				#{u_idx},
  				#{cate2_idx},
  				#{resume_name},
  				1,
