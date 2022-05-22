@@ -47,8 +47,6 @@
 			<input type="hidden" name="l_idx" value="${l_idx}">
 			<input type="hidden" name="save" value="${save}">
 			<div class="row g-3">
-				<input type="hidden" name="l_idx" value="${l_idx}">
-				<input type="hidden" name="save" value="${save}">
 			
 			<div class="col-10">
             	<label for="liveFolder" class="form-label">이미지 등록</label>
@@ -77,9 +75,9 @@
             
             
 			<div class="col-10">
-              <label for="online_cont" class="form-label">강의 상세 설명</label>
+              <label for="live_cont" class="form-label">강의 상세 설명</label>
               <div class="col-10">
-              <textarea name="online_cont" class="form-textarea" style="resize: none" cols="155" rows="5" ></textarea>
+              <textarea name="live_cont" class="form-textarea" style="resize: none" cols="155" rows="5" ></textarea>
               </div >
               <div class="invalid-feedback">
                 강의 상세 설명을 입력해주세요

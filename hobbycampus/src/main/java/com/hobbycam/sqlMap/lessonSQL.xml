@@ -470,7 +470,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	</delete>
   	<insert id="insertLike" parameterType="map">
   		INSERT INTO like_list
-  		VALUES(#{u_idx},#{lesson_idx} )
+  		VALUES(#{u_idx},#{lesson_idx},sysdate )
   	</insert>
   	<select id="selectScIdx" parameterType="int" resultType="int">
   		SELECT lesson_schedule_idx

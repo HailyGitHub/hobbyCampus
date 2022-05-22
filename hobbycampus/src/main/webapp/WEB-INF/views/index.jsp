@@ -159,7 +159,7 @@
 			<c:forEach var="likeTeacher" items="${teacher}">
 			  <div class="col">
 			    <div class="card">
-			      <img src="/hobbycampus/hobbyImg/teacherImg/none.png" class="card-img-top">
+			      <img src="/hobbycampus/hobbyImg/teacherImg/${likeTeacher.t_img}" class="card-img-top">
 			      <div class="card-body text-center">
 			        <h5 class="card-title">${likeTeacher.t_name}</h5>
 			        <p class="card-text">${likeTeacher.t_profile}</p>
@@ -179,7 +179,7 @@
 			<c:forEach var="likeLesson" items="${lesson}">
 			  <div class="col">
 			    <div class="card">
-			      <img src="img/none.png" class="card-img-top">
+			      <img src="/hobbycampus/hobbyImg/lesson/${likeLesson.lesson_thumbnail}/thumbnail.jpg" class="card-img-top">
 			      <div class="card-body text-center">
 			        <h5 class="card-title">${likeLesson.lesson_subj}</h5>
 			        <p class="card-text">${likeLesson.lesson_short_cont}</p>

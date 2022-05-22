@@ -47,11 +47,7 @@ public class UsersDAOImple implements UsersDAO {
 	
 	
 	public int getTel(String tel) {
-		System.out.println(tel);
-		
-		
-		
-		int result=sqlMap.selectOne("selectTel",tel)==null?
+			int result=sqlMap.selectOne("selectTel",tel)==null?
 				0:1;
 	
 		return result;
@@ -86,8 +82,7 @@ public class UsersDAOImple implements UsersDAO {
 		
 		String u_pwd=dto.getU_pwd();
 		String u_state=dto.getU_state();
-		System.out.println("u_pwd="+u_pwd);
-		System.out.println("u_state="+u_state);
+
 		
 		if(u_state.equals("탈퇴")) {
 			return DEL;

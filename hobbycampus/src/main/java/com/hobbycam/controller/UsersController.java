@@ -61,7 +61,7 @@ public class UsersController {
 			StringBuffer url = req.getRequestURL();
 			int findUrl=url.indexOf("hobbycampus");
 			String lastUrl=url.substring(0,findUrl);
-			System.out.println("lastUrl="+lastUrl);
+	
 			
 			
 			ModelAndView mav=new ModelAndView();
@@ -152,8 +152,7 @@ public class UsersController {
 								 }
 							 }
 							 
-							System.out.println("emailvalue=" +emailvalue);
-							System.out.println("codevalue=" +codevalue);
+						
 							
 							
 							int count=0;
@@ -356,7 +355,7 @@ public class UsersController {
 	    		
 	    		if(t_idx!=null) {
 	    			session.setAttribute("t_idx", t_idx);
-	    			System.out.println("tidx 세션 저장됨. t_idxx="+t_idx );
+	
 	    			
 	    		}
 	    		
@@ -458,7 +457,7 @@ public class UsersController {
 			StringBuffer url = req.getRequestURL();
 			int findUrl=url.indexOf("hobbycampus");
 			String lastUrl=url.substring(0,findUrl);
-			System.out.println("lastUrl="+lastUrl);
+	
 			
 			ModelAndView mav=new ModelAndView();
 			int count=usersDao.getPwdCount(email);
@@ -484,7 +483,7 @@ public class UsersController {
 			                   + "클릭클릭</a> ^^";
 					
 					msg=sendEmailAuth(email, subject, content, code, session, resp);
-					System.out.println(code);
+			
 					
 					if(msg.equals("")) {
 						msg="이메일을 보낼 수 없습니다. 메일 주소를 다시 확인해 주세요";

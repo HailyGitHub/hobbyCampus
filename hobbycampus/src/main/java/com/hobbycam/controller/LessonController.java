@@ -85,6 +85,7 @@ public class LessonController {
 		}else {	
 			String fileExtension = thumbnailName.substring(thumbnailName.length()-4, thumbnailName.length());
 			String savePathFolder =servletContext.getRealPath("hobbyImg/lesson/"+th_count+"/"); 
+
 			File f=new File(savePathFolder);
 			if(!f.exists()) {
 				try {
