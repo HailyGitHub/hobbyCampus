@@ -79,7 +79,7 @@
                    <a href="mylessonList.do" class="nav-link">
                      <span class="studentList" id="secreteIdx" data-idx="${sessionScope.t_idx}">내 수강내역</span>
                    </a>
-                   <a href="lessonReqList.do?t_idx=1" class="nav-link">
+                   <a href="lessonReqList.do" class="nav-link">
                     <span class="teacherList" id="lessonRequest" style="display: none;" >강의 신청 관리
 					  
                     </span>
@@ -90,7 +90,7 @@
                   <a href="myPointList.do" class="nav-link">
                     <span class="studentList" >내 포인트</span>
                   </a>
-                  <a href="lessonBasicForm.do?t_idx=1" class="nav-link">
+                  <a href="lessonBasicForm.do" class="nav-link">
                    <span class="teacherList" id="lessonAdd" style="display: none;" >강의 등록</span>
                   </a>                     
                 </li>
