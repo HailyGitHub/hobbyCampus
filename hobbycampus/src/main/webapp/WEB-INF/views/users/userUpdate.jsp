@@ -55,15 +55,16 @@
 		 	</label>
 		 	<input type="hidden" name="u_img" value="${dto.u_img}">
 		 	<input type="hidden" name="u_email" value="${dto.u_email }">
+		 	
 	 	<div class="invalid-feedback">.jsp, png 파일만 가능합니다.</div>
 	 </div> 
 	 
 		<br>
 	<div class="form-floating">
 		  <input type="text" name="u_name" value="${u_name}" placeholder="닉네임" class="form-control"  
-		  		id="validationName"  pattern="^[a-zA-Z가-힣0-9]{1,10}$">
+		  		id="validationName"  pattern="^[a-zA-Z가-힣0-9]{1,10}$"  onkeyup="userNameCheck()">
 		  <label for="validationName" >이름</label>
-		<input type="button" value="사용가능 여부" onclick="userNameCheck()" class="w-100 btn btn-lg btn-warning">
+		<!-- <input type="button" value="사용가능 여부" class="w-100 btn btn-lg btn-warning"> -->
 		<div class="invalid-feedback">
 	 	 	사용할 수 없는 닉네임입니다.
 	    </div>
@@ -87,8 +88,8 @@
 	</div>    
 	
   <div class="col-12">
-	    <label for="validationPwd" class="form-label">비밀번호</label>
-	    <input type="password" name="u_pwd"  maxlength="12"  onkeyup="checkPwd()" pattern="[a-zA-Z0-9]{6,12}" 
+	    <label for="validationPwd" class="form-label">비밀번호 변경</label>
+	    <input type="password" name="u_pwd" maxlength="12"  onkeyup="checkPwd()" pattern="[a-zA-Z0-9]{6,12}" 
 	    	class="form-control" id="validationPwd" required> 
 	    <div class="invalid-feedback">
 	 	   비밀번호는 6 ~12 글자의 숫자, 영문 가능합니다.
@@ -97,6 +98,7 @@
 	 	   비밀번호 사용 가능합니다.
 	    </div>
   </div>
+  
 		 <div>&nbsp;</div>
 
 	<div>
@@ -163,19 +165,19 @@ function checkPwd(){
 	timer=setTimeout(function validate(){
 
 	var pwd1=document.userUp.u_pwd.value;
-
+	var pwdReg=/[a-zA-Z0-9]{6,12}/;
+	
 	$('#validationPwd').removeClass('is-valid');
 	$('#validationPwd').removeClass('is-invalid');
 
 	
-	if(pwd1.length>=6) {		
-			$('#validationPwd').addClass('is-valid');
+	if(pwd1.length>=6&&pwdReg.test(pwd1)){
+		$('#validationPwd').addClass('is-valid');
 	} else {
 		$('#validationPwd').addClass('is-invalid');
-		$('#validationPwd2').addClass('is-invalid');
 	}
-},500)}
 
+},500)}
 
 function checkTel(){
 	clearTimeout(timer);
@@ -253,11 +255,13 @@ function allCheck(){
 	}
 
 	var filename=document.userUp.upload.value;
-	filename=filename.substring(filename.length-3,filename.length);
-	
-	if(filename!='jpg'&&filename!='png'&&filename!='gif'){
-		window.alert('jpg, png, gif 이미지만 업로드 가능합니다.');
-		return false;
+	if (filename !== ""){
+		filename=filename.substring(filename.length-3,filename.length);
+		
+		if(filename!='jpg'&&filename!='png'){
+			window.alert('jpg, png 이미지만 업로드 가능합니다.');
+			return false;
+		}
 	}
 }
 
