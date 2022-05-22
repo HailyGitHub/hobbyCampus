@@ -169,7 +169,7 @@ window.onload = function(){
 		$('#btn_3').css('display', 'none');
 		$('#btn_4').css('display', 'none');
 	}
-	if( $('#tSession').val()==null&&$('#adminSession').val()==null){
+	if( $('#tSession').val()==null || $('#adminSession').val()==null){
 		$('#btn_2').css('display', 'none');
 	}
 	
