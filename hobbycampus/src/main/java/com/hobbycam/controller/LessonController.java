@@ -453,7 +453,7 @@ public class LessonController {
 		
 		HttpSession session=req.getSession();
 		int t_idx=(int)session.getAttribute("t_idx");
-		
+		//System.out.println(t_idx);
 		
 		
 		ModelAndView mav=new ModelAndView();
