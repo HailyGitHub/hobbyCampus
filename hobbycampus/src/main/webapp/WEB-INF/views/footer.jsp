@@ -8,7 +8,7 @@
         <!-- Modal List -->
         <ul class="nav justify-content-center">
             <li class="nav-item">
-              <a class="nav-link text-dark" href="#" onclick="showUs()" data-bs-toggle="modal" data-bs-target="#aboutModal"><b>회사소개</b></a>
+              <a class="nav-link text-dark" href="#" onclick="showUs()" data-key="1" data-bs-toggle="modal" data-bs-target="#aboutModal"><b>회사소개</b></a>
             </li>
             <li class="nav-item" data-bs-toggle="modal" data-bs-target="#aboutModal">
                 <a class="nav-link text-dark" href="#" onclick="showHR()"><b>인사채용</b></a>
@@ -25,10 +25,10 @@
             <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="ModalLabel"></h5>
+                <h5 class="about-title" id="about-title"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="modal-body">
+                <div class="modal-body" id="about-body">
                   
                 </div>
                 <div class="modal-footer">

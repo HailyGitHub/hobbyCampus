@@ -297,11 +297,18 @@
 	var myChart = new Chart($cateTwo, {
 		type: 'bar',
 		data: {
-			labels: ['${twoList[0].cate2_name}', '${twoList[1].cate2_name}', '${twoList[2].cate2_name}', '${twoList[3].cate2_name}', '${twoList[4].cate2_name}', '${twoList[5].cate2_name}', '${twoList[6].cate2_name}'],
+			labels: ['${twoList[0].cate2_name}', '${twoList[1].cate2_name}', '${twoList[2].cate2_name}', '${twoList[3].cate2_name}', '${twoList[4].cate2_name}', '${twoList[5].cate2_name}', '${twoList[6].cate2_name}', '${twoList[7].cate2_name}','${twoList[8].cate2_name}','${twoList[9].cate2_name}','${twoList[10].cate2_name}','${twoList[11].cate2_name}','${twoList[12].cate2_name}','${twoList[13].cate2_name}'],
 			datasets: [{
 				label: '작은 카테고리 수요',
-				data: [${twoRate[0]}, ${twoRate[1]}, ${twoRate[2]}, ${twoRate[3]}, ${twoRate[4]}, ${twoRate[5]}, ${twoRate[6]}],
+				data: [${twoRate[0]}, ${twoRate[1]}, ${twoRate[2]}, ${twoRate[3]}, ${twoRate[4]}, ${twoRate[5]}, ${twoRate[6]}, ${twoRate[7]}, ${twoRate[8]}, ${twoRate[9]}, ${twoRate[10]}, ${twoRate[11]}, ${twoRate[12]}, ${twoRate[13]}],
 				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)', 
+					'rgba(54, 162, 235, 0.2)', 
+					'rgba(255, 206, 86, 0.2)', 
+					'rgba(75, 192, 192, 0.2)', 
+					'rgba(153, 102, 255, 0.2)', 
+					'rgba(255, 159, 64, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
 					'rgba(255, 99, 132, 0.2)', 
 					'rgba(54, 162, 235, 0.2)', 
 					'rgba(255, 206, 86, 0.2)', 
@@ -318,6 +325,13 @@
 					'rgba(153, 102, 255, 1)', 
 					'rgba(255, 159, 64, 1)',
 					'rgba(255, 99, 132, 1)',
+					'rgba(255, 99, 132, 1)', 
+					'rgba(54, 162, 235, 1)', 
+					'rgba(255, 206, 86, 1)', 
+					'rgba(75, 192, 192, 1)', 
+					'rgba(153, 102, 255, 1)', 
+					'rgba(255, 159, 64, 1)',
+					'rgba(255, 99, 132, 1)'
 				],
 				borderWidth: 1
 			}]

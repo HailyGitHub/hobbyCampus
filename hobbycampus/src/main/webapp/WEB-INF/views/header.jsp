@@ -28,7 +28,7 @@
         </a>
 
         <!-- Category One List -->
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown text-white">
             <a class="nav-link dropdown-toggle navbar-brand" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">카테고리</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown03" id="head-cate">
 	            <!-- Data From JQuery -->

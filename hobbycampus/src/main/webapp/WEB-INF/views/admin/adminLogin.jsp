@@ -108,7 +108,7 @@
 							</div>
 							
 							<div class="signUpMsg" id="signUpMsg" style="color:red;"></div>
-							<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" style="margin: 25px 0px;" onclick="return beforeSignUp()">회원가입</button>
+							<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" style="margin: 25px 0px;">회원가입</button>
 							<small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
 						</form>
 					</div>

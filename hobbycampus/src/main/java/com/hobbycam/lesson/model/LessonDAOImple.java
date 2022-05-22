@@ -20,6 +20,7 @@ public class LessonDAOImple implements LessonDAO {
 	@Override
 	public int lessonInsert(LessonDTO dto) {
 		int count=sqlMap.insert("insertLesson",dto);
+		System.out.println("impleidx "+dto.getT_idx());
 		return count;
 	}
 	
