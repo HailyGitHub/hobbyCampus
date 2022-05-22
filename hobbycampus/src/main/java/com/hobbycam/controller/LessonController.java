@@ -436,6 +436,9 @@ public class LessonController {
 									       @RequestParam("lesson_subj")String subj,
 										   HttpServletRequest req){
 		
+		
+		
+		
 		ModelAndView mav=new ModelAndView();
 		
 		int result=ldao.lessonUpdateSubmit(dto);
