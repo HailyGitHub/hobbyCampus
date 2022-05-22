@@ -33,16 +33,12 @@
     		border: 1px solid black;
     	}
 		.wrap-loading{ 
-		    position: fixed;
 		    left:0;
 		    right:0;
 		    top:0;
 		    bottom:0;
-		    background: rgba(0,0,0,0.2);
-		    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',endColorstr='#20000000');
 		}
 		.wrap-loading div{ 
-		     position: fixed;
 		     top:50%;
 		     left:50%;
 		     margin-left: -21px;
@@ -185,6 +181,10 @@
 									</div>
 								</div>
 								<hr class="my-4">
+									<!-- Loading Image -->
+								<div class="wrap-loading display-none text-center border-0">
+								    <div><img src="/hobbycampus/img/loading.gif" width="800px" class="border-0" /></div>
+								</div> 
 								<!-- Interview Sate Buttons -->
 								<div class="form-floating mb-3">
 									<h5><b>면접여부</b></h5>
@@ -221,10 +221,7 @@
 		</article>
 	</main>
 	
-	<!-- Loading Image -->
-	<div class="wrap-loading display-none">
-	    <div><img src="/hobbycampus/img/loading.gif" /></div>
-	</div> 
+
 	
 	<!-- FOOTER -->
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
@@ -327,6 +324,12 @@
 			success: function(msg){
 				alert(decodeURI(msg) + '하였습니다.');
 				location.reload();
+			},
+			beforeSend:function(){
+				$('.wrap-loading').removeClass('display-none');
+			},
+			complete:function(){
+				$('.wrap-loading').addClass('display-none');
 			}
 		});//Ajax
 	}//updateState
