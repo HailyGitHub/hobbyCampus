@@ -36,7 +36,7 @@
 			pay_list_idx= #{pay_list_idx} 
 		and pay_value != '환불' 
 	) set 
-		u_point=u_point+pay_point 
+		u_point=u_point-pay_point 
 		
  </update>
 

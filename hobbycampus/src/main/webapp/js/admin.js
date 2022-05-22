@@ -24,8 +24,8 @@ function showAdmin() {
 
 
 /* About Page Method */
-var m_title = document.getElementById('ModalLabel').firstChild;
-var m_content = document.getElementById('modal-body').firstChild;
+var m_title = document.getElementById('about-title').firstChild;
+var m_content = document.getElementById('about-body').firstChild;
 	
 function showUs(){
 	sendRequest('aboutUs.do', null, showUsResult, 'GET');
@@ -35,7 +35,7 @@ function showUsResult(){
 		if(XHR.status==200){
 		var data = XHR.responseText;
 		
-		m_title.nodeValue = '회사소개';
+		$('#about-title').text('회사소개');
 		m_content.nodeValue = data;
 		}
 	}
@@ -49,7 +49,7 @@ function showHRResult(){
 		if(XHR.status==200){
 		var data = XHR.responseText;
 		
-		m_title.nodeValue = '인사채용';
+		$('#about-title').text('인사채용');
 		m_content.nodeValue = data;
 		}
 	}
@@ -63,7 +63,7 @@ function showPolicyResult(){
 		if(XHR.status==200){
 		var data = XHR.responseText;
 		
-		m_title.nodeValue = '운영정책';
+		$('#about-title').text('운영정책');
 		m_content.nodeValue = data;
 		}
 	}
@@ -77,7 +77,7 @@ function showCenterResult(){
 		if(XHR.status==200){
 		var data = XHR.responseText;
 		
-		m_title.nodeValue = '고객센터';
+		$('#about-title').text('고객센터');
 		m_content.nodeValue = data;
 		}
 	}
