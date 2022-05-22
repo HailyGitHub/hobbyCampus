@@ -581,8 +581,8 @@ public class LessonController {
 		ModelAndView mav=new ModelAndView();
 		HobbyEmailGoogle heg = new HobbyEmailGoogle();
 		boolean result = false;
-		subject = "[hobbycampus/수업 문의]"+subject;
-		content = "[답변 받을 학생 이메일]  "+uEmail+"\r\n[문의 내용]"+content;
+		subject = "<br>[hobbycampus/수업 문의]"+subject;
+		content = "<br>[답변 받을 학생 이메일]  "+uEmail+"<br>[문의 내용]"+content;
 		try {
 			heg.emailSend(tEmail, subject, content);
 			result = true;

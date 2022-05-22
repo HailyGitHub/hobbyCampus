@@ -144,7 +144,7 @@ dd {
 				   </li>
 				   <li class="list-group-item">
 				   <div class="fs-5 text-secondary">
-					결제 포인트
+					할인 포인트
 						</div>
 					   <dd id="price_dd">0</dd>
 				<dd id="total_price_hr">총 결제 포인트: ${lessonVO.lessonPrice}</dd>

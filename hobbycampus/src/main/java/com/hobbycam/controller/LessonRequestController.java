@@ -120,7 +120,7 @@ public class LessonRequestController {
 			
 			int lessonScheduleIdx = Integer.valueOf(param.get("lessonScheduleIdx"));
 			int pricePoint = Integer.valueOf(param.get("pricePoint"));
-			String lessonRecordState = "예약";
+			String lessonRecordState = "예약대기";
 			String lessonExchangeState = "미정산";
 			Map<String, Object> map = new HashMap<>();
 			map.put("uIdx", uIdx);
